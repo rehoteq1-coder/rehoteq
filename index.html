@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Rehoteq Technologies — Smarter Solutions for a Better Tomorrow. School Result Management System, RehoCheck Cybersecurity App and more."/>
+<meta name="keywords" content="Rehoteq, School Result Management, RehoCheck, Cybersecurity, Nigeria, EdTech"/>
+<title>Rehoteq Technologies — Smarter Solutions for a Better Tomorrow</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+/* ============================================================
+   ROOT & RESET
+   ============================================================ */
+:root{
+  --bg:#060c14;
+  --bg2:#09111d;
+  --card:rgba(255,255,255,0.03);
+  --border:rgba(255,255,255,0.07);
+  --gold:#c9a84c;
+  --gold2:#f0c040;
+  --gold-glow:rgba(201,168,76,0.12);
+  --cyan:#00b4d8;
+  --cyan2:#0096b7;
+  --green:#00c853;
+  --white:#f0f4ff;
+  --muted:rgba(240,244,255,0.5);
+  --serif:'Cormorant Garamond',serif;
+  --sans:'Syne',sans-serif;
+  --body:'DM Sans',sans-serif;
+  --mono:'DM Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:var(--body);background:var(--bg);color:var(--white);
+  overflow-x:hidden;line-height:1.6;
+}
+
+/* ============================================================
+   NOISE TEXTURE OVERLAY
+   ============================================================ */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;opacity:0.4;
+}
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:1rem 2rem;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:all 0.3s;
+}
+nav.scrolled{
+  background:rgba(6,12,20,0.95);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-logo-icon{
+  width:36px;height:36px;border-radius:9px;
+  background:linear-gradient(135deg,#8b6914,var(--gold),var(--gold2));
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-size:1rem;font-weight:700;color:#000;
+  box-shadow:0 0 20px rgba(201,168,76,0.3);
+}
+.nav-logo-text{
+  font-family:var(--sans);font-size:1rem;font-weight:700;color:var(--white);
+}
+.nav-logo-text span{color:var(--gold);}
+.nav-links{display:flex;align-items:center;gap:1.5rem;}
+.nav-links a{
+  font-family:var(--sans);font-size:0.8rem;font-weight:600;
+  color:var(--muted);text-decoration:none;letter-spacing:0.05em;
+  transition:color 0.2s;
+}
+.nav-links a:hover{color:var(--white);}
+.nav-cta{
+  background:linear-gradient(135deg,#8b6914,var(--gold));
+  color:#000!important;font-weight:700!important;
+  padding:8px 18px;border-radius:8px;font-size:0.78rem!important;
+}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;}
+.hamburger span{width:22px;height:2px;background:var(--white);border-radius:2px;transition:all 0.3s;}
+.mobile-menu{
+  display:none;position:fixed;inset:0;top:60px;
+  background:rgba(6,12,20,0.98);backdrop-filter:blur(20px);
+  z-index:99;flex-direction:column;align-items:center;
+  justify-content:center;gap:2rem;
+}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{
+  font-family:var(--sans);font-size:1.2rem;font-weight:700;
+  color:var(--white);text-decoration:none;
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{
+  min-height:100vh;display:flex;align-items:center;
+  justify-content:center;text-align:center;padding:8rem 1.5rem 4rem;
+  position:relative;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(201,168,76,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 80%, rgba(0,180,216,0.04) 0%, transparent 50%),
+    radial-gradient(ellipse 40% 30% at 20% 60%, rgba(0,200,83,0.03) 0%, transparent 50%);
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size:60px 60px;
+  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%, black, transparent);
+}
+.hero-content{position:relative;z-index:1;max-width:720px;}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--gold-glow);border:1px solid rgba(201,168,76,0.25);
+  border-radius:20px;padding:6px 18px;
+  font-family:var(--mono);font-size:0.7rem;color:var(--gold);
+  letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1.5rem;
+  animation:fadeUp 0.8s ease both;
+}
+.hero-tag::before{
+  content:'';width:6px;height:6px;border-radius:50%;
+  background:var(--green);animation:blink 2s infinite;
+}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.3;}}
+.hero h1{
+  font-family:var(--serif);font-size:clamp(2.4rem,6vw,4.2rem);
+  font-weight:700;line-height:1.1;margin-bottom:1rem;
+  animation:fadeUp 0.8s 0.1s ease both;
+}
+.hero h1 span{
+  background:linear-gradient(135deg,var(--gold),var(--gold2),#fff8e7);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.hero p{
+  font-size:1.05rem;color:var(--muted);max-width:520px;margin:0 auto 2rem;
+  line-height:1.8;animation:fadeUp 0.8s 0.2s ease both;
+}
+.hero-btns{
+  display:flex;gap:12px;justify-content:center;flex-wrap:wrap;
+  animation:fadeUp 0.8s 0.3s ease both;
+}
+.btn-gold{
+  background:linear-gradient(135deg,#8b6914,var(--gold),var(--gold2));
+  color:#000;font-family:var(--sans);font-weight:700;font-size:0.88rem;
+  padding:13px 28px;border-radius:10px;border:none;cursor:pointer;
+  text-decoration:none;display:inline-flex;align-items:center;gap:8px;
+  transition:all 0.2s;box-shadow:0 0 30px rgba(201,168,76,0.2);
+}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 0 40px rgba(201,168,76,0.35);}
+.btn-outline{
+  background:transparent;border:1px solid rgba(255,255,255,0.15);
+  color:var(--white);font-family:var(--sans);font-weight:600;font-size:0.88rem;
+  padding:13px 28px;border-radius:10px;cursor:pointer;text-decoration:none;
+  display:inline-flex;align-items:center;gap:8px;
+  transition:all 0.2s;
+}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold);}
+
+/* SCROLL INDICATOR */
+.scroll-indicator{
+  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  animation:fadeUp 1s 0.8s ease both;
+}
+.scroll-indicator span{font-size:0.65rem;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;}
+.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollDown 2s infinite;}
+@keyframes scrollDown{0%{transform:scaleY(0);transform-origin:top;}50%{transform:scaleY(1);transform-origin:top;}100%{transform:scaleY(0);transform-origin:bottom;}}
+
+/* ============================================================
+   STATS BAR
+   ============================================================ */
+.stats-bar{
+  background:linear-gradient(135deg,rgba(201,168,76,0.06),rgba(201,168,76,0.02));
+  border-top:1px solid rgba(201,168,76,0.15);
+  border-bottom:1px solid rgba(201,168,76,0.15);
+  padding:1.5rem 2rem;
+}
+.stats-inner{
+  max-width:1000px;margin:0 auto;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:1rem;text-align:center;
+}
+.stat-item{}
+.stat-num{
+  font-family:var(--serif);font-size:2rem;font-weight:700;color:var(--gold);
+  line-height:1;
+}
+.stat-label{font-size:0.72rem;color:var(--muted);margin-top:4px;text-transform:uppercase;letter-spacing:0.08em;}
+
+/* ============================================================
+   SECTIONS
+   ============================================================ */
+section{padding:5rem 1.5rem;}
+.section-inner{max-width:1000px;margin:0 auto;}
+.section-tag{
+  font-family:var(--mono);font-size:0.68rem;color:var(--gold);
+  text-transform:uppercase;letter-spacing:0.15em;margin-bottom:0.8rem;
+  display:flex;align-items:center;gap:8px;
+}
+.section-tag::before{content:'';width:24px;height:1px;background:var(--gold);}
+.section-title{
+  font-family:var(--serif);font-size:clamp(1.8rem,4vw,2.8rem);
+  font-weight:700;line-height:1.2;margin-bottom:1rem;color:var(--white);
+}
+.section-title span{color:var(--gold);}
+.section-sub{font-size:0.95rem;color:var(--muted);max-width:560px;line-height:1.8;}
+
+/* ============================================================
+   PRODUCTS
+   ============================================================ */
+.products-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:1.5rem;margin-top:3rem;
+}
+.product-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:18px;padding:2rem;position:relative;overflow:hidden;
+  transition:all 0.3s;cursor:pointer;text-decoration:none;display:block;
+}
+.product-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(201,168,76,0.04),transparent);
+  opacity:0;transition:opacity 0.3s;
+}
+.product-card:hover{transform:translateY(-4px);border-color:rgba(201,168,76,0.25);}
+.product-card:hover::before{opacity:1;}
+.product-icon{
+  width:52px;height:52px;border-radius:14px;margin-bottom:1.2rem;
+  display:flex;align-items:center;justify-content:center;font-size:1.4rem;
+}
+.product-icon.gold{background:linear-gradient(135deg,rgba(201,168,76,0.15),rgba(240,192,64,0.08));border:1px solid rgba(201,168,76,0.2);}
+.product-icon.cyan{background:linear-gradient(135deg,rgba(0,180,216,0.15),rgba(0,150,183,0.08));border:1px solid rgba(0,180,216,0.2);}
+.product-icon.green{background:linear-gradient(135deg,rgba(0,200,83,0.15),rgba(0,160,66,0.08));border:1px solid rgba(0,200,83,0.2);}
+.product-name{font-family:var(--sans);font-size:1.1rem;font-weight:700;color:var(--white);margin-bottom:0.5rem;}
+.product-desc{font-size:0.85rem;color:var(--muted);line-height:1.7;margin-bottom:1.2rem;}
+.product-tag{
+  display:inline-flex;align-items:center;padding:4px 12px;border-radius:20px;
+  font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;
+}
+.tag-live{background:rgba(0,200,83,0.12);color:var(--green);border:1px solid rgba(0,200,83,0.25);}
+.tag-coming{background:rgba(201,168,76,0.12);color:var(--gold);border:1px solid rgba(201,168,76,0.25);}
+.product-arrow{
+  position:absolute;top:1.5rem;right:1.5rem;
+  width:28px;height:28px;border-radius:50%;
+  background:rgba(255,255,255,0.04);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.8rem;transition:all 0.3s;
+}
+.product-card:hover .product-arrow{background:var(--gold);border-color:var(--gold);color:#000;}
+
+/* ============================================================
+   FEATURES — RMS
+   ============================================================ */
+.features-layout{
+  display:grid;grid-template-columns:1fr 1fr;gap:4rem;
+  align-items:center;margin-top:3rem;
+}
+.features-list{display:flex;flex-direction:column;gap:1.2rem;}
+.feature-item{
+  display:flex;gap:14px;align-items:flex-start;
+  padding:1rem;border-radius:12px;
+  border:1px solid transparent;transition:all 0.2s;
+}
+.feature-item:hover{background:var(--card);border-color:var(--border);}
+.feature-icon{
+  width:40px;height:40px;border-radius:10px;flex-shrink:0;
+  background:linear-gradient(135deg,rgba(201,168,76,0.15),rgba(240,192,64,0.05));
+  border:1px solid rgba(201,168,76,0.2);
+  display:flex;align-items:center;justify-content:center;font-size:1rem;
+}
+.feature-title{font-family:var(--sans);font-size:0.9rem;font-weight:700;color:var(--white);margin-bottom:3px;}
+.feature-desc{font-size:0.8rem;color:var(--muted);line-height:1.6;}
+
+/* MOCK SCREEN */
+.mock-screen{
+  background:linear-gradient(135deg,#0f1628,#141c30);
+  border:1px solid rgba(201,168,76,0.15);border-radius:18px;
+  padding:1.5rem;box-shadow:0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(201,168,76,0.05);
+  position:relative;overflow:hidden;
+}
+.mock-screen::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,#8b6914,var(--gold),var(--gold2),var(--gold),#8b6914);
+}
+.mock-header{display:flex;align-items:center;gap:8px;margin-bottom:1rem;padding-bottom:0.8rem;border-bottom:1px solid rgba(255,255,255,0.06);}
+.mock-dot{width:8px;height:8px;border-radius:50%;}
+.mock-title{font-family:var(--sans);font-size:0.78rem;font-weight:700;color:var(--white);}
+.mock-school{font-size:0.65rem;color:var(--gold);font-family:var(--mono);margin-left:auto;}
+.mock-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:7px 10px;border-radius:7px;margin-bottom:6px;
+  background:rgba(255,255,255,0.02);font-size:0.75rem;
+}
+.mock-row:nth-child(2n){background:rgba(201,168,76,0.04);}
+.mock-name{color:var(--white);font-weight:500;}
+.mock-score{font-family:var(--mono);color:var(--gold);font-size:0.72rem;}
+.mock-grade{
+  width:22px;height:22px;border-radius:5px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.65rem;font-weight:800;
+}
+.grade-a{background:rgba(0,200,83,0.2);color:var(--green);}
+.grade-b{background:rgba(0,180,216,0.2);color:var(--cyan);}
+.grade-c{background:rgba(201,168,76,0.2);color:var(--gold);}
+.mock-total{
+  margin-top:0.8rem;padding:8px 10px;border-radius:8px;
+  background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);
+  display:flex;justify-content:space-between;font-size:0.72rem;
+}
+.mock-total-label{color:var(--muted);}
+.mock-total-val{font-family:var(--mono);color:var(--gold);font-weight:700;}
+
+/* ============================================================
+   PRICING
+   ============================================================ */
+.pricing-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:1.2rem;margin-top:3rem;
+}
+.price-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:1.8rem;position:relative;overflow:hidden;
+  transition:all 0.3s;
+}
+.price-card.featured{
+  background:linear-gradient(145deg,#111f38,#1a2a4a);
+  border-color:rgba(201,168,76,0.35);
+  box-shadow:0 0 40px rgba(201,168,76,0.08);
+}
+.price-popular{
+  position:absolute;top:0;right:0;
+  background:linear-gradient(135deg,#8b6914,var(--gold));
+  color:#000;font-size:0.6rem;font-weight:800;
+  padding:4px 14px 4px 10px;
+  border-bottom-left-radius:10px;
+  letter-spacing:0.06em;text-transform:uppercase;
+}
+.price-plan{font-family:var(--sans);font-size:0.72rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;}
+.price-students{font-size:0.78rem;color:var(--muted);margin-bottom:1rem;}
+.price-setup{font-size:0.78rem;color:var(--muted);margin-bottom:4px;}
+.price-amount{
+  font-family:var(--serif);font-size:2rem;font-weight:700;
+  color:var(--white);line-height:1;margin-bottom:2px;
+}
+.price-card.featured .price-amount{color:var(--gold);}
+.price-period{font-size:0.72rem;color:var(--muted);margin-bottom:1.2rem;}
+.price-features{list-style:none;margin-bottom:1.5rem;}
+.price-features li{
+  font-size:0.8rem;color:var(--muted);padding:5px 0;
+  display:flex;align-items:center;gap:8px;
+}
+.price-features li::before{content:'✓';color:var(--green);font-size:0.7rem;font-weight:700;}
+.price-btn{
+  width:100%;padding:10px;border-radius:8px;
+  font-family:var(--sans);font-size:0.82rem;font-weight:700;
+  cursor:pointer;transition:all 0.2s;border:1px solid var(--border);
+  background:transparent;color:var(--muted);text-align:center;
+  text-decoration:none;display:block;
+}
+.price-card.featured .price-btn{
+  background:linear-gradient(135deg,#8b6914,var(--gold));
+  color:#000;border:none;
+}
+.price-btn:hover{border-color:var(--gold);color:var(--gold);}
+.price-card.featured .price-btn:hover{opacity:0.9;transform:translateY(-1px);}
+
+/* WHITE LABEL CARD */
+.wl-card{
+  background:linear-gradient(135deg,rgba(201,168,76,0.06),rgba(240,192,64,0.02));
+  border:1px solid rgba(201,168,76,0.2);border-radius:16px;
+  padding:2rem;margin-top:1.5rem;
+  display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:center;
+}
+.wl-title{font-family:var(--sans);font-size:1.1rem;font-weight:700;color:var(--gold);margin-bottom:6px;}
+.wl-desc{font-size:0.85rem;color:var(--muted);line-height:1.7;}
+.wl-features{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;}
+.wl-feat{
+  background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);
+  border-radius:20px;padding:3px 12px;font-size:0.7rem;color:var(--gold);
+}
+
+/* ============================================================
+   REHOCHECK SECTION
+   ============================================================ */
+.rehocheck-layout{
+  display:grid;grid-template-columns:1fr 1fr;gap:4rem;
+  align-items:center;margin-top:3rem;
+}
+.threat-cards{display:flex;flex-direction:column;gap:10px;}
+.threat-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:12px;padding:14px 16px;
+  display:flex;align-items:center;gap:12px;
+  transition:all 0.2s;
+}
+.threat-card:hover{border-color:rgba(0,180,216,0.3);}
+.threat-status{
+  width:36px;height:36px;border-radius:8px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:0.9rem;
+}
+.threat-status.danger{background:rgba(255,68,68,0.15);border:1px solid rgba(255,68,68,0.3);}
+.threat-status.safe{background:rgba(0,200,83,0.15);border:1px solid rgba(0,200,83,0.3);}
+.threat-status.warn{background:rgba(255,165,0,0.15);border:1px solid rgba(255,165,0,0.3);}
+.threat-info h4{font-size:0.82rem;font-weight:700;color:var(--white);margin-bottom:2px;}
+.threat-info p{font-size:0.72rem;color:var(--muted);}
+.threat-verdict{
+  margin-left:auto;font-size:0.68rem;font-weight:700;
+  padding:3px 10px;border-radius:20px;white-space:nowrap;
+}
+.verdict-danger{background:rgba(255,68,68,0.15);color:#ff6b6b;border:1px solid rgba(255,68,68,0.3);}
+.verdict-safe{background:rgba(0,200,83,0.15);color:var(--green);border:1px solid rgba(0,200,83,0.3);}
+.verdict-warn{background:rgba(255,165,0,0.15);color:orange;border:1px solid rgba(255,165,0,0.3);}
+
+/* ============================================================
+   TESTIMONIAL
+   ============================================================ */
+.testimonial-section{
+  background:linear-gradient(135deg,rgba(201,168,76,0.04),rgba(201,168,76,0.01));
+  border-top:1px solid rgba(201,168,76,0.1);
+  border-bottom:1px solid rgba(201,168,76,0.1);
+}
+.testimonial-card{
+  background:rgba(255,255,255,0.02);border:1px solid var(--border);
+  border-radius:16px;padding:2rem;max-width:700px;margin:2rem auto 0;
+  position:relative;
+}
+.testimonial-card::before{
+  content:'"';position:absolute;top:-1rem;left:1.5rem;
+  font-family:var(--serif);font-size:5rem;color:var(--gold);
+  opacity:0.3;line-height:1;
+}
+.testimonial-text{font-size:1rem;color:var(--white);line-height:1.8;font-style:italic;margin-bottom:1rem;}
+.testimonial-author{font-size:0.8rem;color:var(--gold);font-weight:700;}
+.testimonial-school{font-size:0.72rem;color:var(--muted);margin-top:2px;}
+
+/* ============================================================
+   CTA SECTION
+   ============================================================ */
+.cta-section{
+  text-align:center;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 50%, rgba(201,168,76,0.06), transparent 70%);
+}
+.cta-title{
+  font-family:var(--serif);font-size:clamp(1.8rem,4vw,3rem);
+  font-weight:700;color:var(--white);margin-bottom:1rem;
+}
+.cta-title span{color:var(--gold);}
+.cta-sub{font-size:0.95rem;color:var(--muted);max-width:500px;margin:0 auto 2rem;line-height:1.8;}
+.whatsapp-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:1.5rem;}
+.wa-btn{
+  background:rgba(37,211,102,0.12);border:1px solid rgba(37,211,102,0.3);
+  color:#25d366;font-family:var(--sans);font-weight:700;font-size:0.88rem;
+  padding:12px 24px;border-radius:10px;text-decoration:none;
+  display:inline-flex;align-items:center;gap:8px;
+  transition:all 0.2s;font-family:var(--mono);
+}
+.wa-btn:hover{background:rgba(37,211,102,0.2);transform:translateY(-2px);}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer{
+  background:var(--bg2);border-top:1px solid var(--border);
+  padding:3rem 1.5rem 2rem;
+}
+.footer-inner{max-width:1000px;margin:0 auto;}
+.footer-top{
+  display:grid;grid-template-columns:2fr 1fr 1fr;
+  gap:3rem;margin-bottom:2rem;
+}
+.footer-brand h3{
+  font-family:var(--serif);font-size:1.2rem;color:var(--white);margin-bottom:0.5rem;
+}
+.footer-brand p{font-size:0.82rem;color:var(--muted);line-height:1.7;max-width:260px;}
+.footer-col h4{font-family:var(--sans);font-size:0.78rem;font-weight:700;color:var(--white);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.8rem;}
+.footer-col a{display:block;font-size:0.8rem;color:var(--muted);text-decoration:none;margin-bottom:0.4rem;transition:color 0.2s;}
+.footer-col a:hover{color:var(--gold);}
+.footer-bottom{
+  border-top:1px solid var(--border);padding-top:1.5rem;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;
+}
+.footer-bottom p{font-size:0.75rem;color:var(--muted);}
+.footer-bottom span{font-size:0.75rem;color:var(--gold);font-family:var(--mono);}
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(20px);}
+  to{opacity:1;transform:translateY(0);}
+}
+.fade-up{opacity:0;transform:translateY(30px);transition:all 0.7s ease;}
+.fade-up.visible{opacity:1;transform:translateY(0);}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media(max-width:768px){
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+  .features-layout,.rehocheck-layout{grid-template-columns:1fr;}
+  .footer-top{grid-template-columns:1fr;}
+  .wl-card{grid-template-columns:1fr;}
+}
+@media(max-width:480px){
+  .pricing-grid{grid-template-columns:1fr;}
+  .products-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon">R</div>
+    <div class="nav-logo-text">Rehoteq <span>Technologies</span></div>
+  </a>
+  <div class="nav-links">
+    <a href="#products">Services</a>
+    <a href="#rms">Result System</a>
+    <a href="#engineering">Engineering</a>
+    <a href="#rehocheck">RehoCheck</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#contact">Contact</a>
+    <a href="https://rehoteq1-coder.github.io/rms/" class="nav-cta" target="_blank">Login to RMS →</a>
+  </div>
+  <div class="hamburger" onclick="toggleMenu()" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#products" onclick="toggleMenu()">Services</a>
+  <a href="#rms" onclick="toggleMenu()">Result System</a>
+  <a href="#engineering" onclick="toggleMenu()">Engineering</a>
+  <a href="#rehocheck" onclick="toggleMenu()">RehoCheck</a>
+  <a href="#pricing" onclick="toggleMenu()">Pricing</a>
+  <a href="#contact" onclick="toggleMenu()">Contact</a>
+  <a href="https://rehoteq1-coder.github.io/rms/" target="_blank" style="color:var(--gold);">Login to RMS →</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-tag">🇳🇬 Built in Nigeria for the World</div>
+    <h1>
+      Smarter Solutions<br/>
+      for a <span>Better Tomorrow</span>
+    </h1>
+    <p>
+      Rehoteq Technologies delivers end-to-end technology solutions — 
+      software products, electrical engineering, solar energy systems, 
+      computer hardware and IT services. One company. Every solution.
+    </p>
+    <div class="hero-btns">
+      <a href="#products" class="btn-gold">Explore Our Products →</a>
+      <a href="#contact" class="btn-outline">📞 Contact Us</a>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-num">5+</div>
+      <div class="stat-label">Service Areas</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">2</div>
+      <div class="stat-label">Live Software Products</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">70+</div>
+      <div class="stat-label">Security Engines</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">Client Satisfaction</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">24/7</div>
+      <div class="stat-label">Support Available</div>
+    </div>
+  </div>
+</div>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="section-inner">
+    <div class="section-tag">Our Services & Products</div>
+    <h2 class="section-title">Complete <span>Technology Solutions</span></h2>
+    <p class="section-sub">
+      From software development to electrical engineering and solar energy — 
+      Rehoteq Technologies delivers everything your home, school or business needs to thrive.
+    </p>
+    <div class="products-grid fade-up">
+      <a href="#rms" class="product-card">
+        <div class="product-arrow">→</div>
+        <div class="product-icon gold">🎓</div>
+        <div class="product-name">School Result Management System</div>
+        <div class="product-desc">
+          Cloud-based result management for schools of all sizes. 
+          From score entry to printable report cards — done in seconds, not weeks.
+        </div>
+        <span class="product-tag tag-live">● Live Now</span>
+      </a>
+      <a href="#rehocheck" class="product-card">
+        <div class="product-arrow">→</div>
+        <div class="product-icon cyan">🔐</div>
+        <div class="product-name">RehoCheck Security Platform</div>
+        <div class="product-desc">
+          Free AI-powered cybersecurity tool. Scans websites, 
+          links and news using Google Safe Browsing and 70+ security engines.
+        </div>
+        <span class="product-tag tag-live">● Live Now</span>
+      </a>
+      <a href="#engineering" class="product-card">
+        <div class="product-arrow">→</div>
+        <div class="product-icon gold">⚡</div>
+        <div class="product-name">Electrical & Solar PV Engineering</div>
+        <div class="product-desc">
+          Professional electrical installations, solar energy systems design 
+          and commissioning for homes, schools and businesses.
+        </div>
+        <span class="product-tag tag-live">● Available Now</span>
+      </a>
+      <a href="#engineering" class="product-card">
+        <div class="product-arrow">→</div>
+        <div class="product-icon cyan">🖥️</div>
+        <div class="product-name">Computer Hardware & IT Services</div>
+        <div class="product-desc">
+          Computer repairs, hardware installation, network setup, 
+          maintenance and IT support for individuals and organisations.
+        </div>
+        <span class="product-tag tag-live">● Available Now</span>
+      </a>
+      <div class="product-card" style="cursor:default;">
+        <div class="product-arrow" style="opacity:0.3;">→</div>
+        <div class="product-icon green">🛡️</div>
+        <div class="product-name">Rehoteq Security Suite</div>
+        <div class="product-desc">
+          Enterprise-grade cybersecurity tools for businesses — 
+          email protection, network scanning and threat intelligence.
+        </div>
+        <span class="product-tag tag-coming">Coming Soon</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RMS SECTION -->
+<section id="rms" style="background:linear-gradient(135deg,rgba(201,168,76,0.03),transparent);">
+  <div class="section-inner">
+    <div class="section-tag">School Result System</div>
+    <h2 class="section-title">Your School,<br/><span>Fully Digital</span></h2>
+    <p class="section-sub">
+      Stop spending weeks computing results by hand. Our cloud system lets teachers 
+      enter scores from any phone — results are ready instantly.
+    </p>
+
+    <div class="features-layout fade-up">
+      <div class="features-list">
+        <div class="feature-item">
+          <div class="feature-icon">📱</div>
+          <div>
+            <div class="feature-title">Any Device, Anywhere</div>
+            <div class="feature-desc">Teachers enter scores from any phone, tablet or laptop. No app download required.</div>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">⚡</div>
+          <div>
+            <div class="feature-title">Instant Auto-Calculation</div>
+            <div class="feature-desc">CA, totals, cumulative scores and GPA calculated automatically as scores are entered.</div>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">📊</div>
+          <div>
+            <div class="feature-title">Cumulative Scoring</div>
+            <div class="feature-desc">Supports 3-term cumulative calculation — Term 2 and Term 3 grand totals computed automatically.</div>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🔗</div>
+          <div>
+            <div class="feature-title">Student Result Links</div>
+            <div class="feature-desc">Generate secure links per student. Deactivate access for fee defaulters with one click.</div>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🏷️</div>
+          <div>
+            <div class="feature-title">White Label Available</div>
+            <div class="feature-desc">Your school name, logo and colors on everything. Your own portal URL. Completely branded.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MOCK SCREEN -->
+      <div class="mock-screen">
+        <div class="mock-header">
+          <div class="mock-dot" style="background:#ff5f56;"></div>
+          <div class="mock-dot" style="background:#ffbd2e;margin:0 4px;"></div>
+          <div class="mock-dot" style="background:#27c93f;"></div>
+          <div class="mock-title">Score Entry — D&I Practical</div>
+          <div class="mock-school">RMS-0001</div>
+        </div>
+        <div class="mock-row"><span class="mock-name">Ayedatiwa Damilola</span><span class="mock-score">8+8+9+55</span><div class="mock-grade grade-b">B</div></div>
+        <div class="mock-row"><span class="mock-name">Okonkwo Emmanuel</span><span class="mock-score">9+8+10+62</span><div class="mock-grade grade-a">A</div></div>
+        <div class="mock-row"><span class="mock-name">Adebayo Fatima</span><span class="mock-score">7+6+8+48</span><div class="mock-grade grade-c">C</div></div>
+        <div class="mock-row"><span class="mock-name">Ibrahim Musa</span><span class="mock-score">9+9+9+63</span><div class="mock-grade grade-a">A</div></div>
+        <div class="mock-row"><span class="mock-name">Chidinma Okafor</span><span class="mock-score">8+7+8+57</span><div class="mock-grade grade-b">B</div></div>
+        <div class="mock-total">
+          <span class="mock-total-label">5 students saved ✅</span>
+          <span class="mock-total-val">Live Sync ON 🟢</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:3rem;">
+      <a href="https://rehoteq1-coder.github.io/rms/" class="btn-gold" target="_blank">Access the System →</a>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="section-inner">
+    <div class="section-tag">Pricing</div>
+    <h2 class="section-title">Simple <span>Transparent</span> Pricing</h2>
+    <p class="section-sub">
+      No hidden charges. No surprises. Pay per term and get the full system.
+      Setup fee is charged once — never again.
+    </p>
+
+    <div class="pricing-grid fade-up">
+      <div class="price-card">
+        <div class="price-plan">Basic</div>
+        <div class="price-students">Up to 100 students</div>
+        <div class="price-setup">Setup: <strong style="color:var(--white);">N10,000</strong> (once)</div>
+        <div class="price-amount">N5,000</div>
+        <div class="price-period">per term</div>
+        <ul class="price-features">
+          <li>Up to 100 students</li>
+          <li>Result sheets & printing</li>
+          <li>3 department logins</li>
+          <li>Student result links</li>
+          <li>WhatsApp support</li>
+        </ul>
+        <a href="#contact" class="price-btn">Get Started</a>
+      </div>
+
+      <div class="price-card featured">
+        <div class="price-popular">Most Popular</div>
+        <div class="price-plan">Standard</div>
+        <div class="price-students">Up to 150 students</div>
+        <div class="price-setup">Setup: <strong style="color:var(--gold);">N10,000</strong> (once)</div>
+        <div class="price-amount">N10,000</div>
+        <div class="price-period">per term</div>
+        <ul class="price-features">
+          <li>Up to 150 students</li>
+          <li>Everything in Basic</li>
+          <li>Unlimited departments</li>
+          <li>Broadsheet download</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="#contact" class="price-btn">Get Started</a>
+      </div>
+
+      <div class="price-card">
+        <div class="price-plan">Premium</div>
+        <div class="price-students">200+ students</div>
+        <div class="price-setup">Setup: <strong style="color:var(--white);">N10,000</strong> (once)</div>
+        <div class="price-amount">N15,000</div>
+        <div class="price-period">per term</div>
+        <ul class="price-features">
+          <li>Unlimited students</li>
+          <li>Everything in Standard</li>
+          <li>Data export & backup</li>
+          <li>Dedicated support</li>
+          <li>Custom configuration</li>
+        </ul>
+        <a href="#contact" class="price-btn">Get Started</a>
+      </div>
+    </div>
+
+    <!-- WHITE LABEL -->
+    <div class="wl-card fade-up">
+      <div>
+        <div class="wl-title">⭐ White Label — Your Brand, Our System</div>
+        <div class="wl-desc">
+          For schools that want complete ownership. Your school name, logo and colors 
+          on every page, every result sheet and every student portal. 
+          Custom domain available (e.g. results.yourschool.com).
+        </div>
+        <div class="wl-features">
+          <span class="wl-feat">Your Logo</span>
+          <span class="wl-feat">Your Colors</span>
+          <span class="wl-feat">Custom Domain</span>
+          <span class="wl-feat">No Rehoteq Branding</span>
+          <span class="wl-feat">Dedicated Support</span>
+        </div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-family:var(--serif);font-size:1.8rem;color:var(--gold);font-weight:700;">N20,000</div>
+        <div style="font-size:0.72rem;color:var(--muted);">per term</div>
+        <div style="font-size:0.78rem;color:var(--muted);margin-top:4px;">Setup: N50,000</div>
+        <a href="#contact" class="btn-gold" style="margin-top:1rem;display:inline-flex;font-size:0.82rem;padding:10px 20px;">Contact Us →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ENGINEERING SECTION -->
+<section id="engineering">
+  <div class="section-inner">
+    <div class="section-tag">Engineering Services</div>
+    <h2 class="section-title">Powering Homes &amp; <span>Businesses</span></h2>
+    <p class="section-sub">
+      Professional engineering services delivered by a certified electrical and solar PV engineer 
+      with years of hands-on experience across Ondo State and beyond.
+    </p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.2rem;margin-top:2.5rem;" class="fade-up">
+
+      <!-- ELECTRICAL -->
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.8rem;">
+        <div style="width:48px;height:48px;border-radius:12px;background:rgba(240,192,64,0.12);border:1px solid rgba(201,168,76,0.25);display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:1.2rem;">⚡</div>
+        <div style="font-family:var(--sans);font-size:1rem;font-weight:700;color:var(--white);margin-bottom:0.5rem;">Electrical Installation</div>
+        <div style="font-size:0.82rem;color:var(--muted);line-height:1.7;margin-bottom:1rem;">
+          Complete electrical wiring for new buildings, rewiring of existing structures, 
+          distribution boards, industrial and commercial installations.
+        </div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:5px;">
+          <li style="font-size:0.78rem;color:var(--muted);display:flex;align-items:center;gap:6px;"><span style="color:var(--gold);">✓</span> New building wiring</li>
+          <li style="font-size:0.78rem;color:var(--muted);display:flex;align-items:center;gap:6px;"><span style="color:var(--gold);">✓</span> Distribution board installation</li>
+          <li style="font-size:0.78rem;color:var(--muted);display:flex;align-items:center;gap:6px;"><span style="color:var(--gold);">✓</span> Industrial wiring & maintenance</li>
+          <li style="font-size:0.78rem;color:var(--muted);display:flex;align-items:center;gap:6px;"><span style="color:var(--gold);">✓</span> Fault diagnosis & repairs</li>
+        </ul>
+      </div>
+
+      <!-- SOLAR -->
+      <div style="background:linear-gradient(135deg,rgba(240,192,64,0.06),rgba(201,168,76,0.02));border:1px solid rgba(201,168,76,0.2);border-radius:16px;padding:1.8rem;">
+        <div style="width:48px;height:48px;border-radius:12px;background:rgba(240,192,64,0.15);border:1px solid rgba(201,168,76,0.3);display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:1.2rem;">☀️</div>
+        <div style="font-family:var(--sans);font-size:1rem;font-weight:700;color:var(--white);margin-bottom:0.5rem;">Solar PV Installation</div>
+        <div style="font-size:0.82rem;color:var(--muted);line-height:1.7;margin-bottom:1rem;">
+          Complete solar energy solutions — from site assessment and system design 
+          to installation and commissioning. Off-grid and hybrid systems.
+        </div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:5px;">
+          <li style="font-size:0.78rem;color:var(--muted);display:flex;align-items:center;gap:6px;"><span style="color:var(--gold);">✓</span> Solar panel installation</li>
+          <li style="font-size:0.78rem;color:var(--muted);display:flex;align-items:center;gap:6px;"><span style="color:var(--gold);">✓</span> Inverter & battery systems</li>
+          <li style="font-size:0.78rem;color:var(--muted);display:flex;align-items:center;gap:6px;"><span style="color:var(--gold);">✓</span> Off-grid & hybrid systems</li>
+          <li style="font-size:0.78rem;color:var(--muted);display:flex;align-items:center;gap:6px;"><span style="color:var(--gold);">✓</span> System maintenance & repairs</li>
+        </ul>
+      </div>
+
+      <!-- COMPUTER -->
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.8rem;">
+        <div style="width:48px;height:48px;border-radius:12px;background:rgba(0,180,216,0.12);border:1px solid rgba(0,180,216,0.25);display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:1.2rem;">🖥️</div>
+        <div style="font-family:var(--sans);font-size:1rem;font-weight:700;color:var(--white);margin-bottom:0.5rem;">Computer Hardware & IT</div>
+        <div style="font-size:0.82rem;color:var(--muted);line-height:1.7;margin-bottom:1rem;">
+          Professional computer repairs, hardware upgrades, network installation 
+          and IT support for homes, schools and businesses.
+        </div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:5px;">
+          <li style="font-size:0.78rem;color:var(--muted);display:flex;align-items:center;gap:6px;"><span style="color:var(--cyan);">✓</span> Computer repair & upgrades</li>
+          <li style="font-size:0.78rem;color:var(--muted);display:flex;align-items:center;gap:6px;"><span style="color:var(--cyan);">✓</span> Network & LAN setup</li>
+          <li style="font-size:0.78rem;color:var(--muted);display:flex;align-items:center;gap:6px;"><span style="color:var(--cyan);">✓</span> OS installation & recovery</li>
+          <li style="font-size:0.78rem;color:var(--muted);display:flex;align-items:center;gap:6px;"><span style="color:var(--cyan);">✓</span> Preventive maintenance</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div style="text-align:center;margin-top:2.5rem;">
+      <p style="font-size:0.88rem;color:var(--muted);margin-bottom:1.2rem;">
+        Serving Okitipupa, Ondo State and surrounding areas
+      </p>
+      <a href="#contact" class="btn-gold">Request a Service →</a>
+    </div>
+  </div>
+</section>
+
+<!-- REHOCHECK SECTION -->
+<section id="rehocheck" style="background:linear-gradient(135deg,rgba(0,180,216,0.03),transparent);">
+  <div class="section-inner">
+    <div class="section-tag">RehoCheck</div>
+    <h2 class="section-title">Your Digital <span>Shield</span><br/>Against Online Threats</h2>
+    <p class="section-sub">
+      Free real-time protection powered by Google Safe Browsing, 
+      VirusTotal and AI news verification. 
+      Protecting people everywhere from scams, phishing and fake news.
+    </p>
+
+    <div class="rehocheck-layout fade-up">
+      <div>
+        <div style="margin-bottom:1.5rem;">
+          <div style="font-family:var(--sans);font-size:0.82rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.8rem;">What RehoCheck Detects:</div>
+          <div class="threat-cards">
+            <div class="threat-card">
+              <div class="threat-status danger">⚠️</div>
+              <div class="threat-info">
+                <h4>Phishing Websites</h4>
+                <p>fake-bank-login.com</p>
+              </div>
+              <span class="threat-verdict verdict-danger">DANGER</span>
+            </div>
+            <div class="threat-card">
+              <div class="threat-status safe">✅</div>
+              <div class="threat-info">
+                <h4>Legitimate Site</h4>
+                <p>google.com</p>
+              </div>
+              <span class="threat-verdict verdict-safe">SAFE</span>
+            </div>
+            <div class="threat-card">
+              <div class="threat-status warn">⚠️</div>
+              <div class="threat-info">
+                <h4>Fake News Claim</h4>
+                <p>Drinking bleach cures disease</p>
+              </div>
+              <span class="threat-verdict verdict-danger">FALSE</span>
+            </div>
+            <div class="threat-card">
+              <div class="threat-status danger">🚨</div>
+              <div class="threat-info">
+                <h4>Malware Link</h4>
+                <p>testsafebrowsing.appspot.com/s/phishing.html</p>
+              </div>
+              <span class="threat-verdict verdict-danger">BLOCKED</span>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <a href="https://rehoteq1-coder.github.io/RehoCheck/" class="btn-gold" target="_blank">Try RehoCheck Free →</a>
+          <a href="https://play.google.com/store/apps/details?id=com.rehoteq.rehocheck" class="btn-outline" target="_blank">📱 Android App</a>
+        </div>
+      </div>
+
+      <div>
+        <div style="background:linear-gradient(135deg,rgba(0,180,216,0.06),rgba(0,150,183,0.02));border:1px solid rgba(0,180,216,0.15);border-radius:16px;padding:1.5rem;">
+          <div style="font-family:var(--sans);font-size:0.78rem;font-weight:700;color:var(--cyan);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:1rem;">Powered By</div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;align-items:center;gap:12px;padding:10px;background:rgba(255,255,255,0.02);border-radius:8px;">
+              <div style="width:32px;height:32px;background:rgba(66,133,244,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;color:#4285f4;">G</div>
+              <div><div style="font-size:0.82rem;font-weight:700;color:var(--white);">Google Safe Browsing</div><div style="font-size:0.7rem;color:var(--muted);">Real-time threat database</div></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;padding:10px;background:rgba(255,255,255,0.02);border-radius:8px;">
+              <div style="width:32px;height:32px;background:rgba(0,180,216,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--cyan);">V</div>
+              <div><div style="font-size:0.82rem;font-weight:700;color:var(--white);">VirusTotal</div><div style="font-size:0.7rem;color:var(--muted);">70+ antivirus scan engines</div></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;padding:10px;background:rgba(255,255,255,0.02);border-radius:8px;">
+              <div style="width:32px;height:32px;background:rgba(0,200,83,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--green);">AI</div>
+              <div><div style="font-size:0.82rem;font-weight:700;color:var(--white);">Groq AI (Llama 3.1)</div><div style="font-size:0.7rem;color:var(--muted);">News fact-checking & analysis</div></div>
+            </div>
+          </div>
+          <div style="margin-top:1rem;padding:10px;background:rgba(0,200,83,0.06);border:1px solid rgba(0,200,83,0.2);border-radius:8px;font-size:0.75rem;color:var(--green);text-align:center;">
+            ✅ 100% Free · No Registration · Works Everywhere
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="testimonial-section">
+  <div class="section-inner" style="text-align:center;">
+    <div class="section-tag" style="justify-content:center;">What Schools Say</div>
+    <h2 class="section-title">Trusted by <span>Real Schools</span></h2>
+    <div class="testimonial-card fade-up">
+      <div class="testimonial-text">
+        Since we started using the Rehoteq Result System at Government Technical College Okitipupa, 
+        computing results has become so easy. Teachers enter scores from their phones 
+        and result sheets are ready immediately. It has saved us so much time and eliminated errors completely.
+      </div>
+      <div class="testimonial-author">Staff Member</div>
+      <div class="testimonial-school">Government Technical College, Okitipupa — Ondo State</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA / CONTACT -->
+<section id="contact" class="cta-section">
+  <div class="section-inner">
+    <div class="section-tag" style="justify-content:center;">Get In Touch</div>
+    <h2 class="cta-title">Ready to Go <span>Digital?</span></h2>
+    <p class="cta-sub">
+      Contact us on WhatsApp for a free live demonstration. 
+      We will set your school up within 24 hours of subscribing.
+    </p>
+    <div class="whatsapp-btns">
+      <a href="https://wa.me/2347036302585" class="wa-btn" target="_blank">
+        💬 07036302585
+      </a>
+      <a href="https://wa.me/2348166519177" class="wa-btn" target="_blank">
+        💬 08166519177
+      </a>
+    </div>
+    <div style="margin-top:1.5rem;font-size:0.8rem;color:var(--muted);">
+      📧 <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0c7e69646378697d4c6b616d6560226f6361">[email&#160;protected]</a>
+    </div>
+    <div style="margin-top:3rem;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <a href="https://rehoteq1-coder.github.io/rms/" class="btn-gold" target="_blank">Access School RMS →</a>
+      <a href="https://rehoteq1-coder.github.io/RehoCheck/" class="btn-outline" target="_blank">Try RehoCheck Free</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <h3>Rehoteq Technologies</h3>
+        <p>Smarter Solutions for a Better Tomorrow. Building digital tools that solve real problems across Nigeria and the world.</p>
+        <div style="margin-top:1rem;font-family:var(--mono);font-size:0.72rem;color:var(--gold);">rehoteq.com</div>
+      </div>
+      <div class="footer-col">
+        <h4>Products</h4>
+        <a href="#rms">School Result System</a>
+        <a href="#rehocheck">RehoCheck</a>
+        <a href="#engineering">Electrical & Solar</a>
+        <a href="#engineering">Computer Hardware & IT</a>
+        <a href="https://rehoteq1-coder.github.io/rms/" target="_blank">Login to RMS</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="https://wa.me/2347036302585" target="_blank">WhatsApp: 07036302585</a>
+        <a href="https://wa.me/2348166519177" target="_blank">WhatsApp: 08166519177</a>
+        <a href="/cdn-cgi/l/email-protection#ea988f82859e8f9baa8d878b8386c4898587"><span class="__cf_email__" data-cfemail="681a0d00071c0d19280f05090104460b0705">[email&#160;protected]</span></a>
+        <a href="https://rehoteq1-coder.github.io/RehoCheck/privacy-policy.html" target="_blank">Privacy Policy</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Rehoteq Technologies. All rights reserved.</p>
+      <span>Built in Nigeria 🇳🇬</span>
+    </div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// Navbar scroll effect
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('navbar');
+  nav.classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// Mobile menu
+function toggleMenu(){
+  const menu = document.getElementById('mobile-menu');
+  const ham = document.getElementById('hamburger');
+  menu.classList.toggle('open');
+  const spans = ham.querySelectorAll('span');
+  if(menu.classList.contains('open')){
+    spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+    spans[1].style.opacity = '0';
+    spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
+  } else {
+    spans[0].style.transform = '';
+    spans[1].style.opacity = '';
+    spans[2].style.transform =
