@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Rehoteq News Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,900&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<style>
+:root{
+  --bg:#05080f;--bg2:#080d17;--card:rgba(255,255,255,0.03);
+  --border:rgba(255,255,255,0.07);--gold:#c9a84c;--gold2:#f0c040;
+  --green:#00d166;--red:#ff4560;--cyan:#00c2e0;
+  --white:#eef2ff;--muted:rgba(238,242,255,0.45);
+  --serif:'Fraunces',serif;--sans:'Syne',sans-serif;
+  --body:'DM Sans',sans-serif;--mono:'DM Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:var(--body);background:var(--bg);color:var(--white);min-height:100vh;}
+
+/* LOGIN */
+.login-page{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:1rem;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(201,168,76,0.06),transparent);}
+.login-box{background:linear-gradient(145deg,#0c1524,#111e32);border:1px solid rgba(201,168,76,0.2);border-radius:20px;padding:2rem;width:100%;max-width:380px;box-shadow:0 20px 60px rgba(0,0,0,0.5);}
+.login-logo{text-align:center;margin-bottom:1.5rem;}
+.login-mark{width:56px;height:56px;border-radius:14px;margin:0 auto 10px;background:linear-gradient(135deg,#7a5c1a,var(--gold),var(--gold2));display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:1.4rem;font-weight:900;color:#000;box-shadow:0 0 30px rgba(201,168,76,0.3);}
+.login-logo h2{font-family:var(--serif);font-size:1.2rem;color:var(--white);}
+.login-logo p{font-size:0.72rem;color:var(--muted);margin-top:3px;}
+
+/* FORM ELEMENTS */
+.fg{display:flex;flex-direction:column;gap:5px;margin-bottom:12px;}
+.fg label{font-family:var(--mono);font-size:0.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;}
+.fi{width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:9px;padding:10px 14px;color:var(--white);font-family:var(--body);font-size:0.85rem;outline:none;transition:all 0.2s;}
+.fi:focus{border-color:rgba(201,168,76,0.4);}
+.fi::placeholder{color:var(--muted);}
+.fi option{background:#0c1524;}
+textarea.fi{resize:vertical;min-height:80px;}
+.btn{border:none;border-radius:9px;padding:10px 20px;font-family:var(--sans);font-size:0.82rem;font-weight:700;cursor:pointer;transition:all 0.2s;display:inline-flex;align-items:center;gap:6px;}
+.btn-g{background:linear-gradient(135deg,#7a5c1a,var(--gold));color:#000;}
+.btn-g:hover{opacity:0.9;transform:translateY(-1px);}
+.btn-ghost{background:transparent;border:1px solid var(--border);color:var(--muted);}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold);}
+.btn-danger{background:rgba(255,69,96,0.12);border:1px solid rgba(255,69,96,0.25);color:var(--red);}
+.btn-success{background:rgba(0,209,102,0.12);border:1px solid rgba(0,209,102,0.25);color:var(--green);}
+.btn-sm{padding:6px 12px;font-size:0.72rem;}
+.btn-block{width:100%;justify-content:center;padding:12px;}
+
+/* MAIN APP */
+.app{display:none;min-height:100vh;}
+header{background:linear-gradient(135deg,#080d17,#0c1524);border-bottom:1px solid var(--border);padding:0.8rem 1.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+.hlogo{display:flex;align-items:center;gap:10px;}
+.hmark{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#7a5c1a,var(--gold));display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:0.85rem;font-weight:900;color:#000;}
+.hbrand{font-family:var(--sans);font-size:0.88rem;font-weight:700;}
+.hbrand em{color:var(--gold);font-style:normal;}
+
+/* NAV TABS */
+.nav-tabs{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 1.5rem;display:flex;gap:4px;overflow-x:auto;}
+.tab{padding:10px 18px;font-family:var(--sans);font-size:0.78rem;font-weight:600;color:var(--muted);cursor:pointer;border:none;background:transparent;border-bottom:2px solid transparent;transition:all 0.2s;white-space:nowrap;}
+.tab:hover{color:var(--white);}
+.tab.active{color:var(--gold);border-bottom-color:var(--gold);}
+
+main{padding:1.5rem;max-width:1000px;margin:0 auto;}
+
+/* SECTION */
+.sec{display:none;}
+.sec.active{display:block;}
+
+/* PANEL */
+.panel{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:1.2rem;}
+.panel-title{font-family:var(--sans);font-size:0.85rem;font-weight:700;color:var(--white);margin-bottom:1.2rem;display:flex;align-items:center;gap:8px;}
+.panel-title em{color:var(--gold);font-style:normal;}
+
+/* STATS */
+.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:1.5rem;}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;text-align:center;}
+.stat-n{font-family:var(--serif);font-size:1.8rem;font-weight:900;color:var(--gold);}
+.stat-l{font-size:0.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;margin-top:2px;}
+
+/* ADS TABLE */
+.ads-table{width:100%;border-collapse:collapse;font-size:0.8rem;}
+.ads-table th{background:rgba(255,255,255,0.03);color:var(--muted);padding:8px 10px;text-align:left;font-size:0.65rem;text-transform:uppercase;letter-spacing:0.08em;border-bottom:1px solid var(--border);}
+.ads-table td{padding:10px;border-bottom:1px solid rgba(255,255,255,0.04);vertical-align:top;}
+.ads-table tr:hover td{background:rgba(255,255,255,0.02);}
+.ad-preview-img{width:60px;height:45px;object-fit:cover;border-radius:6px;border:1px solid var(--border);}
+.ad-preview-ph{width:60px;height:45px;border-radius:6px;border:1px solid var(--border);background:var(--card);display:flex;align-items:center;justify-content:center;font-size:1.2rem;}
+.badge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:20px;font-size:0.62rem;font-weight:700;text-transform:uppercase;gap:4px;}
+.badge::before{content:'';width:4px;height:4px;border-radius:50%;background:currentColor;}
+.b-active{background:rgba(0,209,102,0.1);color:var(--green);border:1px solid rgba(0,209,102,0.25);}
+.b-inactive{background:rgba(255,69,96,0.1);color:var(--red);border:1px solid rgba(255,69,96,0.25);}
+.b-pending{background:rgba(255,165,0,0.1);color:orange;border:1px solid rgba(255,165,0,0.25);}
+
+/* IMAGE UPLOAD */
+.img-upload-wrap{
+  border:2px dashed rgba(201,168,76,0.25);border-radius:12px;
+  padding:1.5rem;text-align:center;cursor:pointer;transition:all 0.2s;
+  position:relative;
+}
+.img-upload-wrap:hover{border-color:rgba(201,168,76,0.5);background:rgba(201,168,76,0.03);}
+.img-upload-wrap input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer;}
+.img-upload-icon{font-size:2rem;margin-bottom:8px;}
+.img-upload-text{font-size:0.78rem;color:var(--muted);}
+.img-preview{width:100%;max-height:200px;object-fit:contain;border-radius:8px;margin-top:10px;display:none;}
+
+/* COLOR PICKER PREVIEW */
+.color-preview{width:30px;height:30px;border-radius:6px;border:1px solid var(--border);display:inline-block;vertical-align:middle;margin-left:8px;}
+
+/* TOAST */
+#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px 20px;font-size:0.82rem;transition:transform 0.3s;z-index:9999;white-space:nowrap;}
+#toast.show{transform:translateX(-50%) translateY(0);}
+#toast.ok{border-color:rgba(0,209,102,0.4);color:var(--green);}
+#toast.err{border-color:rgba(255,69,96,0.4);color:var(--red);}
+
+/* LIVE AD PREVIEW */
+.live-preview{
+  background:linear-gradient(145deg,#0a0f1e,#111e30);
+  border:1px solid rgba(201,168,76,0.2);border-radius:12px;
+  padding:1rem;margin-top:1rem;
+}
+.lp-label{font-family:var(--mono);font-size:0.6rem;color:var(--gold);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;}
+.school-ad-preview{
+  background:linear-gradient(135deg,rgba(201,168,76,0.08),rgba(201,168,76,0.03));
+  border:1px solid rgba(201,168,76,0.2);border-radius:10px;padding:12px;
+}
+.sap-type{font-family:var(--mono);font-size:0.58rem;color:var(--gold);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px;}
+.sap-name{font-family:var(--sans);font-size:0.88rem;font-weight:700;color:var(--white);margin-bottom:3px;}
+.sap-text{font-size:0.75rem;color:var(--muted);line-height:1.5;margin-bottom:6px;}
+.sap-img{width:100%;border-radius:8px;margin-bottom:8px;display:none;}
+.sap-cta{font-size:0.72rem;color:var(--gold);font-weight:700;}
+
+@media(max-width:600px){
+  .stats-row{grid-template-columns:1fr 1fr;}
+  main{padding:1rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-page" id="login-page">
+  <div class="login-box">
+    <div class="login-logo">
+      <div class="login-mark">R</div>
+      <h2>Rehoteq News Admin</h2>
+      <p>Manage ads, articles and announcements</p>
+    </div>
+    <div class="fg">
+      <label>Admin Password</label>
+      <input class="fi" type="password" id="admin-pass" placeholder="Enter admin password"
+        onkeydown="if(event.key==='Enter') doLogin()"/>
+    </div>
+    <button class="btn btn-g btn-block" onclick="doLogin()">Login →</button>
+    <div style="text-align:center;margin-top:1rem;">
+      <a href="news.html" style="font-size:0.72rem;color:var(--muted);">← Back to News Portal</a>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN APP -->
+<div class="app" id="app">
+  <header>
+    <div class="hlogo">
+      <div class="hmark">R</div>
+      <div class="hbrand">Rehoteq <em>News Admin</em></div>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center;">
+      <a href="news.html" target="_blank" class="btn btn-ghost btn-sm">View News Portal</a>
+      <button class="btn btn-ghost btn-sm" onclick="logout()">Logout</button>
+    </div>
+  </header>
+
+  <!-- TABS -->
+  <div class="nav-tabs">
+    <button class="tab active" onclick="showTab('dashboard',this)">🏠 Dashboard</button>
+    <button class="tab" onclick="showTab('post-ad',this)">📢 Post School Ad</button>
+    <button class="tab" onclick="showTab('manage-ads',this)">📋 Manage Ads</button>
+    <button class="tab" onclick="showTab('post-article',this)">✍️ Post Article</button>
+    <button class="tab" onclick="showTab('manage-articles',this)">📰 Manage Articles</button>
+    <button class="tab" onclick="showTab('payments',this)">💰 Payments</button>
+  </div>
+
+  <main>
+
+    <!-- DASHBOARD -->
+    <div class="sec active" id="sec-dashboard">
+      <div class="stats-row" id="dash-stats">
+        <div class="stat-card"><div class="stat-n" id="st-ads">0</div><div class="stat-l">Active Ads</div></div>
+        <div class="stat-card"><div class="stat-n" id="st-articles">0</div><div class="stat-l">Articles</div></div>
+        <div class="stat-card"><div class="stat-n" id="st-pending">0</div><div class="stat-l">Pending Ads</div></div>
+        <div class="stat-card"><div class="stat-n" id="st-revenue" style="font-size:1rem;">N0</div><div class="stat-l">Ad Revenue</div></div>
+      </div>
+      <div class="panel">
+        <div class="panel-title">📢 Recent Ad Submissions</div>
+        <div id="recent-submissions" style="font-size:0.82rem;color:var(--muted);text-align:center;padding:1rem;">
+          No submissions yet. School ads submitted via the portal will appear here.
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-title">⚡ Quick Actions</div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <button class="btn btn-g btn-sm" onclick="showTab('post-ad',document.querySelector('.tab:nth-child(2)'))">📢 Post New Ad</button>
+          <button class="btn btn-ghost btn-sm" onclick="showTab('post-article',document.querySelector('.tab:nth-child(4)'))">✍️ Write Article</button>
+          <a href="news.html" target="_blank" class="btn btn-ghost btn-sm">🌐 View Live Site</a>
+        </div>
+      </div>
+
+      <!-- GENERATE JSON PANEL -->
+      <div class="panel" style="border-color:rgba(201,168,76,0.3);background:rgba(201,168,76,0.04);">
+        <div class="panel-title">🔄 <em>Update Website Ads</em></div>
+        <p style="font-size:0.82rem;color:var(--muted);margin-bottom:1rem;">
+          After posting or changing ads — generate the ads.json file and upload to GitHub. This makes your ads visible to EVERYONE on the website!
+        </p>
+        <button class="btn btn-g" onclick="generateJSON()">⬇️ Generate & Download ads.json</button>
+        <div id="json-output" style="display:none;margin-top:1rem;">
+          <div style="font-family:var(--mono);font-size:0.62rem;color:var(--gold);margin-bottom:6px;">Copy this and save as ads.json on GitHub:</div>
+          <textarea id="json-content" style="width:100%;height:180px;background:rgba(0,0,0,0.3);border:1px solid rgba(201,168,76,0.2);border-radius:8px;padding:10px;color:#eef2ff;font-family:monospace;font-size:0.7rem;resize:vertical;" readonly></textarea>
+          <div style="display:flex;gap:8px;margin-top:8px;">
+            <button class="btn btn-g btn-sm" onclick="copyJSON()">📋 Copy JSON</button>
+            <button class="btn btn-ghost btn-sm" onclick="downloadJSON()">⬇️ Download</button>
+          </div>
+          <div style="margin-top:8px;font-size:0.72rem;color:var(--muted);">
+            Upload to GitHub: <span style="color:var(--gold);font-family:monospace;">rehoteq1-coder/rehoteq → ads.json</span>
+          </div>
+        </div>
+      </div>
+      <div class="panel" style="border-color:rgba(201,168,76,0.3);background:rgba(201,168,76,0.04);">
+        <div class="panel-title">🔄 Update Website Ads</div>
+        <p style="font-size:0.82rem;color:var(--muted);margin-bottom:1rem;">
+          After posting or changing ads — click the button below to generate the ads.json file. 
+          Then copy and upload it to GitHub to make ads visible to everyone on the website.
+        </p>
+        <button class="btn btn-g" onclick="generateJSON()">⬇️ Generate & Download ads.json</button>
+        <div id="json-output" style="display:none;margin-top:1rem;">
+          <div style="font-family:var(--mono);font-size:0.62rem;color:var(--gold);margin-bottom:6px;">ads.json — Upload this file to GitHub:</div>
+          <textarea id="json-content" style="width:100%;height:200px;background:rgba(0,0,0,0.3);border:1px solid rgba(201,168,76,0.2);border-radius:8px;padding:10px;color:#eef2ff;font-family:monospace;font-size:0.72rem;resize:vertical;" readonly></textarea>
+          <div style="display:flex;gap:8px;margin-top:8px;">
+            <button class="btn btn-g btn-sm" onclick="copyJSON()">📋 Copy JSON</button>
+            <button class="btn btn-ghost btn-sm" onclick="downloadJSON()">⬇️ Download File</button>
+          </div>
+          <div style="margin-top:8px;font-size:0.72rem;color:var(--muted);">
+            Upload to: <span style="color:var(--gold);font-family:monospace;">github.com/rehoteq1-coder/rehoteq → ads.json</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- POST SCHOOL AD -->
+    <div class="sec" id="sec-post-ad">
+      <div class="panel">
+        <div class="panel-title">📢 Post <em>New School Ad</em></div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+          <div>
+            <div class="fg">
+              <label>School / Organisation Name *</label>
+              <input class="fi" type="text" id="ad-school" placeholder="e.g. Kings College Lagos" oninput="updatePreview()"/>
+            </div>
+            <div class="fg">
+              <label>Ad Type *</label>
+              <select class="fi" id="ad-type" onchange="updatePreview()">
+                <option value="">Select type...</option>
+                <option value="🎓 Admission">🎓 Admission Notice</option>
+                <option value="💼 Job Vacancy">💼 Job Vacancy</option>
+                <option value="📅 Event">📅 Event Announcement</option>
+                <option value="🏫 School Banner">🏫 School Banner Ad</option>
+                <option value="📢 Announcement">📢 General Announcement</option>
+              </select>
+            </div>
+            <div class="fg">
+              <label>Ad Headline *</label>
+              <input class="fi" type="text" id="ad-headline" placeholder="e.g. 2025/2026 Admission is Open!" oninput="updatePreview()"/>
+            </div>
+            <div class="fg">
+              <label>Ad Message *</label>
+              <textarea class="fi" id="ad-message" placeholder="Full ad details, requirements, dates etc..." oninput="updatePreview()"></textarea>
+            </div>
+            <div class="fg">
+              <label>Contact / WhatsApp Number</label>
+              <input class="fi" type="text" id="ad-contact" placeholder="08012345678"/>
+            </div>
+            <div class="fg">
+              <label>School Website / Social Link (Optional)</label>
+              <input class="fi" type="url" id="ad-link" placeholder="https://..."/>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+              <div class="fg">
+                <label>Start Date</label>
+                <input class="fi" type="date" id="ad-start"/>
+              </div>
+              <div class="fg">
+                <label>End Date</label>
+                <input class="fi" type="date" id="ad-end"/>
+              </div>
+            </div>
+            <div class="fg">
+              <label>Amount Paid (N)</label>
+              <input class="fi" type="number" id="ad-amount" placeholder="e.g. 10000"/>
+            </div>
+            <div class="fg">
+              <label>Payment Status</label>
+              <select class="fi" id="ad-paid">
+                <option value="paid">✅ Paid</option>
+                <option value="pending">⏳ Pending Payment</option>
+                <option value="free">🎁 Free / Promo</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <!-- Image Upload -->
+            <div class="fg">
+              <label>Ad Image / Design (Optional)</label>
+              <div class="img-upload-wrap" onclick="document.getElementById('ad-img-file').click()">
+                <input type="file" id="ad-img-file" accept="image/*" onchange="previewAdImage(event)"/>
+                <div class="img-upload-icon">🖼️</div>
+                <div class="img-upload-text">Click to upload school logo, flier or banner<br/>
+                  <span style="font-size:0.65rem;color:rgba(238,242,255,0.3);">JPG, PNG, GIF — Max 2MB</span>
+                </div>
+                <img id="ad-img-preview" class="img-preview"/>
+              </div>
+            </div>
+
+            <!-- Background color picker -->
+            <div class="fg">
+              <label>Ad Background Style</label>
+              <select class="fi" id="ad-style" onchange="updatePreview()">
+                <option value="gold">Gold Theme (Default)</option>
+                <option value="blue">Blue Theme</option>
+                <option value="green">Green Theme</option>
+                <option value="red">Red Theme</option>
+                <option value="dark">Dark Theme</option>
+              </select>
+            </div>
+
+            <!-- LIVE PREVIEW -->
+            <div class="live-preview">
+              <div class="lp-label">Live Preview — How it looks on the website</div>
+              <div class="school-ad-preview" id="ad-live-preview">
+                <div class="sap-type">📢 Announcement</div>
+                <div class="sap-name">School Name</div>
+                <div class="sap-text">Your ad message will appear here...</div>
+                <div class="sap-cta">Contact: 08012345678 →</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:1.5rem;display:flex;gap:10px;flex-wrap:wrap;">
+          <button class="btn btn-g" onclick="postAd()">🚀 Post Ad to Website</button>
+          <button class="btn btn-ghost" onclick="clearAdForm()">🗑️ Clear</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MANAGE ADS -->
+    <div class="sec" id="sec-manage-ads">
+      <div class="panel">
+        <div class="panel-title">📋 All <em>School Ads</em>
+          <button class="btn btn-ghost btn-sm" style="margin-left:auto;" onclick="loadAds()">🔄 Refresh</button>
+        </div>
+        <div style="overflow-x:auto;">
+          <table class="ads-table">
+            <thead>
+              <tr>
+                <th>Image</th>
+                <th>School</th>
+                <th>Type</th>
+                <th>Headline</th>
+                <th>Dates</th>
+                <th>Payment</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="ads-tbody">
+              <tr><td colspan="8" style="text-align:center;color:var(--muted);padding:2rem;">No ads posted yet</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- POST ARTICLE -->
+    <div class="sec" id="sec-post-article">
+      <div class="panel">
+        <div class="panel-title">✍️ Write <em>New Article</em></div>
+        <div class="fg">
+          <label>Article Title *</label>
+          <input class="fi" type="text" id="art-title" placeholder="Enter a catchy headline..."/>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <div class="fg">
+            <label>Category *</label>
+            <select class="fi" id="art-cat">
+              <option value="tech">💻 Tech News</option>
+              <option value="cyber">🔐 Cybersecurity</option>
+              <option value="school">🎓 Education</option>
+              <option value="tips">💡 Rehoteq Tips</option>
+              <option value="solar">☀️ Solar & Energy</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label>Article Icon (Emoji)</label>
+            <input class="fi" type="text" id="art-icon" placeholder="e.g. 🔐" maxlength="4" value="💻"/>
+          </div>
+        </div>
+        <div class="fg">
+          <label>Short Description (shown in cards) *</label>
+          <input class="fi" type="text" id="art-desc" placeholder="One sentence summary..."/>
+        </div>
+        <div class="fg">
+          <label>Full Article Body * (HTML supported)</label>
+          <textarea class="fi" id="art-body" style="min-height:200px;" placeholder="Write the full article here. You can use HTML like &lt;p&gt;, &lt;h3&gt;, &lt;strong&gt; for formatting..."></textarea>
+        </div>
+        <div class="fg">
+          <label>Author / Source</label>
+          <input class="fi" type="text" id="art-source" value="Rehoteq News Desk" placeholder="Source name"/>
+        </div>
+        <div style="margin-top:1rem;display:flex;gap:10px;flex-wrap:wrap;">
+          <button class="btn btn-g" onclick="postArticle()">🚀 Publish Article</button>
+          <button class="btn btn-ghost" onclick="clearArticleForm()">🗑️ Clear</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MANAGE ARTICLES -->
+    <div class="sec" id="sec-manage-articles">
+      <div class="panel">
+        <div class="panel-title">📰 All <em>Articles</em>
+          <button class="btn btn-ghost btn-sm" style="margin-left:auto;" onclick="loadArticles()">🔄 Refresh</button>
+        </div>
+        <div style="overflow-x:auto;">
+          <table class="ads-table">
+            <thead>
+              <tr><th>Icon</th><th>Title</th><th>Category</th><th>Date</th><th>Status</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="articles-tbody">
+              <tr><td colspan="6" style="text-align:center;color:var(--muted);padding:2rem;">No articles yet</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAYMENTS -->
+    <div class="sec" id="sec-payments">
+      <div class="panel">
+        <div class="panel-title">💰 <em>Payment Records</em>
+          <button class="btn btn-ghost btn-sm" style="margin-left:auto;" onclick="loadPayments()">🔄 Refresh</button>
+        </div>
+        <div style="margin-bottom:1rem;display:flex;gap:8px;flex-wrap:wrap;">
+          <button class="btn btn-g btn-sm" onclick="showAddPayment()">+ Record Payment</button>
+        </div>
+        <div id="add-payment-form" style="display:none;background:rgba(255,255,255,0.02);border-radius:10px;padding:1rem;margin-bottom:1rem;">
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px;">
+            <div class="fg"><label>School Name</label><input class="fi" type="text" id="pay-school" placeholder="School name"/></div>
+            <div class="fg"><label>Amount (N)</label><input class="fi" type="number" id="pay-amount" placeholder="10000"/></div>
+            <div class="fg"><label>Ad Type</label><input class="fi" type="text" id="pay-type" placeholder="Admission Notice"/></div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
+            <div class="fg"><label>Payment Method</label>
+              <select class="fi" id="pay-method">
+                <option value="Bank Transfer">Bank Transfer</option>
+                <option value="Card (Paystack)">Card (Paystack)</option>
+                <option value="Cash">Cash</option>
+              </select>
+            </div>
+            <div class="fg"><label>Date</label><input class="fi" type="date" id="pay-date"/></div>
+          </div>
+          <div class="fg" style="margin-bottom:10px;"><label>Notes</label><input class="fi" type="text" id="pay-notes" placeholder="Any notes..."/></div>
+          <button class="btn btn-g btn-sm" onclick="savePayment()">Save Record</button>
+        </div>
+        <div style="overflow-x:auto;">
+          <table class="ads-table">
+            <thead><tr><th>Date</th><th>School</th><th>Ad Type</th><th>Amount</th><th>Method</th><th>Notes</th></tr></thead>
+            <tbody id="payments-tbody">
+              <tr><td colspan="6" style="text-align:center;color:var(--muted);padding:2rem;">No payment records yet</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="margin-top:1rem;padding:1rem;background:rgba(201,168,76,0.05);border:1px solid rgba(201,168,76,0.15);border-radius:10px;">
+          <div style="font-family:var(--mono);font-size:0.62rem;color:var(--gold);margin-bottom:6px;">TOTAL AD REVENUE</div>
+          <div style="font-family:var(--serif);font-size:2rem;font-weight:900;color:var(--gold);" id="total-revenue">N0</div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<div id="toast"></div>
+
+<script>
+// ============================================================
+// CONFIG
+// ============================================================
+var ADMIN_PASS = 'rehoteq@admin2025';
+var FIREBASE_CONFIG = {
+  apiKey: "AIzaSyAlGrnex8GCd6Ciw_cggrEiA9nhSnEfFMU",
+  authDomain: "gtc-okitipupa.firebaseapp.com",
+  databaseURL: "https://gtc-okitipupa-default-rtdb.firebaseio.com",
+  projectId: "gtc-okitipupa",
+  appId: "1:822961195945:web:a05839b2d488bec61792b8"
+};
+
+var DB = null;
+var currentAdImage = null;
+
+// ============================================================
+// FIREBASE INIT
+// ============================================================
+function initDB(){
+  try{
+    var app;
+    try{ app = firebase.app('news-admin'); }
+    catch(e){ app = firebase.initializeApp(FIREBASE_CONFIG, 'news-admin'); }
+    DB = firebase.database(app).ref('rehoteq_news');
+
+    // Listen for changes
+    DB.child('ads').on('value', function(snap){
+      var ads = snap.val() || {};
+      var count = Object.keys(ads).length;
+      var active = Object.values(ads).filter(function(a){ return a.status === 'active'; }).length;
+      var pending = Object.values(ads).filter(function(a){ return a.status === 'pending'; }).length;
+      document.getElementById('st-ads').textContent = active;
+      document.getElementById('st-pending').textContent = pending;
+      renderRecentSubmissions(ads);
+    });
+
+    DB.child('articles').on('value', function(snap){
+      var arts = snap.val() || {};
+      document.getElementById('st-articles').textContent = Object.keys(arts).length;
+    });
+
+    DB.child('payments').on('value', function(snap){
+      var pays = snap.val() || {};
+      var total = Object.values(pays).reduce(function(s,p){ return s + (parseInt(p.amount)||0); }, 0);
+      document.getElementById('st-revenue').textContent = 'N' + total.toLocaleString();
+      document.getElementById('total-revenue').textContent = 'N' + total.toLocaleString();
+    });
+  } catch(err){
+    toast('Database connection error', 'err');
+  }
+}
+
+// ============================================================
+// LOGIN / LOGOUT
+// ============================================================
+function doLogin(){
+  var pass = document.getElementById('admin-pass').value;
+  if(pass !== ADMIN_PASS){ toast('Wrong password', 'err'); return; }
+  document.getElementById('login-page').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  loadAds();
+  loadArticles();
+  loadPayments();
+  // Set today's date as default
+  var today = new Date().toISOString().split('T')[0];
+  document.getElementById('ad-start').value = today;
+  document.getElementById('pay-date').value = today;
+}
+
+function logout(){
+  document.getElementById('app').style.display = 'none';
+  document.getElementById('login-page').style.display = 'flex';
+  document.getElementById('admin-pass').value = '';
+}
+
+// ============================================================
+// TABS
+// ============================================================
+function showTab(id, btn){
+  document.querySelectorAll('.sec').forEach(function(s){ s.classList.remove('active'); });
+  document.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
+  document.getElementById('sec-'+id).classList.add('active');
+  if(btn) btn.classList.add('active');
+}
+
+// ============================================================
+// IMAGE UPLOAD
+// ============================================================
+function previewAdImage(event){
+  var file = event.target.files[0];
+  if(!file) return;
+  if(file.size > 2*1024*1024){ toast('Image too large — max 2MB', 'err'); return; }
+
+  var reader = new FileReader();
+  reader.onload = function(e){
+    currentAdImage = e.target.result;
+    var preview = document.getElementById('ad-img-preview');
+    preview.src = currentAdImage;
+    preview.style.display = 'block';
+    updatePreview();
+  };
+  reader.readAsDataURL(file);
+}
+
+// ============================================================
+// LIVE PREVIEW UPDATE
+// ============================================================
+function updatePreview(){
+  var school = document.getElementById('ad-school').value || 'School Name';
+  var type = document.getElementById('ad-type').value || '📢 Announcement';
+  var headline = document.getElementById('ad-headline').value || 'Your ad headline here';
+  var message = document.getElementById('ad-message').value || 'Your ad message will appear here...';
+  var contact = document.getElementById('ad-contact').value || '';
+
+  var preview = document.getElementById('ad-live-preview');
+  var imgHtml = currentAdImage
+    ? '<img src="'+currentAdImage+'" class="sap-img" style="display:block;width:100%;border-radius:6px;margin-bottom:6px;max-height:120px;object-fit:cover;"/>'
+    : '';
+
+  preview.innerHTML = imgHtml
+    + '<div class="sap-type">'+type+'</div>'
+    + '<div class="sap-name">'+school+'</div>'
+    + '<div class="sap-text">'+headline+'<br><span style="font-size:0.7rem;opacity:0.7;">'+message.substring(0,80)+(message.length>80?'...':'')+'</span></div>'
+    + (contact ? '<div class="sap-cta">Contact: '+contact+' →</div>' : '');
+}
+
+// ============================================================
+// POST AD
+// ============================================================
+function postAd(){
+  var school = document.getElementById('ad-school').value.trim();
+  var type = document.getElementById('ad-type').value;
+  var headline = document.getElementById('ad-headline').value.trim();
+  var message = document.getElementById('ad-message').value.trim();
+  var contact = document.getElementById('ad-contact').value.trim();
+  var link = document.getElementById('ad-link').value.trim();
+  var start = document.getElementById('ad-start').value;
+  var end = document.getElementById('ad-end').value;
+  var amount = document.getElementById('ad-amount').value;
+  var paid = document.getElementById('ad-paid').value;
+  var style = document.getElementById('ad-style').value;
+
+  if(!school || !type || !headline){ toast('Please fill School, Type and Headline', 'err'); return; }
+
+  var ad = {
+    school: school,
+    type: type,
+    headline: headline,
+    message: message,
+    contact: contact,
+    link: link,
+    startDate: start,
+    endDate: end,
+    amount: amount,
+    paid: paid,
+    style: style,
+    image: currentAdImage || null,
+    status: paid === 'paid' ? 'active' : 'pending',
+    createdAt: Date.now(),
+    createdBy: 'admin'
+  };
+
+  if(DB){
+    var key = DB.child('ads').push().key;
+    DB.child('ads').child(key).set(ad)
+      .then(function(){
+        toast('Ad posted successfully!', 'ok');
+        clearAdForm();
+        loadAds();
+      })
+      .catch(function(err){ toast('Error: '+err.message, 'err'); });
+  } else {
+    toast('Not connected to database', 'err');
+  }
+}
+
+function clearAdForm(){
+  ['ad-school','ad-headline','ad-message','ad-contact','ad-link','ad-amount'].forEach(function(id){
+    document.getElementById(id).value = '';
+  });
+  document.getElementById('ad-type').value = '';
+  document.getElementById('ad-paid').value = 'paid';
+  document.getElementById('ad-img-preview').style.display = 'none';
+  currentAdImage = null;
+  updatePreview();
+}
+
+// ============================================================
+// LOAD AND RENDER ADS
+// ============================================================
+function loadAds(){
+  var saved = JSON.parse(localStorage.getItem('rehoteq_ads') || '[]');
+  var adsObj = {};
+  saved.forEach(function(a){ adsObj[a._key] = a; });
+  renderAdsTable(adsObj);
+  updateStats();
+}
+
+function updateStats(){
+  var saved = JSON.parse(localStorage.getItem('rehoteq_ads') || '[]');
+  document.getElementById('st-ads').textContent = saved.filter(function(a){ return a.status==='active'; }).length;
+  document.getElementById('st-pending').textContent = saved.filter(function(a){ return a.status==='pending'; }).length;
+}
+
+function renderAdsTable(ads){
+  var tbody = document.getElementById('ads-tbody');
+  var list = Object.entries(ads);
+  if(!list.length){
+    tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;color:var(--muted);padding:2rem;">No ads posted yet</td></tr>';
+    return;
+  }
+  tbody.innerHTML = list.map(function(entry){
+    var key = entry[0];
+    var a = entry[1];
+    var statusClass = a.status === 'active' ? 'b-active' : a.status === 'pending' ? 'b-pending' : 'b-inactive';
+    var imgHtml = a.image
+      ? '<img src="'+a.image+'" class="ad-preview-img"/>'
+      : '<div class="ad-preview-ph">📢</div>';
+    return '<tr>'
+      + '<td>'+imgHtml+'</td>'
+      + '<td style="font-weight:600;">'+a.school+'</td>'
+      + '<td style="font-size:0.75rem;">'+a.type+'</td>'
+      + '<td style="font-size:0.75rem;max-width:150px;">'+a.headline+'</td>'
+      + '<td style="font-size:0.68rem;color:var(--muted);">'+(a.startDate||'-')+' to<br>'+(a.endDate||'-')+'</td>'
+      + '<td>'
+        + '<span style="font-size:0.75rem;color:var(--gold);">N'+(parseInt(a.amount)||0).toLocaleString()+'</span><br>'
+        + '<span style="font-size:0.65rem;color:var(--muted);">'+a.paid+'</span>'
+      + '</td>'
+      + '<td><span class="badge '+statusClass+'">'+a.status+'</span></td>'
+      + '<td style="display:flex;gap:4px;flex-wrap:wrap;">'
+        + '<button class="btn btn-success btn-sm" onclick="toggleAdStatus(\''+key+'\',\''+a.status+'\')">'+( a.status==='active'?'Deactivate':'Activate')+'</button>'
+        + '<button class="btn btn-danger btn-sm" onclick="deleteAd(\''+key+'\')">Delete</button>'
+      + '</td>'
+      + '</tr>';
+  }).join('');
+}
+
+function toggleAdStatus(key, currentStatus){
+  var newStatus = currentStatus === 'active' ? 'inactive' : 'active';
+  var saved = JSON.parse(localStorage.getItem('rehoteq_ads') || '[]');
+  saved.forEach(function(a){ if(a._key === key) a.status = newStatus; });
+  localStorage.setItem('rehoteq_ads', JSON.stringify(saved));
+  toast('Status updated! Click Generate ads.json to update website.', 'ok');
+  loadAds();
+}
+
+function deleteAd(key){
+  if(!confirm('Delete this ad?')) return;
+  var saved = JSON.parse(localStorage.getItem('rehoteq_ads') || '[]');
+  saved = saved.filter(function(a){ return a._key !== key; });
+  localStorage.setItem('rehoteq_ads', JSON.stringify(saved));
+  toast('Ad deleted! Click Generate ads.json to update website.', 'ok');
+  loadAds();
+}
+
+function renderRecentSubmissions(ads){
+  var div = document.getElementById('recent-submissions');
+  var list = Object.entries(ads).sort(function(a,b){ return (b[1].createdAt||0)-(a[1].createdAt||0); }).slice(0,5);
+  if(!list.length){
+    div.innerHTML = '<div style="text-align:center;color:var(--muted);padding:1rem;">No submissions yet.</div>';
+    return;
+  }
+  div.innerHTML = list.map(function(entry){
+    var a = entry[1];
+    var statusClass = a.status === 'active' ? 'b-active' : a.status === 'pending' ? 'b-pending' : 'b-inactive';
+    return '<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04);">'
+      + '<div style="font-size:1.2rem;">📢</div>'
+      + '<div style="flex:1;">'
+        + '<div style="font-size:0.82rem;font-weight:600;color:var(--white);">'+a.school+'</div>'
+        + '<div style="font-size:0.72rem;color:var(--muted);">'+a.headline+'</div>'
+      + '</div>'
+      + '<span class="badge '+statusClass+'">'+a.status+'</span>'
+    + '</div>';
+  }).join('');
+}
+
+// ============================================================
+// POST ARTICLE
+// ============================================================
+function postArticle(){
+  var title = document.getElementById('art-title').value.trim();
+  var cat = document.getElementById('art-cat').value;
+  var icon = document.getElementById('art-icon').value.trim() || '💻';
+  var desc = document.getElementById('art-desc').value.trim();
+  var body = document.getElementById('art-body').value.trim();
+  var source = document.getElementById('art-source').value.trim();
+
+  if(!title||!desc||!body){ toast('Title, Description and Body are required', 'err'); return; }
+
+  var catLabels = {
+    tech:'Tech News',cyber:'Cybersecurity',school:'Education',
+    tips:'Rehoteq Tips',solar:'Solar & Energy'
+  };
+
+  var id = title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').substring(0,50);
+
+  var article = {
+    id: id,
+    cat: cat,
+    catLabel: catLabels[cat] || cat,
+    icon: icon,
+    title: title,
+    desc: desc,
+    body: body,
+    source: source || 'Rehoteq News Desk',
+    date: new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'}),
+    featured: false,
+    status: 'published',
+    createdAt: Date.now()
+  };
+
+  if(DB){
+    DB.child('articles').child(id).set(article)
+      .then(function(){
+        toast('Article published!', 'ok');
+        clearArticleForm();
+        loadArticles();
+      })
+      .catch(function(err){ toast('Error: '+err.message, 'err'); });
+  }
+}
+
+function clearArticleForm(){
+  ['art-title','art-desc','art-body'].forEach(function(id){ document.getElementById(id).value=''; });
+  document.getElementById('art-icon').value = '💻';
+}
+
+function loadArticles(){
+  if(!DB) return;
+  DB.child('articles').once('value', function(snap){
+    var arts = snap.val() || {};
+    renderArticlesTable(arts);
+  });
+}
+
+function renderArticlesTable(arts){
+  var tbody = document.getElementById('articles-tbody');
+  var list = Object.entries(arts).sort(function(a,b){ return (b[1].createdAt||0)-(a[1].createdAt||0); });
+  if(!list.length){
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:2rem;">No articles yet</td></tr>';
+    return;
+  }
+  tbody.innerHTML = list.map(function(entry){
+    var key = entry[0];
+    var a = entry[1];
+    return '<tr>'
+      + '<td style="font-size:1.5rem;">'+a.icon+'</td>'
+      + '<td style="font-weight:600;max-width:200px;">'+a.title+'</td>'
+      + '<td style="font-size:0.75rem;">'+a.catLabel+'</td>'
+      + '<td style="font-size:0.72rem;color:var(--muted);">'+a.date+'</td>'
+      + '<td><span class="badge b-active">Published</span></td>'
+      + '<td><button class="btn btn-danger btn-sm" onclick="deleteArticle(\''+key+'\')">Delete</button></td>'
+    + '</tr>';
+  }).join('');
+}
+
+function deleteArticle(key){
+  if(!confirm('Delete this article?')) return;
+  if(DB) DB.child('articles').child(key).remove()
+    .then(function(){ toast('Article deleted', 'ok'); loadArticles(); });
+}
+
+// ============================================================
+// PAYMENTS
+// ============================================================
+function showAddPayment(){
+  var f = document.getElementById('add-payment-form');
+  f.style.display = f.style.display === 'none' ? 'block' : 'none';
+}
+
+function savePayment(){
+  var school = document.getElementById('pay-school').value.trim();
+  var amount = document.getElementById('pay-amount').value;
+  var type = document.getElementById('pay-type').value.trim();
+  var method = document.getElementById('pay-method').value;
+  var date = document.getElementById('pay-date').value;
+  var notes = document.getElementById('pay-notes').value.trim();
+
+  if(!school||!amount){ toast('School name and amount required', 'err'); return; }
+
+  var payment = { school:school, amount:parseInt(amount), type:type, method:method, date:date, notes:notes, createdAt:Date.now() };
+
+  if(DB){
+    DB.child('payments').push().set(payment)
+      .then(function(){ toast('Payment recorded!', 'ok'); loadPayments(); showAddPayment(); });
+  }
+}
+
+function loadPayments(){
+  if(!DB) return;
+  DB.child('payments').once('value', function(snap){
+    var pays = snap.val() || {};
+    renderPaymentsTable(pays);
+  });
+}
+
+function renderPaymentsTable(pays){
+  var tbody = document.getElementById('payments-tbody');
+  var list = Object.entries(pays).sort(function(a,b){ return (b[1].createdAt||0)-(a[1].createdAt||0); });
+  if(!list.length){
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:2rem;">No payments recorded yet</td></tr>';
+    return;
+  }
+  tbody.innerHTML = list.map(function(entry){
+    var p = entry[1];
+    return '<tr>'
+      + '<td style="font-size:0.75rem;color:var(--muted);">'+p.date+'</td>'
+      + '<td style="font-weight:600;">'+p.school+'</td>'
+      + '<td style="font-size:0.75rem;">'+p.type+'</td>'
+      + '<td style="color:var(--gold);font-weight:700;">N'+(parseInt(p.amount)||0).toLocaleString()+'</td>'
+      + '<td style="font-size:0.75rem;color:var(--muted);">'+p.method+'</td>'
+      + '<td style="font-size:0.75rem;color:var(--muted);">'+p.notes+'</td>'
+    + '</tr>';
+  }).join('');
+}
+
+// ============================================================
+// JSON GENERATION
+// ============================================================
+function generateJSON(){
+  var saved = JSON.parse(localStorage.getItem('rehoteq_ads') || '[]');
+  var jsonData = {
+    ads: saved,
+    lastUpdated: new Date().toISOString().split('T')[0]
+  };
+  var jsonStr = JSON.stringify(jsonData, null, 2);
+  document.getElementById('json-output').style.display = 'block';
+  document.getElementById('json-content').value = jsonStr;
+
+  // Auto download
+  downloadJSONData(jsonStr);
+  toast('ads.json generated! Upload it to GitHub to update the website.', 'ok');
+}
+
+function copyJSON(){
+  var txt = document.getElementById('json-content').value;
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(txt).then(function(){
+      toast('JSON copied! Now paste it in GitHub.', 'ok');
+    });
+  }
+}
+
+function downloadJSON(){
+  var txt = document.getElementById('json-content').value;
+  downloadJSONData(txt);
+}
+
+function downloadJSONData(txt){
+  var blob = new Blob([txt], {type:'application/json'});
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = 'ads.json';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// ============================================================
+// JSON GENERATION — makes ads visible to everyone
+// ============================================================
+function generateJSON(){
+  var saved = JSON.parse(localStorage.getItem('rehoteq_ads') || '[]');
+  var jsonData = { ads: saved, lastUpdated: new Date().toISOString().split('T')[0] };
+  var str = JSON.stringify(jsonData, null, 2);
+  document.getElementById('json-output').style.display = 'block';
+  document.getElementById('json-content').value = str;
+  downloadJSONData(str);
+  toast('ads.json downloaded! Upload to GitHub to update website.', 'ok');
+}
+
+function copyJSON(){
+  var txt = document.getElementById('json-content').value;
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(txt).then(function(){ toast('Copied! Paste in GitHub.', 'ok'); });
+  }
+}
+
+function downloadJSON(){
+  downloadJSONData(document.getElementById('json-content').value);
+}
+
+function downloadJSONData(txt){
+  var blob = new Blob([txt], {type:'application/json'});
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url; a.download = 'ads.json'; a.click();
+  URL.revokeObjectURL(url);
+}
+
+// ============================================================
+// TOAST
+// ============================================================
+function generateJSON(){
+  var saved = JSON.parse(localStorage.getItem('rehoteq_ads') || '[]');
+  var jsonData = { ads: saved, lastUpdated: new Date().toISOString().split('T')[0] };
+  var str = JSON.stringify(jsonData, null, 2);
+  var out = document.getElementById('json-output');
+  var jc = document.getElementById('json-content');
+  if(out) out.style.display = 'block';
+  if(jc) jc.value = str;
+  downloadJSONData(str);
+  toast('ads.json downloaded! Upload to GitHub to update website.', 'ok');
+}
+function copyJSON(){
+  var txt = document.getElementById('json-content').value;
+  if(navigator.clipboard) navigator.clipboard.writeText(txt).then(function(){ toast('Copied! Paste in GitHub.','ok'); });
+  else alert(txt);
+}
+function downloadJSON(){ downloadJSONData(document.getElementById('json-content').value); }
+function downloadJSONData(txt){
+  var blob = new Blob([txt],{type:'application/json'});
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href=url; a.download='ads.json'; a.click();
+  URL.revokeObjectURL(url);
+}
+
+function toast(msg, type){
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'show ' + (type||'ok');
+  setTimeout(function(){ t.className = ''; }, 3000);
+}
+</script>
+</body>
+</html>
