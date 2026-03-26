@@ -154,6 +154,7 @@ textarea.fi{resize:vertical;min-height:80px;}
     <button class="tab" onclick="showTab('articles',this)">Articles</button>
     <button class="tab" onclick="showTab('payments',this)">Payments</button>
     <button class="tab" onclick="showTab('export',this)">Export JSON</button>
+    <button class="tab" onclick="showTab('fetch',this)">Auto-Fetch News</button>
   </div>
 
   <div class="content">
@@ -423,6 +424,25 @@ textarea.fi{resize:vertical;min-height:80px;}
         <div style="margin-top:8px;font-size:0.72rem;color:rgba(238,242,255,0.4);">
           Upload to GitHub: <span style="color:#c9a84c;">github.com/rehoteq1-coder/rehoteq</span> as <span style="color:#c9a84c;">ads.json</span>
         </div>
+      </div>
+    </div>
+
+    <!-- FETCH NEWS -->
+    <div class="sec" id="sec-fetch">
+      <div class="panel" style="border-color:rgba(201,168,76,0.3);">
+        <h3>Auto-Fetch <em>Latest News</em></h3>
+        <p style="font-size:0.82rem;color:rgba(238,242,255,0.55);line-height:1.8;margin-bottom:1.2rem;">
+          Click the buttons below to fetch real articles from the internet.<br/>
+          Review them, then save the ones you want to publish on the news portal.
+        </p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:1.5rem;">
+          <button class="btn btn-g" onclick="fetchNews('technology Nigeria','tech','Tech News')">Fetch Tech News</button>
+          <button class="btn btn-g" onclick="fetchNews('cybersecurity Africa scam','cyber','Cybersecurity')">Fetch Cybersecurity</button>
+          <button class="btn btn-g" onclick="fetchNews('solar energy Nigeria','solar','Solar and Energy')">Fetch Solar News</button>
+          <button class="btn btn-g" onclick="fetchNews('school education EdTech Africa','school','Education')">Fetch School News</button>
+        </div>
+        <div id="fetch-status" style="font-size:0.8rem;color:#c9a84c;margin-bottom:1rem;display:none;">Fetching articles...</div>
+        <div id="fetch-results"></div>
       </div>
     </div>
 
@@ -839,6 +859,76 @@ function getVideoEmbed(url){
     return '<div style="margin:1rem 0;"><iframe src="https://www.facebook.com/plugins/video.php?href='+encodeURIComponent(url)+'&show_text=0&width=100%" style="width:100%;height:300px;border:none;" scrolling="no" frameborder="0" allowfullscreen></iframe></div>';
   }
   return '<p><a href="'+url+'" target="_blank" style="color:#c9a84c;">Watch Video</a></p>';
+}
+
+// ============ AUTO-FETCH NEWS ============
+var NEWS_API_KEY = "pub_8a14c782047e4e979a8213004b3e91a6";
+
+function fetchNews(query, cat, catLabel) {
+  var status = document.getElementById("fetch-status");
+  var results = document.getElementById("fetch-results");
+  status.style.display = "block";
+  status.textContent = "Fetching " + catLabel + " articles...";
+  results.innerHTML = "";
+
+  var url = "https://newsdata.io/api/1/news?apikey=" + NEWS_API_KEY + "&q=" + encodeURIComponent(query) + "&language=en&size=5";
+
+  fetch(url)
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      status.style.display = "none";
+      if (!d || !d.results || !d.results.length) {
+        results.innerHTML = "<p style='color:rgba(238,242,255,0.45);font-size:0.82rem;'>No articles found. Try again later.</p>";
+        return;
+      }
+      var html = "<div style='display:flex;flex-direction:column;gap:10px;'>";
+      for (var i = 0; i < d.results.length; i++) {
+        var item = d.results[i];
+        if (!item.title) continue;
+        var safeTitle = (item.title || "").replace(/'/g, " ");
+        var safeDesc = (item.description || "").replace(/'/g, " ").substring(0, 120);
+        var safeLink = item.link || "";
+        html += "<div style='background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:12px;'>";
+        if (item.image_url) html += "<img src='" + item.image_url + "' style='width:100%;height:120px;object-fit:cover;border-radius:6px;margin-bottom:8px;'/>";
+        html += "<div style='font-family:Syne,sans-serif;font-size:0.82rem;font-weight:700;color:#eef2ff;margin-bottom:4px;'>" + safeTitle + "</div>";
+        html += "<div style='font-size:0.72rem;color:rgba(238,242,255,0.45);margin-bottom:8px;'>" + safeDesc + "</div>";
+        html += "<div style='font-size:0.65rem;color:#c9a84c;margin-bottom:8px;'>Source: " + (item.source_name || "Unknown") + " | " + (item.pubDate ? item.pubDate.split(" ")[0] : "Today") + "</div>";
+        html += "<div style='display:flex;gap:8px;'>";
+        html += "<button class='btn btn-g btn-sm' onclick="saveNewsArt('" + safeTitle.substring(0,60).replace(/"/g,'') + "','" + safeDesc.substring(0,120).replace(/"/g,'') + "','" + cat + "','" + catLabel + "','" + safeLink + "')">Save to Portal</button>";
+        if (safeLink) html += "<a href='" + safeLink + "' target='_blank' class='btn btn-gh btn-sm'>Read Full Article</a>";
+        html += "</div></div>";
+      }
+      html += "</div>";
+      results.innerHTML = html;
+    })
+    .catch(function(err) {
+      status.style.display = "none";
+      results.innerHTML = "<p style='color:#ff6b6b;font-size:0.82rem;'>Error fetching news. Check your API key or internet connection.</p>";
+    });
+}
+
+function saveNewsArt(title, desc, cat, catLabel, link) {
+  var icons = {tech:"💻",cyber:"🔐",solar:"☀️",school:"🎓"};
+  var art = {
+    _key: "art_" + Date.now(),
+    id: title.toLowerCase().replace(/[^a-z0-9]+/g, "-").substring(0, 50),
+    cat: cat,
+    catLabel: catLabel,
+    icon: icons[cat] || "📰",
+    title: title,
+    desc: desc,
+    body: desc,
+    link: link,
+    source: "Auto-fetched",
+    date: new Date().toLocaleDateString("en-GB", {day:"numeric",month:"long",year:"numeric"}),
+    status: "published",
+    createdAt: Date.now()
+  };
+  var arts = getArts();
+  arts.unshift(art);
+  saveArts(arts);
+  toast("Article saved! Go to Export JSON to update website.", "ok");
+  refreshAll();
 }
 
 // ============ TOAST ============
