@@ -469,6 +469,45 @@ function loadAds() {
     }).catch(function() {});
 }
 
+function showAdDetail(key) {
+  var ad = window[key];
+  if (!ad) return;
+  var msg = ad.school + ' - ' + ad.headline;
+  if (ad.message) msg += '
+
+' + ad.message;
+  if (ad.contact) msg += '
+
+Contact: ' + ad.contact;
+  if (ad.link) {
+    window.open(ad.link, '_blank');
+  } else if (ad.contact) {
+    var txt = 'Hello, I saw your ad on rehoteq.com
+
+Ad: ' + ad.headline + '
+
+I am interested, please share more details.';
+    window.open('https://wa.me/' + ad.contact.replace(/[^0-9]/g,'') + '?text=' + encodeURIComponent(txt), '_blank');
+  } else {
+    alert(msg);
+  }
+}
+
+function showAdDetail(key) {
+  var ad = window[key];
+  if (!ad) return;
+  if (ad.link) {
+    window.open(ad.link, '_blank');
+  } else if (ad.contact) {
+    var txt = 'Hello, I saw your ad on rehoteq.com\n\nAd: ' + ad.headline + '\n\nI am interested, please share more details.';
+    var num = ad.contact.replace(/[^0-9]/g, '');
+    if (num.length >= 10) window.open('https://wa.me/234' + num.slice(-10) + '?text=' + encodeURIComponent(txt), '_blank');
+    else alert(ad.school + '\n' + ad.headline + '\n' + ad.message);
+  } else {
+    alert(ad.school + '\n\n' + ad.headline + '\n\n' + (ad.message || '') + '\n\nContact Rehoteq: 07036302585');
+  }
+}
+
 window.onload = function() {
   renderArts('all');
   loadAds();
