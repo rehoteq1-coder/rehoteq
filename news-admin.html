@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Rehoteq News Admin</title>
+<style>
+body{margin:0;padding:0;font-family:Arial,sans-serif;background:#05080f;color:#eef2ff;min-height:100vh;}
+a{color:#c9a84c;text-decoration:none;}
+
+/* LOGIN */
+#login{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:1rem;}
+.lbox{background:#0c1524;border:1px solid rgba(201,168,76,0.3);border-radius:16px;padding:2rem;width:100%;max-width:360px;}
+.licon{width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,#7a5c1a,#c9a84c);display:flex;align-items:center;justify-content:center;font-size:1.4rem;font-weight:900;color:#000;margin:0 auto 12px;}
+.lbox h2{text-align:center;font-size:1.2rem;margin-bottom:4px;}
+.lbox p{text-align:center;font-size:0.75rem;color:rgba(238,242,255,0.5);margin-bottom:1.5rem;}
+.lbox label{font-size:0.68rem;color:rgba(238,242,255,0.5);text-transform:uppercase;letter-spacing:0.08em;display:block;margin-bottom:5px;}
+.lbox input{width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:10px 12px;color:#eef2ff;font-size:0.85rem;outline:none;box-sizing:border-box;}
+.lbox input:focus{border-color:#c9a84c;}
+.lbtn{width:100%;margin-top:1rem;background:linear-gradient(135deg,#7a5c1a,#c9a84c);color:#000;font-weight:700;font-size:0.9rem;padding:12px;border:none;border-radius:8px;cursor:pointer;}
+.lbtn:hover{opacity:0.9;}
+.lerr{background:rgba(255,69,96,0.12);border:1px solid rgba(255,69,96,0.3);color:#ff6b6b;border-radius:8px;padding:8px 12px;font-size:0.78rem;margin-top:10px;display:none;}
+.back-link{text-align:center;margin-top:1rem;font-size:0.72rem;color:rgba(238,242,255,0.4);}
+
+/* APP */
+#app{display:none;}
+.topbar{background:#080d17;border-bottom:1px solid rgba(255,255,255,0.07);padding:0.8rem 1.5rem;display:flex;align-items:center;justify-content:space-between;}
+.topbar-logo{display:flex;align-items:center;gap:8px;}
+.topbar-mark{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,#7a5c1a,#c9a84c);display:flex;align-items:center;justify-content:center;font-weight:900;color:#000;font-size:0.85rem;}
+.topbar-title{font-size:0.88rem;font-weight:700;}
+.topbar-title em{color:#c9a84c;font-style:normal;}
+.topbar-btns{display:flex;gap:8px;}
+.tbtn{background:transparent;border:1px solid rgba(255,255,255,0.1);color:rgba(238,242,255,0.5);font-size:0.75rem;padding:6px 12px;border-radius:7px;cursor:pointer;}
+.tbtn:hover{border-color:#c9a84c;color:#c9a84c;}
+
+/* TABS */
+.tabs{background:#080d17;border-bottom:1px solid rgba(255,255,255,0.07);display:flex;overflow-x:auto;padding:0 1rem;}
+.tab{padding:10px 16px;font-size:0.78rem;font-weight:600;color:rgba(238,242,255,0.45);cursor:pointer;border:none;background:transparent;border-bottom:2px solid transparent;white-space:nowrap;}
+.tab:hover{color:#eef2ff;}
+.tab.on{color:#c9a84c;border-bottom-color:#c9a84c;}
+
+/* CONTENT */
+.content{max-width:960px;margin:0 auto;padding:1.5rem;}
+
+/* PANELS */
+.panel{background:#0c1524;border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:1.3rem;margin-bottom:1.2rem;}
+.panel h3{font-size:0.85rem;font-weight:700;margin-bottom:1rem;color:#eef2ff;}
+.panel h3 em{color:#c9a84c;font-style:normal;}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:1.2rem;}
+.stat{background:#0c1524;border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:1rem;text-align:center;}
+.stat-n{font-size:1.8rem;font-weight:900;color:#c9a84c;line-height:1;}
+.stat-l{font-size:0.62rem;color:rgba(238,242,255,0.4);text-transform:uppercase;margin-top:4px;}
+
+/* FORM */
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
+.row.full{grid-template-columns:1fr;}
+.fg{display:flex;flex-direction:column;gap:4px;}
+.fg label{font-size:0.62rem;color:rgba(238,242,255,0.45);text-transform:uppercase;letter-spacing:0.08em;}
+.fi{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:9px 12px;color:#eef2ff;font-size:0.82rem;outline:none;font-family:Arial,sans-serif;}
+.fi:focus{border-color:#c9a84c;}
+.fi::placeholder{color:rgba(238,242,255,0.3);}
+select.fi option{background:#0c1524;}
+textarea.fi{resize:vertical;min-height:80px;}
+
+/* BUTTONS */
+.btn{border:none;border-radius:8px;padding:9px 18px;font-size:0.82rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;}
+.btn-g{background:linear-gradient(135deg,#7a5c1a,#c9a84c);color:#000;}
+.btn-g:hover{opacity:0.9;}
+.btn-gh{background:transparent;border:1px solid rgba(255,255,255,0.1);color:rgba(238,242,255,0.5);}
+.btn-gh:hover{border-color:#c9a84c;color:#c9a84c;}
+.btn-d{background:rgba(255,69,96,0.12);border:1px solid rgba(255,69,96,0.25);color:#ff6b6b;}
+.btn-s{background:rgba(0,209,102,0.12);border:1px solid rgba(0,209,102,0.25);color:#00d166;}
+.btn-sm{padding:5px 12px;font-size:0.72rem;}
+
+/* IMAGE UPLOAD */
+.img-up{border:2px dashed rgba(201,168,76,0.25);border-radius:10px;padding:1.2rem;text-align:center;cursor:pointer;position:relative;transition:all 0.2s;}
+.img-up:hover{border-color:rgba(201,168,76,0.5);}
+.img-up input{position:absolute;inset:0;opacity:0;cursor:pointer;}
+.img-up .icon{font-size:1.8rem;margin-bottom:6px;}
+.img-up p{font-size:0.72rem;color:rgba(238,242,255,0.4);}
+.img-prev{width:100%;border-radius:8px;margin-top:8px;display:none;max-height:160px;object-fit:contain;}
+
+/* PREVIEW */
+.live-prev{background:#111e30;border:1px solid rgba(201,168,76,0.2);border-radius:10px;padding:1rem;margin-top:1rem;}
+.prev-lbl{font-size:0.6rem;color:#c9a84c;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;}
+.prev-card{background:linear-gradient(135deg,rgba(201,168,76,0.08),rgba(201,168,76,0.03));border:1px solid rgba(201,168,76,0.2);border-radius:8px;padding:10px;}
+.prev-type{font-size:0.58rem;color:#c9a84c;text-transform:uppercase;letter-spacing:0.1em;}
+.prev-name{font-size:0.85rem;font-weight:700;margin:3px 0;}
+.prev-text{font-size:0.72rem;color:rgba(238,242,255,0.55);}
+
+/* TABLE */
+.tbl{width:100%;border-collapse:collapse;font-size:0.8rem;}
+.tbl th{background:rgba(255,255,255,0.03);color:rgba(238,242,255,0.4);padding:8px 10px;text-align:left;font-size:0.62rem;text-transform:uppercase;letter-spacing:0.08em;border-bottom:1px solid rgba(255,255,255,0.06);}
+.tbl td{padding:9px 10px;border-bottom:1px solid rgba(255,255,255,0.04);vertical-align:top;}
+.tbl-img{width:54px;height:40px;object-fit:cover;border-radius:5px;}
+.badge{display:inline-flex;align-items:center;gap:3px;padding:3px 9px;border-radius:20px;font-size:0.6rem;font-weight:700;text-transform:uppercase;}
+.badge::before{content:'';width:4px;height:4px;border-radius:50%;background:currentColor;}
+.b-active{background:rgba(0,209,102,0.1);color:#00d166;border:1px solid rgba(0,209,102,0.25);}
+.b-pending{background:rgba(255,165,0,0.1);color:orange;border:1px solid rgba(255,165,0,0.25);}
+.b-inactive{background:rgba(255,69,96,0.1);color:#ff6b6b;border:1px solid rgba(255,69,96,0.25);}
+
+/* JSON OUTPUT */
+.json-box{background:#000;border:1px solid rgba(201,168,76,0.2);border-radius:8px;padding:10px;font-family:monospace;font-size:0.68rem;color:#c9a84c;width:100%;min-height:150px;resize:vertical;margin-top:10px;box-sizing:border-box;}
+
+/* TOAST */
+#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(80px);background:#0c1524;border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:10px 20px;font-size:0.82rem;transition:transform 0.3s;z-index:999;white-space:nowrap;}
+#toast.show{transform:translateX(-50%) translateY(0);}
+#toast.ok{border-color:rgba(0,209,102,0.4);color:#00d166;}
+#toast.err{border-color:rgba(255,69,96,0.4);color:#ff6b6b;}
+
+/* SECTIONS */
+.sec{display:none;}
+.sec.on{display:block;}
+
+@media(max-width:600px){.row{grid-template-columns:1fr;}.stats{grid-template-columns:1fr 1fr;}}
+</style>
+</head>
+<body>
+
+<!-- LOGIN PAGE -->
+<div id="login">
+  <div class="lbox">
+    <div class="licon">R</div>
+    <h2>Rehoteq News Admin</h2>
+    <p>Manage school ads, articles and payments</p>
+    <label>Admin Password</label>
+    <input type="password" id="pw" placeholder="Enter password" onkeydown="if(event.key==='Enter')login()"/>
+    <div class="lerr" id="lerr">Wrong password. Try again.</div>
+    <button class="lbtn" onclick="login()">Login</button>
+    <div class="back-link"><a href="news.html">Back to News Portal</a></div>
+  </div>
+</div>
+
+<!-- MAIN APP -->
+<div id="app">
+  <div class="topbar">
+    <div class="topbar-logo">
+      <div class="topbar-mark">R</div>
+      <div class="topbar-title">Rehoteq <em>News Admin</em></div>
+    </div>
+    <div class="topbar-btns">
+      <a href="news.html" target="_blank"><button class="tbtn">View News Site</button></a>
+      <button class="tbtn" onclick="doLogout()">Logout</button>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab on" onclick="showTab('dash',this)">Dashboard</button>
+    <button class="tab" onclick="showTab('post',this)">Post Ad</button>
+    <button class="tab" onclick="showTab('manage',this)">Manage Ads</button>
+    <button class="tab" onclick="showTab('article',this)">Post Article</button>
+    <button class="tab" onclick="showTab('articles',this)">Articles</button>
+    <button class="tab" onclick="showTab('payments',this)">Payments</button>
+    <button class="tab" onclick="showTab('export',this)">Export JSON</button>
+  </div>
+
+  <div class="content">
+
+    <!-- DASHBOARD -->
+    <div class="sec on" id="sec-dash">
+      <div class="stats">
+        <div class="stat"><div class="stat-n" id="s-active">0</div><div class="stat-l">Active Ads</div></div>
+        <div class="stat"><div class="stat-n" id="s-pending">0</div><div class="stat-l">Pending</div></div>
+        <div class="stat"><div class="stat-n" id="s-arts">0</div><div class="stat-l">Articles</div></div>
+        <div class="stat"><div class="stat-n" id="s-rev" style="font-size:1rem;">N0</div><div class="stat-l">Revenue</div></div>
+      </div>
+      <div class="panel">
+        <h3>Recent Ads</h3>
+        <div id="recent-ads" style="font-size:0.82rem;color:rgba(238,242,255,0.45);">No ads yet. Post one using the Post Ad tab.</div>
+      </div>
+      <div class="panel" style="border-color:rgba(201,168,76,0.3);">
+        <h3>How to Update the Website</h3>
+        <ol style="font-size:0.82rem;color:rgba(238,242,255,0.6);line-height:2;padding-left:1.2rem;">
+          <li>Post your school ad in the <strong style="color:#c9a84c;">Post Ad</strong> tab</li>
+          <li>Go to the <strong style="color:#c9a84c;">Export JSON</strong> tab</li>
+          <li>Click <strong style="color:#c9a84c;">Download ads.json</strong></li>
+          <li>Go to GitHub and upload the file as <strong style="color:#c9a84c;">ads.json</strong></li>
+          <li>The ad will appear on the news website for everyone!</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- POST AD -->
+    <div class="sec" id="sec-post">
+      <div class="panel">
+        <h3>Post <em>New School Ad</em></h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+          <div>
+            <div class="row">
+              <div class="fg">
+                <label>School Name *</label>
+                <input class="fi" type="text" id="a-school" placeholder="e.g. Kings College Lagos" oninput="updPrev()"/>
+              </div>
+              <div class="fg">
+                <label>Ad Type *</label>
+                <select class="fi" id="a-type" onchange="updPrev()">
+                  <option value="">Select...</option>
+                  <option>Admission Notice</option>
+                  <option>Job Vacancy</option>
+                  <option>Event Announcement</option>
+                  <option>School Banner</option>
+                  <option>General Announcement</option>
+                </select>
+              </div>
+            </div>
+            <div class="row full">
+              <div class="fg">
+                <label>Ad Headline *</label>
+                <input class="fi" type="text" id="a-headline" placeholder="e.g. 2025/2026 Admission is Open!" oninput="updPrev()"/>
+              </div>
+            </div>
+            <div class="row full">
+              <div class="fg">
+                <label>Full Message</label>
+                <textarea class="fi" id="a-msg" placeholder="Full details, requirements, dates..."></textarea>
+              </div>
+            </div>
+            <div class="row">
+              <div class="fg">
+                <label>Contact WhatsApp</label>
+                <input class="fi" type="tel" id="a-contact" placeholder="08012345678" oninput="updPrev()"/>
+              </div>
+              <div class="fg">
+                <label>Website Link</label>
+                <input class="fi" type="url" id="a-link" placeholder="https://..."/>
+              </div>
+            </div>
+            <div class="row">
+              <div class="fg">
+                <label>Start Date</label>
+                <input class="fi" type="date" id="a-start"/>
+              </div>
+              <div class="fg">
+                <label>End Date</label>
+                <input class="fi" type="date" id="a-end"/>
+              </div>
+            </div>
+            <div class="row">
+              <div class="fg">
+                <label>Amount Paid (N)</label>
+                <input class="fi" type="number" id="a-amount" placeholder="10000"/>
+              </div>
+              <div class="fg">
+                <label>Payment Status</label>
+                <select class="fi" id="a-paid">
+                  <option value="paid">Paid - Activate</option>
+                  <option value="pending">Pending Payment</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="fg" style="margin-bottom:1rem;">
+              <label>Upload Image / Logo</label>
+              <div class="img-up" onclick="document.getElementById('a-img').click()">
+                <input type="file" id="a-img" accept="image/*" onchange="prevImg(event)"/>
+                <div class="icon">🖼️</div>
+                <p>Click to upload school logo or flier<br/>Max 2MB — JPG or PNG</p>
+                <img id="a-img-prev" class="img-prev"/>
+              </div>
+            </div>
+            <div class="live-prev">
+              <div class="prev-lbl">Live Preview</div>
+              <div class="prev-card" id="ad-preview">
+                <div class="prev-type">Announcement</div>
+                <div class="prev-name">School Name</div>
+                <div class="prev-text">Your ad message...</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:1.2rem;display:flex;gap:10px;">
+          <button class="btn btn-g" onclick="postAd()">Save Ad</button>
+          <button class="btn btn-gh" onclick="clearAd()">Clear</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MANAGE ADS -->
+    <div class="sec" id="sec-manage">
+      <div class="panel">
+        <h3>All <em>Ads</em>
+          <button class="btn btn-gh btn-sm" style="margin-left:auto;float:right;" onclick="renderAdTable()">Refresh</button>
+        </h3>
+        <div style="overflow-x:auto;">
+          <table class="tbl">
+            <thead><tr><th>Img</th><th>School</th><th>Type</th><th>Headline</th><th>Amount</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="ad-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- POST ARTICLE -->
+    <div class="sec" id="sec-article">
+      <div class="panel">
+        <h3>Post <em>New Article</em></h3>
+        <div class="row full"><div class="fg"><label>Title *</label><input class="fi" type="text" id="t-title" placeholder="Article headline..."/></div></div>
+        <div class="row">
+          <div class="fg">
+            <label>Category *</label>
+            <select class="fi" id="t-cat">
+              <option value="tech">Tech News</option>
+              <option value="cyber">Cybersecurity</option>
+              <option value="school">Schools</option>
+              <option value="tips">Rehoteq Tips</option>
+              <option value="solar">Solar and Energy</option>
+            </select>
+          </div>
+          <div class="fg"><label>Icon (emoji)</label><input class="fi" type="text" id="t-icon" value="💻" maxlength="4"/></div>
+        </div>
+        <div class="row full"><div class="fg"><label>Short Description *</label><input class="fi" type="text" id="t-desc" placeholder="One sentence summary..."/></div></div>
+        <div class="row full"><div class="fg"><label>Full Article Body *</label><textarea class="fi" id="t-body" style="min-height:180px;" placeholder="Write your article here. Use HTML tags like p, h3, strong for formatting."></textarea></div></div>
+        <div class="row full"><div class="fg"><label>Author</label><input class="fi" type="text" id="t-author" value="Rehoteq News Desk"/></div></div>
+        <div style="margin-top:1rem;display:flex;gap:10px;">
+          <button class="btn btn-g" onclick="postArticle()">Publish Article</button>
+          <button class="btn btn-gh" onclick="clearArticle()">Clear</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ARTICLES LIST -->
+    <div class="sec" id="sec-articles">
+      <div class="panel">
+        <h3>All <em>Articles</em>
+          <button class="btn btn-gh btn-sm" style="margin-left:auto;float:right;" onclick="renderArtsTable()">Refresh</button>
+        </h3>
+        <div style="overflow-x:auto;">
+          <table class="tbl">
+            <thead><tr><th>Icon</th><th>Title</th><th>Category</th><th>Date</th><th>Action</th></tr></thead>
+            <tbody id="arts-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAYMENTS -->
+    <div class="sec" id="sec-payments">
+      <div class="panel">
+        <h3>Record <em>Payment</em></h3>
+        <div class="row">
+          <div class="fg"><label>School Name</label><input class="fi" type="text" id="p-school" placeholder="School name"/></div>
+          <div class="fg"><label>Amount (N)</label><input class="fi" type="number" id="p-amount" placeholder="10000"/></div>
+        </div>
+        <div class="row">
+          <div class="fg"><label>Ad Type</label><input class="fi" type="text" id="p-type" placeholder="Admission Notice"/></div>
+          <div class="fg">
+            <label>Method</label>
+            <select class="fi" id="p-method">
+              <option>Bank Transfer</option>
+              <option>Card - Paystack</option>
+              <option>Cash</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="fg"><label>Date</label><input class="fi" type="date" id="p-date"/></div>
+          <div class="fg"><label>Notes</label><input class="fi" type="text" id="p-notes" placeholder="Any notes..."/></div>
+        </div>
+        <button class="btn btn-g" onclick="savePayment()" style="margin-top:0.5rem;">Save Payment</button>
+      </div>
+      <div class="panel">
+        <h3>Payment <em>Records</em></h3>
+        <div style="overflow-x:auto;">
+          <table class="tbl">
+            <thead><tr><th>Date</th><th>School</th><th>Type</th><th>Amount</th><th>Method</th><th>Notes</th></tr></thead>
+            <tbody id="pay-tbody"></tbody>
+          </table>
+        </div>
+        <div style="margin-top:1rem;padding:1rem;background:rgba(201,168,76,0.05);border:1px solid rgba(201,168,76,0.15);border-radius:8px;">
+          <div style="font-size:0.65rem;color:#c9a84c;margin-bottom:4px;">TOTAL REVENUE</div>
+          <div style="font-size:1.8rem;font-weight:900;color:#c9a84c;" id="total-rev">N0</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXPORT JSON -->
+    <div class="sec" id="sec-export">
+      <div class="panel" style="border-color:rgba(201,168,76,0.3);">
+        <h3>Export <em>ads.json</em> for Website</h3>
+        <p style="font-size:0.82rem;color:rgba(238,242,255,0.55);line-height:1.8;margin-bottom:1.2rem;">
+          After posting ads, generate the ads.json file and upload it to GitHub.<br/>
+          This makes your ads visible to <strong style="color:#c9a84c;">everyone</strong> on rehoteq.com/news.html!
+        </p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <button class="btn btn-g" onclick="genJSON()">Generate and Download ads.json</button>
+          <button class="btn btn-gh" onclick="copyJSON()">Copy JSON Text</button>
+        </div>
+        <textarea class="json-box" id="json-out" readonly placeholder="Click Generate to create the JSON file..."></textarea>
+        <div style="margin-top:8px;font-size:0.72rem;color:rgba(238,242,255,0.4);">
+          Upload to GitHub: <span style="color:#c9a84c;">github.com/rehoteq1-coder/rehoteq</span> as <span style="color:#c9a84c;">ads.json</span>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+</div><!-- /app -->
+
+<div id="toast"></div>
+
+<script>
+var PASS = 'rehoteq@admin2025';
+var curImg = null;
+
+// ============ LOGIN ============
+function login(){
+  var p = document.getElementById('pw').value;
+  var err = document.getElementById('lerr');
+  if(p !== PASS){
+    err.style.display = 'block';
+    return;
+  }
+  err.style.display = 'none';
+  document.getElementById('login').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  var today = new Date().toISOString().split('T')[0];
+  document.getElementById('a-start').value = today;
+  document.getElementById('p-date').value = today;
+  refreshAll();
+}
+
+function doLogout(){
+  document.getElementById('app').style.display = 'none';
+  document.getElementById('login').style.display = 'flex';
+  document.getElementById('pw').value = '';
+}
+
+// ============ TABS ============
+function showTab(id, btn){
+  document.querySelectorAll('.sec').forEach(function(s){ s.classList.remove('on'); });
+  document.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('on'); });
+  var sec = document.getElementById('sec-'+id);
+  if(sec) sec.classList.add('on');
+  if(btn) btn.classList.add('on');
+  if(id === 'manage') renderAdTable();
+  if(id === 'articles') renderArtsTable();
+  if(id === 'payments') renderPayTable();
+}
+
+// ============ DATA HELPERS ============
+function getAds(){ return JSON.parse(localStorage.getItem('r_ads') || '[]'); }
+function saveAds(d){ localStorage.setItem('r_ads', JSON.stringify(d)); }
+function getArts(){ return JSON.parse(localStorage.getItem('r_arts') || '[]'); }
+function saveArts(d){ localStorage.setItem('r_arts', JSON.stringify(d)); }
+function getPays(){ return JSON.parse(localStorage.getItem('r_pays') || '[]'); }
+function savePays(d){ localStorage.setItem('r_pays', JSON.stringify(d)); }
+
+function refreshAll(){
+  var ads = getAds();
+  var pays = getPays();
+  var arts = getArts();
+  document.getElementById('s-active').textContent = ads.filter(function(a){ return a.status==='active'; }).length;
+  document.getElementById('s-pending').textContent = ads.filter(function(a){ return a.status==='pending'; }).length;
+  document.getElementById('s-arts').textContent = arts.length;
+  var total = pays.reduce(function(s,p){ return s+(parseInt(p.amount)||0); }, 0);
+  document.getElementById('s-rev').textContent = 'N'+total.toLocaleString();
+  renderRecent(ads);
+}
+
+function renderRecent(ads){
+  var div = document.getElementById('recent-ads');
+  if(!ads.length){ div.innerHTML = 'No ads yet.'; return; }
+  div.innerHTML = ads.slice(0,5).map(function(a){
+    var cls = a.status==='active'?'b-active':a.status==='pending'?'b-pending':'b-inactive';
+    return '<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04);">'
+      +'<div style="flex:1;"><div style="font-size:0.82rem;font-weight:700;">'+a.school+'</div>'
+      +'<div style="font-size:0.7rem;color:rgba(238,242,255,0.45);">'+a.headline+'</div></div>'
+      +'<span class="badge '+cls+'">'+a.status+'</span></div>';
+  }).join('');
+}
+
+// ============ IMAGE ============
+function prevImg(e){
+  var f = e.target.files[0];
+  if(!f) return;
+  if(f.size > 2097152){ toast('Image too large - max 2MB','err'); return; }
+  var r = new FileReader();
+  r.onload = function(ev){
+    curImg = ev.target.result;
+    var p = document.getElementById('a-img-prev');
+    p.src = curImg; p.style.display = 'block';
+    updPrev();
+  };
+  r.readAsDataURL(f);
+}
+
+// ============ PREVIEW ============
+function updPrev(){
+  var school = document.getElementById('a-school').value || 'School Name';
+  var type = document.getElementById('a-type').value || 'Announcement';
+  var headline = document.getElementById('a-headline').value || 'Your ad headline...';
+  var contact = document.getElementById('a-contact').value || '';
+  var prev = document.getElementById('ad-preview');
+  var imgH = curImg ? '<img src="'+curImg+'" style="width:100%;border-radius:5px;margin-bottom:6px;max-height:80px;object-fit:cover;"/>' : '';
+  prev.innerHTML = imgH
+    + '<div class="prev-type">'+type+'</div>'
+    + '<div class="prev-name">'+school+'</div>'
+    + '<div class="prev-text">'+headline+'</div>'
+    + (contact ? '<div style="font-size:0.68rem;color:#c9a84c;margin-top:4px;">Contact: '+contact+'</div>' : '');
+}
+
+// ============ POST AD ============
+function postAd(){
+  var school = document.getElementById('a-school').value.trim();
+  var type = document.getElementById('a-type').value;
+  var headline = document.getElementById('a-headline').value.trim();
+  if(!school){ toast('School name required','err'); return; }
+  if(!type){ toast('Select ad type','err'); return; }
+  if(!headline){ toast('Headline required','err'); return; }
+
+  var paid = document.getElementById('a-paid').value;
+  var ad = {
+    _key: 'ad_'+Date.now(),
+    school: school,
+    type: type,
+    headline: headline,
+    message: document.getElementById('a-msg').value.trim(),
+    contact: document.getElementById('a-contact').value.trim(),
+    link: document.getElementById('a-link').value.trim(),
+    startDate: document.getElementById('a-start').value,
+    endDate: document.getElementById('a-end').value,
+    amount: document.getElementById('a-amount').value,
+    paid: paid,
+    image: curImg || null,
+    status: paid === 'paid' ? 'active' : 'pending',
+    createdAt: Date.now()
+  };
+
+  var ads = getAds();
+  ads.unshift(ad);
+  saveAds(ads);
+  toast('Ad saved! Go to Export JSON tab to update the website.','ok');
+  clearAd();
+  refreshAll();
+}
+
+function clearAd(){
+  ['a-school','a-headline','a-msg','a-contact','a-link','a-amount'].forEach(function(id){
+    document.getElementById(id).value = '';
+  });
+  document.getElementById('a-type').value = '';
+  document.getElementById('a-paid').value = 'paid';
+  var p = document.getElementById('a-img-prev');
+  p.style.display = 'none'; p.src = '';
+  curImg = null;
+  updPrev();
+}
+
+// ============ AD TABLE ============
+function renderAdTable(){
+  var tbody = document.getElementById('ad-tbody');
+  var ads = getAds();
+  if(!ads.length){ tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:rgba(238,242,255,0.4);padding:2rem;">No ads yet</td></tr>'; return; }
+  tbody.innerHTML = ads.map(function(a){
+    var cls = a.status==='active'?'b-active':a.status==='pending'?'b-pending':'b-inactive';
+    var img = a.image ? '<img class="tbl-img" src="'+a.image+'"/>' : '<div style="width:54px;height:40px;background:#111;border-radius:5px;display:flex;align-items:center;justify-content:center;">📢</div>';
+    return '<tr>'
+      +'<td>'+img+'</td>'
+      +'<td style="font-weight:700;">'+a.school+'</td>'
+      +'<td style="font-size:0.72rem;">'+a.type+'</td>'
+      +'<td style="font-size:0.75rem;max-width:160px;">'+a.headline+'</td>'
+      +'<td style="color:#c9a84c;font-weight:700;">N'+(parseInt(a.amount)||0).toLocaleString()+'</td>'
+      +'<td><span class="badge '+cls+'">'+a.status+'</span></td>'
+      +'<td style="display:flex;gap:5px;flex-wrap:wrap;">'
+        +'<button class="btn btn-sm '+(a.status==='active'?'btn-d':'btn-s')+'" onclick="toggleAd(\''+a._key+'\',\''+a.status+'\')">'+( a.status==='active'?'Deactivate':'Activate')+'</button>'
+        +'<button class="btn btn-d btn-sm" onclick="delAd(\''+a._key+'\')">Delete</button>'
+      +'</td>'
+    +'</tr>';
+  }).join('');
+}
+
+function toggleAd(key, cur){
+  var ns = cur==='active'?'inactive':'active';
+  var ads = getAds();
+  ads.forEach(function(a){ if(a._key===key) a.status=ns; });
+  saveAds(ads);
+  toast('Status updated! Export JSON to update website.','ok');
+  renderAdTable();
+  refreshAll();
+}
+
+function delAd(key){
+  if(!confirm('Delete this ad?')) return;
+  var ads = getAds().filter(function(a){ return a._key!==key; });
+  saveAds(ads);
+  toast('Ad deleted','ok');
+  renderAdTable();
+  refreshAll();
+}
+
+// ============ ARTICLES ============
+function postArticle(){
+  var title = document.getElementById('t-title').value.trim();
+  var desc = document.getElementById('t-desc').value.trim();
+  var body = document.getElementById('t-body').value.trim();
+  if(!title||!desc||!body){ toast('Title, description and body required','err'); return; }
+  var cats = {tech:'Tech News',cyber:'Cybersecurity',school:'Schools',tips:'Rehoteq Tips',solar:'Solar and Energy'};
+  var cat = document.getElementById('t-cat').value;
+  var art = {
+    _key: 'art_'+Date.now(),
+    id: title.toLowerCase().replace(/[^a-z0-9]+/g,'-').substring(0,50),
+    cat: cat, catLabel: cats[cat]||cat,
+    icon: document.getElementById('t-icon').value||'💻',
+    title: title, desc: desc, body: body,
+    source: document.getElementById('t-author').value||'Rehoteq News Desk',
+    date: new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'}),
+    status: 'published', createdAt: Date.now()
+  };
+  var arts = getArts();
+  arts.unshift(art);
+  saveArts(arts);
+  toast('Article saved! Export JSON to update website.','ok');
+  clearArticle();
+  refreshAll();
+}
+
+function clearArticle(){
+  ['t-title','t-desc','t-body'].forEach(function(id){ document.getElementById(id).value=''; });
+  document.getElementById('t-icon').value='💻';
+  document.getElementById('t-cat').value='tech';
+}
+
+function renderArtsTable(){
+  var tbody = document.getElementById('arts-tbody');
+  var arts = getArts();
+  if(!arts.length){ tbody.innerHTML='<tr><td colspan="5" style="text-align:center;color:rgba(238,242,255,0.4);padding:2rem;">No articles yet</td></tr>'; return; }
+  tbody.innerHTML = arts.map(function(a){
+    return '<tr>'
+      +'<td style="font-size:1.4rem;">'+a.icon+'</td>'
+      +'<td style="font-weight:700;max-width:200px;">'+a.title+'</td>'
+      +'<td style="font-size:0.72rem;">'+a.catLabel+'</td>'
+      +'<td style="font-size:0.7rem;color:rgba(238,242,255,0.4);">'+a.date+'</td>'
+      +'<td><button class="btn btn-d btn-sm" onclick="delArt(\''+a._key+'\')">Delete</button></td>'
+    +'</tr>';
+  }).join('');
+}
+
+function delArt(key){
+  if(!confirm('Delete this article?')) return;
+  saveArts(getArts().filter(function(a){ return a._key!==key; }));
+  toast('Deleted','ok');
+  renderArtsTable();
+  refreshAll();
+}
+
+// ============ PAYMENTS ============
+function savePayment(){
+  var school = document.getElementById('p-school').value.trim();
+  var amount = document.getElementById('p-amount').value;
+  if(!school||!amount){ toast('School and amount required','err'); return; }
+  var pays = getPays();
+  pays.unshift({
+    _key:'pay_'+Date.now(),
+    school:school, amount:parseInt(amount),
+    type:document.getElementById('p-type').value,
+    method:document.getElementById('p-method').value,
+    date:document.getElementById('p-date').value,
+    notes:document.getElementById('p-notes').value,
+    createdAt:Date.now()
+  });
+  savePays(pays);
+  toast('Payment recorded!','ok');
+  ['p-school','p-amount','p-type','p-notes'].forEach(function(id){ document.getElementById(id).value=''; });
+  renderPayTable();
+  refreshAll();
+}
+
+function renderPayTable(){
+  var tbody = document.getElementById('pay-tbody');
+  var pays = getPays();
+  var total = pays.reduce(function(s,p){ return s+(parseInt(p.amount)||0); },0);
+  document.getElementById('total-rev').textContent = 'N'+total.toLocaleString();
+  if(!pays.length){ tbody.innerHTML='<tr><td colspan="6" style="text-align:center;color:rgba(238,242,255,0.4);padding:2rem;">No payments yet</td></tr>'; return; }
+  tbody.innerHTML = pays.map(function(p){
+    return '<tr>'
+      +'<td style="font-size:0.72rem;color:rgba(238,242,255,0.4);">'+p.date+'</td>'
+      +'<td style="font-weight:700;">'+p.school+'</td>'
+      +'<td style="font-size:0.72rem;">'+p.type+'</td>'
+      +'<td style="color:#c9a84c;font-weight:700;">N'+(parseInt(p.amount)||0).toLocaleString()+'</td>'
+      +'<td style="font-size:0.72rem;color:rgba(238,242,255,0.4);">'+p.method+'</td>'
+      +'<td style="font-size:0.72rem;color:rgba(238,242,255,0.4);">'+p.notes+'</td>'
+    +'</tr>';
+  }).join('');
+}
+
+// ============ EXPORT JSON ============
+function genJSON(){
+  var data = {
+    ads: getAds(),
+    articles: getArts(),
+    lastUpdated: new Date().toISOString().split('T')[0]
+  };
+  var str = JSON.stringify(data, null, 2);
+  document.getElementById('json-out').value = str;
+  var blob = new Blob([str],{type:'application/json'});
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href=url; a.download='ads.json'; a.click();
+  URL.revokeObjectURL(url);
+  toast('ads.json downloaded! Upload to GitHub now.','ok');
+}
+
+function copyJSON(){
+  var txt = document.getElementById('json-out').value;
+  if(!txt){ toast('Click Generate first','err'); return; }
+  if(navigator.clipboard) navigator.clipboard.writeText(txt).then(function(){ toast('Copied!','ok'); });
+  else{ document.getElementById('json-out').select(); document.execCommand('copy'); toast('Copied!','ok'); }
+}
+
+// ============ TOAST ============
+function toast(msg, type){
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'show '+(type||'ok');
+  setTimeout(function(){ t.className=''; }, 3000);
+}
+</script>
+</body>
+</html>
