@@ -1,0 +1,18 @@
+{
+  "ads": [
+    {
+      "id": "sample-001",
+      "school": "Your School Name Here",
+      "type": "🎓 Admission",
+      "headline": "2025/2026 Admission is Now Open!",
+      "message": "Applications are invited from qualified candidates. Contact the school for details.",
+      "contact": "08012345678",
+      "link": "",
+      "image": "",
+      "status": "inactive",
+      "startDate": "2025-03-01",
+      "endDate": "2025-06-30"
+    }
+  ],
+  "lastUpdated": "2025-03-26"
+}
