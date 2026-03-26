@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /news-admin.html
+
+Sitemap: https://rehoteq.com/sitemap.xml
