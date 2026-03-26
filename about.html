@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="About Rehoteq Technologies — Nigeria's leading provider of school result management systems, cybersecurity tools, solar energy and IT services based in Okitipupa, Ondo State."/>
+<title>About Us — Rehoteq Technologies</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,900&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#05080f;--bg2:#080d17;--card:rgba(255,255,255,0.03);
+  --border:rgba(255,255,255,0.07);--gold:#c9a84c;--gold2:#f0c040;
+  --white:#eef2ff;--muted:rgba(238,242,255,0.55);--green:#00d166;
+  --serif:'Fraunces',serif;--sans:'Syne',sans-serif;
+  --body:'DM Sans',sans-serif;--mono:'DM Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:var(--body);background:var(--bg);color:var(--white);min-height:100vh;}
+nav{background:rgba(5,8,15,0.97);border-bottom:1px solid var(--border);padding:0.9rem 1.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-mark{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,#7a5c1a,var(--gold),var(--gold2));display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:0.9rem;font-weight:900;color:#000;}
+.nav-brand{font-family:var(--sans);font-size:0.88rem;font-weight:700;color:var(--white);}
+.nav-brand em{color:var(--gold);font-style:normal;}
+.nav-back{font-size:0.78rem;color:var(--muted);padding:7px 14px;border:1px solid var(--border);border-radius:8px;text-decoration:none;transition:all 0.2s;}
+.nav-back:hover{border-color:var(--gold);color:var(--gold);}
+
+/* HERO */
+.hero{padding:3.5rem 1.5rem 2.5rem;text-align:center;background:linear-gradient(135deg,rgba(201,168,76,0.06),transparent);position:relative;overflow:hidden;}
+.hero-orb{position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,0.08),transparent 70%);top:-150px;right:-100px;}
+.hero-tag{font-family:var(--mono);font-size:0.62rem;color:var(--gold);text-transform:uppercase;letter-spacing:0.15em;margin-bottom:0.8rem;}
+.hero h1{font-family:var(--serif);font-size:clamp(2rem,5vw,3.2rem);font-weight:900;line-height:1.1;margin-bottom:1rem;position:relative;z-index:1;}
+.hero h1 em{color:var(--gold);font-style:normal;}
+.hero p{font-size:0.9rem;color:var(--muted);max-width:520px;margin:0 auto 2rem;line-height:1.8;position:relative;z-index:1;}
+.hero-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+.btn-g{background:linear-gradient(135deg,#7a5c1a,var(--gold));color:#000;font-family:var(--sans);font-weight:700;font-size:0.82rem;padding:11px 24px;border-radius:9px;text-decoration:none;border:none;cursor:pointer;}
+.btn-o{background:transparent;border:1px solid rgba(201,168,76,0.3);color:var(--gold);font-family:var(--sans);font-weight:600;font-size:0.82rem;padding:11px 24px;border-radius:9px;text-decoration:none;}
+
+/* STATS BAR */
+.stats-bar{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1.5rem;display:flex;justify-content:center;gap:0;}
+.stat-item{text-align:center;padding:0 2rem;border-right:1px solid var(--border);}
+.stat-item:last-child{border-right:none;}
+.stat-n{font-family:var(--serif);font-size:1.8rem;font-weight:900;color:var(--gold);}
+.stat-l{font-size:0.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-top:2px;}
+
+/* SECTIONS */
+.wrap{max-width:900px;margin:0 auto;padding:2.5rem 1.5rem;}
+.section{margin-bottom:3rem;}
+.sec-tag{font-family:var(--mono);font-size:0.6rem;color:var(--gold);text-transform:uppercase;letter-spacing:0.15em;margin-bottom:0.6rem;display:flex;align-items:center;gap:8px;}
+.sec-tag::before{content:'';width:20px;height:1px;background:var(--gold);}
+.sec-title{font-family:var(--serif);font-size:clamp(1.4rem,3vw,2rem);font-weight:900;color:var(--white);margin-bottom:1rem;line-height:1.2;}
+.sec-title em{color:var(--gold);font-style:normal;}
+.sec-body{font-size:0.88rem;color:var(--muted);line-height:1.9;}
+.sec-body p{margin-bottom:1rem;}
+
+/* SERVICES GRID */
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:1.5rem;}
+.svc-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.3rem;transition:all 0.2s;}
+.svc-card:hover{border-color:rgba(201,168,76,0.3);transform:translateY(-2px);}
+.svc-icon{font-size:2rem;margin-bottom:10px;}
+.svc-name{font-family:var(--sans);font-size:0.88rem;font-weight:700;color:var(--white);margin-bottom:6px;}
+.svc-desc{font-size:0.78rem;color:var(--muted);line-height:1.6;}
+.svc-link{display:inline-flex;align-items:center;gap:4px;font-size:0.72rem;color:var(--gold);font-weight:600;margin-top:8px;text-decoration:none;}
+
+/* FOUNDER SECTION */
+.founder-card{background:linear-gradient(145deg,rgba(201,168,76,0.06),rgba(201,168,76,0.02));border:1px solid rgba(201,168,76,0.2);border-radius:16px;padding:2rem;display:flex;gap:2rem;align-items:flex-start;flex-wrap:wrap;}
+.founder-avatar{width:90px;height:90px;border-radius:50%;background:linear-gradient(135deg,#7a5c1a,var(--gold));display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:2rem;font-weight:900;color:#000;flex-shrink:0;border:3px solid rgba(201,168,76,0.3);}
+.founder-info{flex:1;}
+.founder-name{font-family:var(--serif);font-size:1.3rem;font-weight:900;color:var(--white);margin-bottom:4px;}
+.founder-title{font-family:var(--mono);font-size:0.65rem;color:var(--gold);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;}
+.founder-bio{font-size:0.85rem;color:var(--muted);line-height:1.8;}
+.founder-badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;}
+.badge{background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.2);border-radius:20px;padding:4px 12px;font-size:0.65rem;color:var(--gold);font-weight:600;}
+
+/* MISSION VISION */
+.mv-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:1.5rem;}
+.mv-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.3rem;}
+.mv-label{font-family:var(--mono);font-size:0.6rem;color:var(--gold);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;}
+.mv-title{font-family:var(--serif);font-size:1rem;font-weight:900;color:var(--white);margin-bottom:8px;}
+.mv-text{font-size:0.82rem;color:var(--muted);line-height:1.7;}
+
+/* VALUES */
+.values-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:1.5rem;}
+.val-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.2rem;text-align:center;}
+.val-icon{font-size:1.8rem;margin-bottom:8px;}
+.val-name{font-family:var(--sans);font-size:0.82rem;font-weight:700;color:var(--white);margin-bottom:4px;}
+.val-desc{font-size:0.73rem;color:var(--muted);line-height:1.6;}
+
+/* CTA */
+.cta-box{background:linear-gradient(135deg,rgba(201,168,76,0.08),rgba(201,168,76,0.02));border:1px solid rgba(201,168,76,0.2);border-radius:16px;padding:2rem;text-align:center;margin-top:2rem;}
+.cta-box h3{font-family:var(--serif);font-size:1.4rem;font-weight:900;color:var(--white);margin-bottom:0.6rem;}
+.cta-box h3 em{color:var(--gold);font-style:normal;}
+.cta-box p{font-size:0.85rem;color:var(--muted);margin-bottom:1.2rem;line-height:1.7;}
+.cta-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:1.5rem;text-align:center;margin-top:2rem;}
+footer p{font-size:0.75rem;color:var(--muted);}
+footer a{color:var(--gold);text-decoration:none;}
+
+@media(max-width:600px){
+  .mv-grid{grid-template-columns:1fr;}
+  .stats-bar{flex-wrap:wrap;}
+  .stat-item{border-right:none;border-bottom:1px solid var(--border);padding:0.8rem 1rem;width:50%;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-mark">R</div>
+    <div class="nav-brand">Rehoteq <em>Technologies</em></div>
+  </a>
+  <a href="index.html" class="nav-back">← Back to Home</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-orb"></div>
+  <div class="hero-tag">Our Story</div>
+  <h1>Built in Nigeria.<br/><em>Built for the World.</em></h1>
+  <p>Rehoteq Technologies is a Nigerian technology company delivering smarter digital solutions for schools, businesses and homes across Ondo State and beyond.</p>
+  <div class="hero-btns">
+    <a href="index.html#contact" class="btn-g">Work With Us</a>
+    <a href="news.html" class="btn-o" target="_blank">Read Our News</a>
+  </div>
+</div>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-item"><div class="stat-n">5+</div><div class="stat-l">Services</div></div>
+  <div class="stat-item"><div class="stat-n">2</div><div class="stat-l">Live Apps</div></div>
+  <div class="stat-item"><div class="stat-n">1000+</div><div class="stat-l">Students Served</div></div>
+  <div class="stat-item"><div class="stat-n">24/7</div><div class="stat-l">Support</div></div>
+</div>
+
+<div class="wrap">
+
+  <!-- OUR STORY -->
+  <div class="section">
+    <div class="sec-tag">Our Story</div>
+    <div class="sec-title">From Okitipupa to <em>the World</em></div>
+    <div class="sec-body">
+      <p>Rehoteq Technologies was founded with a simple but powerful idea — that Nigerian schools, businesses and homes deserve access to world-class technology solutions at affordable prices.</p>
+      <p>We started by identifying the real problems our community faced every day. Schools spending weeks computing results by hand. Families losing money to WhatsApp scammers. Homes battling unreliable electricity. Computers breaking down with no expert nearby.</p>
+      <p>We built solutions for every one of these problems. Today, Rehoteq Technologies operates from Okitipupa, Ondo State, serving clients across the region with cloud-based software, cybersecurity tools, solar energy systems and computer hardware services.</p>
+      <p>Our name Rehoteq comes from a simple belief — <strong style="color:var(--white);">Reliable, Honest Technology</strong> for everyone. That is our promise to every client we serve.</p>
+    </div>
+  </div>
+
+  <!-- FOUNDER -->
+  <div class="section">
+    <div class="sec-tag">Leadership</div>
+    <div class="sec-title">Meet Our <em>Founder</em></div>
+    <div class="founder-card">
+      <div class="founder-avatar">T</div>
+      <div class="founder-info">
+        <div class="founder-name">Adetoye Oluwaseun</div>
+        <div class="founder-title">Founder and Chief Executive Officer</div>
+        <div class="founder-bio">
+          Adetoye is a certified electrical and solar PV engineer as well as a computer hardware engineer based in Okitipupa, Ondo State. With years of hands-on experience in electrical installations, solar energy systems and computer hardware repairs, he founded Rehoteq Technologies to bridge the technology gap in his community.
+          His vision is to make quality digital tools accessible to Nigerian schools and businesses regardless of their size or location. Under his leadership, Rehoteq has developed two live applications — the School Result Management System and RehoCheck cybersecurity platform — serving students, parents and schools across Nigeria.
+        </div>
+        <div class="founder-badges">
+          <span class="badge">Electrical Engineer</span>
+          <span class="badge">Solar PV Certified</span>
+          <span class="badge">Computer Hardware</span>
+          <span class="badge">Software Developer</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MISSION AND VISION -->
+  <div class="section">
+    <div class="sec-tag">Purpose</div>
+    <div class="sec-title">Mission and <em>Vision</em></div>
+    <div class="mv-grid">
+      <div class="mv-card">
+        <div class="mv-label">Our Mission</div>
+        <div class="mv-title">Solving Real Problems</div>
+        <div class="mv-text">To provide reliable, affordable and innovative technology solutions that solve the everyday challenges of Nigerian schools, businesses and homes — from digital result management to cybersecurity protection and clean energy access.</div>
+      </div>
+      <div class="mv-card">
+        <div class="mv-label">Our Vision</div>
+        <div class="mv-title">A Digital Nigeria</div>
+        <div class="mv-text">To become Nigeria's most trusted technology partner for educational institutions and small businesses — empowering every school to go digital, every business to stay secure, and every home to have reliable power.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OUR SERVICES -->
+  <div class="section">
+    <div class="sec-tag">What We Do</div>
+    <div class="sec-title">Our <em>Services</em></div>
+    <div class="services-grid">
+      <div class="svc-card">
+        <div class="svc-icon">🎓</div>
+        <div class="svc-name">School Result Management System</div>
+        <div class="svc-desc">Cloud-based result management for schools of all sizes. Teachers enter scores from any phone, results are computed automatically. From N5,000 per term.</div>
+        <a href="https://rehoteq1-coder.github.io/rms/" target="_blank" class="svc-link">Try it live →</a>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">🔐</div>
+        <div class="svc-name">RehoCheck Cybersecurity</div>
+        <div class="svc-desc">Free cybersecurity app for scanning suspicious links, detecting fake news and protecting against phishing. Available on web and Android.</div>
+        <a href="https://rehoteq1-coder.github.io/RehoCheck/" target="_blank" class="svc-link">Try it free →</a>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">☀️</div>
+        <div class="svc-name">Solar Energy Installation</div>
+        <div class="svc-desc">Complete solar PV system design and installation. Panels, inverters, batteries and off-grid systems for homes and businesses in Ondo State.</div>
+        <a href="index.html#contact" class="svc-link">Get a quote →</a>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">⚡</div>
+        <div class="svc-name">Electrical Engineering</div>
+        <div class="svc-desc">Certified electrical installations, distribution board setup, industrial wiring, fault diagnosis and repairs for homes and businesses.</div>
+        <a href="index.html#contact" class="svc-link">Book a service →</a>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">🖥️</div>
+        <div class="svc-name">Computer Hardware and IT</div>
+        <div class="svc-desc">Computer repairs, upgrades, networking, OS installation and preventive maintenance. We come to you or you bring it to us.</div>
+        <a href="index.html#contact" class="svc-link">Book a service →</a>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">📰</div>
+        <div class="svc-name">Rehoteq News Portal</div>
+        <div class="svc-desc">Nigeria's tech and education news hub. Latest tech news, cybersecurity alerts, school announcements and tips. School advertising available.</div>
+        <a href="news.html" target="_blank" class="svc-link">Visit portal →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- OUR VALUES -->
+  <div class="section">
+    <div class="sec-tag">What Drives Us</div>
+    <div class="sec-title">Our <em>Core Values</em></div>
+    <div class="values-grid">
+      <div class="val-card">
+        <div class="val-icon">🎯</div>
+        <div class="val-name">Reliability</div>
+        <div class="val-desc">We build systems that work when you need them most. Downtime is not an option for schools computing results or homes needing power.</div>
+      </div>
+      <div class="val-card">
+        <div class="val-icon">🤝</div>
+        <div class="val-name">Honesty</div>
+        <div class="val-desc">We are transparent about our pricing, capabilities and limitations. No hidden charges, no empty promises.</div>
+      </div>
+      <div class="val-card">
+        <div class="val-icon">💡</div>
+        <div class="val-name">Innovation</div>
+        <div class="val-desc">We constantly improve our products based on feedback from Nigerian schools and businesses. Your problems inspire our solutions.</div>
+      </div>
+      <div class="val-card">
+        <div class="val-icon">🇳🇬</div>
+        <div class="val-name">Community</div>
+        <div class="val-desc">We are built for Nigeria and proud of it. We price our services to be accessible to schools and businesses of all sizes.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-box">
+    <h3>Ready to Work with <em>Rehoteq?</em></h3>
+    <p>Whether you need a result management system for your school, solar installation for your home, or cybersecurity protection for your business — we are here to help. Get in touch today.</p>
+    <div class="cta-btns">
+      <a href="https://wa.me/2347036302585" target="_blank" class="btn-g">WhatsApp: 07036302585</a>
+      <a href="index.html#contact" class="btn-o">Request a Service</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>
+    <a href="index.html">Home</a> &nbsp;|&nbsp;
+    <a href="news.html">News Portal</a> &nbsp;|&nbsp;
+    <a href="privacy.html">Privacy Policy</a> &nbsp;|&nbsp;
+    <a href="mailto:rehoteq@gmail.com">rehoteq@gmail.com</a> &nbsp;|&nbsp;
+    Okitipupa, Ondo State, Nigeria
+  </p>
+</footer>
+
+</body>
+</html>
