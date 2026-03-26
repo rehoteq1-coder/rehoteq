@@ -311,10 +311,41 @@ textarea.fi{resize:vertical;min-height:80px;}
           </div>
           <div class="fg"><label>Icon (emoji)</label><input class="fi" type="text" id="t-icon" value="💻" maxlength="4"/></div>
         </div>
-        <div class="row full"><div class="fg"><label>Short Description *</label><input class="fi" type="text" id="t-desc" placeholder="One sentence summary..."/></div></div>
-        <div class="row full"><div class="fg"><label>Full Article Body *</label><textarea class="fi" id="t-body" style="min-height:180px;" placeholder="Write your article here. Use HTML tags like p, h3, strong for formatting."></textarea></div></div>
-        <div class="row full"><div class="fg"><label>Author</label><input class="fi" type="text" id="t-author" value="Rehoteq News Desk"/></div></div>
-        <div style="margin-top:1rem;display:flex;gap:10px;">
+        <div class="row full"><div class="fg"><label>Short Description *</label><input class="fi" type="text" id="t-desc" placeholder="One sentence summary shown in article cards..."/></div></div>
+
+        <!-- IMAGE UPLOAD FOR ARTICLE -->
+        <div class="fg" style="margin-bottom:10px;">
+          <label>Article Cover Image (Optional)</label>
+          <div class="img-up" onclick="document.getElementById('t-img').click()" style="height:80px;display:flex;align-items:center;justify-content:center;gap:10px;">
+            <input type="file" id="t-img" accept="image/*" onchange="prevArtImg(event)"/>
+            <span style="font-size:1.4rem;">🖼️</span>
+            <span style="font-size:0.75rem;color:rgba(238,242,255,0.4);">Click to upload cover image (Max 2MB)</span>
+          </div>
+          <img id="t-img-prev" style="width:100%;max-height:140px;object-fit:cover;border-radius:8px;margin-top:6px;display:none;"/>
+        </div>
+
+        <!-- VIDEO EMBED -->
+        <div class="fg" style="margin-bottom:10px;">
+          <label>Video URL (YouTube or Facebook — Optional)</label>
+          <input class="fi" type="url" id="t-video" placeholder="https://youtube.com/watch?v=... or https://fb.watch/..."/>
+          <div style="font-size:0.62rem;color:rgba(238,242,255,0.3);margin-top:3px;">Paste a YouTube or Facebook video link to embed it in the article</div>
+        </div>
+
+        <!-- ARTICLE EDITOR TOOLBAR -->
+        <div class="fg" style="margin-bottom:6px;">
+          <label>Article Body *</label>
+          <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:6px;">
+            <button type="button" class="btn btn-gh btn-sm" onclick="fmt('b')"><b>B</b></button>
+            <button type="button" class="btn btn-gh btn-sm" onclick="fmt('i')"><i>I</i></button>
+            <button type="button" class="btn btn-gh btn-sm" onclick="fmt('h3')">H3</button>
+            <button type="button" class="btn btn-gh btn-sm" onclick="fmt('p')">P</button>
+            <button type="button" class="btn btn-gh btn-sm" onclick="fmt('br')">Line</button>
+          </div>
+          <textarea class="fi" id="t-body" style="min-height:200px;" placeholder="Write your full article here...&#10;&#10;Use the toolbar buttons to format, or type HTML like:&#10;&lt;p&gt;Your paragraph&lt;/p&gt;&#10;&lt;h3&gt;Sub heading&lt;/h3&gt;&#10;&lt;strong&gt;Bold text&lt;/strong&gt;"></textarea>
+        </div>
+
+        <div class="row full"><div class="fg"><label>Author / Source</label><input class="fi" type="text" id="t-author" value="Rehoteq News Desk"/></div></div>
+        <div style="margin-top:1rem;display:flex;gap:10px;flex-wrap:wrap;">
           <button class="btn btn-g" onclick="postArticle()">Publish Article</button>
           <button class="btn btn-gh" onclick="clearArticle()">Clear</button>
         </div>
@@ -598,12 +629,18 @@ function postArticle(){
   if(!title||!desc||!body){ toast('Title, description and body required','err'); return; }
   var cats = {tech:'Tech News',cyber:'Cybersecurity',school:'Schools',tips:'Rehoteq Tips',solar:'Solar and Energy'};
   var cat = document.getElementById('t-cat').value;
+  var videoUrl = document.getElementById('t-video').value.trim();
+  var videoEmbed = videoUrl ? getVideoEmbed(videoUrl) : '';
+  var fullBody = (curArtImg ? '<img src="'+curArtImg+'" style="width:100%;border-radius:10px;margin-bottom:1.2rem;max-height:360px;object-fit:cover;"/>' : '')
+    + (videoEmbed ? videoEmbed : '')
+    + body;
   var art = {
     _key: 'art_'+Date.now(),
     id: title.toLowerCase().replace(/[^a-z0-9]+/g,'-').substring(0,50),
     cat: cat, catLabel: cats[cat]||cat,
     icon: document.getElementById('t-icon').value||'💻',
-    title: title, desc: desc, body: body,
+    title: title, desc: desc, body: fullBody,
+    img: curArtImg || null,
     source: document.getElementById('t-author').value||'Rehoteq News Desk',
     date: new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'}),
     status: 'published', createdAt: Date.now()
@@ -617,9 +654,12 @@ function postArticle(){
 }
 
 function clearArticle(){
-  ['t-title','t-desc','t-body'].forEach(function(id){ document.getElementById(id).value=''; });
+  ['t-title','t-desc','t-body','t-video'].forEach(function(id){ document.getElementById(id).value=''; });
   document.getElementById('t-icon').value='💻';
   document.getElementById('t-cat').value='tech';
+  var p = document.getElementById('t-img-prev');
+  if(p){ p.style.display='none'; p.src=''; }
+  curArtImg = null;
 }
 
 function renderArtsTable(){
@@ -707,6 +747,98 @@ function copyJSON(){
   if(!txt){ toast('Click Generate first','err'); return; }
   if(navigator.clipboard) navigator.clipboard.writeText(txt).then(function(){ toast('Copied!','ok'); });
   else{ document.getElementById('json-out').select(); document.execCommand('copy'); toast('Copied!','ok'); }
+}
+
+// ============ ARTICLE IMAGE AND VIDEO ============
+var curArtImg = null;
+
+function prevArtImg(e){
+  var f = e.target.files[0];
+  if(!f) return;
+  if(f.size > 2097152){ toast('Image too large - max 2MB','err'); return; }
+  var r = new FileReader();
+  r.onload = function(ev){
+    curArtImg = ev.target.result;
+    var p = document.getElementById('t-img-prev');
+    p.src = curArtImg; p.style.display = 'block';
+  };
+  r.readAsDataURL(f);
+}
+
+function fmt(tag){
+  var ta = document.getElementById('t-body');
+  var sel = ta.value.substring(ta.selectionStart, ta.selectionEnd);
+  var before = ta.value.substring(0, ta.selectionStart);
+  var after = ta.value.substring(ta.selectionEnd);
+  var insert = '';
+  if(tag === 'b') insert = '<strong>' + (sel||'Bold text') + '</strong>';
+  else if(tag === 'i') insert = '<em>' + (sel||'Italic text') + '</em>';
+  else if(tag === 'h3') insert = '<h3>' + (sel||'Subheading') + '</h3>';
+  else if(tag === 'p') insert = '<p>' + (sel||'Paragraph text here') + '</p>';
+  else if(tag === 'br') insert = '<br/>';
+  ta.value = before + insert + after;
+  ta.focus();
+}
+
+function getVideoEmbed(url){
+  if(!url) return '';
+  var ytMatch = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([A-Za-z0-9_-]{11})/);
+  if(ytMatch) return '<div style="position:relative;padding-bottom:56.25%;height:0;margin:1rem 0;border-radius:10px;overflow:hidden;"><iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://www.youtube.com/embed/' + ytMatch[1] + '" frameborder="0" allowfullscreen></iframe></div>';
+  var fbMatch = url.match(/fb\.watch\/([A-Za-z0-9_-]+)/);
+  if(fbMatch) return '<div style="margin:1rem 0;"><iframe src="https://www.facebook.com/plugins/video.php?href=' + encodeURIComponent(url) + '&show_text=0&width=100%" style="width:100%;height:300px;border:none;overflow:hidden;" scrolling="no" frameborder="0" allowfullscreen></iframe></div>';
+  return '<p><a href="' + url + '" target="_blank" style="color:#c9a84c;">Watch Video</a></p>';
+}
+
+// ============ ARTICLE IMAGE AND VIDEO ============
+var curArtImg = null;
+
+function prevArtImg(e){
+  var f = e.target.files[0];
+  if(!f) return;
+  if(f.size > 2097152){ toast('Image too large - max 2MB','err'); return; }
+  var r = new FileReader();
+  r.onload = function(ev){
+    curArtImg = ev.target.result;
+    var p = document.getElementById('t-img-prev');
+    if(p){ p.src=curArtImg; p.style.display='block'; }
+  };
+  r.readAsDataURL(f);
+}
+
+function fmt(tag){
+  var ta = document.getElementById('t-body');
+  var start = ta.selectionStart;
+  var end = ta.selectionEnd;
+  var sel = ta.value.substring(start, end);
+  var before = ta.value.substring(0, start);
+  var after = ta.value.substring(end);
+  var ins = '';
+  if(tag==='b') ins='<strong>'+(sel||'Bold text')+'</strong>';
+  else if(tag==='i') ins='<em>'+(sel||'Italic text')+'</em>';
+  else if(tag==='h3') ins='<h3>'+(sel||'Subheading')+'</h3>';
+  else if(tag==='p') ins='<p>'+(sel||'Your paragraph here')+'</p>';
+  else if(tag==='br') ins='<br/>';
+  ta.value = before + ins + after;
+  ta.focus();
+}
+
+function getVideoEmbed(url){
+  if(!url) return '';
+  var ytId = '';
+  if(url.indexOf('youtube.com/watch') > -1){
+    var parts = url.split('v=');
+    if(parts[1]) ytId = parts[1].split('&')[0];
+  } else if(url.indexOf('youtu.be/') > -1){
+    ytId = url.split('youtu.be/')[1].split('?')[0];
+  }
+  if(ytId){
+    return '<div style="position:relative;padding-bottom:56.25%;height:0;margin:1rem 0;border-radius:10px;overflow:hidden;">'
+      +'<iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://www.youtube.com/embed/'+ytId+'" frameborder="0" allowfullscreen></iframe></div>';
+  }
+  if(url.indexOf('fb.watch') > -1 || url.indexOf('facebook.com') > -1){
+    return '<div style="margin:1rem 0;"><iframe src="https://www.facebook.com/plugins/video.php?href='+encodeURIComponent(url)+'&show_text=0&width=100%" style="width:100%;height:300px;border:none;" scrolling="no" frameborder="0" allowfullscreen></iframe></div>';
+  }
+  return '<p><a href="'+url+'" target="_blank" style="color:#c9a84c;">Watch Video</a></p>';
 }
 
 // ============ TOAST ============
