@@ -146,8 +146,6 @@ footer a{color:var(--gold);}
   .share-btns{flex-direction:column;}
 }
 </style>
-</head>
-<body>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -163,40 +161,15 @@ footer a{color:var(--gold);}
   }
 }
 </script>
+</head>
+<body>
 
-<!-- Article bodies stored in hidden divs to avoid JS slash issues -->
-<div id="body-solar-ng" style="display:none">
-  <p>Nigeria continues to face significant challenges with its national electricity grid. This has accelerated solar adoption across all regions of the country.</p>
-  <h3>Why Solar is the Smart Choice</h3>
-  <p>A properly designed solar system provides reliable electricity 24 hours a day. A 2kW system with battery backup can power essential appliances throughout the day and night.</p>
-  <h3>Cost and Return on Investment</h3>
-  <p>Most Nigerian households recover their investment within 2-3 years through electricity savings. Contact Rehoteq Technologies at 07036302585 for a free solar assessment and quotation.</p>
-</div>
-<div id="body-wa-scams" style="display:none">
-  <p>WhatsApp scams are among the fastest growing forms of cybercrime in Nigeria. Fraudsters send convincing messages with links promising cash prizes or investment opportunities.</p>
-  <h3>How to Stay Safe</h3>
-  <p>First verify every link using RehoCheck before clicking. Never share your OTP with anyone. Download RehoCheck on Android from Play Store for protection on the go. Visit rehoteq1-coder.github.io/RehoCheck to scan links online.</p>
-</div>
-<div id="body-school-rms" style="display:none">
-  <p>Across Nigeria, thousands of school administrators still spend weeks computing student results manually. This process is prone to errors and causes delays frustrating parents and students.</p>
-  <h3>How Digital Systems Help</h3>
-  <p>With Rehoteq RMS teachers enter scores from any phone and results are computed automatically. The system handles CA, examination scores, cumulative calculations, GPA and grade assignment instantly. Contact Rehoteq Technologies at 07036302585 for a free demonstration.</p>
-</div>
-<div id="body-ai-africa" style="display:none">
-  <p>Artificial intelligence is no longer just for large corporations. In 2025 powerful AI tools are freely available to Nigerian businesses of all sizes.</p>
-  <h3>Free AI Tools for Nigerian Businesses</h3>
-  <p>Tools like Claude, ChatGPT and Groq AI can help with customer service automation, content creation, data analysis and code writing. Rehoteq Technologies already uses Groq AI in RehoCheck for cybersecurity features. There has never been a better time to build a technology-focused business in Nigeria.</p>
-</div>
-<div id="body-elec-safety" style="display:none">
-  <p>Electrical safety is a serious concern in Nigeria where aging infrastructure can create dangerous conditions for homes and businesses.</p>
-  <h3>Key Safety Rules to Follow</h3>
-  <p>1. Never overload power outlets. Use properly rated extension boards with surge protection. 2. Have your wiring inspected every 5 years. 3. Install a quality distribution board with MCBs. 4. Ensure proper earthing to protect against electric shock. 5. Never do electrical work yourself. Contact Rehoteq Technologies at 07036302585 for certified electrical services in Okitipupa.</p>
-</div>
-<div id="body-pc-care" style="display:none">
-  <p>Many Nigerians replace computers that could have been maintained for a fraction of the replacement cost. Here are the habits that make the biggest difference.</p>
-  <h3>Key Maintenance Tips</h3>
-  <p>Clean your computer professionally every 6 months to prevent dust damage. Invest in a quality UPS to protect against power surges from NEPA. Keep your operating system and drivers updated. Avoid keeping your laptop plugged in at 100 percent all the time as this damages the battery. Contact Rehoteq Technologies at 07036302585 for professional computer maintenance in Okitipupa.</p>
-</div>
+
+
+
+
+
+
 
 <nav>
   <a href="index.html" class="nav-logo">
@@ -356,6 +329,14 @@ var ARTS = [
   {id:'pc-care',cat:'tips',lab:'Rehoteq Tips',icon:'laptop',img:'https://images.unsplash.com/photo-1588702547919-26089e690ecc?w=600&q=70',feat:false,title:'How to Make Your Computer Last 5 Years Longer',desc:'Simple maintenance habits that most Nigerians overlook to avoid costly repairs.',date:'March 20 2025',src:'Rehoteq IT Desk'}
 ];
 
+var BODIES = {};
+BODIES['solar-ng'] = '<p>Nigeria continues to face significant challenges with its national electricity grid. This has accelerated solar adoption across all regions.</p><h3>Why Solar is the Smart Choice</h3><p>A properly designed solar system provides reliable electricity 24 hours a day. A 2kW system with battery backup can power essential appliances throughout the day and night.</p><h3>Cost and Return on Investment</h3><p>Most Nigerian households recover their investment within 2-3 years through electricity savings. Contact Rehoteq Technologies at 07036302585 for a free solar assessment.</p>';
+BODIES['wa-scams'] = '<p>WhatsApp scams are among the fastest growing forms of cybercrime in Nigeria. Fraudsters send messages with links promising cash prizes.</p><h3>How to Stay Safe</h3><p>1. Verify every link using RehoCheck before clicking. 2. Never share your OTP. 3. Download RehoCheck on Android. 4. Visit rehoteq1-coder.github.io/RehoCheck to scan links online.</p>';
+BODIES['school-rms'] = '<p>Thousands of school administrators still spend weeks computing results manually. This is prone to errors and causes delays.</p><h3>How Digital Systems Help</h3><p>With Rehoteq RMS teachers enter scores from any phone and results are computed automatically. Contact Rehoteq Technologies at 07036302585 for a free demonstration.</p>';
+BODIES['ai-africa'] = '<p>Artificial intelligence is no longer just for large corporations. In 2025 powerful AI tools are freely available to Nigerian businesses of all sizes.</p><h3>Free AI Tools Available</h3><p>Tools like Claude, ChatGPT and Groq AI help with customer service, content creation and data analysis. Rehoteq uses Groq AI in RehoCheck for cybersecurity features.</p>';
+BODIES['elec-safety'] = '<p>Electrical safety is a serious concern in Nigeria where aging infrastructure creates dangerous conditions.</p><h3>Key Safety Rules</h3><p>1. Never overload outlets. 2. Have wiring inspected every 5 years. 3. Install a quality distribution board. 4. Ensure proper earthing. 5. Never DIY electrical work. Contact Rehoteq Technologies at 07036302585 for certified electrical services in Okitipupa.</p>';
+BODIES['pc-care'] = '<p>Many Nigerians replace computers that could be maintained for a fraction of the cost.</p><h3>Key Maintenance Tips</h3><p>Clean your computer every 6 months. Invest in a UPS to protect against NEPA surges. Keep your OS updated. Avoid keeping laptop at 100 percent all the time. Contact Rehoteq Technologies at 07036302585 for professional computer maintenance.</p>';
+
 var CAT_IMGS = {
   solar:'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=600&q=70',
   cyber:'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&q=70',
@@ -440,8 +421,7 @@ function getArt(id) {
 }
 
 function getBody(id) {
-  var el = document.getElementById('body-' + id);
-  return el ? el.innerHTML : '';
+  return BODIES[id] || '';
 }
 
 function openArt(id) {
