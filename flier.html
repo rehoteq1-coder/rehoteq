@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Rehoteq RMS Flier</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,900&family=Syne:wght@400;700;800&family=DM+Sans:wght@400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#222;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:2rem;gap:2rem;font-family:'DM Sans',sans-serif;}
+
+/* PRINT BUTTON */
+.print-btn{background:linear-gradient(135deg,#7a5c1a,#c9a84c);color:#000;font-family:'Syne',sans-serif;font-weight:700;font-size:0.85rem;padding:10px 24px;border-radius:8px;border:none;cursor:pointer;margin-bottom:1rem;}
+.print-note{color:#888;font-size:0.72rem;text-align:center;margin-top:-0.5rem;}
+
+/* FLIER CONTAINER */
+.flier-wrap{
+  width:100%;max-width:900px;
+  box-shadow:0 30px 80px rgba(0,0,0,0.7);
+}
+
+/* ============================================================
+   FLIER 1 — RMS LANDSCAPE
+   ============================================================ */
+.flier{
+  width:100%;aspect-ratio:16/9;
+  background:linear-gradient(145deg,#050810,#0a0f1e,#0f1628);
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;
+  border-radius:12px;
+}
+
+/* Background elements */
+.fl-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(201,168,76,0.06) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(201,168,76,0.06) 1px,transparent 1px);
+  background-size:50px 50px;
+}
+.fl-orb1{
+  position:absolute;width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,rgba(201,168,76,0.12),transparent 60%);
+  top:-200px;right:-100px;
+}
+.fl-orb2{
+  position:absolute;width:300px;height:300px;border-radius:50%;
+  background:radial-gradient(circle,rgba(0,194,224,0.06),transparent 60%);
+  bottom:-100px;left:200px;
+}
+.fl-orb3{
+  position:absolute;width:200px;height:200px;border-radius:50%;
+  background:radial-gradient(circle,rgba(0,209,102,0.05),transparent 60%);
+  bottom:50px;left:-50px;
+}
+
+/* Top accent bar */
+.fl-top-bar{
+  position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,transparent,#c9a84c,#f0c040,#f0c040,#c9a84c,transparent);
+}
+.fl-bottom-bar{
+  position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,#c9a84c,transparent);
+  opacity:0.4;
+}
+
+/* Corner decorations */
+.fl-corner-tl{
+  position:absolute;top:12px;left:12px;
+  width:30px;height:30px;
+  border-top:2px solid rgba(201,168,76,0.5);
+  border-left:2px solid rgba(201,168,76,0.5);
+}
+.fl-corner-tr{
+  position:absolute;top:12px;right:12px;
+  width:30px;height:30px;
+  border-top:2px solid rgba(201,168,76,0.5);
+  border-right:2px solid rgba(201,168,76,0.5);
+}
+.fl-corner-bl{
+  position:absolute;bottom:12px;left:12px;
+  width:30px;height:30px;
+  border-bottom:2px solid rgba(201,168,76,0.3);
+  border-left:2px solid rgba(201,168,76,0.3);
+}
+.fl-corner-br{
+  position:absolute;bottom:12px;right:12px;
+  width:30px;height:30px;
+  border-bottom:2px solid rgba(201,168,76,0.3);
+  border-right:2px solid rgba(201,168,76,0.3);
+}
+
+/* Main content layout */
+.fl-body{
+  position:relative;z-index:1;
+  flex:1;display:grid;
+  grid-template-columns:1.2fr 1fr;
+  gap:0;
+}
+
+/* LEFT PANEL */
+.fl-left{
+  padding:2rem 1.5rem 2rem 2.5rem;
+  display:flex;flex-direction:column;
+  justify-content:space-between;
+  border-right:1px solid rgba(201,168,76,0.1);
+}
+.fl-logo-row{display:flex;align-items:center;gap:10px;margin-bottom:1rem;}
+.fl-logo-mark{
+  width:38px;height:38px;border-radius:10px;
+  background:linear-gradient(135deg,#7a5c1a,#c9a84c,#f0c040);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Fraunces',serif;font-size:1.1rem;font-weight:900;color:#000;
+  box-shadow:0 0 20px rgba(201,168,76,0.4);
+  flex-shrink:0;
+}
+.fl-logo-text{
+  font-family:'Syne',sans-serif;font-size:0.78rem;font-weight:700;color:#eef2ff;
+}
+.fl-logo-text em{color:#c9a84c;font-style:normal;}
+.fl-logo-sub{font-size:0.55rem;color:rgba(238,242,255,0.4);text-transform:uppercase;letter-spacing:0.1em;}
+
+.fl-tag{
+  font-family:'DM Mono',monospace;font-size:0.58rem;color:#c9a84c;
+  text-transform:uppercase;letter-spacing:0.15em;
+  display:flex;align-items:center;gap:8px;margin-bottom:0.6rem;
+}
+.fl-tag::before{content:'';width:20px;height:1px;background:#c9a84c;}
+
+.fl-headline{
+  font-family:'Fraunces',serif;
+  font-size:clamp(1.4rem,4vw,2.2rem);
+  font-weight:900;line-height:1.05;
+  color:#eef2ff;margin-bottom:0.8rem;
+}
+.fl-headline .gold{
+  color:#f0c040;
+  text-shadow:0 0 30px rgba(240,192,64,0.4);
+}
+.fl-headline .block{display:block;}
+
+.fl-sub{
+  font-size:0.72rem;color:rgba(238,242,255,0.55);
+  line-height:1.7;margin-bottom:1.2rem;max-width:280px;
+}
+
+.fl-features{display:flex;flex-direction:column;gap:7px;margin-bottom:1.2rem;}
+.fl-feat{
+  display:flex;align-items:center;gap:8px;
+  font-size:0.7rem;color:rgba(238,242,255,0.8);
+}
+.fl-feat-icon{
+  width:18px;height:18px;border-radius:4px;flex-shrink:0;
+  background:rgba(0,209,102,0.15);border:1px solid rgba(0,209,102,0.3);
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.55rem;color:#00d166;font-weight:800;
+}
+
+.fl-cta-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.fl-cta{
+  background:linear-gradient(135deg,#7a5c1a,#c9a84c,#f0c040);
+  color:#000;font-family:'Syne',sans-serif;font-weight:700;
+  font-size:0.7rem;padding:9px 18px;border-radius:8px;
+  box-shadow:0 4px 20px rgba(201,168,76,0.3);
+  white-space:nowrap;
+}
+.fl-url{
+  font-family:'DM Mono',monospace;font-size:0.6rem;
+  color:rgba(201,168,76,0.6);
+}
+
+/* RIGHT PANEL */
+.fl-right{
+  padding:2rem 2rem 2rem 1.5rem;
+  display:flex;flex-direction:column;
+  justify-content:space-between;
+}
+
+.fl-badge{
+  align-self:flex-start;
+  background:rgba(0,209,102,0.1);border:1px solid rgba(0,209,102,0.25);
+  border-radius:20px;padding:5px 14px;
+  font-family:'DM Mono',monospace;font-size:0.58rem;
+  color:#00d166;font-weight:700;text-transform:uppercase;
+  letter-spacing:0.06em;display:flex;align-items:center;gap:6px;
+}
+.fl-badge::before{
+  content:'';width:5px;height:5px;border-radius:50%;
+  background:#00d166;box-shadow:0 0 6px #00d166;
+}
+
+/* Price cards */
+.fl-prices{display:flex;flex-direction:column;gap:8px;}
+.fl-price-title{
+  font-family:'Syne',sans-serif;font-size:0.65rem;font-weight:700;
+  color:rgba(238,242,255,0.5);text-transform:uppercase;letter-spacing:0.1em;
+  margin-bottom:4px;
+}
+.fl-price-card{
+  background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);
+  border-radius:8px;padding:8px 12px;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.fl-price-card.hot{
+  background:rgba(201,168,76,0.06);
+  border-color:rgba(201,168,76,0.2);
+}
+.fl-price-plan{font-family:'Syne',sans-serif;font-size:0.65rem;font-weight:700;color:#eef2ff;}
+.fl-price-stu{font-size:0.58rem;color:rgba(238,242,255,0.4);}
+.fl-price-amount{font-family:'Fraunces',serif;font-size:0.95rem;font-weight:900;}
+.fl-price-card.hot .fl-price-amount{color:#c9a84c;}
+.fl-price-card:not(.hot) .fl-price-amount{color:rgba(238,242,255,0.7);}
+.fl-price-period{font-size:0.5rem;color:rgba(238,242,255,0.35);}
+.fl-hot-badge{
+  font-size:0.5rem;font-weight:800;color:#000;
+  background:#c9a84c;border-radius:4px;padding:2px 6px;
+  text-transform:uppercase;letter-spacing:0.06em;
+}
+
+/* Contact row */
+.fl-contact{
+  background:rgba(201,168,76,0.05);border:1px solid rgba(201,168,76,0.15);
+  border-radius:8px;padding:10px 12px;
+}
+.fl-contact-title{
+  font-family:'DM Mono',monospace;font-size:0.55rem;color:#c9a84c;
+  text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;
+}
+.fl-contact-items{display:flex;flex-direction:column;gap:4px;}
+.fl-contact-item{
+  font-size:0.65rem;color:rgba(238,242,255,0.7);
+  display:flex;align-items:center;gap:6px;
+}
+.fl-contact-dot{
+  width:4px;height:4px;border-radius:50%;background:#c9a84c;flex-shrink:0;
+}
+
+/* Testimonial */
+.fl-testi{
+  font-family:'Fraunces',serif;font-size:0.68rem;font-style:italic;
+  color:rgba(238,242,255,0.45);line-height:1.6;
+  border-left:2px solid rgba(201,168,76,0.3);padding-left:10px;
+}
+
+/* BOTTOM BAR */
+.fl-bottom{
+  position:relative;z-index:1;
+  background:rgba(201,168,76,0.06);
+  border-top:1px solid rgba(201,168,76,0.1);
+  padding:8px 2.5rem;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.fl-bottom-left{
+  font-family:'DM Mono',monospace;font-size:0.58rem;
+  color:rgba(201,168,76,0.6);
+}
+.fl-bottom-center{
+  font-family:'Fraunces',serif;font-size:0.75rem;
+  color:rgba(238,242,255,0.3);font-style:italic;
+}
+.fl-bottom-right{
+  font-family:'DM Mono',monospace;font-size:0.58rem;
+  color:rgba(238,242,255,0.3);
+}
+
+/* ============================================================
+   PRINT STYLES
+   ============================================================ */
+@media print{
+  body{background:#fff;padding:0;}
+  .print-btn,.print-note{display:none;}
+  .flier-wrap{max-width:100%;box-shadow:none;}
+  .flier{border-radius:0;}
+}
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨️ Print / Save as Image</button>
+<div class="print-note">To save as image: Print → Save as PDF, or screenshot the flier</div>
+
+<!-- FLIER -->
+<div class="flier-wrap">
+  <div class="flier">
+    <!-- Background -->
+    <div class="fl-grid"></div>
+    <div class="fl-orb1"></div>
+    <div class="fl-orb2"></div>
+    <div class="fl-orb3"></div>
+    <div class="fl-top-bar"></div>
+    <div class="fl-bottom-bar"></div>
+    <div class="fl-corner-tl"></div>
+    <div class="fl-corner-tr"></div>
+    <div class="fl-corner-bl"></div>
+    <div class="fl-corner-br"></div>
+
+    <!-- Main Body -->
+    <div class="fl-body">
+
+      <!-- LEFT -->
+      <div class="fl-left">
+        <div>
+          <div class="fl-logo-row">
+            <div class="fl-logo-mark">R</div>
+            <div>
+              <div class="fl-logo-text">Rehoteq <em>Technologies</em></div>
+              <div class="fl-logo-sub">Smarter Solutions for a Better Tomorrow</div>
+            </div>
+          </div>
+          <div class="fl-tag">School Result Management System</div>
+          <div class="fl-headline">
+            <span class="block">Results in</span>
+            <span class="block gold">Seconds,</span>
+            <span class="block">Not Weeks</span>
+          </div>
+          <div class="fl-sub">
+            Cloud-based result management that works on any phone. Teachers enter scores, system handles everything else — automatically.
+          </div>
+          <div class="fl-features">
+            <div class="fl-feat"><div class="fl-feat-icon">✓</div>Works on any phone — no app download</div>
+            <div class="fl-feat"><div class="fl-feat-icon">✓</div>Auto CA, GPA and cumulative scoring</div>
+            <div class="fl-feat"><div class="fl-feat-icon">✓</div>Student result links — control fee defaulters</div>
+            <div class="fl-feat"><div class="fl-feat-icon">✓</div>Printable report cards instantly</div>
+            <div class="fl-feat"><div class="fl-feat-icon">✓</div>White Label — your school branding</div>
+          </div>
+        </div>
+        <div>
+          <div class="fl-cta-row">
+            <div class="fl-cta">Try it FREE → rehoteq1-coder.github.io/rms</div>
+          </div>
+          <div class="fl-url" style="margin-top:6px;">🌐 rehoteq.com</div>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="fl-right">
+        <div class="fl-badge">● Live & Active</div>
+
+        <div class="fl-prices">
+          <div class="fl-price-title">Subscription Plans</div>
+          <div class="fl-price-card">
+            <div>
+              <div class="fl-price-plan">Basic</div>
+              <div class="fl-price-stu">Up to 100 students</div>
+            </div>
+            <div style="text-align:right;">
+              <div class="fl-price-amount">N5,000</div>
+              <div class="fl-price-period">per term</div>
+            </div>
+          </div>
+          <div class="fl-price-card hot">
+            <div>
+              <div class="fl-price-plan">Standard <span class="fl-hot-badge">Popular</span></div>
+              <div class="fl-price-stu">Up to 150 students</div>
+            </div>
+            <div style="text-align:right;">
+              <div class="fl-price-amount">N10,000</div>
+              <div class="fl-price-period">per term</div>
+            </div>
+          </div>
+          <div class="fl-price-card">
+            <div>
+              <div class="fl-price-plan">Premium</div>
+              <div class="fl-price-stu">200+ students</div>
+            </div>
+            <div style="text-align:right;">
+              <div class="fl-price-amount">N15,000</div>
+              <div class="fl-price-period">per term</div>
+            </div>
+          </div>
+          <div style="font-size:0.58rem;color:rgba(238,242,255,0.3);text-align:center;margin-top:2px;">
+            One-time setup fee: N10,000
+          </div>
+        </div>
+
+        <div class="fl-testi">
+          "Computing results has become so easy. Teachers enter scores from their phones and result sheets are ready immediately."
+          <div style="margin-top:4px;font-style:normal;font-size:0.6rem;color:rgba(238,242,255,0.3);">— Staff, Govt Technical College Okitipupa</div>
+        </div>
+
+        <div class="fl-contact">
+          <div class="fl-contact-title">Contact Us Today</div>
+          <div class="fl-contact-items">
+            <div class="fl-contact-item"><div class="fl-contact-dot"></div>WhatsApp: 07036302585</div>
+            <div class="fl-contact-item"><div class="fl-contact-dot"></div>WhatsApp: 08166519177</div>
+            <div class="fl-contact-item"><div class="fl-contact-dot"></div>Email: rehoteq@gmail.com</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOTTOM BAR -->
+    <div class="fl-bottom">
+      <div class="fl-bottom-left">rehoteq.com</div>
+      <div class="fl-bottom-center">Smarter Solutions for a Better Tomorrow 🇳🇬</div>
+      <div class="fl-bottom-right">Setup done within 24 hours</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
