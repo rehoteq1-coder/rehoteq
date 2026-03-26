@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Rehoteq News Admin</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:Arial,sans-serif;background:#05080f;color:#eef2ff;min-height:100vh;}
+
+#login{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:1rem;}
+.lbox{background:#0c1524;border:2px solid rgba(201,168,76,0.4);border-radius:16px;padding:2rem;width:100%;max-width:340px;}
+.lmark{width:52px;height:52px;border-radius:12px;background:linear-gradient(135deg,#7a5c1a,#c9a84c);display:flex;align-items:center;justify-content:center;font-weight:900;color:#000;font-size:1.3rem;margin:0 auto 12px;}
+.lbox h2{text-align:center;font-size:1.1rem;margin-bottom:4px;}
+.lbox p{text-align:center;font-size:0.72rem;color:rgba(238,242,255,0.5);margin-bottom:1.5rem;}
+.lbox label{font-size:0.68rem;color:rgba(238,242,255,0.5);text-transform:uppercase;display:block;margin-bottom:5px;}
+.lbox input[type=password]{width:100%;background:rgba(255,255,255,0.06);border:2px solid rgba(255,255,255,0.15);border-radius:8px;padding:11px 12px;color:#eef2ff;font-size:0.9rem;outline:none;margin-bottom:12px;}
+.lbox input[type=password]:focus{border-color:#c9a84c;}
+.lbtn{width:100%;background:linear-gradient(135deg,#7a5c1a,#c9a84c);color:#000;font-weight:700;font-size:0.9rem;padding:12px;border:none;border-radius:8px;cursor:pointer;}
+.lerr{background:rgba(255,69,96,0.15);border:1px solid rgba(255,69,96,0.4);color:#ff6b6b;border-radius:7px;padding:8px 12px;font-size:0.78rem;margin-bottom:10px;display:none;text-align:center;}
+.lback{text-align:center;margin-top:1rem;font-size:0.72rem;color:rgba(238,242,255,0.35);}
+.lback a{color:#c9a84c;}
+
+#app{display:none;}
+.topbar{background:#080d17;border-bottom:1px solid rgba(255,255,255,0.07);padding:0.8rem 1.2rem;display:flex;align-items:center;justify-content:space-between;}
+.tbrand{display:flex;align-items:center;gap:8px;}
+.tmark{width:28px;height:28px;border-radius:7px;background:linear-gradient(135deg,#7a5c1a,#c9a84c);display:flex;align-items:center;justify-content:center;font-weight:900;color:#000;font-size:0.8rem;}
+.tname{font-size:0.85rem;font-weight:700;}
+.tname em{color:#c9a84c;font-style:normal;}
+.tbtns{display:flex;gap:6px;}
+.tbtn{background:transparent;border:1px solid rgba(255,255,255,0.12);color:rgba(238,242,255,0.5);font-size:0.72rem;padding:6px 11px;border-radius:6px;cursor:pointer;}
+
+.tabs{background:#080d17;border-bottom:1px solid rgba(255,255,255,0.07);display:flex;overflow-x:auto;padding:0 0.8rem;}
+.tab{padding:10px 14px;font-size:0.76rem;font-weight:600;color:rgba(238,242,255,0.4);cursor:pointer;border:none;background:transparent;border-bottom:2px solid transparent;white-space:nowrap;}
+.tab.on{color:#c9a84c;border-bottom-color:#c9a84c;}
+
+.content{max-width:940px;margin:0 auto;padding:1.2rem;}
+.sec{display:none;}
+.sec.on{display:block;}
+
+.panel{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:1.2rem;margin-bottom:1rem;}
+.panel h3{font-size:0.85rem;font-weight:700;margin-bottom:1rem;}
+.panel h3 em{color:#c9a84c;font-style:normal;}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:1rem;}
+.stat{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:0.9rem;text-align:center;}
+.stat-n{font-size:1.6rem;font-weight:900;color:#c9a84c;line-height:1;}
+.stat-l{font-size:0.6rem;color:rgba(238,242,255,0.4);text-transform:uppercase;margin-top:3px;}
+
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
+.fg{display:flex;flex-direction:column;gap:4px;}
+.fg label{font-size:0.62rem;color:rgba(238,242,255,0.45);text-transform:uppercase;letter-spacing:0.06em;}
+.fi{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:7px;padding:9px 11px;color:#eef2ff;font-size:0.82rem;outline:none;font-family:Arial,sans-serif;width:100%;}
+.fi:focus{border-color:#c9a84c;}
+.fi::placeholder{color:rgba(238,242,255,0.3);}
+select.fi option{background:#0c1524;}
+textarea.fi{resize:vertical;min-height:80px;}
+
+.btn{border:none;border-radius:7px;padding:8px 16px;font-size:0.8rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:5px;}
+.btn-g{background:linear-gradient(135deg,#7a5c1a,#c9a84c);color:#000;}
+.btn-d{background:rgba(255,69,96,0.12);border:1px solid rgba(255,69,96,0.25);color:#ff6b6b;}
+.btn-s{background:rgba(0,209,102,0.12);border:1px solid rgba(0,209,102,0.25);color:#00d166;}
+.btn-o{background:transparent;border:1px solid rgba(255,255,255,0.12);color:rgba(238,242,255,0.5);}
+.btn-sm{padding:5px 11px;font-size:0.7rem;}
+
+.imgup{border:2px dashed rgba(201,168,76,0.25);border-radius:9px;padding:1rem;text-align:center;cursor:pointer;position:relative;}
+.imgup input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.iprev{width:100%;border-radius:7px;margin-top:8px;display:none;max-height:150px;object-fit:contain;}
+
+.lprev{background:#111e30;border:1px solid rgba(201,168,76,0.2);border-radius:9px;padding:0.9rem;margin-top:1rem;}
+.lprev-lbl{font-size:0.58rem;color:#c9a84c;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:7px;}
+.lprev-card{background:linear-gradient(135deg,rgba(201,168,76,0.08),rgba(201,168,76,0.02));border:1px solid rgba(201,168,76,0.2);border-radius:7px;padding:10px;}
+
+.badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:0.6rem;font-weight:700;text-transform:uppercase;}
+.b-active{background:rgba(0,209,102,0.12);color:#00d166;border:1px solid rgba(0,209,102,0.25);}
+.b-pending{background:rgba(255,165,0,0.1);color:orange;border:1px solid rgba(255,165,0,0.25);}
+.b-inactive{background:rgba(255,69,96,0.1);color:#ff6b6b;border:1px solid rgba(255,69,96,0.25);}
+
+.ads-list{display:flex;flex-direction:column;gap:8px;}
+.ad-item{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:10px;display:flex;align-items:flex-start;gap:10px;}
+.ad-thumb{width:60px;height:45px;border-radius:5px;object-fit:cover;flex-shrink:0;background:rgba(255,255,255,0.05);}
+.ad-info{flex:1;}
+.ad-name{font-size:0.82rem;font-weight:700;margin-bottom:2px;}
+.ad-head{font-size:0.72rem;color:rgba(238,242,255,0.5);margin-bottom:4px;}
+.ad-btns{display:flex;gap:5px;flex-wrap:wrap;}
+
+.arts-list{display:flex;flex-direction:column;gap:8px;}
+.art-item{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:10px;display:flex;align-items:center;gap:10px;}
+.art-icon{font-size:1.4rem;flex-shrink:0;}
+.art-info{flex:1;}
+.art-title{font-size:0.8rem;font-weight:700;margin-bottom:2px;}
+.art-meta{font-size:0.65rem;color:rgba(238,242,255,0.4);}
+
+.pays-list{display:flex;flex-direction:column;gap:6px;}
+.pay-item{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:7px;padding:9px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.pay-school{font-size:0.8rem;font-weight:700;flex:1;}
+.pay-amount{color:#c9a84c;font-weight:700;font-size:0.85rem;}
+.pay-detail{font-size:0.65rem;color:rgba(238,242,255,0.4);}
+
+.jsonbox{width:100%;min-height:140px;background:#000;border:1px solid rgba(201,168,76,0.2);border-radius:7px;padding:10px;font-family:monospace;font-size:0.68rem;color:#c9a84c;resize:vertical;margin-top:10px;}
+
+.fetch-results{display:flex;flex-direction:column;gap:10px;margin-top:1rem;}
+.fetch-item{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:12px;}
+.fetch-img{width:100%;height:110px;object-fit:cover;border-radius:6px;margin-bottom:8px;}
+.fetch-title{font-size:0.82rem;font-weight:700;margin-bottom:4px;}
+.fetch-desc{font-size:0.72rem;color:rgba(238,242,255,0.5);margin-bottom:6px;}
+.fetch-src{font-size:0.62rem;color:#c9a84c;margin-bottom:7px;}
+.fetch-btns{display:flex;gap:7px;}
+
+.total-box{background:rgba(201,168,76,0.05);border:1px solid rgba(201,168,76,0.15);border-radius:8px;padding:1rem;margin-top:1rem;}
+.total-lbl{font-size:0.62rem;color:#c9a84c;margin-bottom:4px;}
+.total-n{font-size:1.8rem;font-weight:900;color:#c9a84c;}
+
+#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(80px);background:#0c1524;border:1px solid rgba(255,255,255,0.1);border-radius:9px;padding:10px 20px;font-size:0.8rem;transition:transform 0.3s;z-index:999;}
+#toast.show{transform:translateX(-50%) translateY(0);}
+#toast.ok{border-color:rgba(0,209,102,0.4);color:#00d166;}
+#toast.err{border-color:rgba(255,69,96,0.4);color:#ff6b6b;}
+
+.how-steps{font-size:0.82rem;color:rgba(238,242,255,0.6);line-height:2.2;padding-left:1.2rem;}
+.how-steps li{margin-bottom:2px;}
+.how-steps strong{color:#c9a84c;}
+
+.fetch-status{font-size:0.8rem;color:#c9a84c;padding:0.8rem;text-align:center;display:none;}
+
+@media(max-width:600px){.stats{grid-template-columns:1fr 1fr;}.row2{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<div id="login">
+  <div class="lbox">
+    <div class="lmark">R</div>
+    <h2>Rehoteq News Admin</h2>
+    <p>Manage school ads, articles and payments</p>
+    <div class="lerr" id="lerr">Wrong password. Please try again.</div>
+    <label>Password</label>
+    <input type="password" id="pw" placeholder="Enter admin password"/>
+    <button class="lbtn" onclick="doLogin()">Login to Admin Panel</button>
+    <div class="lback"><a href="news.html">Back to News Portal</a></div>
+  </div>
+</div>
+
+<div id="app">
+  <div class="topbar">
+    <div class="tbrand">
+      <div class="tmark">R</div>
+      <div class="tname">Rehoteq <em>News Admin</em></div>
+    </div>
+    <div class="tbtns">
+      <a href="news.html" target="_blank"><button class="tbtn">View Site</button></a>
+      <button class="tbtn" onclick="doLogout()">Logout</button>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab on" onclick="goTab('dash',this)">Dashboard</button>
+    <button class="tab" onclick="goTab('post',this)">Post Ad</button>
+    <button class="tab" onclick="goTab('manage',this)">Manage Ads</button>
+    <button class="tab" onclick="goTab('article',this)">Post Article</button>
+    <button class="tab" onclick="goTab('articles',this)">Articles</button>
+    <button class="tab" onclick="goTab('payments',this)">Payments</button>
+    <button class="tab" onclick="goTab('export',this)">Export JSON</button>
+    <button class="tab" onclick="goTab('fetch',this)">Auto-Fetch News</button>
+  </div>
+
+  <div class="content">
+
+    <div class="sec on" id="sec-dash">
+      <div class="stats">
+        <div class="stat"><div class="stat-n" id="s1">0</div><div class="stat-l">Active Ads</div></div>
+        <div class="stat"><div class="stat-n" id="s2">0</div><div class="stat-l">Pending</div></div>
+        <div class="stat"><div class="stat-n" id="s3">0</div><div class="stat-l">Articles</div></div>
+        <div class="stat"><div class="stat-n" id="s4" style="font-size:0.9rem;">N0</div><div class="stat-l">Revenue</div></div>
+      </div>
+      <div class="panel">
+        <h3>How to Update the Website</h3>
+        <ol class="how-steps">
+          <li>Post your school ad in the <strong>Post Ad</strong> tab</li>
+          <li>Go to <strong>Export JSON</strong> tab</li>
+          <li>Click <strong>Download ads.json</strong></li>
+          <li>Upload the file to GitHub as <strong>ads.json</strong></li>
+          <li>Ad appears on news.html for everyone!</li>
+        </ol>
+      </div>
+      <div class="panel">
+        <h3>Recent <em>Ads</em></h3>
+        <div id="recent-list"><p style="color:rgba(238,242,255,0.4);font-size:0.8rem;">No ads yet.</p></div>
+      </div>
+    </div>
+
+    <div class="sec" id="sec-post">
+      <div class="panel">
+        <h3>Post <em>New School Ad</em></h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;">
+          <div>
+            <div class="row2">
+              <div class="fg"><label>School Name</label><input class="fi" type="text" id="a-school" placeholder="e.g. Kings College" oninput="updPrev()"/></div>
+              <div class="fg"><label>Ad Type</label>
+                <select class="fi" id="a-type" onchange="updPrev()">
+                  <option value="">Select type</option>
+                  <option>Admission Notice</option>
+                  <option>Job Vacancy</option>
+                  <option>Event Announcement</option>
+                  <option>School Banner</option>
+                  <option>General Announcement</option>
+                </select>
+              </div>
+            </div>
+            <div class="fg" style="margin-bottom:10px;"><label>Ad Headline</label><input class="fi" type="text" id="a-head" placeholder="e.g. 2025 Admission is Open!" oninput="updPrev()"/></div>
+            <div class="fg" style="margin-bottom:10px;"><label>Full Message</label><textarea class="fi" id="a-msg" placeholder="Full ad details..."></textarea></div>
+            <div class="row2">
+              <div class="fg"><label>Contact WhatsApp</label><input class="fi" type="tel" id="a-contact" placeholder="08012345678" oninput="updPrev()"/></div>
+              <div class="fg"><label>Website Link</label><input class="fi" type="url" id="a-link" placeholder="https://..."/></div>
+            </div>
+            <div class="row2">
+              <div class="fg"><label>Start Date</label><input class="fi" type="date" id="a-start"/></div>
+              <div class="fg"><label>End Date</label><input class="fi" type="date" id="a-end"/></div>
+            </div>
+            <div class="row2">
+              <div class="fg"><label>Amount Paid (N)</label><input class="fi" type="number" id="a-amount" placeholder="10000"/></div>
+              <div class="fg"><label>Payment Status</label>
+                <select class="fi" id="a-paid">
+                  <option value="paid">Paid - Activate Now</option>
+                  <option value="pending">Pending Payment</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="fg" style="margin-bottom:12px;"><label>Upload Image or Logo</label>
+              <div class="imgup">
+                <input type="file" id="a-img" accept="image/*" onchange="prevImg(event)"/>
+                <div style="font-size:1.5rem;margin-bottom:6px;">🖼️</div>
+                <div style="font-size:0.72rem;color:rgba(238,242,255,0.4);">Click to upload image (Max 2MB)</div>
+                <img id="a-prev" class="iprev"/>
+              </div>
+            </div>
+            <div class="lprev">
+              <div class="lprev-lbl">Live Preview</div>
+              <div class="lprev-card" id="ad-prev">
+                <div style="font-size:0.55rem;color:#c9a84c;text-transform:uppercase;letter-spacing:0.1em;">Announcement</div>
+                <div style="font-size:0.85rem;font-weight:700;margin:3px 0;">School Name</div>
+                <div style="font-size:0.72rem;color:rgba(238,242,255,0.5);">Your ad headline...</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:1rem;display:flex;gap:8px;">
+          <button class="btn btn-g" onclick="postAd()">Save Ad</button>
+          <button class="btn btn-o" onclick="clearAd()">Clear</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec" id="sec-manage">
+      <div class="panel">
+        <h3>All <em>Ads</em> <button class="btn btn-o btn-sm" style="float:right;" onclick="loadManage()">Refresh</button></h3>
+        <div class="ads-list" id="ads-list"><p style="color:rgba(238,242,255,0.4);font-size:0.8rem;">No ads yet.</p></div>
+      </div>
+    </div>
+
+    <div class="sec" id="sec-article">
+      <div class="panel">
+        <h3>Post <em>New Article</em></h3>
+        <div class="fg" style="margin-bottom:10px;"><label>Title</label><input class="fi" type="text" id="t-title" placeholder="Article headline..."/></div>
+        <div class="row2">
+          <div class="fg"><label>Category</label>
+            <select class="fi" id="t-cat">
+              <option value="tech">Tech News</option>
+              <option value="cyber">Cybersecurity</option>
+              <option value="school">Schools</option>
+              <option value="tips">Rehoteq Tips</option>
+              <option value="solar">Solar and Energy</option>
+            </select>
+          </div>
+          <div class="fg"><label>Icon Emoji</label><input class="fi" type="text" id="t-icon" value="💻" maxlength="4"/></div>
+        </div>
+        <div class="fg" style="margin-bottom:10px;"><label>Short Description</label><input class="fi" type="text" id="t-desc" placeholder="One sentence summary..."/></div>
+        <div class="fg" style="margin-bottom:10px;">
+          <label>Cover Image (Optional)</label>
+          <div class="imgup">
+            <input type="file" id="t-img" accept="image/*" onchange="prevArtImg(event)"/>
+            <div style="font-size:0.72rem;color:rgba(238,242,255,0.4);">Click to upload cover image</div>
+            <img id="t-prev" class="iprev"/>
+          </div>
+        </div>
+        <div class="fg" style="margin-bottom:10px;"><label>Video URL (YouTube or Facebook)</label><input class="fi" type="url" id="t-video" placeholder="https://youtube.com/watch?v=..."/></div>
+        <div class="fg" style="margin-bottom:10px;"><label>Full Article Body</label><textarea class="fi" id="t-body" style="min-height:160px;" placeholder="Write your full article here..."></textarea></div>
+        <div class="fg" style="margin-bottom:10px;"><label>Author</label><input class="fi" type="text" id="t-author" value="Rehoteq News Desk"/></div>
+        <div style="display:flex;gap:8px;margin-top:0.5rem;">
+          <button class="btn btn-g" onclick="postArt()">Publish Article</button>
+          <button class="btn btn-o" onclick="clearArt()">Clear</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec" id="sec-articles">
+      <div class="panel">
+        <h3>All <em>Articles</em> <button class="btn btn-o btn-sm" style="float:right;" onclick="loadArts()">Refresh</button></h3>
+        <div class="arts-list" id="arts-list"><p style="color:rgba(238,242,255,0.4);font-size:0.8rem;">No articles yet.</p></div>
+      </div>
+    </div>
+
+    <div class="sec" id="sec-payments">
+      <div class="panel">
+        <h3>Record <em>Payment</em></h3>
+        <div class="row2">
+          <div class="fg"><label>School Name</label><input class="fi" type="text" id="p-school" placeholder="School name"/></div>
+          <div class="fg"><label>Amount (N)</label><input class="fi" type="number" id="p-amount" placeholder="10000"/></div>
+        </div>
+        <div class="row2">
+          <div class="fg"><label>Ad Type</label><input class="fi" type="text" id="p-type" placeholder="Admission Notice"/></div>
+          <div class="fg"><label>Method</label>
+            <select class="fi" id="p-method">
+              <option>Bank Transfer</option>
+              <option>Card Paystack</option>
+              <option>Cash</option>
+            </select>
+          </div>
+        </div>
+        <div class="row2">
+          <div class="fg"><label>Date</label><input class="fi" type="date" id="p-date"/></div>
+          <div class="fg"><label>Notes</label><input class="fi" type="text" id="p-notes" placeholder="Any notes..."/></div>
+        </div>
+        <button class="btn btn-g" style="margin-top:0.8rem;" onclick="savePay()">Save Payment</button>
+      </div>
+      <div class="panel">
+        <h3>Payment <em>Records</em></h3>
+        <div class="pays-list" id="pays-list"><p style="color:rgba(238,242,255,0.4);font-size:0.8rem;">No payments yet.</p></div>
+        <div class="total-box"><div class="total-lbl">TOTAL REVENUE</div><div class="total-n" id="total">N0</div></div>
+      </div>
+    </div>
+
+    <div class="sec" id="sec-export">
+      <div class="panel" style="border-color:rgba(201,168,76,0.3);">
+        <h3>Export <em>ads.json</em></h3>
+        <p style="font-size:0.8rem;color:rgba(238,242,255,0.5);line-height:1.8;margin-bottom:1rem;">Generate the ads.json file and upload to GitHub to update the website for all visitors.</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <button class="btn btn-g" onclick="genJSON()">Download ads.json</button>
+          <button class="btn btn-o" onclick="copyJSON()">Copy JSON</button>
+        </div>
+        <textarea class="jsonbox" id="json-out" readonly placeholder="Click Download to generate..."></textarea>
+        <p style="font-size:0.7rem;color:rgba(238,242,255,0.35);margin-top:8px;">Upload to: github.com/rehoteq1-coder/rehoteq as ads.json</p>
+      </div>
+    </div>
+
+    <div class="sec" id="sec-fetch">
+      <div class="panel" style="border-color:rgba(201,168,76,0.3);">
+        <h3>Auto-Fetch <em>Latest News</em></h3>
+        <p style="font-size:0.8rem;color:rgba(238,242,255,0.5);line-height:1.8;margin-bottom:1rem;">Click a button to fetch real articles. Review them and save the ones you want to publish.</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1rem;">
+          <button class="btn btn-g" onclick="fetchNews('technology Nigeria','tech','Tech News')">Fetch Tech News</button>
+          <button class="btn btn-g" onclick="fetchNews('cybersecurity Africa','cyber','Cybersecurity')">Fetch Cybersecurity</button>
+          <button class="btn btn-g" onclick="fetchNews('solar energy Nigeria','solar','Solar and Energy')">Fetch Solar News</button>
+          <button class="btn btn-g" onclick="fetchNews('school education Africa','school','Education')">Fetch School News</button>
+        </div>
+        <div class="fetch-status" id="fetch-status">Fetching articles...</div>
+        <div class="fetch-results" id="fetch-results"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+var PASS = "rehoteq@admin2025";
+var API_KEY = "pub_8a14c782047e4e979a8213004b3e91a6";
+var curImg = null;
+var curArtImg = null;
+
+function doLogin() {
+  var pw = document.getElementById("pw").value;
+  var err = document.getElementById("lerr");
+  if (pw !== PASS) {
+    err.style.display = "block";
+    return;
+  }
+  err.style.display = "none";
+  document.getElementById("login").style.display = "none";
+  document.getElementById("app").style.display = "block";
+  var t = new Date().toISOString().split("T")[0];
+  document.getElementById("a-start").value = t;
+  document.getElementById("p-date").value = t;
+  refreshStats();
+}
+
+function doLogout() {
+  document.getElementById("app").style.display = "none";
+  document.getElementById("login").style.display = "flex";
+  document.getElementById("pw").value = "";
+}
+
+function goTab(id, btn) {
+  var secs = document.querySelectorAll(".sec");
+  for (var i = 0; i < secs.length; i++) secs[i].classList.remove("on");
+  var tabs = document.querySelectorAll(".tab");
+  for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove("on");
+  document.getElementById("sec-" + id).classList.add("on");
+  if (btn) btn.classList.add("on");
+  if (id === "manage") loadManage();
+  if (id === "articles") loadArts();
+  if (id === "payments") loadPays();
+}
+
+function getAds() { return JSON.parse(localStorage.getItem("r_ads") || "[]"); }
+function setAds(d) { localStorage.setItem("r_ads", JSON.stringify(d)); }
+function getArts() { return JSON.parse(localStorage.getItem("r_arts") || "[]"); }
+function setArts(d) { localStorage.setItem("r_arts", JSON.stringify(d)); }
+function getPays() { return JSON.parse(localStorage.getItem("r_pays") || "[]"); }
+function setPays(d) { localStorage.setItem("r_pays", JSON.stringify(d)); }
+
+function refreshStats() {
+  var ads = getAds();
+  var pays = getPays();
+  var arts = getArts();
+  document.getElementById("s1").textContent = ads.filter(function(a) { return a.status === "active"; }).length;
+  document.getElementById("s2").textContent = ads.filter(function(a) { return a.status === "pending"; }).length;
+  document.getElementById("s3").textContent = arts.length;
+  var total = 0;
+  for (var i = 0; i < pays.length; i++) total += (parseInt(pays[i].amount) || 0);
+  document.getElementById("s4").textContent = "N" + total.toLocaleString();
+  loadRecent();
+}
+
+function loadRecent() {
+  var box = document.getElementById("recent-list");
+  var ads = getAds();
+  if (!ads.length) { box.innerHTML = ""; box.appendChild(txt("No ads yet.", "0.8rem", "rgba(238,242,255,0.4)")); return; }
+  box.innerHTML = "";
+  for (var i = 0; i < Math.min(ads.length, 5); i++) {
+    var a = ads[i];
+    var d = document.createElement("div");
+    d.style.cssText = "display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04);";
+    var info = document.createElement("div");
+    info.style.flex = "1";
+    var name = document.createElement("div");
+    name.style.cssText = "font-size:0.82rem;font-weight:700;";
+    name.textContent = a.school;
+    var head = document.createElement("div");
+    head.style.cssText = "font-size:0.7rem;color:rgba(238,242,255,0.45);";
+    head.textContent = a.headline;
+    info.appendChild(name);
+    info.appendChild(head);
+    var badge = mkBadge(a.status);
+    d.appendChild(info);
+    d.appendChild(badge);
+    box.appendChild(d);
+  }
+}
+
+function txt(t, fs, col) {
+  var p = document.createElement("p");
+  p.style.cssText = "font-size:" + (fs||"0.8rem") + ";color:" + (col||"rgba(238,242,255,0.4)") + ";";
+  p.textContent = t;
+  return p;
+}
+
+function mkBadge(status) {
+  var s = document.createElement("span");
+  s.className = "badge " + (status === "active" ? "b-active" : status === "pending" ? "b-pending" : "b-inactive");
+  s.textContent = status;
+  return s;
+}
+
+function prevImg(e) {
+  var f = e.target.files[0];
+  if (!f) return;
+  if (f.size > 2097152) { toast("Image too large - max 2MB", "err"); return; }
+  var r = new FileReader();
+  r.onload = function(ev) {
+    curImg = ev.target.result;
+    var p = document.getElementById("a-prev");
+    p.src = curImg; p.style.display = "block";
+    updPrev();
+  };
+  r.readAsDataURL(f);
+}
+
+function prevArtImg(e) {
+  var f = e.target.files[0];
+  if (!f) return;
+  if (f.size > 2097152) { toast("Image too large - max 2MB", "err"); return; }
+  var r = new FileReader();
+  r.onload = function(ev) {
+    curArtImg = ev.target.result;
+    var p = document.getElementById("t-prev");
+    p.src = curArtImg; p.style.display = "block";
+  };
+  r.readAsDataURL(f);
+}
+
+function updPrev() {
+  var prev = document.getElementById("ad-prev");
+  prev.innerHTML = "";
+  var typeEl = document.createElement("div");
+  typeEl.style.cssText = "font-size:0.55rem;color:#c9a84c;text-transform:uppercase;letter-spacing:0.1em;";
+  typeEl.textContent = document.getElementById("a-type").value || "Announcement";
+  var nameEl = document.createElement("div");
+  nameEl.style.cssText = "font-size:0.85rem;font-weight:700;margin:3px 0;";
+  nameEl.textContent = document.getElementById("a-school").value || "School Name";
+  var headEl = document.createElement("div");
+  headEl.style.cssText = "font-size:0.72rem;color:rgba(238,242,255,0.5);";
+  headEl.textContent = document.getElementById("a-head").value || "Your ad headline...";
+  if (curImg) {
+    var imgEl = document.createElement("img");
+    imgEl.src = curImg;
+    imgEl.style.cssText = "width:100%;border-radius:5px;margin-bottom:6px;max-height:80px;object-fit:cover;";
+    prev.appendChild(imgEl);
+  }
+  prev.appendChild(typeEl);
+  prev.appendChild(nameEl);
+  prev.appendChild(headEl);
+  var contact = document.getElementById("a-contact").value;
+  if (contact) {
+    var ctEl = document.createElement("div");
+    ctEl.style.cssText = "font-size:0.68rem;color:#c9a84c;margin-top:4px;";
+    ctEl.textContent = "Contact: " + contact;
+    prev.appendChild(ctEl);
+  }
+}
+
+function postAd() {
+  var school = document.getElementById("a-school").value.trim();
+  var type = document.getElementById("a-type").value;
+  var head = document.getElementById("a-head").value.trim();
+  if (!school) { toast("School name required", "err"); return; }
+  if (!type) { toast("Select ad type", "err"); return; }
+  if (!head) { toast("Headline required", "err"); return; }
+  var paid = document.getElementById("a-paid").value;
+  var ad = {
+    _key: "ad" + Date.now(),
+    school: school, type: type, headline: head,
+    message: document.getElementById("a-msg").value.trim(),
+    contact: document.getElementById("a-contact").value.trim(),
+    link: document.getElementById("a-link").value.trim(),
+    startDate: document.getElementById("a-start").value,
+    endDate: document.getElementById("a-end").value,
+    amount: document.getElementById("a-amount").value,
+    paid: paid, image: curImg || null,
+    status: paid === "paid" ? "active" : "pending",
+    createdAt: Date.now()
+  };
+  var ads = getAds(); ads.unshift(ad); setAds(ads);
+  toast("Ad saved! Go to Export JSON to update website.", "ok");
+  clearAd(); refreshStats();
+}
+
+function clearAd() {
+  var ids = ["a-school","a-head","a-msg","a-contact","a-link","a-amount"];
+  for (var i = 0; i < ids.length; i++) document.getElementById(ids[i]).value = "";
+  document.getElementById("a-type").value = "";
+  document.getElementById("a-paid").value = "paid";
+  var p = document.getElementById("a-prev");
+  p.style.display = "none"; p.src = "";
+  curImg = null; updPrev();
+}
+
+function loadManage() {
+  var box = document.getElementById("ads-list");
+  var ads = getAds();
+  if (!ads.length) { box.innerHTML = ""; box.appendChild(txt("No ads yet.")); return; }
+  box.innerHTML = "";
+  for (var i = 0; i < ads.length; i++) {
+    var a = ads[i];
+    var d = document.createElement("div");
+    d.className = "ad-item";
+    if (a.image) {
+      var img = document.createElement("img");
+      img.className = "ad-thumb"; img.src = a.image; img.alt = "ad";
+      d.appendChild(img);
+    }
+    var info = document.createElement("div");
+    info.className = "ad-info";
+    var name = document.createElement("div"); name.className = "ad-name"; name.textContent = a.school;
+    var head = document.createElement("div"); head.className = "ad-head"; head.textContent = a.headline;
+    var btns = document.createElement("div"); btns.className = "ad-btns";
+    var b1 = document.createElement("button");
+    b1.className = "btn btn-sm " + (a.status === "active" ? "btn-d" : "btn-s");
+    b1.textContent = a.status === "active" ? "Deactivate" : "Activate";
+    b1.setAttribute("data-key", a._key);
+    b1.setAttribute("data-status", a.status);
+    b1.onclick = function() { toggleAd(this.getAttribute("data-key"), this.getAttribute("data-status")); };
+    var b2 = document.createElement("button");
+    b2.className = "btn btn-d btn-sm"; b2.textContent = "Delete";
+    b2.setAttribute("data-key", a._key);
+    b2.onclick = function() { delAd(this.getAttribute("data-key")); };
+    btns.appendChild(b1); btns.appendChild(b2);
+    info.appendChild(name); info.appendChild(head); info.appendChild(btns);
+    var badge = mkBadge(a.status);
+    d.appendChild(info); d.appendChild(badge);
+    box.appendChild(d);
+  }
+}
+
+function toggleAd(key, cur) {
+  var ns = cur === "active" ? "inactive" : "active";
+  var ads = getAds();
+  for (var i = 0; i < ads.length; i++) { if (ads[i]._key === key) ads[i].status = ns; }
+  setAds(ads); toast("Status updated! Export JSON to update website.", "ok"); loadManage(); refreshStats();
+}
+
+function delAd(key) {
+  if (!confirm("Delete this ad?")) return;
+  setAds(getAds().filter(function(a) { return a._key !== key; }));
+  toast("Ad deleted", "ok"); loadManage(); refreshStats();
+}
+
+function postArt() {
+  var title = document.getElementById("t-title").value.trim();
+  var desc = document.getElementById("t-desc").value.trim();
+  var body = document.getElementById("t-body").value.trim();
+  if (!title || !desc || !body) { toast("Title, description and body required", "err"); return; }
+  var cats = {tech:"Tech News",cyber:"Cybersecurity",school:"Schools",tips:"Rehoteq Tips",solar:"Solar and Energy"};
+  var cat = document.getElementById("t-cat").value;
+  var art = {
+    _key: "art" + Date.now(),
+    id: title.toLowerCase().replace(/[^a-z0-9]+/g, "-").substring(0, 50),
+    cat: cat, catLabel: cats[cat] || cat,
+    icon: document.getElementById("t-icon").value || "💻",
+    title: title, desc: desc, body: body,
+    img: curArtImg || null,
+    video: document.getElementById("t-video").value.trim(),
+    source: document.getElementById("t-author").value || "Rehoteq News Desk",
+    date: new Date().toLocaleDateString("en-GB", {day:"numeric",month:"long",year:"numeric"}),
+    status: "published", createdAt: Date.now()
+  };
+  var arts = getArts(); arts.unshift(art); setArts(arts);
+  toast("Article saved! Export JSON to update website.", "ok");
+  clearArt(); refreshStats();
+}
+
+function clearArt() {
+  var ids = ["t-title","t-desc","t-body","t-video"];
+  for (var i = 0; i < ids.length; i++) document.getElementById(ids[i]).value = "";
+  document.getElementById("t-icon").value = "💻";
+  var p = document.getElementById("t-prev");
+  p.style.display = "none"; p.src = "";
+  curArtImg = null;
+}
+
+function loadArts() {
+  var box = document.getElementById("arts-list");
+  var arts = getArts();
+  if (!arts.length) { box.innerHTML = ""; box.appendChild(txt("No articles yet.")); return; }
+  box.innerHTML = "";
+  for (var i = 0; i < arts.length; i++) {
+    var a = arts[i];
+    var d = document.createElement("div"); d.className = "art-item";
+    var ic = document.createElement("div"); ic.className = "art-icon"; ic.textContent = a.icon;
+    var info = document.createElement("div"); info.className = "art-info";
+    var title = document.createElement("div"); title.className = "art-title"; title.textContent = a.title;
+    var meta = document.createElement("div"); meta.className = "art-meta"; meta.textContent = a.catLabel + " | " + a.date;
+    var db = document.createElement("button"); db.className = "btn btn-d btn-sm"; db.textContent = "Delete";
+    db.style.marginTop = "6px";
+    db.setAttribute("data-key", a._key);
+    db.onclick = function() { delArt(this.getAttribute("data-key")); };
+    info.appendChild(title); info.appendChild(meta); info.appendChild(db);
+    d.appendChild(ic); d.appendChild(info);
+    box.appendChild(d);
+  }
+}
+
+function delArt(key) {
+  if (!confirm("Delete this article?")) return;
+  setArts(getArts().filter(function(a) { return a._key !== key; }));
+  toast("Deleted", "ok"); loadArts(); refreshStats();
+}
+
+function savePay() {
+  var school = document.getElementById("p-school").value.trim();
+  var amount = document.getElementById("p-amount").value;
+  if (!school || !amount) { toast("School and amount required", "err"); return; }
+  var pays = getPays();
+  pays.unshift({
+    _key: "pay" + Date.now(),
+    school: school, amount: parseInt(amount),
+    type: document.getElementById("p-type").value,
+    method: document.getElementById("p-method").value,
+    date: document.getElementById("p-date").value,
+    notes: document.getElementById("p-notes").value,
+    createdAt: Date.now()
+  });
+  setPays(pays); toast("Payment recorded!", "ok");
+  var ids = ["p-school","p-amount","p-type","p-notes"];
+  for (var i = 0; i < ids.length; i++) document.getElementById(ids[i]).value = "";
+  loadPays(); refreshStats();
+}
+
+function loadPays() {
+  var box = document.getElementById("pays-list");
+  var pays = getPays();
+  var total = 0;
+  for (var i = 0; i < pays.length; i++) total += (parseInt(pays[i].amount) || 0);
+  document.getElementById("total").textContent = "N" + total.toLocaleString();
+  if (!pays.length) { box.innerHTML = ""; box.appendChild(txt("No payments yet.")); return; }
+  box.innerHTML = "";
+  for (var i = 0; i < pays.length; i++) {
+    var p = pays[i];
+    var d = document.createElement("div"); d.className = "pay-item";
+    var school = document.createElement("div"); school.className = "pay-school"; school.textContent = p.school;
+    var amount = document.createElement("div"); amount.className = "pay-amount"; amount.textContent = "N" + (parseInt(p.amount)||0).toLocaleString();
+    var detail = document.createElement("div"); detail.className = "pay-detail"; detail.textContent = p.date + " | " + p.method + " | " + p.type;
+    d.appendChild(school); d.appendChild(amount); d.appendChild(detail);
+    box.appendChild(d);
+  }
+}
+
+function genJSON() {
+  var data = {ads: getAds(), articles: getArts(), lastUpdated: new Date().toISOString().split("T")[0]};
+  var str = JSON.stringify(data, null, 2);
+  document.getElementById("json-out").value = str;
+  var blob = new Blob([str], {type:"application/json"});
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement("a");
+  a.href = url; a.download = "ads.json"; a.click();
+  URL.revokeObjectURL(url);
+  toast("ads.json downloaded! Upload to GitHub now.", "ok");
+}
+
+function copyJSON() {
+  var txt = document.getElementById("json-out").value;
+  if (!txt) { toast("Click Download first", "err"); return; }
+  if (navigator.clipboard) navigator.clipboard.writeText(txt).then(function() { toast("Copied!", "ok"); });
+  else { document.getElementById("json-out").select(); document.execCommand("copy"); toast("Copied!", "ok"); }
+}
+
+function fetchNews(query, cat, catLabel) {
+  var status = document.getElementById("fetch-status");
+  var results = document.getElementById("fetch-results");
+  status.style.display = "block";
+  status.textContent = "Fetching " + catLabel + " articles...";
+  results.innerHTML = "";
+  var url = "https://newsdata.io/api/1/news?apikey=" + API_KEY + "&q=" + encodeURIComponent(query) + "&language=en&size=5";
+  fetch(url)
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      status.style.display = "none";
+      if (!d || !d.results || !d.results.length) {
+        results.appendChild(txt("No articles found. Try again later."));
+        return;
+      }
+      for (var i = 0; i < d.results.length; i++) {
+        var item = d.results[i];
+        if (!item.title) continue;
+        results.appendChild(mkFetchItem(item, cat, catLabel));
+      }
+    })
+    .catch(function() {
+      status.style.display = "none";
+      results.appendChild(txt("Error fetching. Check internet connection.", "0.8rem", "#ff6b6b"));
+    });
+}
+
+function mkFetchItem(item, cat, catLabel) {
+  var d = document.createElement("div"); d.className = "fetch-item";
+  if (item.image_url) {
+    var img = document.createElement("img"); img.className = "fetch-img"; img.src = item.image_url; img.alt = "news";
+    d.appendChild(img);
+  }
+  var title = document.createElement("div"); title.className = "fetch-title"; title.textContent = item.title;
+  var desc = document.createElement("div"); desc.className = "fetch-desc"; desc.textContent = (item.description || "").substring(0, 150);
+  var src = document.createElement("div"); src.className = "fetch-src"; src.textContent = "Source: " + (item.source_name || "Unknown") + " | " + (item.pubDate ? item.pubDate.split(" ")[0] : "Today");
+  var btns = document.createElement("div"); btns.className = "fetch-btns";
+  var saveBtn = document.createElement("button"); saveBtn.className = "btn btn-g btn-sm"; saveBtn.textContent = "Save to Portal";
+  saveBtn.onclick = (function(i, c, cl) { return function() { saveFromFetch(i, c, cl); }; })(item, cat, catLabel);
+  btns.appendChild(saveBtn);
+  if (item.link) {
+    var readBtn = document.createElement("a"); readBtn.href = item.link; readBtn.target = "_blank";
+    var rb = document.createElement("button"); rb.className = "btn btn-o btn-sm"; rb.textContent = "Read Full";
+    readBtn.appendChild(rb); btns.appendChild(readBtn);
+  }
+  d.appendChild(title); d.appendChild(desc); d.appendChild(src); d.appendChild(btns);
+  return d;
+}
+
+function saveFromFetch(item, cat, catLabel) {
+  var icons = {tech:"💻", cyber:"🔐", solar:"☀️", school:"🎓"};
+  var art = {
+    _key: "art" + Date.now(),
+    id: "f" + Date.now(),
+    cat: cat, catLabel: catLabel,
+    icon: icons[cat] || "📰",
+    title: item.title, desc: item.description || item.title,
+    body: item.description || item.title,
+    img: item.image_url || null,
+    link: item.link || "",
+    source: item.source_name || "Auto-fetched",
+    date: new Date().toLocaleDateString("en-GB", {day:"numeric",month:"long",year:"numeric"}),
+    status: "published", createdAt: Date.now()
+  };
+  var arts = getArts(); arts.unshift(art); setArts(arts);
+  toast("Article saved! Export JSON to update website.", "ok");
+  refreshStats();
+}
+
+function toast(msg, type) {
+  var t = document.getElementById("toast");
+  t.textContent = msg;
+  t.className = "show " + (type || "ok");
+  setTimeout(function() { t.className = ""; }, 3000);
+}
+</script>
+</body>
+</html>
