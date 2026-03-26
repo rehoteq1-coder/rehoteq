@@ -3,8 +3,22 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta name="description" content="Rehoteq News — Latest tech news, cybersecurity alerts, school announcements from Nigeria."/>
-<title>Rehoteq News — Tech, Schools and Cybersecurity Nigeria</title>
+<meta name="description" content="Rehoteq News - Latest tech news, cybersecurity alerts, school announcements and digital tips from Nigeria. Share articles on WhatsApp and Facebook."/>
+<meta name="keywords" content="Nigeria tech news, cybersecurity Nigeria, school news Nigeria, solar energy Nigeria, Rehoteq news, EdTech Nigeria, Ondo State tech"/>
+<meta name="author" content="Rehoteq Technologies"/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://rehoteq.com/news.html"/>
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="Rehoteq News"/>
+<meta property="og:title" content="Rehoteq News - Tech, Schools and Cybersecurity Nigeria"/>
+<meta property="og:description" content="Latest tech news, cybersecurity alerts, school announcements and digital tips from Nigeria. Share with your community!"/>
+<meta property="og:url" content="https://rehoteq.com/news.html"/>
+<meta property="og:image" content="https://rehoteq.com/og-image.jpg"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Rehoteq News - Tech and Schools Nigeria"/>
+<meta name="twitter:description" content="Latest tech news, cybersecurity alerts and school updates from Nigeria."/>
+<title>Rehoteq News - Tech, Schools and Cybersecurity Nigeria</title>
+
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3770512274225098" crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,900&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
@@ -134,6 +148,21 @@ footer a{color:var(--gold);}
 </style>
 </head>
 <body>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "NewsMediaOrganization",
+  "name": "Rehoteq News",
+  "url": "https://rehoteq.com/news.html",
+  "description": "Tech news, cybersecurity alerts and school announcements from Nigeria",
+  "publishingPrinciples": "https://rehoteq.com/privacy.html",
+  "parentOrganization": {
+    "@type": "Organization",
+    "name": "Rehoteq Technologies",
+    "url": "https://rehoteq.com"
+  }
+}
+</script>
 
 <!-- Article bodies stored in hidden divs to avoid JS slash issues -->
 <div id="body-solar-ng" style="display:none">
@@ -528,7 +557,7 @@ function loadAds() {
         h += '<div class="sad-text">' + ad.headline + '</div>';
         h += '<div class="sad-cta">Tap to view details</div>';
         h += '</div>';
-        window['_adData_' + i] = {link: lnk, contact: contact, school: ad.school, headline: ad.headline, message: ad.message || ''};
+        window['_adData_' + i] = {link: (ad.link||'').trim(), contact: (ad.contact||'').trim(), school: ad.school||'', headline: ad.headline||'', message: ad.message||''};
       }
       if (h) box.innerHTML = h;
     })
@@ -538,17 +567,41 @@ function loadAds() {
 function adClick(i) {
   var ad = window['_adData_' + i];
   if (!ad) return;
-  if (ad.link) {
+
+  // Validate link — must start with http
+  var hasLink = ad.link && ad.link.length > 5 && ad.link.indexOf('http') === 0;
+
+  if (hasLink) {
     window.open(ad.link, '_blank');
-  } else if (ad.contact) {
+    return;
+  }
+
+  // Try contact WhatsApp
+  if (ad.contact) {
     var num = ad.contact.replace(/[^0-9]/g, '');
     if (num.length >= 10) {
-      var txt = 'Hello, I saw your ad on rehoteq.com\n\n' + ad.headline + '\n\nI am interested, please send more details.';
-      window.open('https://wa.me/234' + num.slice(-10) + '?text=' + encodeURIComponent(txt), '_blank');
+      var wa = 'Hello! I saw your ad on rehoteq.com' + '
+
+' + ad.headline + '
+
+I am interested, please share more details.';
+      var waNum = num.length === 11 ? '234' + num.slice(1) : '234' + num.slice(-10);
+      window.open('https://wa.me/' + waNum + '?text=' + encodeURIComponent(wa), '_blank');
+      return;
     }
-  } else {
-    alert(ad.school + '\n\n' + ad.headline + '\n\n' + ad.message + '\n\nContact Rehoteq: 07036302585');
   }
+
+  // Fallback — show ad details and Rehoteq contact
+  var msg = ad.school + '
+
+' + ad.headline;
+  if (ad.message) msg += '
+
+' + ad.message;
+  msg += '
+
+For more info WhatsApp Rehoteq: 07036302585';
+  alert(msg);
 }
 
 window.onload = function() {
