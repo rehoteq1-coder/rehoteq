@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rehoteq Student Hub – Cyber Quiz & Tech Careers</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #F5A623;
+  --gold2: #C4811A;
+  --bg: #0A0A0A;
+  --card: #141414;
+  --card2: #1A1A1A;
+  --border: #252525;
+  --border2: #2E2E2E;
+  --text: #E8E8E8;
+  --muted: #777;
+  --green: #28C840;
+  --red: #FF5F57;
+  --blue: #4A9EFF;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border);
+  background: #0A0A0Aee;
+  position: sticky; top: 0; z-index: 100;
+  backdrop-filter: blur(12px);
+}
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: #fff;
+}
+.nav-logo span { color: var(--gold); }
+.nav-tabs { display: flex; gap: 4px; }
+.nav-tab {
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+  background: transparent;
+  color: var(--muted);
+}
+.nav-tab.active, .nav-tab:hover {
+  background: var(--gold);
+  color: #000;
+}
+
+/* ── HERO ── */
+.hero {
+  text-align: center;
+  padding: 60px 24px 40px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -60px; left: 50%;
+  transform: translateX(-50%);
+  width: 500px; height: 300px;
+  background: radial-gradient(ellipse, #F5A62318 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #F5A62314;
+  border: 1px solid #F5A62330;
+  border-radius: 100px;
+  padding: 6px 16px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.hero-badge::before { content:''; width:6px; height:6px; background:var(--gold); border-radius:50%; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.8)} }
+.hero h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(1.8rem, 6vw, 3rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+.hero h1 .gold { color: var(--gold); }
+.hero p {
+  font-size: 0.95rem;
+  color: var(--muted);
+  max-width: 480px;
+  margin: 0 auto 32px;
+  line-height: 1.7;
+}
+.hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.btn-gold {
+  background: var(--gold);
+  color: #000;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'DM Sans', sans-serif;
+}
+.btn-gold:hover { background: var(--gold2); transform: translateY(-1px); }
+.btn-outline {
+  background: transparent;
+  color: var(--gold);
+  border: 1px solid var(--gold);
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'DM Sans', sans-serif;
+}
+.btn-outline:hover { background: #F5A62310; }
+
+/* ── SECTIONS ── */
+.section { display: none; padding: 0 20px 60px; max-width: 860px; margin: 0 auto; }
+.section.active { display: block; animation: fadeIn 0.4s ease; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+.section-title span { color: var(--gold); }
+.section-sub { color: var(--muted); font-size: 0.85rem; margin-bottom: 32px; }
+
+/* ── QUIZ ── */
+.quiz-progress-bar {
+  width: 100%;
+  height: 4px;
+  background: var(--border2);
+  border-radius: 2px;
+  margin-bottom: 28px;
+  overflow: hidden;
+}
+.quiz-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold2), var(--gold));
+  border-radius: 2px;
+  transition: width 0.5s ease;
+}
+.quiz-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.question-card {
+  background: var(--card);
+  border: 1px solid var(--border2);
+  border-radius: 14px;
+  padding: 28px 24px;
+  margin-bottom: 20px;
+}
+.question-num {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.question-text {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 24px;
+}
+.options { display: grid; gap: 10px; }
+.option {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  background: var(--card2);
+  border: 1.5px solid var(--border2);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.88rem;
+}
+.option:hover { border-color: var(--gold); background: #F5A62308; }
+.option.correct { border-color: var(--green); background: #28C84012; color: #fff; }
+.option.wrong { border-color: var(--red); background: #FF5F5712; color: #aaa; }
+.option.disabled { cursor: default; pointer-events: none; }
+.option-letter {
+  width: 28px; height: 28px;
+  border-radius: 6px;
+  background: var(--border2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem; font-weight: 700;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+.option.correct .option-letter { background: var(--green); color: #000; }
+.option.wrong .option-letter { background: var(--red); color: #fff; }
+.feedback-box {
+  background: #F5A62310;
+  border: 1px solid #F5A62330;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 0.82rem;
+  color: #ddd;
+  line-height: 1.55;
+  margin-top: 14px;
+  display: none;
+}
+.feedback-box.show { display: block; animation: fadeIn 0.3s ease; }
+.quiz-nav { display: flex; justify-content: flex-end; margin-top: 16px; }
+
+/* ── RESULT ── */
+.result-card {
+  background: var(--card);
+  border: 1px solid var(--border2);
+  border-radius: 16px;
+  padding: 40px 28px;
+  text-align: center;
+}
+.result-badge {
+  font-size: 4rem;
+  margin-bottom: 16px;
+  display: block;
+}
+.result-grade {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.result-score {
+  font-size: 1rem;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+.result-msg {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: #ccc;
+  max-width: 400px;
+  margin: 0 auto 28px;
+}
+.score-bar-wrap { margin: 0 auto 28px; max-width: 300px; }
+.score-bar-bg {
+  width: 100%; height: 10px;
+  background: var(--border2);
+  border-radius: 5px; overflow: hidden;
+}
+.score-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold2), var(--gold));
+  border-radius: 5px;
+  transition: width 1.2s ease;
+}
+.share-text {
+  background: var(--card2);
+  border: 1px dashed var(--border2);
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-size: 0.82rem;
+  color: #ccc;
+  font-style: italic;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+.share-btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.share-btn {
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+  font-family: 'DM Sans', sans-serif;
+}
+.share-wa { background: #25D366; color: #000; }
+.share-wa:hover { background: #1db954; }
+.share-copy { background: var(--border2); color: var(--text); }
+.share-copy:hover { background: var(--border); }
+.rehocheck-cta {
+  margin-top: 28px;
+  background: linear-gradient(135deg, #1A1200, #2A1E00);
+  border: 1px solid var(--gold2);
+  border-radius: 12px;
+  padding: 20px 24px;
+  text-align: left;
+}
+.rehocheck-cta h4 {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.95rem;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+.rehocheck-cta p { font-size: 0.82rem; color: #bbb; line-height: 1.6; margin-bottom: 14px; }
+
+/* ── CAREERS ── */
+.career-grid { display: grid; gap: 16px; }
+.career-card {
+  background: var(--card);
+  border: 1.5px solid var(--border2);
+  border-radius: 14px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.career-card:hover { border-color: var(--gold); transform: translateY(-2px); }
+.career-card.open { border-color: var(--gold); }
+.career-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 22px;
+}
+.career-icon {
+  width: 48px; height: 48px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+.career-title-wrap { flex: 1; }
+.career-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 3px;
+}
+.career-tag {
+  font-size: 0.7rem;
+  padding: 2px 10px;
+  border-radius: 100px;
+  font-weight: 600;
+}
+.tag-hot { background: #FF5F5720; color: #FF8A85; border: 1px solid #FF5F5740; }
+.tag-growth { background: #28C84020; color: #5DD67A; border: 1px solid #28C84040; }
+.tag-core { background: #F5A62320; color: var(--gold); border: 1px solid #F5A62340; }
+.tag-rising { background: #4A9EFF20; color: #7AB8FF; border: 1px solid #4A9EFF40; }
+.career-chevron {
+  color: var(--muted);
+  font-size: 1.1rem;
+  transition: transform 0.3s;
+}
+.career-card.open .career-chevron { transform: rotate(180deg); color: var(--gold); }
+.career-body {
+  display: none;
+  padding: 0 22px 22px;
+  border-top: 1px solid var(--border);
+  animation: fadeIn 0.3s ease;
+}
+.career-card.open .career-body { display: block; }
+.career-body-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 18px;
+}
+@media(max-width:500px){ .career-body-grid { grid-template-columns: 1fr; } }
+.cb-block h5 {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+.skill-chip {
+  display: inline-block;
+  background: var(--card2);
+  border: 1px solid var(--border2);
+  border-radius: 5px;
+  padding: 4px 10px;
+  font-size: 0.73rem;
+  margin: 3px 3px 3px 0;
+  color: #ccc;
+}
+.salary-range {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--green);
+  margin-bottom: 4px;
+}
+.salary-note { font-size: 0.73rem; color: var(--muted); }
+.rehoteq-link {
+  margin-top: 16px;
+  background: #F5A62310;
+  border: 1px solid #F5A62325;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 0.8rem;
+  color: #ccc;
+  line-height: 1.6;
+}
+.rehoteq-link strong { color: var(--gold); }
+.roadmap { margin-top: 0; }
+.roadmap-step {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+.step-num {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: #000;
+  font-size: 0.65rem;
+  font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 1px;
+}
+.step-text { font-size: 0.8rem; color: #bbb; line-height: 1.5; }
+
+/* ── FOOTER ── */
+footer {
+  text-align: center;
+  padding: 30px 20px;
+  border-top: 1px solid var(--border);
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+footer a { color: var(--gold); text-decoration: none; }
+
+/* ── COPIED TOAST ── */
+.toast {
+  position: fixed;
+  bottom: 24px; left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: var(--green);
+  color: #000;
+  font-weight: 700;
+  font-size: 0.8rem;
+  padding: 10px 22px;
+  border-radius: 100px;
+  transition: transform 0.3s ease;
+  z-index: 999;
+}
+.toast.show { transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Reho<span>teq</span></div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="showSection('quiz', this)">🧠 Cyber Quiz</button>
+    <button class="nav-tab" onclick="showSection('careers', this)">🚀 Tech Careers</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">Student & Teacher Hub</div>
+  <h1>Know Your <span class="gold">Cyber Score.</span><br>Build Your Tech Future.</h1>
+  <p>Test your cybersecurity awareness, then explore real tech career paths available to you right here in Nigeria.</p>
+  <div class="hero-actions">
+    <button class="btn-gold" onclick="showSection('quiz', document.querySelector('.nav-tab'))">Take the Quiz →</button>
+    <button class="btn-outline" onclick="showSection('careers', document.querySelectorAll('.nav-tab')[1])">Explore Careers</button>
+  </div>
+</div>
+
+<!-- QUIZ SECTION -->
+<div class="section active" id="section-quiz">
+  <div class="section-title">Cyber <span>Awareness</span> Quiz</div>
+  <div class="section-sub">10 questions · Nigeria-relevant scenarios · See how safe you really are</div>
+
+  <div id="quiz-container">
+    <div class="quiz-meta">
+      <span id="q-counter">Question 1 of 10</span>
+      <span id="q-score-live">Score: 0</span>
+    </div>
+    <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="q-progress" style="width:10%"></div></div>
+
+    <div class="question-card" id="question-card">
+      <div class="question-num" id="q-num">Question 01</div>
+      <div class="question-text" id="q-text"></div>
+      <div class="options" id="q-options"></div>
+      <div class="feedback-box" id="q-feedback"></div>
+    </div>
+
+    <div class="quiz-nav">
+      <button class="btn-gold" id="q-next-btn" onclick="nextQuestion()" style="display:none">Next →</button>
+    </div>
+  </div>
+
+  <!-- RESULT -->
+  <div id="result-container" style="display:none">
+    <div class="result-card">
+      <span class="result-badge" id="r-badge"></span>
+      <div class="result-grade" id="r-grade"></div>
+      <div class="result-score" id="r-score"></div>
+      <div class="score-bar-wrap">
+        <div class="score-bar-bg"><div class="score-bar-fill" id="r-bar" style="width:0%"></div></div>
+      </div>
+      <div class="result-msg" id="r-msg"></div>
+      <div class="share-text" id="r-share-text"></div>
+      <div class="share-btns">
+        <button class="share-btn share-wa" onclick="shareWhatsApp()">📲 Share on WhatsApp</button>
+        <button class="share-btn share-copy" onclick="copyResult()">📋 Copy Result</button>
+        <button class="share-btn btn-gold" onclick="retakeQuiz()">🔄 Retake Quiz</button>
+      </div>
+      <div class="rehocheck-cta">
+        <h4>🔒 Try RehoCheck — Free Link Scanner</h4>
+        <p>Before you click any suspicious link on WhatsApp or SMS, scan it with RehoCheck first. Built by Rehoteq Technologies to protect Nigerians from phishing scams.</p>
+        <button class="btn-gold" onclick="window.open('https://rehoteq.com','_blank')">Get RehoCheck →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CAREERS SECTION -->
+<div class="section" id="section-careers">
+  <div class="section-title">Tech <span>Career</span> Paths</div>
+  <div class="section-sub">Real careers. Real salaries. How to get there from where you are now.</div>
+
+  <div class="career-grid" id="career-grid"></div>
+</div>
+
+<footer>
+  Built with ❤️ by <a href="https://rehoteq.com">Rehoteq Technologies</a> · Okitipupa, Ondo State, Nigeria
+</footer>
+
+<div class="toast" id="toast">✅ Copied to clipboard!</div>
+
+<script>
+// ── QUIZ DATA ──
+const questions = [
+  {
+    q: "You receive a WhatsApp message from 'Access Bank' with a link asking you to verify your BVN. What do you do?",
+    options: ["Click the link immediately to secure your account","Ignore and delete the message","Forward it to family to warn them","Call Access Bank's official number first"],
+    correct: 3,
+    feedback: "Banks will NEVER ask for your BVN via WhatsApp. Always call the bank's official number printed on your card. That message is a phishing scam."
+  },
+  {
+    q: "Which of these is the STRONGEST password?",
+    options: ["password123","MyName1990","R3h0!#Teq_Ng24","okitipupa2024"],
+    correct: 2,
+    feedback: "R3h0!#Teq_Ng24 mixes uppercase, lowercase, numbers and symbols — making it extremely hard to crack. Never use your name, location or birth year."
+  },
+  {
+    q: "You're using a cybercafé in Akure to check your school email. What's most important after you're done?",
+    options: ["Clear the browsing history","Log out of your accounts and clear history","Just close the browser tab","It doesn't matter, no one knows your password"],
+    correct: 1,
+    feedback: "Always LOG OUT before leaving any shared computer. Closing
