@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rehoteq Quick Tech Tips – SVG Illustrations</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500&display=swap');
+  :root {
+    --gold: #F5A623;
+    --gold-dim: #C4811A;
+    --bg: #0D0D0D;
+    --card: #161616;
+    --border: #2A2A2A;
+    --text: #E8E8E8;
+    --muted: #888;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    padding: 40px 20px;
+  }
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    color: var(--gold);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  h1::before { content: ''; display: inline-block; width: 30px; height: 2px; background: var(--gold); }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.25s, border-color 0.25s;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: var(--gold-dim);
+  }
+
+  .svg-wrapper {
+    width: 100%;
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #111;
+    border-bottom: 1px solid var(--border);
+    padding: 16px;
+  }
+
+  .card-body {
+    padding: 16px 18px 20px;
+  }
+  .card-body h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+  .card-body p {
+    font-size: 0.78rem;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  /* ── SVG shared animation base ── */
+  .pulse { animation: pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+  .spin { animation: spin 6s linear infinite; }
+  @keyframes spin { from{transform-origin:50% 50%;transform:rotate(0deg)} to{transform:rotate(360deg)} }
+  .float { animation: float 3s ease-in-out infinite; }
+  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+  .flicker { animation: flicker 1.8s ease-in-out infinite; }
+  @keyframes flicker { 0%,100%{opacity:1} 45%{opacity:0.6} 55%{opacity:1} }
+</style>
+</head>
+<body>
+
+<h1>Quick Tech Tips — SVG Illustrations</h1>
+
+<div class="grid">
+
+  <!-- 1. Always Verify Before You Click -->
+  <div class="card">
+    <div class="svg-wrapper">
+      <svg width="200" height="130" viewBox="0 0 200 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Background glow -->
+        <ellipse cx="100" cy="65" rx="70" ry="45" fill="#F5A62308"/>
+        <!-- Browser window -->
+        <rect x="30" y="20" width="140" height="85" rx="8" fill="#1E1E1E" stroke="#333" stroke-width="1.5"/>
+        <rect x="30" y="20" width="140" height="22" rx="8" fill="#2A2A2A"/>
+        <circle cx="46" cy="31" r="4" fill="#FF5F57"/>
+        <circle cx="60" cy="31" r="4" fill="#FEBC2E"/>
+        <circle cx="74" cy="31" r="4" fill="#28C840"/>
+        <!-- URL bar -->
+        <rect x="85" y="25" width="70" height="12" rx="3" fill="#1A1A1A" stroke="#444" stroke-width="0.8"/>
+        <text x="88" y="34" font-size="6" fill="#F5A623" font-family="monospace">bit.ly/wr0ng-l1nk</text>
+        <!-- Page content lines -->
+        <rect x="42" y="54" width="60" height="5" rx="2" fill="#333"/>
+        <rect x="42" y="64" width="44" height="5" rx="2" fill="#2A2A2A"/>
+        <rect x="42" y="74" width="52" height="5" rx="2" fill="#2A2A2A"/>
+        <!-- Warning shield -->
+        <g class="float">
+          <path d="M138 48 L152 54 L152 70 Q152 78 145 82 Q138 78 138 70 Z" fill="#F5A62320" stroke="#F5A623" stroke-width="1.5"/>
+          <text x="145" y="69" font-size="12" fill="#F5A623" text-anchor="middle" font-weight="bold">!</text>
+        </g>
+        <!-- Cursor -->
+        <g class="pulse" style="transform-origin:80px 80px">
+          <polygon points="80,68 80,85 84,81 87,88 89,87 86,80 91,80" fill="#fff" stroke="#111" stroke-width="0.5"/>
+        </g>
+        <!-- Danger lines -->
+        <line x1="96" y1="60" x2="108" y2="50" stroke="#F5A62360" stroke-width="0.8" stroke-dasharray="2,2"/>
+      </svg>
+    </div>
+    <div class="card-body">
+      <h3>Always Verify Before You Click</h3>
+      <p>Phishing attacks are Nigeria's fastest growing cybercrime. Paste suspicious links into RehoCheck first.</p>
+    </div>
+  </div>
+
+  <!-- 2. Solar Saves More Than You Think -->
+  <div class="card">
+    <div class="svg-wrapper">
+      <svg width="200" height="130" viewBox="0 0 200 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Sun -->
+        <g class="spin" style="transform-origin:48px 38px">
+          <line x1="48" y1="16" x2="48" y2="22" stroke="#F5A623" stroke-width="2" stroke-linecap="round"/>
+          <line x1="48" y1="54" x2="48" y2="60" stroke="#F5A623" stroke-width="2" stroke-linecap="round"/>
+          <line x1="26" y1="38" x2="32" y2="38" stroke="#F5A623" stroke-width="2" stroke-linecap="round"/>
+          <line x1="64" y1="38" x2="70" y2="38" stroke="#F5A623" stroke-width="2" stroke-linecap="round"/>
+          <line x1="32" y1="22" x2="36" y2="26" stroke="#F5A623" stroke-width="2" stroke-linecap="round"/>
+          <line x1="60" y1="50" x2="64" y2="54" stroke="#F5A623" stroke-width="2" stroke-linecap="round"/>
+          <line x1="64" y1="22" x2="60" y2="26" stroke="#F5A623" stroke-width="2" stroke-linecap="round"/>
+          <line x1="32" y1="50" x2="36" y2="46" stroke="#F5A623" stroke-width="2" stroke-linecap="round"/>
+        </g>
+        <circle cx="48" cy="38" r="12" fill="#F5A623" opacity="0.9"/>
+        <!-- Solar rays hitting panels -->
+        <line x1="58" y1="44" x2="82" y2="62" stroke="#F5A62370" stroke-width="1" stroke-dasharray="3,2"/>
+        <line x1="60" y1="40" x2="100" y2="55" stroke="#F5A62750" stroke-width="1" stroke-dasharray="3,2"/>
+        <!-- Solar panels -->
+        <g>
+          <rect x="72" y="62" width="58" height="36" rx="3" fill="#1A1A2E" stroke="#F5A623" stroke-width="1.2"/>
+          <!-- Panel grid -->
+          <line x1="91" y1="62" x2="91" y2="98" stroke="#F5A62340" stroke-width="0.8"/>
+          <line x1="110" y1="62" x2="110" y2="98" stroke="#F5A62340" stroke-width="0.8"/>
+          <line x1="72" y1="74" x2="130" y2="74" stroke="#F5A62340" stroke-width="0.8"/>
+          <line x1="72" y1="86" x2="130" y2="86" stroke="#F5A62340" stroke-width="0.8"/>
+          <!-- Panel shine -->
+          <rect x="73" y="63" width="17" height="10" rx="1" fill="#2233AA18"/>
+          <rect x="92" y="63" width="17" height="10" rx="1" fill="#F5A62314"/>
+        </g>
+        <!-- Savings meter -->
+        <g class="float">
+          <rect x="140" y="50" width="48" height="56" rx="6" fill="#1E1E1E" stroke="#333" stroke-width="1"/>
+          <rect x="152" y="58" width="24" height="4" rx="2" fill="#333"/>
+          <!-- Bar graph -->
+          <rect x="146" y="92" width="8" height="8" rx="1" fill="#F5A62360"/>
+          <rect x="157" y="85" width="8" height="15" rx="1" fill="#F5A62380"/>
+          <rect x="168" y="76" width="8" height="24" rx="1" fill="#F5A623"/>
+          <text x="164" y="72" font-size="7" fill="#F5A623" text-anchor="middle" font-weight="bold">70%</text>
+        </g>
+      </svg>
+    </div>
+    <div class="card-body">
+      <h3>Solar Saves More Than You Think</h3>
+      <p>A 2kW system can eliminate over 70% of your electricity bill. ROI in 2–3 years in Nigeria.</p>
+    </div>
+  </div>
+
+  <!-- 3. Clean Your PC Every 6 Months -->
+  <div class="card">
+    <div class="svg-wrapper">
+      <svg width="200" height="130" viewBox="0 0 200 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- PC Tower -->
+        <rect x="35" y="25" width="55" height="80" rx="5" fill="#1E1E1E" stroke="#333" stroke-width="1.5"/>
+        <rect x="43" y="34" width="38" height="28" rx="3" fill="#111" stroke="#2A2A2A" stroke-width="1"/>
+        <!-- Fan blades -->
+        <g class="spin" style="transform-origin:62px 48px">
+          <ellipse cx="62" cy="40" rx="6" ry="3" fill="#333" opacity="0.8"/>
+          <ellipse cx="70" cy="48" rx="3" ry="6" fill="#333" opacity="0.8"/>
+          <ellipse cx="62" cy="56" rx="6" ry="3" fill="#333" opacity="0.8"/>
+          <ellipse cx="54" cy="48" rx="3" ry="6" fill="#333" opacity="0.8"/>
+        </g>
+        <circle cx="62" cy="48" r="4" fill="#222" stroke="#444" stroke-width="1"/>
+        <!-- LEDs -->
+        <circle cx="47" cy="70" r="3" fill="#F5A623" class="flicker"/>
+        <circle cx="47" cy="80" r="3" fill="#28C84050"/>
+        <rect x="53" y="68" width="18" height="5" rx="1" fill="#1A1A1A" stroke="#333" stroke-width="0.5"/>
+        <rect x="53" y="78" width="12" height="5" rx="1" fill="#1A1A1A" stroke="#333" stroke-width="0.5"/>
+        <!-- Dust particles -->
+        <g class="pulse">
+          <circle cx="105" cy="35" r="2" fill="#888" opacity="0.6"/>
+          <circle cx="115" cy="50" r="1.5" fill="#777" opacity="0.5"/>
+          <circle cx="100" cy="60" r="1" fill="#999" opacity="0.4"/>
+          <circle cx="120" cy="40" r="2.5" fill="#666" opacity="0.5"/>
+          <circle cx="108" cy="70" r="1.5" fill="#888" opacity="0.6"/>
+          <circle cx="118" cy="80" r="2" fill="#777" opacity="0.4"/>
+        </g>
+        <!-- Brush / Cleaning tool -->
+        <g class="float">
+          <rect x="130" y="30" width="6" height="40" rx="3" fill="#C4811A"/>
+          <rect x="126" y="65" width="14" height="18" rx="2" fill="#F5A623"/>
+          <!-- Bristles -->
+          <line x1="128" y1="83" x2="128" y2="92" stroke="#E8E8E8" stroke-width="1.2" stroke-linecap="round"/>
+          <line x1="131" y1="83" x2="131" y2="93" stroke="#E8E8E8" stroke-width="1.2" stroke-linecap="round"/>
+          <line x1="134" y1="83" x2="134" y2="93" stroke="#E8E8E8" stroke-width="1.2" stroke-linecap="round"/>
+          <line x1="137" y1="83" x2="137" y2="92" stroke="#E8E8E8" stroke-width="1.2" stroke-linecap="round"/>
+        </g>
+        <!-- Sparkles after cleaning -->
+        <text x="148" y="50" font-size="10" fill="#F5A623" class="pulse">✦</text>
+        <text x="155" y="70" font-size="7" fill="#F5A62380" class="pulse" style="animation-delay:0.5s">✦</text>
+        <text x="143" y="72" font-size="8" fill="#F5A62360" class="pulse" style="animation-delay:1s">✦</text>
+      </svg>
+    </div>
+    <div class="card-body">
+      <h3>Clean Your PC Every 6 Months</h3>
+      <p>Dust causes overheating and slow performance. Regular cleaning extends computer life by 3–5 years.</p>
+    </div>
+  </div>
+
+  <!-- 4. Strong Password = Strong Protection -->
+  <div class="card">
+    <div class="svg-wrapper">
+      <svg width="200" height="130" viewBox="0 0 200 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Shield -->
+        <path d="M100 12 L142 28 L142 68 Q142 98 100 112 Q58 98 58 68 L58 28 Z" fill="#F5A62312" stroke="#F5A623" stroke-width="1.8"/>
+        <path d="M100 22 L134 35 L134 68 Q134 90 100 102 Q66 90 66 68 L66 35 Z" fill="#F5A62308" stroke="#F5A62340" stroke-width="1"/>
+        <!-- Lock body -->
+        <rect x="86" y="58" width="28" height="24" rx="5" fill="#F5A623"/>
+        <path d="M92 58 L92 50 Q92 40 100 40 Q108 40 108 50 L108 58" fill="none" stroke="#F5A623" stroke-width="3.5" stroke-linecap="round"/>
+        <!-- Keyhole -->
+        <circle cx="100" cy="67" r="4" fill="#1A1A1A"/>
+        <rect x="98" y="67" width="4" height="8" rx="1" fill="#1A1A1A"/>
+        <!-- Password dots orbiting -->
+        <g class="spin" style="transform-origin:100px 65px">
+          <circle cx="100" cy="18" r="3" fill="#F5A623" opacity="0.8"/>
+        </g>
+        <g class="spin" style="transform-origin:100px 65px; animation-duration:4s; animation-direction:reverse">
+          <circle cx="152" cy="65" r="2.5" fill="#F5A62360"/>
+        </g>
+        <!-- Character hints -->
+        <text x="40" y="45" font-size="8" fill="#F5A62350" font-family="monospace">A</text>
+        <text x="150" y="38" font-size="8" fill="#F5A62550" font-family="monospace">#</text>
+        <text x="30" y="88" font-size="8" fill="#F5A62540" font-family="monospace">9</text>
+        <text x="156" y="95" font-size="8" fill="#F5A62545" font-family="monospace">!</text>
+        <text x="42" y="108" font-size="8" fill="#F5A62535" font-family="monospace">z</text>
+        <text x="148" y="110" font-size="8" fill="#F5A62535" font-family="monospace">@</text>
+        <!-- Check indicator -->
+        <g class="float">
+          <circle cx="138" cy="24" r="10" fill="#28C840"/>
+          <polyline points="133,24 137,28 143,20" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </g>
+      </svg>
+    </div>
+    <div class="card-body">
+      <h3>Strong Password = Strong Protection</h3>
+      <p>Use 12+ characters mixing letters, numbers and symbols. Never reuse passwords across accounts.</p>
+    </div>
+  </div>
+
+  <!-- 5. Check Wiring Every 5 Years -->
+  <div class="card">
+    <div class="svg-wrapper">
+      <svg width="200" height="130" viewBox="0 0 200 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Wall panel -->
+        <rect x="22" y="20" width="80" height="90" rx="4" fill="#1E1E1E" stroke="#333" stroke-width="1.5"/>
+        <!-- Breaker switches -->
+        <rect x="30" y="30" width="64" height="12" rx="3" fill="#2A2A2A"/>
+        <rect x="34" y="33" width="18" height="6" rx="2" fill="#28C840" opacity="0.9"/>
+        <rect x="56" y="33" width="18" height="6" rx="2" fill="#28C840" opacity="0.9"/>
+        <rect x="30" y="47" width="64" height="12" rx="3" fill="#2A2A2A"/>
+        <rect x="34" y="50" width="18" height="6" rx="2" fill="#28C840" opacity="0.9"/>
+        <rect x="56" y="50" width="18" height="6" rx="2" fill="#F5A623" class="flicker"/>
+        <rect x="30" y="64" width="64" height="12" rx="3" fill="#2A2A2A"/>
+        <rect x="34" y="67" width="18" height="6" rx="2" fill="#28C840" opacity="0.9"/>
+        <rect x="56" y="67" width="18" height="6" rx="2" fill="#FF5F5780" class="flicker"/>
+        <!-- Wires coming out -->
+        <path d="M102 38 Q120 38 120 55 Q120 72 140 72" stroke="#F5A623" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <path d="M102 55 Q118 55 118 68 Q118 80 145 80" stroke="#888" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="4,2"/>
+        <path d="M102 72 Q125 72 125 85 Q125 95 145 95" stroke="#FF5F57" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <!-- Magnifying glass inspection -->
+        <g class="float">
+          <circle cx="152" cy="58" r="18" fill="#111" stroke="#F5A623" stroke-width="2"/>
+          <circle cx="152" cy="58" r="12" fill="#1A1A1A" stroke="#333" stroke-width="0.8"/>
+          <!-- Wire fray inside lens -->
+          <line x1="146" y1="58" x2="158" y2="58" stroke="#F5A623" stroke-width="2" stroke-linecap="round"/>
+          <line x1="153" y1="54" x2="157" y2="50" stroke="#F5A62380" stroke-width="1.2" stroke-linecap="round"/>
+          <line x1="153" y1="62" x2="157" y2="66" stroke="#FF5F5780" stroke-width="1.2" stroke-linecap="round"/>
+          <!-- Magnifier handle -->
+          <line x1="164" y1="70" x2="172" y2="78" stroke="#C4811A" stroke-width="3" stroke-linecap="round"/>
+        </g>
+        <!-- Warning spark -->
+        <g class="pulse">
+          <text x="130" y="105" font-size="14" fill="#F5A623">⚡</text>
+        </g>
+      </svg>
+    </div>
+    <div class="card-body">
+      <h3>Check Wiring Every 5 Years</h3>
+      <p>Old or damaged wiring causes electrical fires. A professional inspection can prevent disaster.</p>
+    </div>
+  </div>
+
+  <!-- 6. Digital Records Never Get Lost -->
+  <div class="card">
+    <div class="svg-wrapper">
+      <svg width="200" height="130" viewBox="0 0 200 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Cloud -->
+        <g class="float">
+          <ellipse cx="105" cy="38" rx="42" ry="22" fill="#1E2A3A" stroke="#F5A623" stroke-width="1.5"/>
+          <ellipse cx="82" cy="44" rx="20" ry="14" fill="#1E2A3A" stroke="#F5A623" stroke-width="1.5"/>
+          <ellipse cx="128" cy="44" rx="20" ry="14" fill="#1E2A3A" stroke="#F5A623" stroke-width="1.5"/>
+          <rect x="62" y="44" width="86" height="16" fill="#1E2A3A"/>
+          <!-- Cloud icon center -->
+          <text x="105" y="46" text-anchor="middle" font-size="14" fill="#F5A623">☁</text>
+        </g>
+        <!-- Floating documents going up to cloud -->
+        <g style="animation: float 2.5s ease-in-out infinite; animation-delay:0s">
+          <rect x="40" y="72" width="30" height="38" rx="3" fill="#222" stroke="#444" stroke-width="1"/>
+          <rect x="45" y="78" width="20" height="3" rx="1" fill="#F5A62360"/>
+          <rect x="45" y="84" width="16" height="2" rx="1" fill="#44444480"/>
+          <rect x="45" y="89" width="18" height="2" rx="1" fill="#44444460"/>
+          <!-- Graduation cap hint -->
+          <rect x="48" y="95" width="14" height="10" rx="1" fill="#F5A62320"/>
+          <text x="55" y="104" text-anchor="middle" font-size="8" fill="#F5A62380">📋</text>
+        </g>
+        <!-- Upload arrow -->
+        <g class="pulse">
+          <line x1="56" y1="68" x2="56" y2="58" stroke="#F5A62380" stroke-width="1.5" stroke-dasharray="3,2"/>
+          <polygon points="52,62 56,56 60,62" fill="#F5A62360"/>
+        </g>
+        <g style="animation: float 2.5s ease-in-out infinite; animation-delay:0.8s">
+          <rect x="82" y="78" width="30" height="38" rx="3" fill="#222" stroke="#444" stroke-width="1"/>
+          <rect x="87" y="84" width="20" height="3" rx="1" fill="#F5A62360"/>
+          <rect x="87" y="90" width="14" height="2" rx="1" fill="#44444480"/>
+          <rect x="87" y="95" width="18" height="2" rx="1" fill="#44444460"/>
+          <text x="97" y="110" text-anchor="middle" font-size="8" fill="#F5A62380">🏫</text>
+        </g>
+        <g class="pulse" style="animation-delay:0.4s">
+          <line x1="97" y1="74" x2="97" y2="64" stroke="#F5A62380" stroke-width="1.5" stroke-dasharray="3,2"/>
+          <polygon points="93,68 97,62 101,68" fill="#F5A62360"/>
+        </g>
+        <g style="animation: float 2.5s ease-in-out infinite; animation-delay:1.4s">
+          <rect x="130" y="72" width="30" height="38" rx="3" fill="#222" stroke="#444" stroke-width="1"/>
+          <rect x="135" y="78" width="20" height="3" rx="1" fill="#F5A62360"/>
+          <rect x="135" y="84" width="16" height="2" rx="1" fill="#44444480"/>
+          <rect x="135" y="89" width="18" height="2" rx="1" fill="#44444460"/>
+          <text x="145" y="104" text-anchor="middle" font-size="8" fill="#F5A62380">✔</text>
+        </g>
+        <g class="pulse" style="animation-delay:0.9s">
+          <line x1="145" y1="68" x2="145" y2="58" stroke="#F5A62380" stroke-width="1.5" stroke-dasharray="3,2"/>
+          <polygon points="141,62 145,56 149,62" fill="#F5A62360"/>
+        </g>
+        <!-- Safe label -->
+        <rect x="90" y="114" width="52" height="12" rx="3" fill="#F5A62320" stroke="#F5A62340" stroke-width="0.8"/>
+        <text x="116" y="123" text-anchor="middle" font-size="7" fill="#F5A623" font-family="monospace">ALWAYS SAFE</text>
+      </svg>
+    </div>
+    <div class="card-body">
+      <h3>Digital Records Never Get Lost</h3>
+      <p>Paper can burn, flood or fade. Cloud-based school result systems keep records safe and accessible forever.</p>
+    </div>
+  </div>
+
+</div>
+
+<p style="text-align:center; margin-top:40px; font-size:0.75rem; color:#555; font-family:monospace;">
+  Rehoteq Technologies · rehoteq.com · Quick Tech Tips SVG Set v1
+</p>
+
+</body>
+</html>
