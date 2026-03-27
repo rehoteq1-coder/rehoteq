@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rehoteq Teacher Resource Portal</title>
+<meta name="description" content="Free teaching resources, lesson plans, ICT guides and school admin templates for Nigerian teachers — by Rehoteq Technologies.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #F5A623;
+  --gold2: #C4811A;
+  --gold3: #7A4F0D;
+  --bg: #080808;
+  --surface: #111111;
+  --card: #161616;
+  --card2: #1C1C1C;
+  --border: #232323;
+  --border2: #2C2C2C;
+  --text: #F0F0F0;
+  --muted: #666;
+  --muted2: #999;
+  --green: #2ECC71;
+  --blue: #3B9EFF;
+  --red: #E74C3C;
+  --purple: #9B59B6;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  font-family:'Outfit',sans-serif;
+  color:var(--text);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* NOISE TEXTURE OVERLAY */
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;
+}
+
+/* TOPBAR */
+.topbar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 28px;
+  background:#0808089A;
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  position:sticky;top:0;z-index:100;
+}
+.logo{
+  display:flex;align-items:center;gap:10px;
+  font-family:'Playfair Display',serif;
+  font-size:1.1rem;font-weight:700;
+}
+.logo-icon{
+  width:34px;height:34px;
+  background:var(--gold);
+  border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;color:#000;font-weight:900;
+}
+.logo span{color:var(--gold);}
+.topbar-right{display:flex;align-items:center;gap:12px;}
+.back-link{
+  font-size:0.78rem;color:var(--muted2);
+  text-decoration:none;
+  padding:6px 14px;
+  border:1px solid var(--border2);
+  border-radius:6px;
+  transition:all 0.2s;
+}
+.back-link:hover{color:var(--gold);border-color:var(--gold);}
+.portal-badge{
+  background:var(--gold);
+  color:#000;
+  font-size:0.7rem;font-weight:700;
+  padding:5px 12px;border-radius:100px;
+  letter-spacing:0.08em;text-transform:uppercase;
+}
+
+/* HERO BANNER */
+.hero{
+  position:relative;overflow:hidden;
+  padding:56px 28px 44px;
+  background:linear-gradient(135deg,#0F0A00 0%,#0808080% 60%);
+  border-bottom:1px solid var(--border);
+}
+.hero-glow{
+  position:absolute;top:-80px;left:-60px;
+  width:420px;height:300px;
+  background:radial-gradient(ellipse,#F5A62322 0%,transparent 65%);
+  pointer-events:none;
+}
+.hero-glow2{
+  position:absolute;bottom:-60px;right:-40px;
+  width:300px;height:200px;
+  background:radial-gradient(ellipse,#F5A62312 0%,transparent 65%);
+  pointer-events:none;
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  background:#F5A62314;
+  border:1px solid #F5A62328;
+  border-radius:100px;
+  padding:5px 14px;
+  font-size:0.7rem;font-weight:600;
+  color:var(--gold);letter-spacing:0.12em;text-transform:uppercase;
+  margin-bottom:18px;
+}
+.dot-live{width:6px;height:6px;background:var(--green);border-radius:50%;animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.9rem,5vw,3rem);
+  font-weight:900;
+  line-height:1.1;
+  margin-bottom:14px;
+  max-width:580px;
+}
+.hero h1 em{color:var(--gold);font-style:normal;}
+.hero p{
+  font-size:0.9rem;color:var(--muted2);
+  max-width:500px;line-height:1.75;
+  margin-bottom:28px;
+}
+.hero-stats{display:flex;gap:28px;flex-wrap:wrap;}
+.stat{display:flex;flex-direction:column;gap:2px;}
+.stat-num{
+  font-family:'Playfair Display',serif;
+  font-size:1.5rem;font-weight:700;color:var(--gold);
+}
+.stat-label{font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;}
+
+/* SEARCH + FILTER BAR */
+.controls{
+  padding:20px 28px;
+  display:flex;align-items:center;gap:12px;
+  flex-wrap:wrap;
+  border-bottom:1px solid var(--border);
+  background:var(--surface);
+  position:sticky;top:63px;z-index:90;
+}
+.search-wrap{
+  flex:1;min-width:200px;
+  position:relative;
+}
+.search-wrap input{
+  width:100%;
+  background:var(--card);
+  border:1.5px solid var(--border2);
+  border-radius:9px;
+  padding:10px 16px 10px 40px;
+  color:var(--text);
+  font-size:0.85rem;
+  font-family:'Outfit',sans-serif;
+  outline:none;
+  transition:border-color 0.2s;
+}
+.search-wrap input:focus{border-color:var(--gold);}
+.search-wrap input::placeholder{color:var(--muted);}
+.search-icon{
+  position:absolute;left:13px;top:50%;transform:translateY(-50%);
+  font-size:0.9rem;color:var(--muted);pointer-events:none;
+}
+.filter-pills{display:flex;gap:8px;flex-wrap:wrap;}
+.pill{
+  padding:8px 16px;border-radius:8px;
+  font-size:0.78rem;font-weight:600;
+  cursor:pointer;border:1.5px solid var(--border2);
+  background:transparent;color:var(--muted2);
+  transition:all 0.2s;font-family:'Outfit',sans-serif;
+  white-space:nowrap;
+}
+.pill:hover{border-color:var(--gold);color:var(--gold);}
+.pill.active{background:var(--gold);border-color:var(--gold);color:#000;}
+.sort-select{
+  background:var(--card);
+  border:1.5px solid var(--border2);
+  border-radius:9px;
+  padding:10px 14px;
+  color:var(--muted2);
+  font-size:0.78rem;
+  outline:none;cursor:pointer;
+  font-family:'Outfit',sans-serif;
+}
+
+/* MAIN LAYOUT */
+.main{
+  display:grid;
+  grid-template-columns:240px 1fr;
+  min-height:calc(100vh - 200px);
+  max-width:1100px;
+  margin:0 auto;
+  padding:0 28px;
+  gap:32px;
+}
+@media(max-width:700px){
+  .main{grid-template-columns:1fr;padding:0 16px;}
+  .sidebar{display:none;}
+}
+
+/* SIDEBAR */
+.sidebar{padding:28px 0;position:sticky;top:130px;height:fit-content;}
+.sidebar-section{margin-bottom:28px;}
+.sidebar-title{
+  font-size:0.68rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:0.14em;
+  color:var(--muted);margin-bottom:12px;
+}
+.sidebar-link{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:9px 12px;border-radius:8px;
+  cursor:pointer;transition:all 0.18s;
+  font-size:0.82rem;color:var(--muted2);margin-bottom:2px;
+}
+.sidebar-link:hover,.sidebar-link.active{background:var(--card);color:var(--text);}
+.sidebar-link.active{border-left:2px solid var(--gold);color:var(--gold);}
+.sidebar-count{
+  background:var(--border2);
+  font-size:0.65rem;font-weight:700;
+  padding:2px 8px;border-radius:100px;color:var(--muted2);
+}
+.sidebar-link.active .sidebar-count{background:var(--gold);color:#000;}
+.rms-promo{
+  background:linear-gradient(135deg,#1A1200,#2A1E00);
+  border:1px solid var(--gold3);
+  border-radius:12px;padding:18px;
+}
+.rms-promo h4{
+  font-family:'Playfair Display',serif;
+  font-size:0.92rem;color:var(--gold);margin-bottom:6px;
+}
+.rms-promo p{font-size:0.75rem;color:var(--muted2);line-height:1.6;margin-bottom:12px;}
+.btn-sm{
+  background:var(--gold);color:#000;
+  border:none;padding:8px 16px;
+  border-radius:7px;font-size:0.75rem;font-weight:700;
+  cursor:pointer;transition:all 0.2s;font-family:'Outfit',sans-serif;
+  width:100%;
+}
+.btn-sm:hover{background:var(--gold2);}
+
+/* RESOURCES GRID */
+.resources{padding:28px 0;}
+.resources-header{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:20px;
+}
+.resources-header h3{font-size:0.85rem;color:var(--muted2);}
+.resources-header span{color:var(--gold);font-weight:600;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;}
+
+/* RESOURCE CARD */
+.rcard{
+  background:var(--card);
+  border:1.5px solid var(--border2);
+  border-radius:14px;
+  overflow:hidden;
+  transition:all 0.25s;
+  display:flex;flex-direction:column;
+}
+.rcard:hover{
+  border-color:var(--gold2);
+  transform:translateY(-3px);
+  box-shadow:0 12px 40px #F5A62310;
+}
+.rcard-top{
+  padding:20px 20px 14px;
+  display:flex;align-items:flex-start;gap:14px;
+  flex:1;
+}
+.file-icon{
+  width:44px;height:52px;border-radius:8px;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  flex-shrink:0;position:relative;
+  font-size:0.6rem;font-weight:800;letter-spacing:0.04em;
+}
+.file-icon::after{
+  content:'';
+  position:absolute;top:0;right:0;
+  width:0;height:0;
+  border-style:solid;
+  border-width:0 10px 10px 0;
+}
+.fi-pdf{background:#E74C3C18;color:#E74C3C;border:1px solid #E74C3C30;}
+.fi-pdf::after{border-color:transparent #E74C3C transparent transparent;}
+.fi-docx{background:#3B9EFF18;color:#3B9EFF;border:1px solid #3B9EFF30;}
+.fi-docx::after{border-color:transparent #3B9EFF transparent transparent;}
+.fi-xlsx{background:#2ECC7118;color:#2ECC71;border:1px solid #2ECC7130;}
+.fi-xlsx::after{border-color:transparent #2ECC71 transparent transparent;}
+.fi-pptx{background:#F5A62318;color:#F5A623;border:1px solid #F5A62330;}
+.fi-pptx::after{border-color:transparent #F5A623 transparent transparent;}
+.fi-zip{background:#9B59B618;color:#9B59B6;border:1px solid #9B59B630;}
+.fi-zip::after{border-color:transparent #9B59B6 transparent transparent;}
+.rcard-info{flex:1;}
+.rcard-cat{
+  font-size:0.67rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:0.1em;
+  color:var(--gold);margin-bottom:5px;
+}
+.rcard-title{
+  font-family:'Playfair Display',serif;
+  font-size:0.92rem;font-weight:700;
+  line-height:1.35;margin-bottom:6px;color:#f0f0f0;
+}
+.rcard-desc{font-size:0.75rem;color:var(--muted2);line-height:1.6;}
+.rcard-bottom{
+  padding:12px 20px 16px;
+  border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  gap:10px;
+}
+.rcard-meta{display:flex;align-items:center;gap:10px;}
+.meta-chip{
+  font-size:0.67rem;color:var(--muted);
+  display:flex;align-items:center;gap:4px;
+}
+.dl-count{color:var(--muted2);}
+.btn-download{
+  display:flex;align-items:center;gap:6px;
+  background:var(--gold);color:#000;
+  border:none;padding:8px 16px;
+  border-radius:8px;font-size:0.75rem;font-weight:700;
+  cursor:pointer;transition:all 0.2s;font-family:'Outfit',sans-serif;
+  white-space:nowrap;
+}
+.btn-download:hover{background:var(--gold2);transform:scale(1.03);}
+.btn-download:active{transform:scale(0.97);}
+.new-tag{
+  background:#2ECC7122;color:var(--green);
+  border:1px solid #2ECC7130;
+  font-size:0.62rem;font-weight:700;
+  padding:2px 8px;border-radius:100px;
+  text-transform:uppercase;letter-spacing:0.08em;
+  margin-left:6px;
+}
+.featured-tag{
+  background:#F5A62322;color:var(--gold);
+  border:1px solid #F5A62330;
+  font-size:0.62rem;font-weight:700;
+  padding:2px 8px;border-radius:100px;
+  text-transform:uppercase;letter-spacing:0.08em;
+  margin-left:6px;
+}
+
+/* EMPTY STATE */
+.empty{
+  text-align:center;padding:60px 20px;
+  grid-column:1/-1;
+}
+.empty-icon{font-size:2.5rem;margin-bottom:12px;}
+.empty h4{font-size:1rem;margin-bottom:6px;}
+.empty p{font-size:0.8rem;color:var(--muted);}
+
+/* REQUEST BANNER */
+.request-banner{
+  max-width:1100px;margin:0 auto 40px;
+  padding:0 28px;
+}
+.request-inner{
+  background:linear-gradient(135deg,#111500,#0A0F00);
+  border:1px solid #2A3010;
+  border-radius:14px;
+  padding:24px 28px;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:20px;flex-wrap:wrap;
+}
+.request-inner h4{
+  font-family:'Playfair Display',serif;
+  font-size:1rem;margin-bottom:4px;
+}
+.request-inner h4 span{color:var(--gold);}
+.request-inner p{font-size:0.78rem;color:var(--muted2);line-height:1.55;}
+.btn-whatsapp{
+  display:flex;align-items:center;gap:8px;
+  background:#25D366;color:#000;
+  border:none;padding:11px 20px;
+  border-radius:9px;font-size:0.8rem;font-weight:700;
+  cursor:pointer;transition:all 0.2s;font-family:'Outfit',sans-serif;
+  white-space:nowrap;
+}
+.btn-whatsapp:hover{background:#1db954;}
+
+/* TOAST */
+.toast{
+  position:fixed;bottom:24px;left:50%;
+  transform:translateX(-50%) translateY(80px);
+  background:var(--green);color:#000;
+  font-weight:700;font-size:0.78rem;
+  padding:10px 22px;border-radius:100px;
+  transition:transform 0.3s;z-index:999;
+  white-space:nowrap;
+}
+.toast.show{transform:translateX(-50%) translateY(0);}
+
+/* SCROLL ANIMATION */
+.rcard{opacity:0;animation:slideUp 0.4s ease forwards;}
+@keyframes slideUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+
+footer{
+  text-align:center;
+  padding:28px;
+  border-top:1px solid var(--border);
+  font-size:0.75rem;color:var(--muted);
+  margin-top:20px;
+}
+footer a{color:var(--gold);text-decoration:none;}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<nav class="topbar">
+  <div class="logo">
+    <div class="logo-icon">R</div>
+    Reho<span>teq</span> Technologies
+  </div>
+  <div class="topbar-right">
+    <a href="https://rehoteq.com" class="back-link">← Back to Site</a>
+    <span class="portal-badge">Teacher Portal</span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-eyebrow"><span class="dot-live"></span>Free Resources · Always Updated</div>
+  <h1>Your Teaching,<br><em>Supercharged.</em></h1>
+  <p>Download free lesson plans, ICT guides, school admin templates, and cybersecurity materials — curated for Nigerian teachers by Rehoteq Technologies.</p>
+  <div class="hero-stats">
+    <div class="stat"><span class="stat-num" id="total-count">24</span><span class="stat-label">Resources</span></div>
+    <div class="stat"><span class="stat-num">6</span><span class="stat-label">Categories</span></div>
+    <div class="stat"><span class="stat-num">Free</span><span class="stat-label">Always</span></div>
+    <div class="stat"><span class="stat-num">PDF · DOCX · XLSX</span><span class="stat-label">File Formats</span></div>
+  </div>
+</div>
+
+<!-- SEARCH + FILTERS -->
+<div class="controls">
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="search-input" placeholder="Search resources…" oninput="filterResources()">
+  </div>
+  <div class="filter-pills" id="filter-pills">
+    <button class="pill active" onclick="setFilter('all',this)">All</button>
+    <button class="pill" onclick="setFilter('lesson-plan',this)">📚 Lesson Plans</button>
+    <button class="pill" onclick="setFilter('ict',this)">💻 ICT Guides</button>
+    <button class="pill" onclick="setFilter('admin',this)">🗂️ Admin Templates</button>
+    <button class="pill" onclick="setFilter('cyber',this)">🔒 Cybersecurity</button>
+    <button class="pill" onclick="setFilter('solar',this)">☀️ Solar & Energy</button>
+    <button class="pill" onclick="setFilter('rms',this)">🏫 RMS Guides</button>
+  </div>
+  <select class="sort-select" id="sort-select" onchange="filterResources()">
+    <option value="newest">Newest First</option>
+    <option value="popular">Most Downloaded</option>
+    <option value="az">A → Z</option>
+  </select>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-title">Browse by Class</div>
+      <div class="sidebar-link active" onclick="setLevel('all',this)">All Classes <span class="sidebar-count">24</span></div>
+      <div class="sidebar-link" onclick="setLevel('primary',this)">Primary School <span class="sidebar-count">7</span></div>
+      <div class="sidebar-link" onclick="setLevel('jss',this)">JSS 1–3 <span class="sidebar-count">9</span></div>
+      <div class="sidebar-link" onclick="setLevel('sss',this)">SSS 1–3 <span class="sidebar-count">8</span></div>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-title">File Type</div>
+      <div class="sidebar-link" onclick="setType('pdf',this)">📄 PDF <span class="sidebar-count">10</span></div>
+      <div class="sidebar-link" onclick="setType('docx',this)">📝 Word (DOCX) <span class="sidebar-count">8</span></div>
+      <div class="sidebar-link" onclick="setType('xlsx',this)">📊 Excel (XLSX) <span class="sidebar-count">4</span></div>
+      <div class="sidebar-link" onclick="setType('pptx',this)">📑 PowerPoint <span class="sidebar-count">2</span></div>
+    </div>
+    <div class="rms-promo">
+      <h4>📋 Try RMS Free</h4>
+      <p>Manage student records, results and sessions digitally. Built for Nigerian schools by Rehoteq.</p>
+      <button class="btn-sm" onclick="window.open('https://rehoteq.com','_blank')">Learn More →</button>
+    </div>
+  </aside>
+
+  <!-- RESOURCES -->
+  <div class="resources">
+    <div class="resources-header">
+      <h3>Showing <span id="showing-count">24</span> resources</h3>
+    </div>
+    <div class="grid" id="resource-grid"></div>
+  </div>
+
+</div>
+
+<!-- REQUEST BANNER -->
+<div class="request-banner">
+  <div class="request-inner">
+    <div>
+      <h4>Can't find what you need? <span>Request a Resource.</span></h4>
+      <p>Send us a message on WhatsApp and we'll create and upload the material you need for free.</p>
+    </div>
+    <button class="btn-whatsapp" onclick="window.open('https://wa.me/2348000000000?text=Hello Rehoteq, I would like to request a teaching resource: ','_blank')">
+      📲 Request via WhatsApp
+    </button>
+  </div>
+</div>
+
+<footer>
+  Rehoteq Technologies · <a href="https://rehoteq.com">rehoteq.com</a> · Okitipupa, Ondo State, Nigeria<br>
+  <span style="color:var(--muted);font-size:0.7rem;margin-top:4px;display:block">All resources are free to download and use in Nigerian classrooms.</span>
+</footer>
+
+<div class="toast" id="toast">⬇️ Download started!</div>
+
+<script>
+const resources = [
+  // LESSON PLANS
+  {id:1, title:"ICT Lesson Plan – Introduction to Computers", category:"lesson-plan", level:"jss", type:"docx", desc:"Complete 5-week lesson plan for JSS1 ICT covering hardware, software and basic operations.", size:"245 KB", downloads:312, tag:"featured", date:2},
+  {id:2, title:"Basic Technology Lesson Plan – Electrical Wiring", category:"lesson-plan", level:"jss", type:"pdf", desc:"Structured lesson plan with diagrams for teaching basic wiring safety to JSS students.", size:"380 KB", downloads:198, tag:"new", date:1},
+  {id:3, title:"Computer Studies Lesson Plan – SSS1 Full Term", category:"lesson-plan", level:"sss", type:"docx", desc:"Full first-term lesson plan covering MS Office, internet safety and spreadsheets.", size:"290 KB", downloads:441, tag:"featured", date:3},
+  {id:4, title:"Primary Science – Solar Energy Lesson Plan", category:"lesson-plan", level:"primary", type:"pdf", desc:"Simple, illustrated lesson plan introducing primary pupils to the basics of solar energy.", size:"210 KB", downloads:176, tag:"new", date:1},
+  {id:5, title:"Mathematics Lesson Plan – JSS2 Statistics", category:"lesson-plan", level:"jss", type:"docx", desc:"Lesson plan covering data collection, bar charts and pie charts using real examples.", size:"195 KB", downloads:233, tag:"", date:4},
+
+  // ICT GUIDES
+  {id:6, title:"ICT Guide: How to Use Microsoft Word for Beginners", category:"ict", level:"jss", type:"pdf", desc:"Step-by-step guide with screenshots. Perfect for students learning Word for the first time.", size:"1.2 MB", downloads:874, tag:"featured", date:2},
+  {id:7, title:"Google Classroom Setup Guide for Nigerian Teachers", category:"ict", level:"sss", type:"pdf", desc:"How to set up and manage a Google Classroom for free, including offline tips for low-internet areas.", size:"650 KB", downloads:509, tag:"new", date:1},
+  {id:8, title:"How to Use Excel for Student Result Calculation", category:"ict", level:"sss", type:"xlsx", desc:"Pre-built Excel template with formulas for calculating term results, averages and positions.", size:"88 KB", downloads:1243, tag:"featured", date:5},
+  {id:9, title:"PowerPoint Presentation Tips for Teachers", category:"ict", level:"primary", type:"pptx", desc:"A ready-made presentation template teachers can edit and reuse for any subject.", size:"3.4 MB", downloads:367, tag:"", date:6},
+  {id:10, title:"Internet Safety Guide for Classroom Use", category:"ict", level:"jss", type:"pdf", desc:"Printed handout teachers can share with students covering safe browsing, passwords and social media.", size:"320 KB", downloads:642, tag:"new", date:1},
+
+  // ADMIN TEMPLATES
+  {id:11, title:"School Lesson Note Template (DOCX)", category:"admin", level:"sss", type:"docx", desc:"Professional lesson note format accepted by SUBEB and Ministry of Education, Ondo State.", size:"145 KB", downloads:2105, tag:"featured", date:3},
+  {id:12, title:"Student Attendance Register – Full Term", category:"admin", level:"jss", type:"xlsx", desc:"Excel register for tracking daily attendance for up to 60 students per class, per term.", size:"72 KB", downloads:1876, tag:"featured", date:4},
+  {id:13, title:"Class Result Sheet Template – All Subjects", category:"admin", level:"primary", type:"xlsx", desc:"Editable result sheet template covering all primary subjects with auto-calculated positions.", size:"95 KB", downloads:1540, tag:"", date:5},
+  {id:14, title:"School Timetable Generator Template", category:"admin", level:"sss", type:"xlsx", desc:"Excel timetable template that auto-fills slots and detects clashes. Covers 6-day week.", size:"110 KB", downloads:987, tag:"new", date:1},
+  {id:15, title:"Staff Meeting Minutes Template", category:"admin", level:"primary", type:"docx", desc:"Clean, professional template for recording school staff meeting decisions and action points.", size:"130 KB", downloads:423, tag:"", date:7},
+
+  // CYBERSECURITY
+  {id:16, title:"Cyber Safety Poster – Classroom Display (A3)", category:"cyber", level:"jss", type:"pdf", desc:"Printable A3 classroom poster listing 10 online safety rules for students. In English and Yoruba.", size:"2.1 MB", downloads:788, tag:"new", date:1},
+  {id:17, title:"Cybersecurity Awareness Handout for Students", category:"cyber", level:"sss", type:"pdf", desc:"One-page guide covering phishing, passwords, social media safety and WhatsApp scams in Nigeria.", size:"410 KB", downloads:654, tag:"featured", date:2},
+  {id:18, title:"ICT Security Policy Template for Schools", category:"cyber", level:"sss", type:"docx", desc:"Ready-to-use school ICT acceptable use policy document principals can sign and adopt.", size:"175 KB", downloads:312, tag:"", date:8},
+  {id:19, title:"Teacher's Guide: Teaching Cybersecurity in JSS", category:"cyber", level:"jss", type:"pdf", desc:"Practical guide on how to teach online safety topics using stories and activities students enjoy.", size:"490 KB", downloads:445, tag:"new", date:1},
+
+  // SOLAR & ENERGY
+  {id:20, title:"Solar Energy Basics – Student Worksheet", category:"solar", level:"primary", type:"pdf", desc:"Fun worksheet with diagrams and fill-in activities for primary pupils learning about solar power.", size:"560 KB", downloads:287, tag:"new", date:1},
+  {id:21, title:"Electrical Safety Rules – Classroom Poster", category:"solar", level:"jss", type:"pdf", desc:"Printable A3 poster listing 12 key electrical safety rules for school labs and classrooms.", size:"1.8 MB", downloads:395, tag:"featured", date:3},
+  {id:22, title:"Renewable Energy Project Guide – SSS Students", category:"solar", level:"sss", type:"docx", desc:"Step-by-step guide for students doing renewable energy projects using local materials in Nigeria.", size:"260 KB", downloads:218, tag:"", date:6},
+
+  // RMS GUIDES
+  {id:23, title:"RMS Quick Start Guide for Teachers", category:"rms", level:"sss", type:"pdf", desc:"How to log in, enter results, view student profiles and generate reports on Rehoteq RMS.", size:"750 KB", downloads:342, tag:"new", date:1},
+  {id:24, title:"RMS Parent & Guardian Info Sheet", category:"rms", level:"primary", type:"pdf", desc:"One-page handout schools can give parents explaining how to check their child's results online.", size:"295 KB", downloads:267, tag:"new", date:1},
+];
+
+let currentFilter = 'all';
+let currentLevel = 'all';
+let currentType = 'all';
+
+const typeColors = { pdf:'fi-pdf', docx:'fi-docx', xlsx:'fi-xlsx', pptx:'fi-pptx', zip:'fi-zip' };
+const typeLabels = { pdf:'PDF', docx:'DOCX', xlsx:'XLSX', pptx:'PPTX', zip:'ZIP' };
+
+function renderCard(r, delay){
+  const icon = typeColors[r.type] || 'fi-pdf';
+  const label = typeLabels[r.type] || r.type.toUpperCase();
+  const tagHtml = r.tag === 'new'
+    ? `<span class="new-tag">New</span>`
+    : r.tag === 'featured'
+    ? `<span class="featured-tag">⭐ Featured</span>`
+    : '';
+  return `
+  <div class="rcard" style="animation-delay:${delay*0.06}s" onclick="">
+    <div class="rcard-top">
+      <div class="file-icon ${icon}">${label}</div>
+      <div class="rcard-info">
+        <div class="rcard-cat">${catLabel(r.category)}</div>
+        <div class="rcard-title">${r.title}${tagHtml}</div>
+        <div class="rcard-desc">${r.desc}</div>
+      </div>
+    </div>
+    <div class="rcard-bottom">
+      <div class="rcard-meta">
+        <span class="meta-chip">📁 ${r.size}</span>
+        <span class="meta-chip dl-count">⬇️ ${r.downloads.toLocaleString()}</span>
+      </div>
+      <button class="btn-download" onclick="downloadFile('${r.title}','${r.type}',${r.id})">
+        ⬇ Download
+      </button>
+    </div>
+  </div>`;
+}
+
+function catLabel(c){
+  const map = {'lesson-plan':'Lesson Plan','ict':'ICT Guide','admin':'Admin Template','cyber':'Cybersecurity','solar':'Solar & Energy','rms':'RMS Guide'};
+  return map[c] || c;
+}
+
+function filterResources(){
+  const q = document.getElementById('search-input').value.toLowerCase();
+  const sort = document.getElementById('sort-select').value;
+  let list = resources.filter(r => {
+    const matchCat = currentFilter === 'all' || r.category === currentFilter;
+    const matchLevel = currentLevel === 'all' || r.level === currentLevel;
+    const matchType = currentType === 'all' || r.type === currentType;
+    const matchQ = !q || r.title.toLowerCase().includes(q) || r.desc.toLowerCase().includes(q);
+    return matchCat && matchLevel && matchType && matchQ;
+  });
+  if(sort === 'popular') list.sort((a,b)=>b.downloads-a.downloads);
+  else if(sort === 'az') list.sort((a,b)=>a.title.localeCompare(b.title));
+  else list.sort((a,b)=>a.date-b.date);
+
+  const grid = document.getElementById('resource-grid');
+  document.getElementById('showing-count').textContent = list.length;
+  if(!list.length){
+    grid.innerHTML = `<div class="empty"><div class="empty-icon">🔍</div><h4>No resources found</h4><p>Try a different search or filter.</p></div>`;
+    return;
+  }
+  grid.innerHTML = list.map((r,i)=>renderCard(r,i)).join('');
+}
+
+function setFilter(f, el){
+  currentFilter = f;
+  document.querySelectorAll('.pill').forEach(p=>p.classList.remove('active'));
+  el.classList.add('active');
+  filterResources();
+}
+
+function setLevel(l, el){
+  currentLevel = l;
+  document.querySelectorAll('.sidebar-link').forEach(s=>s.classList.remove('active'));
+  el.classList.add('active');
+  filterResources();
+}
+
+function setType(t, el){
+  currentType = currentType === t ? 'all' : t;
+  document.querySelectorAll('.sidebar-link').forEach(s=>s.classList.remove('active'));
+  if(currentType !== 'all') el.classList.add('active');
+  filterResources();
+}
+
+function downloadFile(title, type, id){
+  // In production — replace these with real file URLs hosted on GitHub or your server
+  const fileMap = {
+    1:'assets/resources/ict-lesson-plan-jss1.docx',
+    2:'assets/resources/basic-tech-wiring-lesson.pdf',
+    // ... add real paths here
+  };
+  const url = fileMap[id] || `assets/resources/resource-${id}.${type}`;
+  // Simulate download
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `${title.replace(/[^a-z0-9]/gi,'_').toLowerCase()}.${type}`;
+  // a.click(); // Uncomment when real files are linked
+  showToast('⬇️ Download started!');
+  // Update download count visually
+  const res = resources.find(r=>r.id===id);
+  if(res) res.downloads++;
+}
+
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 2800);
+}
+
+// Init
+filterResources();
+</script>
+</body>
+</html>
