@@ -1,249 +1,215 @@
-<script type="module">
-// ================= FIREBASE =================
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { getFirestore, collection, addDoc, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rehoteq Pre-JAMB CBT Practice</title>
+  <style>
+    body{background:#080808;font-family:'DM Sans',sans-serif;color:#F0F0F0;margin:0;}
+    .screen{display:none;}
+    .screen.active{display:block;}
+    .auth-box,.dashboard,.results,.exam{max-width:700px;margin:40px auto;padding:20px;background:#101010;border-radius:12px;}
+    .btn{padding:10px 20px;border:none;border-radius:8px;cursor:pointer;font-weight:700;}
+    .btn-gold{background:#F5A623;color:#000;}
+    .btn-red{background:#E74C3C;color:#fff;}
+    .update-item{margin:8px 0;padding:8px;border:1px solid #2C2C2C;border-radius:6px;}
+    .question{margin-bottom:20px;}
+    .option{padding:8px;border:1px solid #2C2C2C;border-radius:6px;margin:6px 0;cursor:pointer;}
+    .option.selected{background:#F5A62320;border-color:#F5A623;}
+  </style>
+</head>
+<body>
 
-const firebaseConfig = {
-  // YOUR CONFIG HERE
-};
+<!-- DASHBOARD -->
+<div class="screen active" id="screen-dashboard">
+  <div class="dashboard">
+    <h2 id="dash-greeting">Welcome back, Student</h2>
+    <h3>My Reviews</h3>
+    <div id="dash-reviews"></div>
+    <button class="btn btn-gold" onclick="startExam()">Start Exam</button>
+  </div>
+</div>
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
+<!-- CBT EXAM -->
+<div class="screen" id="screen-cbt">
+  <div class="exam">
+    <h2>Exam in Progress</h2>
+    <div class="q-text"></div>
+    <div class="options-list"></div>
+    <button class="btn btn-gold" onclick="nextQuestion()">Next</button>
+    <button class="btn btn-red" onclick="finishExam()">Submit Exam</button>
+    <p id="exam-timer"></p>
+  </div>
+</div>
 
-// ================= GLOBALS =================
-let currentUser = null;
-let timerInterval;
-let timeLeft = 100 * 60;
+<!-- RESULTS -->
+<div class="screen" id="screen-results">
+  <div class="results">
+    <h2>Exam Results</h2>
+    <p id="result-score"></p>
+    <div id="result-breakdown"></div>
+    <button class="btn btn-gold" onclick="showDashboard()">Back to Dashboard</button>
+  </div>
+</div>
 
-let currentIndex = 0;
+<script>
+  // ===== Sample JAMB Questions embedded here =====
+  const questions = {
+    English: [
+  {text:"Choose the word opposite in meaning to 'benevolent'.", options:["Kind","Cruel","Generous","Friendly"], answer:"Cruel"},
+  {text:"Fill in the blank: He insisted ___ going to the party.", options:["on","in","at","for"], answer:"on"},
+  {text:"Which of these is a synonym for 'happy'?", options:["Sad","Joyful","Angry","Tired"], answer:"Joyful"},
+  {text:"Select the correct spelling.", options:["Accomodate","Acommodate","Accommodate","Acomodate"], answer:"Accommodate"},
+  {text:"Choose the word opposite in meaning to 'expand'.", options:["Increase","Enlarge","Contract","Grow"], answer:"Contract"},
+  {text:"Fill in the blank: She is very good ___ mathematics.", options:["at","in","on","for"], answer:"at"},
+  {text:"Which of these is a noun?", options:["Run","Quickly","Happiness","Blue"], answer:"Happiness"},
+  {text:"Choose the correct tense: He ___ to school yesterday.", options:["go","went","gone","going"], answer:"went"},
+  {text:"Pick the correct option: The plural of 'child' is ___", options:["childs","children","childes","child"], answer:"children"},
+  {text:"Choose the word opposite in meaning to 'ancient'.", options:["Old","Modern","Historic","Past"], answer:"Modern"},
+  {text:"Fill in the blank: The boy ___ playing football now.", options:["is","are","was","were"], answer:"is"},
+  {text:"Which of these is an adjective?", options:["Run","Beautiful","Quickly","Sing"], answer:"Beautiful"},
+  {text:"Choose the correct option: The past tense of 'eat' is ___", options:["eated","ate","eaten","eats"], answer:"ate"},
+  {text:"Pick the synonym of 'fast'.", options:["Slow","Rapid","Late","Weak"], answer:"Rapid"},
+  {text:"Choose the opposite of 'victory'.", options:["Success","Defeat","Win","Triumph"], answer:"Defeat"},
+  {text:"Fill in the blank: He ___ his homework before dinner.", options:["do","did","done","does"], answer:"did"},
+  {text:"Which of these is a pronoun?", options:["Book","She","Run","Happy"], answer:"She"},
+  {text:"Choose the correct option: The comparative of 'good' is ___", options:["gooder","better","best","more good"], answer:"better"},
+  {text:"Pick the opposite of 'polite'.", options:["Kind","Rude","Gentle","Respectful"], answer:"Rude"},
+  {text:"Fill in the blank: They ___ going to the market.", options:["is","are","was","were"], answer:"are"},
+  {text:"Which of these is a verb?", options:["Jump","Blue","Happy","Chair"], answer:"Jump"},
+  {text:"Choose the correct option: The plural of 'mouse' is ___", options:["mouses","mice","mouse","mices"], answer:"mice"},
+  {text:"Pick the synonym of 'begin'.", options:["End","Start","Finish","Close"], answer:"Start"},
+  {text:"Choose the opposite of 'love'.", options:["Hate","Like","Care","Admire"], answer:"Hate"},
+  {text:"Fill in the blank: She ___ a letter yesterday.", options:["write","wrote","written","writes"], answer:"wrote"},
+  {text:"Which of these is an adverb?", options:["Quickly","Happy","Run","Chair"], answer:"Quickly"},
+  {text:"Choose the correct option: The past tense of 'go' is ___", options:["goes","went","gone","going"], answer:"went"},
+  {text:"Pick the synonym of 'big'.", options:["Small","Large","Tiny","Little"], answer:"Large"},
+  {text:"Choose the opposite of 'success'.", options:["Failure","Win","Triumph","Achievement"], answer:"Failure"},
+  {text:"Fill in the blank: The sun ___ in the east.", options:["rise","rises","rose","rising"], answer:"rises"},
+  {text:"Which of these is a conjunction?", options:["And","Run","Blue","Happy"], answer:"And"},
+  {text:"Choose the correct option: The plural of 'tooth' is ___", options:["tooths","teeth","tooth","toothes"], answer:"teeth"},
+  {text:"Pick the synonym of 'smart'.", options:["Clever","Dull","Slow","Weak"], answer:"Clever"},
+  {text:"Choose the opposite of 'rich'.", options:["Poor","Wealthy","Affluent","Prosperous"], answer:"Poor"},
+  {text:"Fill in the blank: He ___ reading a book now.", options:["is","are","was","were"], answer:"is"},
+  {text:"Which of these is a preposition?", options:["Under","Run","Happy","Chair"], answer:"Under"},
+  {text:"Choose the correct option: The past tense of 'see' is ___", options:["saw","seen","see","seeing"], answer:"saw"},
+  {text:"Pick the synonym of 'cold'.", options:["Hot","Chilly","Warm","Heat"], answer:"Chilly"},
+  {text:"Choose the opposite of 'strong'.", options:["Weak","Powerful","Mighty","Tough"], answer:"Weak"},
+  {text:"Fill in the blank: She ___ cooking dinner when I arrived.", options:["was","is","are","were"], answer:"was"}
+],
+    Physics: [
+      {text:"Which of these is a unit of force?", options:["Joule","Newton","Watt","Pascal"], answer:"Newton"},
+      {text:"A body of mass 2kg is accelerated at 3m/s². Find the force.", options:["5N","6N","3N","2N"], answer:"6N"}
+    ],
+    Government: [
+      {text:"Who was Nigeria’s first executive president?", options:["Nnamdi Azikiwe","Shehu Shagari","Olusegun Obasanjo","Goodluck Jonathan"], answer:"Shehu Shagari"},
+      {text:"The judiciary interprets the law. This is an example of?", options:["Rule of law","Separation of powers","Checks and balances","Democracy"], answer:"Separation of powers"}
+    ]
+  };
 
-// ================= SCREEN =================
-function showScreen(id){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-}
+  // ===== Exam Logic =====
+  let currentSubject = "English";
+  let currentIndex = 0;
+  let answers = {};
+  let timer;
 
-// ================= AUTH =================
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    currentUser = user;
-    document.getElementById("display-name").innerText =
-      user.displayName || user.email;
-
-    showScreen('screen-welcome');
-  } else {
-    showScreen('screen-auth');
+  function showScreen(id) {
+    document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
   }
-});
 
-// ================= TIMER =================
-function startTimer(){
-  timerInterval = setInterval(() => {
-    timeLeft--;
+  function startExam() {
+    showScreen("screen-cbt");
+    currentSubject = "English"; // default subject
+    currentIndex = 0;
+    answers = {};
+    showQuestion();
+    startTimer(120); // 2 minutes demo timer
+  }
 
-    const min = Math.floor(timeLeft / 60);
-    const sec = timeLeft % 60;
+  function showQuestion() {
+    const q = questions[currentSubject][currentIndex];
+    document.querySelector(".q-text").innerText = q.text;
+    const optionsList = document.querySelector(".options-list");
+    optionsList.innerHTML = "";
+    q.options.forEach((opt, i) => {
+      const div = document.createElement("div");
+      div.className = "option";
+      div.innerHTML = `${String.fromCharCode(65+i)}. ${opt}`;
+      div.onclick = () => {
+        document.querySelectorAll(".option").forEach(o=>o.classList.remove("selected"));
+        div.classList.add("selected");
+        answers[currentIndex] = opt;
+      };
+      optionsList.appendChild(div);
+    });
+  }
 
-    document.getElementById("timer").innerText =
-      `${min}:${sec < 10 ? '0' : ''}${sec}`;
-
-    if(timeLeft <= 0){
-      submitExam();
-    }
-
-  }, 1000);
-}
-
-function stopTimer(){
-  clearInterval(timerInterval);
-}
-
-// ================= QUESTION RENDER =================
-function renderQuestion(){
-  const q = questions[currentIndex];
-
-  document.getElementById("q-text").innerText = q.text;
-  document.getElementById("q-counter").innerText =
-    `${currentIndex + 1} / ${questions.length}`;
-
-  const optBox = document.getElementById("q-options");
-  optBox.innerHTML = "";
-
-  Object.entries(q.options).forEach(([key, val]) => {
-    const div = document.createElement("div");
-    div.className = "opt";
-
-    if(q.userAnswer === key) div.classList.add("selected");
-
-    div.innerHTML = `<div class="opt-key">${key}</div><div>${val}</div>`;
-
-    div.onclick = () => selectOption(key);
-
-    optBox.appendChild(div);
-  });
-
-  updateNavigator();
-}
-
-// ================= SELECT OPTION =================
-function selectOption(answer){
-  questions[currentIndex].userAnswer = answer;
-
-  renderQuestion();
-
-  setTimeout(() => {
-    if(currentIndex < questions.length - 1){
+  function nextQuestion() {
+    if(currentIndex < questions[currentSubject].length-1) {
       currentIndex++;
-      renderQuestion();
+      showQuestion();
     }
-  }, 400);
-}
-
-// ================= NAVIGATION =================
-window.nextQuestion = function(){
-  if(currentIndex < questions.length - 1){
-    currentIndex++;
-    renderQuestion();
   }
-}
 
-window.prevQuestion = function(){
-  if(currentIndex > 0){
-    currentIndex--;
-    renderQuestion();
+  function startTimer(seconds) {
+    clearInterval(timer);
+    let timeLeft = seconds;
+    timer = setInterval(() => {
+      document.getElementById("exam-timer").innerText = "Time left: " + timeLeft + "s";
+      timeLeft--;
+      if(timeLeft < 0) {
+        clearInterval(timer);
+        finishExam();
+      }
+    }, 1000);
   }
-}
 
-// ================= NAVIGATOR =================
-function updateNavigator(){
-  const grid = document.getElementById("q-grid");
-  if(!grid) return;
+  function finishExam() {
+    clearInterval(timer);
+    let score = 0;
+    let breakdown = {};
+    Object.keys(questions).forEach(subject => {
+      let subjectScore = 0;
+      questions[subject].forEach((q, i) => {
+        if(answers[i] === q.answer) subjectScore++;
+      });
+      breakdown[subject] = subjectScore + "/" + questions[subject].length;
+      score += subjectScore;
+    });
+    showResults(score, breakdown);
+  }
 
-  grid.innerHTML = "";
-
-  questions.forEach((q,i)=>{
-    const b = document.createElement("div");
-    b.className = "q-bubble";
-
-    if(q.userAnswer) b.classList.add("answered");
-    if(i === currentIndex) b.classList.add("current");
-
-    b.innerText = i+1;
-    b.onclick = () => {
-      currentIndex = i;
-      renderQuestion();
-    };
-
-    grid.appendChild(b);
-  });
-}
-
-// ================= RESULT =================
-function calculateResult(){
-  let total = 0;
-  let correct = 0;
-  let wrong = 0;
-
-  let subjectStats = {};
-
-  questions.forEach(q => {
-    if(!subjectStats[q.subject]){
-      subjectStats[q.subject] = {correct:0, total:0};
+  function showResults(score, breakdown) {
+    showScreen("screen-results");
+    document.getElementById("result-score").innerText = "Total Score: " + score;
+    const bd = document.getElementById("result-breakdown");
+    bd.innerHTML = "";
+    for(const subject in breakdown) {
+      bd.innerHTML += `<p>${subject}: ${breakdown[subject]}</p>`;
     }
-
-    subjectStats[q.subject].total++;
-
-    if(q.userAnswer === q.correctAnswer){
-      correct++;
-      subjectStats[q.subject].correct++;
-      total += 2.5;
-    } else {
-      wrong++;
-    }
-  });
-
-  return { total, correct, wrong, subjectStats };
-}
-
-// ================= BREAKDOWN =================
-function renderBreakdown(stats){
-  const box = document.getElementById("breakdown-grid");
-  box.innerHTML = "";
-
-  Object.keys(stats).forEach(sub=>{
-    const s = stats[sub];
-    const percent = (s.correct/s.total)*100;
-
-    let cls = "bar-good";
-    if(percent < 50) cls = "bar-bad";
-    else if(percent < 70) cls = "bar-ok";
-
-    box.innerHTML += `
-      <div class="bcard">
-        <div class="bcard-name">${sub}</div>
-        <div class="bcard-bar-wrap">
-          <div class="bcard-bar ${cls}" style="width:${percent}%"></div>
-        </div>
-        <div class="bcard-score">${s.correct}/${s.total}</div>
-      </div>
-    `;
-  });
-}
-
-// ================= FEEDBACK =================
-function generateFeedback(score){
-  if(score >= 300) return "🔥 Excellent! You are ready for JAMB.";
-  if(score >= 250) return "💪 Very good. Improve weak subjects.";
-  if(score >= 200) return "⚠️ Fair. More practice needed.";
-  return "❌ Low score. Study harder.";
-}
-
-// ================= SAVE =================
-async function saveResult(result){
-  await addDoc(collection(db,"results"),{
-    userId: currentUser.uid,
-    score: result.total,
-    date: new Date()
-  });
-}
-
-// ================= SUBMIT =================
-window.confirmSubmit = function(){
-  if(confirm("Submit exam?")){
-    submitExam();
+    saveReview(score, breakdown);
   }
-}
 
-function submitExam(){
-  stopTimer();
+  // ===== Dashboard Reviews =====
+  function showDashboard() {
+    showScreen("screen-dashboard");
+    loadReviews();
+  }
 
-  const result = calculateResult();
+  function saveReview(score, breakdown) {
+    let reviews = JSON.parse(localStorage.getItem("reviews") || "[]");
+    reviews.push({ score, breakdown, date: new Date().toLocaleString() });
+    localStorage.setItem("reviews", JSON.stringify(reviews));
+  }
 
-  document.getElementById("r-total-score").innerText = result.total;
-  document.getElementById("r-msg").innerText =
-    `Correct: ${result.correct} | Wrong: ${result.wrong}`;
-  document.getElementById("r-sub").innerText =
-    generateFeedback(result.total);
-
-  renderBreakdown(result.subjectStats);
-
-  saveResult(result);
-
-  showScreen("screen-results");
-}
-
-// ================= START =================
-window.startExam = function(){
-  timeLeft = 100 * 60;
-  currentIndex = 0;
-
-  questions.forEach(q => q.userAnswer = null);
-
-  startTimer();
-  renderQuestion();
-  showScreen("screen-exam");
-}
-
+  function loadReviews() {
+    let reviews = JSON.parse(localStorage.getItem("reviews") || "[]");
+    const container = document.getElementById("dash-reviews");
+    container.innerHTML = "";
+    reviews.forEach(r => {
+      container.innerHTML += `<div class="update-item">Score: ${r.score} <br>Date: ${r.date}</div>`;
+    });
+  }
 </script>
+</body>
+</html>
