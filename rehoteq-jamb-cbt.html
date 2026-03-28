@@ -67,7 +67,15 @@
 </div>
 
 <script>
-  // ===== Sample JAMB Questions embedded here =====
+function startExam() {
+  showScreen("screen-cbt");
+  const select = document.getElementById("subjectSelect");
+  currentSubject = select.value; // subject chosen by student
+  currentIndex = 0;
+  answers = {};
+  showQuestion();
+  startTimer(120); // adjust timer as needed
+}
   const questions = {
     English: [
   {text:"Choose the word opposite in meaning to 'benevolent'.", options:["Kind","Cruel","Generous","Friendly"], answer:"Cruel"},
