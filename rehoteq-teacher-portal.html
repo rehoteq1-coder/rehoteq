@@ -649,6 +649,12 @@ function downloadFile(title, type, id){
   // In production — replace these with real file URLs hosted on GitHub or your server
   const fileMap = {
     1:'assets/resources/ict-lesson-plan-jss1.docx',
+    11:'assets/resources/school-lesson-note.docx',
+    12:'assets/resources/class-result-sheet.xlsx',
+    13:'assets/resources/class-result-sheet.xlsx',
+    17:'assets/resources/cybersecurity-handout.docx',
+    16:'assets/resources/cybersecurity-handout.docx',
+    1:'assets/resources/ict-lesson-plan-jss1.docx',
     2:'assets/resources/basic-tech-wiring-lesson.pdf',
     // ... add real paths here
   };
@@ -657,7 +663,9 @@ function downloadFile(title, type, id){
   const a = document.createElement('a');
   a.href = url;
   a.download = `${title.replace(/[^a-z0-9]/gi,'_').toLowerCase()}.${type}`;
-  // a.click(); // Uncomment when real files are linked
+  a.href = url;
+  a.target = '_blank';
+  a.click();
   showToast('⬇️ Download started!');
   // Update download count visually
   const res = resources.find(r=>r.id===id);
