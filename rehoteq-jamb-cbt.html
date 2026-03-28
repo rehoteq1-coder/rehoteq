@@ -637,7 +637,7 @@ function updateReviews() {
 
   function loadReviews() {
     let reviews = JSON.parse(localStorage.getItem("reviews") || "[]");
-    const container = document.getElementById("dash-reviews");
+    const container = document.getElementById<div id="dash-reviews"></div>
     container.innerHTML = "";
     reviews.forEach(r => {
       container.innerHTML += `<div class="update-item">Score: ${r.score} <br>Date: ${r.date}</div>`;
