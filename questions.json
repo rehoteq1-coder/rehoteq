@@ -1,19 +1,4 @@
-Alright Adetoye, let’s make this super straightforward so you know exactly what to copy and where to paste it.  
 
----
-
-🪜 Step‑by‑Step
-
-1. Create a JSON file in your GitHub project
-- In your project folder (same place as your HTML file), create a new file called:
-
-`
-questions.json
-`
-
-- Copy this content into it:
-
-`json
 {
   "English": [
     {
