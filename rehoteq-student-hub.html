@@ -3,576 +3,307 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rehoteq Student Hub – Cyber Quiz & Tech Careers</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<title>Rehoteq Student Hub — Cyber Quiz & Tech Careers</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root {
-  --gold: #F5A623;
-  --gold2: #C4811A;
-  --bg: #0A0A0A;
-  --card: #141414;
-  --card2: #1A1A1A;
-  --border: #252525;
-  --border2: #2E2E2E;
-  --text: #E8E8E8;
-  --muted: #777;
-  --green: #28C840;
-  --red: #FF5F57;
-  --blue: #4A9EFF;
-}
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-  background: var(--bg);
-  font-family: 'DM Sans', sans-serif;
-  color: var(--text);
-  min-height: 100vh;
-  overflow-x: hidden;
-}
-
-/* ── NAV ── */
-nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 24px;
-  border-bottom: 1px solid var(--border);
-  background: #0A0A0Aee;
-  position: sticky; top: 0; z-index: 100;
-  backdrop-filter: blur(12px);
-}
-.nav-logo {
-  font-family: 'Syne', sans-serif;
-  font-weight: 800;
-  font-size: 1.1rem;
-  color: #fff;
-}
-.nav-logo span { color: var(--gold); }
-.nav-tabs { display: flex; gap: 4px; }
-.nav-tab {
-  padding: 8px 16px;
-  border-radius: 6px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  cursor: pointer;
-  border: none;
-  transition: all 0.2s;
-  background: transparent;
-  color: var(--muted);
-}
-.nav-tab.active, .nav-tab:hover {
-  background: var(--gold);
-  color: #000;
-}
-
-/* ── HERO ── */
-.hero {
-  text-align: center;
-  padding: 60px 24px 40px;
-  position: relative;
-  overflow: hidden;
-}
-.hero::before {
-  content: '';
-  position: absolute;
-  top: -60px; left: 50%;
-  transform: translateX(-50%);
-  width: 500px; height: 300px;
-  background: radial-gradient(ellipse, #F5A62318 0%, transparent 70%);
-  pointer-events: none;
-}
-.hero-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: #F5A62314;
-  border: 1px solid #F5A62330;
-  border-radius: 100px;
-  padding: 6px 16px;
-  font-size: 0.72rem;
-  font-weight: 600;
-  color: var(--gold);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  margin-bottom: 20px;
-}
-.hero-badge::before { content:''; width:6px; height:6px; background:var(--gold); border-radius:50%; animation: pulse 2s infinite; }
-@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.8)} }
-.hero h1 {
-  font-family: 'Syne', sans-serif;
-  font-size: clamp(1.8rem, 6vw, 3rem);
-  font-weight: 800;
-  line-height: 1.1;
-  margin-bottom: 16px;
-}
-.hero h1 .gold { color: var(--gold); }
-.hero p {
-  font-size: 0.95rem;
-  color: var(--muted);
-  max-width: 480px;
-  margin: 0 auto 32px;
-  line-height: 1.7;
-}
-.hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-.btn-gold {
-  background: var(--gold);
-  color: #000;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-weight: 700;
-  font-size: 0.85rem;
-  cursor: pointer;
-  transition: all 0.2s;
-  font-family: 'DM Sans', sans-serif;
-}
-.btn-gold:hover { background: var(--gold2); transform: translateY(-1px); }
-.btn-outline {
-  background: transparent;
-  color: var(--gold);
-  border: 1px solid var(--gold);
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 0.85rem;
-  cursor: pointer;
-  transition: all 0.2s;
-  font-family: 'DM Sans', sans-serif;
-}
-.btn-outline:hover { background: #F5A62310; }
-
-/* ── SECTIONS ── */
-.section { display: none; padding: 0 20px 60px; max-width: 860px; margin: 0 auto; }
-.section.active { display: block; animation: fadeIn 0.4s ease; }
-@keyframes fadeIn { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
-.section-title {
-  font-family: 'Syne', sans-serif;
-  font-size: 1.4rem;
-  font-weight: 800;
-  margin-bottom: 6px;
-}
-.section-title span { color: var(--gold); }
-.section-sub { color: var(--muted); font-size: 0.85rem; margin-bottom: 32px; }
-
-/* ── QUIZ ── */
-.quiz-progress-bar {
-  width: 100%;
-  height: 4px;
-  background: var(--border2);
-  border-radius: 2px;
-  margin-bottom: 28px;
-  overflow: hidden;
-}
-.quiz-progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--gold2), var(--gold));
-  border-radius: 2px;
-  transition: width 0.5s ease;
-}
-.quiz-meta {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.75rem;
-  color: var(--muted);
-  margin-bottom: 8px;
-}
-.question-card {
-  background: var(--card);
-  border: 1px solid var(--border2);
-  border-radius: 14px;
-  padding: 28px 24px;
-  margin-bottom: 20px;
-}
-.question-num {
-  font-size: 0.7rem;
-  font-weight: 700;
-  color: var(--gold);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  margin-bottom: 12px;
-}
-.question-text {
-  font-family: 'Syne', sans-serif;
-  font-size: 1.05rem;
-  font-weight: 700;
-  line-height: 1.4;
-  margin-bottom: 24px;
-}
-.options { display: grid; gap: 10px; }
-.option {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 14px 18px;
-  background: var(--card2);
-  border: 1.5px solid var(--border2);
-  border-radius: 10px;
-  cursor: pointer;
-  transition: all 0.2s;
-  font-size: 0.88rem;
-}
-.option:hover { border-color: var(--gold); background: #F5A62308; }
-.option.correct { border-color: var(--green); background: #28C84012; color: #fff; }
-.option.wrong { border-color: var(--red); background: #FF5F5712; color: #aaa; }
-.option.disabled { cursor: default; pointer-events: none; }
-.option-letter {
-  width: 28px; height: 28px;
-  border-radius: 6px;
-  background: var(--border2);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 0.75rem; font-weight: 700;
-  flex-shrink: 0;
-  transition: all 0.2s;
-}
-.option.correct .option-letter { background: var(--green); color: #000; }
-.option.wrong .option-letter { background: var(--red); color: #fff; }
-.feedback-box {
-  background: #F5A62310;
-  border: 1px solid #F5A62330;
-  border-radius: 8px;
-  padding: 12px 16px;
-  font-size: 0.82rem;
-  color: #ddd;
-  line-height: 1.55;
-  margin-top: 14px;
-  display: none;
-}
-.feedback-box.show { display: block; animation: fadeIn 0.3s ease; }
-.quiz-nav { display: flex; justify-content: flex-end; margin-top: 16px; }
-
-/* ── RESULT ── */
-.result-card {
-  background: var(--card);
-  border: 1px solid var(--border2);
-  border-radius: 16px;
-  padding: 40px 28px;
-  text-align: center;
-}
-.result-badge {
-  font-size: 4rem;
-  margin-bottom: 16px;
-  display: block;
-}
-.result-grade {
-  font-family: 'Syne', sans-serif;
-  font-size: 1.8rem;
-  font-weight: 800;
-  color: var(--gold);
-  margin-bottom: 8px;
-}
-.result-score {
-  font-size: 1rem;
-  color: var(--muted);
-  margin-bottom: 20px;
-}
-.result-msg {
-  font-size: 0.9rem;
-  line-height: 1.7;
-  color: #ccc;
-  max-width: 400px;
-  margin: 0 auto 28px;
-}
-.score-bar-wrap { margin: 0 auto 28px; max-width: 300px; }
-.score-bar-bg {
-  width: 100%; height: 10px;
-  background: var(--border2);
-  border-radius: 5px; overflow: hidden;
-}
-.score-bar-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--gold2), var(--gold));
-  border-radius: 5px;
-  transition: width 1.2s ease;
-}
-.share-text {
-  background: var(--card2);
-  border: 1px dashed var(--border2);
-  border-radius: 8px;
-  padding: 14px 18px;
-  font-size: 0.82rem;
-  color: #ccc;
-  font-style: italic;
-  margin-bottom: 20px;
-  line-height: 1.6;
-}
-.share-btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-.share-btn {
-  padding: 10px 18px;
-  border-radius: 8px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  cursor: pointer;
-  border: none;
-  transition: all 0.2s;
-  font-family: 'DM Sans', sans-serif;
-}
-.share-wa { background: #25D366; color: #000; }
-.share-wa:hover { background: #1db954; }
-.share-copy { background: var(--border2); color: var(--text); }
-.share-copy:hover { background: var(--border); }
-.rehocheck-cta {
-  margin-top: 28px;
-  background: linear-gradient(135deg, #1A1200, #2A1E00);
-  border: 1px solid var(--gold2);
-  border-radius: 12px;
-  padding: 20px 24px;
-  text-align: left;
-}
-.rehocheck-cta h4 {
-  font-family: 'Syne', sans-serif;
-  font-size: 0.95rem;
-  color: var(--gold);
-  margin-bottom: 6px;
-}
-.rehocheck-cta p { font-size: 0.82rem; color: #bbb; line-height: 1.6; margin-bottom: 14px; }
-
-/* ── CAREERS ── */
-.career-grid { display: grid; gap: 16px; }
-.career-card {
-  background: var(--card);
-  border: 1.5px solid var(--border2);
-  border-radius: 14px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: all 0.25s;
-}
-.career-card:hover { border-color: var(--gold); transform: translateY(-2px); }
-.career-card.open { border-color: var(--gold); }
-.career-header {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 20px 22px;
-}
-.career-icon {
-  width: 48px; height: 48px;
-  border-radius: 10px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.4rem;
-  flex-shrink: 0;
-}
-.career-title-wrap { flex: 1; }
-.career-title {
-  font-family: 'Syne', sans-serif;
-  font-weight: 700;
-  font-size: 0.95rem;
-  margin-bottom: 3px;
-}
-.career-tag {
-  font-size: 0.7rem;
-  padding: 2px 10px;
-  border-radius: 100px;
-  font-weight: 600;
-}
-.tag-hot { background: #FF5F5720; color: #FF8A85; border: 1px solid #FF5F5740; }
-.tag-growth { background: #28C84020; color: #5DD67A; border: 1px solid #28C84040; }
-.tag-core { background: #F5A62320; color: var(--gold); border: 1px solid #F5A62340; }
-.tag-rising { background: #4A9EFF20; color: #7AB8FF; border: 1px solid #4A9EFF40; }
-.career-chevron {
-  color: var(--muted);
-  font-size: 1.1rem;
-  transition: transform 0.3s;
-}
-.career-card.open .career-chevron { transform: rotate(180deg); color: var(--gold); }
-.career-body {
-  display: none;
-  padding: 0 22px 22px;
-  border-top: 1px solid var(--border);
-  animation: fadeIn 0.3s ease;
-}
-.career-card.open .career-body { display: block; }
-.career-body-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin-top: 18px;
-}
-@media(max-width:500px){ .career-body-grid { grid-template-columns: 1fr; } }
-.cb-block h5 {
-  font-size: 0.7rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--gold);
-  margin-bottom: 10px;
-}
-.skill-chip {
-  display: inline-block;
-  background: var(--card2);
-  border: 1px solid var(--border2);
-  border-radius: 5px;
-  padding: 4px 10px;
-  font-size: 0.73rem;
-  margin: 3px 3px 3px 0;
-  color: #ccc;
-}
-.salary-range {
-  font-family: 'Syne', sans-serif;
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--green);
-  margin-bottom: 4px;
-}
-.salary-note { font-size: 0.73rem; color: var(--muted); }
-.rehoteq-link {
-  margin-top: 16px;
-  background: #F5A62310;
-  border: 1px solid #F5A62325;
-  border-radius: 8px;
-  padding: 12px 16px;
-  font-size: 0.8rem;
-  color: #ccc;
-  line-height: 1.6;
-}
-.rehoteq-link strong { color: var(--gold); }
-.roadmap { margin-top: 0; }
-.roadmap-step {
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
-  margin-bottom: 10px;
-}
-.step-num {
-  width: 22px; height: 22px;
-  border-radius: 50%;
-  background: var(--gold);
-  color: #000;
-  font-size: 0.65rem;
-  font-weight: 800;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0; margin-top: 1px;
-}
-.step-text { font-size: 0.8rem; color: #bbb; line-height: 1.5; }
-
-/* ── FOOTER ── */
-footer {
-  text-align: center;
-  padding: 30px 20px;
-  border-top: 1px solid var(--border);
-  font-size: 0.75rem;
-  color: var(--muted);
-}
-footer a { color: var(--gold); text-decoration: none; }
-
-/* ── COPIED TOAST ── */
-.toast {
-  position: fixed;
-  bottom: 24px; left: 50%;
-  transform: translateX(-50%) translateY(80px);
-  background: var(--green);
-  color: #000;
-  font-weight: 700;
-  font-size: 0.8rem;
-  padding: 10px 22px;
-  border-radius: 100px;
-  transition: transform 0.3s ease;
-  z-index: 999;
-}
-.toast.show { transform: translateX(-50%) translateY(0); }
+:root{--gold:#F5A623;--gold2:#C4811A;--bg:#080808;--surface:#101010;--card:#161616;--card2:#1C1C1C;--border:#222;--border2:#2C2C2C;--text:#F0F0F0;--muted:#666;--muted2:#999;--green:#2ECC71;--red:#E74C3C;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);font-family:'DM Sans',sans-serif;color:var(--text);min-height:100vh;overflow-x:hidden;}
+nav{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;background:#080808CC;backdrop-filter:blur(16px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;}
+.logo{font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:800;display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text);}
+.logo-box{width:34px;height:34px;background:var(--gold);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;color:#000;font-weight:900;}
+.logo span{color:var(--gold);}
+.nav-tabs{display:flex;gap:4px;}
+.ntab{padding:8px 16px;border-radius:7px;font-size:0.78rem;font-weight:600;cursor:pointer;border:none;background:transparent;color:var(--muted2);transition:all 0.2s;font-family:'DM Sans',sans-serif;}
+.ntab.active,.ntab:hover{background:var(--gold);color:#000;}
+.back-btn{font-size:0.78rem;color:var(--muted2);text-decoration:none;padding:7px 14px;border:1px solid var(--border2);border-radius:7px;transition:all 0.2s;}
+.back-btn:hover{color:var(--gold);border-color:var(--gold);}
+.hero{text-align:center;padding:56px 24px 36px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-60px;left:50%;transform:translateX(-50%);width:600px;height:300px;background:radial-gradient(ellipse,#F5A62314 0%,transparent 65%);pointer-events:none;}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;background:#F5A62312;border:1px solid #F5A62328;border-radius:100px;padding:5px 16px;font-size:0.7rem;font-weight:700;color:var(--gold);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:18px;}
+.live-dot{width:6px;height:6px;background:var(--green);border-radius:50%;animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.15}}
+.hero h1{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,6vw,3rem);font-weight:800;line-height:1.1;margin-bottom:14px;}
+.hero h1 .g{color:var(--gold);}
+.hero p{font-size:0.9rem;color:var(--muted2);max-width:480px;margin:0 auto 0;line-height:1.8;}
+.section{display:none;padding:24px 20px 60px;max-width:860px;margin:0 auto;}
+.section.active{display:block;animation:fi 0.35s ease;}
+@keyframes fi{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.sec-title{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;margin-bottom:6px;}
+.sec-title span{color:var(--gold);}
+.sec-sub{color:var(--muted);font-size:0.85rem;margin-bottom:28px;}
+/* QUIZ */
+.q-meta{display:flex;justify-content:space-between;font-size:0.75rem;color:var(--muted);margin-bottom:8px;}
+.pb{width:100%;height:4px;background:var(--border2);border-radius:2px;overflow:hidden;margin-bottom:24px;}
+.pf{height:100%;background:linear-gradient(90deg,var(--gold2),var(--gold));border-radius:2px;transition:width 0.4s;}
+.q-card{background:var(--card);border:1px solid var(--border2);border-radius:14px;padding:26px 22px;margin-bottom:14px;}
+.q-num{font-size:0.68rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:0.14em;margin-bottom:10px;}
+.q-txt{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;line-height:1.45;margin-bottom:22px;}
+.opts{display:grid;gap:10px;}
+.opt{display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--card2);border:1.5px solid var(--border2);border-radius:10px;cursor:pointer;transition:all 0.18s;font-size:0.86rem;}
+.opt:hover{border-color:var(--gold);background:#F5A62308;}
+.opt.sel{border-color:var(--gold);background:#F5A62312;}
+.opt.ok{border-color:var(--green);background:#2ECC7112;pointer-events:none;}
+.opt.no{border-color:var(--red);background:#E74C3C10;color:#999;pointer-events:none;}
+.opt.dis{pointer-events:none;}
+.ok-txt{color:var(--green) !important;}
+.okey{width:27px;height:27px;border-radius:6px;background:var(--border2);display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:700;flex-shrink:0;transition:all 0.18s;}
+.opt.sel .okey{background:var(--gold);color:#000;}
+.opt.ok .okey{background:var(--green);color:#000;}
+.opt.no .okey{background:var(--red);color:#fff;}
+.fb{background:#F5A62310;border:1px solid #F5A62328;border-radius:8px;padding:12px 16px;font-size:0.81rem;color:#ddd;line-height:1.6;margin-top:12px;display:none;}
+.fb.show{display:block;}
+.q-nav-row{display:flex;justify-content:flex-end;margin-top:12px;}
+.btn-g{background:var(--gold);color:#000;border:none;padding:11px 24px;border-radius:9px;font-family:'Syne',sans-serif;font-size:0.84rem;font-weight:700;cursor:pointer;transition:all 0.2s;}
+.btn-g:hover{background:var(--gold2);}
+.btn-o{background:transparent;color:var(--gold);border:1.5px solid var(--gold);padding:10px 22px;border-radius:9px;font-family:'Syne',sans-serif;font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s;}
+.btn-o:hover{background:#F5A62310;}
+/* RESULT */
+.rbox{background:var(--card);border:1px solid var(--border2);border-radius:16px;padding:36px 26px;text-align:center;}
+.remoji{font-size:3.2rem;margin-bottom:12px;display:block;}
+.rgrade{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:var(--gold);margin-bottom:8px;}
+.rscore{font-size:0.88rem;color:var(--muted2);margin-bottom:18px;}
+.rbar-bg{max-width:260px;height:10px;background:var(--border2);border-radius:5px;margin:0 auto 22px;overflow:hidden;}
+.rbar-f{height:100%;background:linear-gradient(90deg,var(--gold2),var(--gold));border-radius:5px;transition:width 1.4s ease;}
+.rmsg{background:var(--card2);border:1px solid var(--border2);border-radius:10px;padding:14px 18px;font-size:0.84rem;color:#ccc;line-height:1.7;margin-bottom:22px;text-align:left;}
+.rshare{background:var(--card2);border:1px dashed var(--border2);border-radius:8px;padding:13px;font-size:0.79rem;color:#aaa;font-style:italic;margin-bottom:18px;line-height:1.6;}
+.rbtns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:22px;}
+.btn-wa{background:#25D366;color:#000;border:none;padding:10px 18px;border-radius:8px;font-size:0.79rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;}
+.rcta{background:linear-gradient(135deg,#1A1200,#2A1E00);border:1px solid var(--gold2);border-radius:12px;padding:18px 20px;text-align:left;}
+.rcta h4{font-family:'Syne',sans-serif;font-size:0.9rem;color:var(--gold);margin-bottom:6px;}
+.rcta p{font-size:0.79rem;color:#bbb;line-height:1.6;margin-bottom:12px;}
+/* CAREERS */
+.cgrid{display:grid;gap:14px;}
+.ccard{background:var(--card);border:1.5px solid var(--border2);border-radius:14px;overflow:hidden;transition:all 0.22s;}
+.ccard:hover{border-color:var(--gold2);}
+.ccard.open{border-color:var(--gold);}
+.chead{display:flex;align-items:center;gap:14px;padding:18px 20px;cursor:pointer;}
+.cicon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.25rem;flex-shrink:0;}
+.cmeta{flex:1;}
+.ctitle{font-family:'Syne',sans-serif;font-weight:700;font-size:0.9rem;margin-bottom:3px;}
+.cbadge{font-size:0.64rem;font-weight:700;padding:2px 9px;border-radius:100px;}
+.hot{background:#E74C3C18;color:#ff7b72;border:1px solid #E74C3C30;}
+.growth{background:#2ECC7118;color:#5DD67A;border:1px solid #2ECC7130;}
+.rising{background:#3B9EFF18;color:#7AB8FF;border:1px solid #3B9EFF30;}
+.core{background:#F5A62318;color:var(--gold);border:1px solid #F5A62330;}
+.chev{color:var(--muted);font-size:0.9rem;transition:transform 0.3s;}
+.ccard.open .chev{transform:rotate(180deg);color:var(--gold);}
+.cbody{display:none;padding:0 20px 20px;border-top:1px solid var(--border);}
+.ccard.open .cbody{display:block;}
+.cb2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px;}
+@media(max-width:500px){.cb2{grid-template-columns:1fr;}}
+.cbh{font-size:0.67rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--gold);margin-bottom:8px;}
+.chip{display:inline-block;background:var(--card2);border:1px solid var(--border2);border-radius:5px;padding:3px 9px;font-size:0.71rem;margin:2px 2px 2px 0;color:#ccc;}
+.sal{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:var(--green);margin-bottom:2px;}
+.saln{font-size:0.71rem;color:var(--muted);}
+.rnote{margin-top:12px;background:#F5A62310;border:1px solid #F5A62325;border-radius:8px;padding:11px 14px;font-size:0.78rem;color:#ccc;line-height:1.6;}
+.rnote strong{color:var(--gold);}
+.rstep{display:flex;gap:10px;align-items:flex-start;margin-bottom:7px;}
+.rsn{width:20px;height:20px;border-radius:50%;background:var(--gold);color:#000;font-size:0.62rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.rst{font-size:0.78rem;color:#bbb;line-height:1.5;}
+footer{text-align:center;padding:26px;border-top:1px solid var(--border);font-size:0.74rem;color:var(--muted);}
+footer a{color:var(--gold);text-decoration:none;}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
-  <div class="nav-logo">Reho<span>teq</span></div>
+  <a href="index.html" class="logo"><div class="logo-box">R</div>Reho<span>teq</span></a>
   <div class="nav-tabs">
-    <button class="nav-tab active" onclick="showSection('quiz', this)">🧠 Cyber Quiz</button>
-    <button class="nav-tab" onclick="showSection('careers', this)">🚀 Tech Careers</button>
+    <button class="ntab active" onclick="showSec('quiz',this)">🧠 Cyber Quiz</button>
+    <button class="ntab" onclick="showSec('careers',this)">🚀 Tech Careers</button>
   </div>
+  <a href="hub.html" class="back-btn">← Hub</a>
 </nav>
 
-<!-- HERO -->
 <div class="hero">
-  <div class="hero-badge">Student & Teacher Hub</div>
-  <h1>Know Your <span class="gold">Cyber Score.</span><br>Build Your Tech Future.</h1>
-  <p>Test your cybersecurity awareness, then explore real tech career paths available to you right here in Nigeria.</p>
-  <div class="hero-actions">
-    <button class="btn-gold" onclick="showSection('quiz', document.querySelector('.nav-tab'))">Take the Quiz →</button>
-    <button class="btn-outline" onclick="showSection('careers', document.querySelectorAll('.nav-tab')[1])">Explore Careers</button>
-  </div>
+  <div class="eyebrow"><span class="live-dot"></span>Free · For Students & Teachers</div>
+  <h1>Know Your <span class="g">Cyber Score.</span><br>Build Your Tech Future.</h1>
+  <p>Test your online safety awareness, then explore real tech career paths available to you right here in Nigeria.</p>
 </div>
 
-<!-- QUIZ SECTION -->
+<!-- QUIZ -->
 <div class="section active" id="section-quiz">
-  <div class="section-title">Cyber <span>Awareness</span> Quiz</div>
-  <div class="section-sub">10 questions · Nigeria-relevant scenarios · See how safe you really are</div>
-
-  <div id="quiz-container">
-    <div class="quiz-meta">
-      <span id="q-counter">Question 1 of 10</span>
-      <span id="q-score-live">Score: 0</span>
+  <div class="sec-title">Cyber <span>Awareness</span> Quiz</div>
+  <div class="sec-sub">10 Nigeria-relevant questions · Instant score · Share your result</div>
+  <div id="quiz-wrap">
+    <div class="q-meta">
+      <span id="qctr">Question 1 of 10</span>
+      <span id="qscore">Score: 0 ✅</span>
     </div>
-    <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="q-progress" style="width:10%"></div></div>
-
-    <div class="question-card" id="question-card">
-      <div class="question-num" id="q-num">Question 01</div>
-      <div class="question-text" id="q-text"></div>
-      <div class="options" id="q-options"></div>
-      <div class="feedback-box" id="q-feedback"></div>
+    <div class="pb"><div class="pf" id="qpb" style="width:10%"></div></div>
+    <div class="q-card">
+      <div class="q-num" id="qnum">Question 01</div>
+      <div class="q-txt" id="qtxt"></div>
+      <div class="opts" id="qopts"></div>
+      <div class="fb" id="qfb"></div>
     </div>
-
-    <div class="quiz-nav">
-      <button class="btn-gold" id="q-next-btn" onclick="nextQuestion()" style="display:none">Next →</button>
+    <div class="q-nav-row">
+      <button class="btn-g" id="qnxt" onclick="nextQ()" style="display:none">Next →</button>
     </div>
   </div>
-
-  <!-- RESULT -->
-  <div id="result-container" style="display:none">
-    <div class="result-card">
-      <span class="result-badge" id="r-badge"></span>
-      <div class="result-grade" id="r-grade"></div>
-      <div class="result-score" id="r-score"></div>
-      <div class="score-bar-wrap">
-        <div class="score-bar-bg"><div class="score-bar-fill" id="r-bar" style="width:0%"></div></div>
+  <div id="result-wrap" style="display:none">
+    <div class="rbox">
+      <span class="remoji" id="remoji"></span>
+      <div class="rgrade" id="rgrade"></div>
+      <div class="rscore" id="rscore"></div>
+      <div class="rbar-bg"><div class="rbar-f" id="rbarf" style="width:0%"></div></div>
+      <div class="rmsg" id="rmsg"></div>
+      <div class="rshare" id="rshare"></div>
+      <div class="rbtns">
+        <button class="btn-wa" onclick="shareWA()">📲 Share on WhatsApp</button>
+        <button class="btn-o" onclick="retake()">🔄 Retake</button>
+        <button class="btn-g" onclick="showSec('careers',document.querySelectorAll('.ntab')[1])">🚀 Explore Careers</button>
       </div>
-      <div class="result-msg" id="r-msg"></div>
-      <div class="share-text" id="r-share-text"></div>
-      <div class="share-btns">
-        <button class="share-btn share-wa" onclick="shareWhatsApp()">📲 Share on WhatsApp</button>
-        <button class="share-btn share-copy" onclick="copyResult()">📋 Copy Result</button>
-        <button class="share-btn btn-gold" onclick="retakeQuiz()">🔄 Retake Quiz</button>
-      </div>
-      <div class="rehocheck-cta">
-        <h4>🔒 Try RehoCheck — Free Link Scanner</h4>
-        <p>Before you click any suspicious link on WhatsApp or SMS, scan it with RehoCheck first. Built by Rehoteq Technologies to protect Nigerians from phishing scams.</p>
-        <button class="btn-gold" onclick="window.open('https://rehoteq.com','_blank')">Get RehoCheck →</button>
+      <div class="rcta">
+        <h4>🔒 Scan Links with RehoCheck — Free</h4>
+        <p>Before you click any suspicious link on WhatsApp or SMS, scan it with RehoCheck first. Built by Rehoteq Technologies to protect Nigerians from phishing.</p>
+        <button class="btn-g" onclick="window.open('https://rehoteq.com','_blank')">Get RehoCheck →</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- CAREERS SECTION -->
+<!-- CAREERS -->
 <div class="section" id="section-careers">
-  <div class="section-title">Tech <span>Career</span> Paths</div>
-  <div class="section-sub">Real careers. Real salaries. How to get there from where you are now.</div>
-
-  <div class="career-grid" id="career-grid"></div>
+  <div class="sec-title">Tech <span>Career</span> Paths</div>
+  <div class="sec-sub">Real careers · Nigerian salary ranges · How to get started from SS3</div>
+  <div class="cgrid" id="cgrid"></div>
 </div>
 
-<footer>
-  Built with ❤️ by <a href="https://rehoteq.com">Rehoteq Technologies</a> · Okitipupa, Ondo State, Nigeria
-</footer>
-
-<div class="toast" id="toast">✅ Copied to clipboard!</div>
+<footer>Built with ❤️ by <a href="https://rehoteq.com">Rehoteq Technologies</a> · Okitipupa, Ondo State, Nigeria</footer>
 
 <script>
-// ── QUIZ DATA ──
-const questions = [
-  {
-    q: "You receive a WhatsApp message from 'Access Bank' with a link asking you to verify your BVN. What do you do?",
-    options: ["Click the link immediately to secure your account","Ignore and delete the message","Forward it to family to warn them","Call Access Bank's official number first"],
-    correct: 3,
-    feedback: "Banks will NEVER ask for your BVN via WhatsApp. Always call the bank's official number printed on your card. That message is a phishing scam."
-  },
-  {
-    q: "Which of these is the STRONGEST password?",
-    options: ["password123","MyName1990","R3h0!#Teq_Ng24","okitipupa2024"],
-    correct: 2,
-    feedback: "R3h0!#Teq_Ng24 mixes uppercase, lowercase, numbers and symbols — making it extremely hard to crack. Never use your name, location or birth year."
-  },
-  {
-    q: "You're using a cybercafé in Akure to check your school email. What's most important after you're done?",
-    options: ["Clear the browsing history","Log out of your accounts and clear history","Just close the browser tab","It doesn't matter, no one knows your password"],
-    correct: 1,
-    feedback: "Always LOG OUT before leaving any shared computer. Closing
+// QUIZ
+var QS=[
+  {q:"You receive a WhatsApp message from 'GTBank' asking you to click a link and verify your BVN urgently. What should you do?",o:["Click immediately to secure your account","Call GTBank's official number to verify before doing anything","Forward it to family to warn them","Reply asking for more details"],a:1,f:"Banks NEVER request your BVN via WhatsApp. Always call the official number on the back of your card. That message is a phishing scam designed to steal your money."},
+  {q:"Which of these is the STRONGEST password for your email?",o:["password123","MyName1990","R3h0!#Teq_2024","okitipupa24"],a:2,f:"R3h0!#Teq_2024 combines uppercase, lowercase, numbers AND symbols — making it extremely hard to crack. Never use your name, city, or year as a password."},
+  {q:"You finish using a cybercafé in town to check your email. What is MOST important before you leave?",o:["Clear browsing history only","Log out of all accounts AND clear browser history","Just close the browser tab","Switch off the computer"],a:1,f:"Always LOG OUT before leaving any shared computer. Closing the tab without logging out leaves your accounts fully accessible to the next person who sits down."},
+  {q:"A website URL reads: 'http://gtb-verification.ng.com'. What is suspicious?",o:["It uses http not https","It is not the official GTBank domain (gtbank.com)","It contains .ng","The URL is too long"],a:1,f:"Scammers create fake domains that LOOK like real banks. The real GTBank site is gtbank.com. Always check the exact URL carefully. Use RehoCheck to scan suspicious links."},
+  {q:"Which social media habit puts you at HIGHEST risk of being targeted by scammers?",o:["Posting food photos","Publicly sharing your phone number, address and daily routine","Using a real profile photo","Liking many posts"],a:1,f:"Sharing personal details publicly — phone number, home address, daily schedule — gives scammers and criminals everything they need to target and defraud you."},
+  {q:"You receive a message: 'Congratulations! You have won ₦5,000,000. Send ₦5,000 processing fee to claim.' This is a:",o:["Genuine prize — claim quickly","419 advance-fee fraud scam","Government stimulus payment","Bank error in your favour"],a:1,f:"This is a classic 419 advance-fee fraud. There is no prize. They will collect your 'processing fee' and disappear. You can never win a lottery you never entered."},
+  {q:"What does enabling Two-Factor Authentication (2FA) protect you against?",o:["Slow internet connection","Hackers who have your password but cannot access your second verification","Computer viruses","Power outages"],a:1,f:"2FA means even if someone steals your password, they still cannot log in without the second verification (usually a code sent to your phone). Always enable it on all accounts!"},
+  {q:"You download a 'cracked' or 'free premium' app from an unknown website. The main risk is:",o:["The app may expire quickly","The app likely contains malware that steals your data","It will use too much data","The graphics will be poor"],a:1,f:"Cracked and pirated apps are among the most common ways malware enters phones in Nigeria. These apps secretly steal passwords, banking details, messages and contacts."},
+  {q:"Your friend sends you a WhatsApp link for 'free airtime'. It asks for your phone number to claim. You should:",o:["Enter your number — your friend would not send something harmful","Close the page — this is likely a scam that compromised your friend's account","Share it with more contacts first","Enter a fake number instead"],a:1,f:"This is a classic viral sharing scam. Your friend was tricked and their account may be compromised. These sites harvest phone numbers for spam, fraud and SIM swap attacks."},
+  {q:"Which combination BEST protects your online accounts in Nigeria?",o:["Same password for all accounts — easy to remember","Unique strong passwords for each account + 2FA enabled + not sharing personal data publicly","Delete all social media","Only use the internet at school or work"],a:1,f:"The strongest protection combines: unique strong passwords for every account, two-factor authentication on all accounts, and careful control of what personal information you share online."}
+];
+
+var cur=0, sc=0, done=false;
+
+function renderQ(){
+  var q=QS[cur];
+  var n=cur+1;
+  document.getElementById('qctr').textContent='Question '+n+' of 10';
+  document.getElementById('qscore').textContent='Score: '+sc+' \u2705';
+  document.getElementById('qnum').textContent='Question '+String(n).padStart(2,'0');
+  document.getElementById('qtxt').textContent=q.q;
+  document.getElementById('qpb').style.width=(n/10*100)+'%';
+  var keys=['A','B','C','D'];
+  document.getElementById('qopts').innerHTML=q.o.map(function(o,i){
+    return '<div class="opt" onclick="pick('+i+')"><div class="okey">'+keys[i]+'</div><div>'+o+'</div></div>';
+  }).join('');
+  document.getElementById('qfb').className='fb';
+  document.getElementById('qfb').textContent='';
+  document.getElementById('qnxt').style.display='none';
+  done=false;
+}
+
+function pick(idx){
+  if(done)return;
+  done=true;
+  var q=QS[cur];
+  var opts=document.querySelectorAll('.opt');
+  for(var i=0;i<opts.length;i++){
+    opts[i].classList.add('dis');
+    if(i===q.a)opts[i].classList.add('ok');
+    else if(i===idx&&i!==q.a)opts[i].classList.add('no');
+  }
+  if(idx===q.a)sc++;
+  var fb=document.getElementById('qfb');
+  fb.textContent=(idx===q.a?'\u2705 Correct! ':'\u274c Wrong. ')+q.f;
+  fb.className='fb show';
+  var nb=document.getElementById('qnxt');
+  nb.style.display='block';
+  nb.textContent=cur<9?'Next \u2192':'See Results \u2192';
+}
+
+function nextQ(){
+  if(cur<9){cur++;renderQ();}
+  else{showResult();}
+}
+
+function showResult(){
+  document.getElementById('quiz-wrap').style.display='none';
+  document.getElementById('result-wrap').style.display='block';
+  var pct=sc/10*100;
+  var emoji,grade,msg;
+  if(sc>=9){emoji='\ud83c\udfc6';grade='Cyber Warrior!';msg='Exceptional! You scored '+sc+'/10. You have excellent cyber awareness and are well equipped to stay safe online in Nigeria. Help educate others around you!';}
+  else if(sc>=7){emoji='\u26a1';grade='Cyber Guard!';msg='Well done! You scored '+sc+'/10. You understand most online risks. Review what you missed and share your knowledge with friends and family.';}
+  else if(sc>=5){emoji='\ud83d\udcda';grade='Cyber Learner';msg='Good start! You scored '+sc+'/10. You have basic awareness but there are gaps scammers could exploit. Retake the quiz and read each explanation carefully.';}
+  else{emoji='\ud83d\udd30';grade='Cyber Rookie';msg='You scored '+sc+'/10. This means you are at risk from the online scams common in Nigeria. Please retake the quiz and read each explanation carefully.';}
+  document.getElementById('remoji').textContent=emoji;
+  document.getElementById('rgrade').textContent=grade;
+  document.getElementById('rscore').textContent=sc+' out of 10 correct';
+  document.getElementById('rmsg').textContent=msg;
+  document.getElementById('rshare').textContent='\ud83c\udfaf I scored '+sc+'/10 on the Rehoteq Cyber Awareness Quiz! ('+grade+')\nTest your online safety too \ud83d\udc49 rehoteq.com\nBuilt by Rehoteq Technologies, Okitipupa \ud83c\uddf3\ud83c\uddec';
+  setTimeout(function(){document.getElementById('rbarf').style.width=pct+'%';},300);
+}
+
+function shareWA(){
+  var txt=document.getElementById('rshare').textContent;
+  window.open('https://wa.me/?text='+encodeURIComponent(txt),'_blank');
+}
+
+function retake(){
+  cur=0;sc=0;done=false;
+  document.getElementById('quiz-wrap').style.display='block';
+  document.getElementById('result-wrap').style.display='none';
+  renderQ();
+}
+
+// CAREERS
+var CAREERS=[
+  {icon:'\ud83d\udd10',title:'Cybersecurity Analyst',badge:'hot',bt:'\ud83d\udd25 High Demand',bg:'rgba(231,76,60,0.08)',bc:'rgba(231,76,60,0.2)',desc:'Protect organisations from hackers and cyberattacks. One of the fastest-growing tech careers in Nigeria with demand in banks, telecoms and government.',skills:['Networking Basics','Ethical Hacking','Python or Linux','SIEM Tools','Risk Assessment'],sal:'₦150,000 – ₦800,000/month',saln:'Entry to Senior in Nigeria (2024)',road:['Complete SS3 — Sciences or Commercial recommended','Get CompTIA Security+ or CEH certification','Learn basic networking (CCNA)','Practice on TryHackMe and HackTheBox','Apply to banks, telecoms or government agencies'],rh:'Rehoteq offers cybersecurity training. Our RehoCheck app is built on security principles. WhatsApp us to learn more.'},
+  {icon:'\ud83d\udcbb',title:'Software Developer',badge:'hot',bt:'\ud83d\udd25 Top Earner',bg:'rgba(245,166,35,0.08)',bc:'rgba(245,166,35,0.2)',desc:'Build apps and websites. Nigerian developers work remotely for international companies earning in dollars. High income potential.',skills:['HTML/CSS/JavaScript','Python or Java','React or Flutter','Databases','Git & GitHub'],sal:'₦200,000 – ₦2,000,000/month',saln:'Including remote international contracts',road:['Learn HTML, CSS and JavaScript free online','Build 3 portfolio projects to show employers','Learn a framework (React for web, Flutter for mobile)','Contribute to open source on GitHub','Apply locally or seek remote work internationally'],rh:'Rehoteq builds software including this website and RMS. We mentor young developers from Ondo State.'},
+  {icon:'\u2600\ufe0f',title:'Solar PV / Electrical Engineer',badge:'core',bt:'\u26a1 Always Needed',bg:'rgba(245,166,35,0.06)',bc:'rgba(245,166,35,0.18)',desc:'With Nigeria\'s power problems, certified solar engineers are in constant demand for homes, schools and businesses across the country.',skills:['Electrical Theory','Solar PV System Design','Inverter & Battery Setup','Cable Sizing & Safety','AutoCAD (optional)'],sal:'₦80,000 – ₦500,000/month',saln:'Plus project commissions',road:['Study Physics and Technical Drawing in school','OND or NABTEB in Electrical Engineering','Get REA or NABCEP solar certification','Apprentice under experienced engineer','Register with COREN and take projects'],rh:'Our founder Toye is a certified Electrical & Solar PV Engineer in Okitipupa. We offer mentorship and hands-on training.'},
+  {icon:'\ud83d\udda5\ufe0f',title:'Computer Hardware Engineer',badge:'growth',bt:'\ud83d\udcc8 Growing Fast',bg:'rgba(59,158,255,0.08)',bc:'rgba(59,158,255,0.2)',desc:'Repair, assemble and maintain computers and networks. Every school, business and organisation in Nigeria needs IT support.',skills:['PC Assembly & Repair','Network Installation','OS Configuration','Hardware Diagnostics','Preventive Maintenance'],sal:'₦60,000 – ₦350,000/month',saln:'Higher in Lagos, Abuja and Port Harcourt',road:['Study for CompTIA A+ certification','Practice assembling and repairing computers','Learn basic networking','Offer services to schools and businesses','Build a client base and register a business'],rh:'Rehoteq provides computer hardware services in Okitipupa. Contact us for apprenticeship opportunities.'},
+  {icon:'\ud83d\udcca',title:'Data Analyst',badge:'rising',bt:'\ud83c\udf1f Rising Career',bg:'rgba(46,204,113,0.08)',bc:'rgba(46,204,113,0.2)',desc:'Analyse data to help businesses make better decisions. Banks, telecoms and government in Nigeria all need data analysts urgently.',skills:['Excel (Advanced)','SQL Databases','Python or R','Power BI or Tableau','Statistics & Data Visualization'],sal:'₦150,000 – ₦700,000/month',saln:'Entry to senior in Nigerian companies',road:['Master Excel — the starting point for all analysts','Learn SQL through free online resources','Take Google Data Analytics Certificate (free)','Build a portfolio of data projects','Apply to banks, telecoms, fintechs or NGOs'],rh:'Rehoteq\'s RMS generates school data. We can mentor you in data analysis tools used in real-world projects.'},
+  {icon:'\ud83c\udf10',title:'Network & IT Administrator',badge:'core',bt:'\ud83d\udd27 Always Required',bg:'rgba(155,89,182,0.08)',bc:'rgba(155,89,182,0.2)',desc:'Set up and maintain computer networks that every school, hospital and company depends on. Steady demand across Nigeria.',skills:['Cisco Networking (CCNA)','Linux Administration','Active Directory','Network Security','Cloud Basics (AWS/Azure)'],sal:'₦100,000 – ₦600,000/month',saln:'Government, telecoms and banks pay top rates',road:['Study CCNA — Cisco Certified Network Associate','Set up a home lab to practice','Learn Linux command line basics','Build certifications and a portfolio','Target ISPs, banks, universities and hospitals'],rh:'Rehoteq installs networks for businesses in Okitipupa. Ask us about training and mentorship opportunities.'}
+];
+
+function buildCareers(){
+  var g=document.getElementById('cgrid');
+  g.innerHTML=CAREERS.map(function(c,i){
+    return '<div class="ccard" id="cc'+i+'">'
+      +'<div class="chead" onclick="toggleC('+i+')">'
+      +'<div class="cicon" style="background:'+c.bg+';border:1px solid '+c.bc+'">'+c.icon+'</div>'
+      +'<div class="cmeta"><div class="ctitle">'+c.title+'</div><span class="cbadge '+c.badge+'">'+c.bt+'</span></div>'
+      +'<span class="chev">&#9660;</span>'
+      +'</div>'
+      +'<div class="cbody">'
+      +'<p style="font-size:0.83rem;color:var(--muted2);line-height:1.7;margin-top:6px">'+c.desc+'</p>'
+      +'<div class="cb2">'
+      +'<div><div class="cbh">Key Skills</div><div>'+c.skills.map(function(s){return '<span class="chip">'+s+'</span>';}).join('')+'</div></div>'
+      +'<div><div class="cbh">Nigerian Salary (2024)</div><div class="sal">'+c.sal+'</div><div class="saln">'+c.saln+'</div></div>'
+      +'<div><div class="cbh">How to Get Started</div><div>'+c.road.map(function(s,j){return '<div class="rstep"><div class="rsn">'+(j+1)+'</div><div class="rst">'+s+'</div></div>';}).join('')+'</div></div>'
+      +'<div><div class="cbh">Rehoteq Can Help</div><div class="rnote"><strong>Rehoteq Technologies:</strong> '+c.rh+'<br><br><a href="https://wa.me/2347036302585?text=Hello Rehoteq, I am interested in '+encodeURIComponent(c.title)+' training" target="_blank" style="color:var(--gold)">&#128242; WhatsApp Us &#8594;</a></div></div>'
+      +'</div></div></div>';
+  }).join('');
+}
+
+function toggleC(i){
+  document.getElementById('cc'+i).classList.toggle('open');
+}
+
+function showSec(id,el){
+  document.querySelectorAll('.section').forEach(function(s){s.classList.remove('active');});
+  document.querySelectorAll('.ntab').forEach(function(t){t.classList.remove('active');});
+  document.getElementById('section-'+id).classList.add('active');
+  if(el)el.classList.add('active');
+}
+
+renderQ();
+buildCareers();
+</script>
+</body>
+</html>
