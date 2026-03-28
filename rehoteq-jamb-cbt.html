@@ -553,9 +553,9 @@ function updateReviews() {
 
   function startExam() {
     showScreen("screen-cbt");
-    currentSubject = "English"; // default subject
+    currentSubject = document.getElementById("subjectSelect").value;
     currentIndex = 0;
-    answers = {};
+    answers[currentSubject] = {};
     showQuestion();
     startTimer(120); // 2 minutes demo timer
   }
