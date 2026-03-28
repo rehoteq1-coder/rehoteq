@@ -1,0 +1,99 @@
+Alright Adetoye, let’s make this super straightforward so you know exactly what to copy and where to paste it.  
+
+---
+
+🪜 Step‑by‑Step
+
+1. Create a JSON file in your GitHub project
+- In your project folder (same place as your HTML file), create a new file called:
+
+`
+questions.json
+`
+
+- Copy this content into it:
+
+`json
+{
+  "English": [
+    {
+      "text": "Choose the word opposite in meaning to 'benevolent'.",
+      "options": ["Kind", "Cruel", "Generous", "Friendly"],
+      "answer": "Cruel"
+    },
+    {
+      "text": "Fill in the blank: He insisted _ going to the party.",
+      "options": ["on", "in", "at", "for"],
+      "answer": "on"
+    }
+  ],
+  "Physics": [
+    {
+      "text": "Which of these is a unit of force?",
+      "options": ["Joule", "Newton", "Watt", "Pascal"],
+      "answer": "Newton"
+    },
+    {
+      "text": "A body of mass 2kg is accelerated at 3m/s². Find the force.",
+      "options": ["5N", "6N", "3N", "2N"],
+      "answer": "6N"
+    }
+  ],
+  "Government": [
+    {
+      "text": "Who was Nigeria’s first executive president?",
+      "options": ["Nnamdi Azikiwe","Shehu Shagari","Olusegun Obasanjo","Goodluck Jonathan"],
+      "answer": "Shehu Shagari"
+    },
+    {
+      "text": "The judiciary interprets the law. This is an example of?",
+      "options": ["Rule of law","Separation of powers","Checks and balances","Democracy"],
+      "answer": "Separation of powers"
+    }
+  ]
+}
+`
+
+---
+
+2. Fetch the JSON in your JavaScript
+Inside your main JS file (or <script> tag in your HTML), paste this code:
+
+`js
+let questions = {};
+
+function loadQuestions() {
+  fetch("questions.json")
+    .then(res => res.json())
+    .then(data => {
+      questions = data;
+      startExam(); // call your exam start function
+    })
+    .catch(err => console.error("Error loading questions:", err));
+}
+`
+
+---
+
+3. Call it when exam starts
+In your startExam() function, instead of hardcoding questions, just call:
+
+`js
+function startExam() {
+  showScreen("screen-cbt");
+  loadQuestions(); // loads from questions.json
+}
+`
+
+---
+
+✅ What You Just Did
+- Created questions.json → holds your JAMB‑style questions.  
+- Fetched it with JavaScript → loads them into your exam engine.  
+- Displayed them in your existing HTML structure → .q-text and .options-list show the questions and answers.  
+
+---
+
+👉 This way, you don’t touch your Firebase auth or dashboard logic at all. You just add one file (questions.json) and a small fetch function.  
+
+Would you like me to now show you the loop logic that moves through each question one by one (so students can click “Next” and “Previous”)?
