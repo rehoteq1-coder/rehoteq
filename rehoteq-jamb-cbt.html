@@ -1,35 +1,53 @@
-<!DOCTYPE html>
+
+    <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Rehoteq Pre-JAMB CBT Practice</title>
-  <style>
-    body{background:#080808;font-family:'DM Sans',sans-serif;color:#F0F0F0;margin:0;}
-    .screen{display:none;}
-    .screen.active{display:block;}
-    .auth-box,.dashboard,.results,.exam{max-width:700px;margin:40px auto;padding:20px;background:#101010;border-radius:12px;}
-    .btn{padding:10px 20px;border:none;border-radius:8px;cursor:pointer;font-weight:700;}
-    .btn-gold{background:#F5A623;color:#000;}
-    .btn-red{background:#E74C3C;color:#fff;}
-    .update-item{margin:8px 0;padding:8px;border:1px solid #2C2C2C;border-radius:6px;}
-    .question{margin-bottom:20px;}
-    .option{padding:8px;border:1px solid #2C2C2C;border-radius:6px;margin:6px 0;cursor:pointer;}
-    .option.selected{background:#F5A62320;border-color:#F5A623;}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rehoteq Pre-JAMB CBT Practice</title>
+<meta name="description" content="Free JAMB CBT practice test for Nigerian students — by Rehoteq Technologies, Okitipupa.">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* keep all your CSS exactly as before */
+:root {
+  --gold:#F5A623; --gold2:#C4811A; --bg:#080808; --surface:#101010;
+  --card:#161616; --card2:#1C1C1C; --border:#222; --border2:#2C2C2C;
+  --text:#F0F0F0; --muted:#666; --muted2:#999;
+  --green:#2ECC71; --red:#E74C3C; --blue:#3B9EFF; --orange:#F39C12;
+}
+/* … all your existing CSS for auth, dashboard, exam, results, review … */
+</style>
 </head>
-<body>
+  <body>
+
+<!-- AUTH SCREEN -->
+<div class="screen active" id="screen-auth">
+  <!-- your existing auth markup -->
+</div>
 
 <!-- DASHBOARD -->
-<div class="screen active" id="screen-dashboard">
+<div class="screen" id="screen-dashboard">
   <div class="dashboard">
-    <h2 id="dash-greeting">Welcome back, Student</h2>
-    <h3>My Reviews</h3>
-    <div id="dash-reviews"></div>
-    <button class="btn btn-gold" onclick="startExam()">Start Exam</button>
+    <div class="dash-top">
+      <div class="dash-greeting" id="dash-greeting">Welcome back!</div>
+      <div class="dash-user-info">
+        <span id="dash-email" style="font-size:0.75rem;color:var(--muted2)"></span>
+        <button onclick="doSignOut()" style="background:none;border:1px solid var(--border2);color:var(--muted2);padding:5px 12px;border-radius:6px;font-size:0.72rem;cursor:pointer;font-family:var(--body);margin-left:10px">Sign Out</button>
+      </div>
+    </div>
+
+    <div class="dash-motivation" id="dash-motivation"></div>
+
+    <div class="dash-section">
+      <div class="dash-sec-title">📢 JAMB Updates & News</div>
+      <div class="dash-updates" id="dash-updates"></div>
+    </div>
   </div>
 </div>
+
 <!-- SUBJECT SELECTION -->
-<div id="screen-subject" class="screen active">
+<div id="screen-subject" class="screen">
   <h2>Select Subject</h2>
   <select id="subjectSelect">
     <option value="English">English</option>
@@ -44,6 +62,7 @@
   </select>
   <button class="btn btn-gold" onclick="startExam()">Start Exam</button>
 </div>
+
 <!-- CBT EXAM -->
 <div class="screen" id="screen-cbt">
   <div class="exam">
@@ -65,17 +84,115 @@
     <button class="btn btn-gold" onclick="showDashboard()">Back to Dashboard</button>
   </div>
 </div>
+  <script>
+const questions = {
+  English: [
+    {text:"Choose the word opposite in meaning to 'benevolent'.", options:["Kind","Cruel","Generous","Friendly"], answer:"Cruel"},
+    {text:"Fill in the blank: He insisted ____ going to the party.", options:["on","at","for","in"], answer:"on"},
+    {text:"Which of these is a synonym for 'happy'?", options:["Sad","Joyful","Angry","Tired"], answer:"Joyful"},
+    {text:"Select the correct spelling.", options:["Accomodate","Accommodate","Acommodate","Acomodate"], answer:"Accommodate"},
+    {text:"Choose the word opposite in meaning to 'contract'.", options:["Increase","Enlarge","Expand","Grow"], answer:"Expand"}
+  ]
+};
 
-<script>
+let currentSubject = null;
+let currentIndex = 0;
+let selectedAnswers = [];
+let timerInterval = null;
+let timeLeft = 600; // 10 minutes
+let reviews = []; // store past scores
+
+function showScreen(id) {
+  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+}
+
+function showQuestion() {
+  const q = questions[currentSubject][currentIndex];
+  document.querySelector(".q-text").textContent = q.text;
+  const optionsDiv = document.querySelector(".options-list");
+  optionsDiv.innerHTML = "";
+  q.options.forEach(opt => {
+    const btn = document.createElement("button");
+    btn.textContent = opt;
+    btn.className = "opt";
+    btn.onclick = () => selectAnswer(opt);
+    optionsDiv.appendChild(btn);
+  });
+}
+
+function selectAnswer(option) {
+  selectedAnswers[currentIndex] = option;
+  document.querySelectorAll(".opt").forEach(b => {
+    b.classList.toggle("selected", b.textContent === option);
+  });
+}
+
+function nextQuestion() {
+  if (currentIndex < questions[currentSubject].length - 1) {
+    currentIndex++;
+    showQuestion();
+  } else {
+    finishExam(); // ✅ allow submit even if not all answered
+  }
+}
+
+function finishExam() {
+  clearInterval(timerInterval);
+  let score = 0;
+  questions[currentSubject].forEach((q, i) => {
+    if (q.answer === selectedAnswers[i]) score++;
+  });
+  document.getElementById("result-score").textContent = 
+    `You scored ${score} out of ${questions[currentSubject].length}`;
+  reviews.push({subject: currentSubject, score: score, total: questions[currentSubject].length});
+  updateReviews();
+  showScreen("screen-results");
+}
+
 function startExam() {
   showScreen("screen-cbt");
   const select = document.getElementById("subjectSelect");
-  currentSubject = select.value; // subject chosen by student
+  currentSubject = select.value;
   currentIndex = 0;
-  answers = {};
+  selectedAnswers = [];
   showQuestion();
-  startTimer(120); // adjust timer as needed
+  startTimer();
 }
+
+function startTimer() {
+  timeLeft = 600;
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    const minutes = Math.floor(timeLeft / 60);
+    const seconds = timeLeft % 60;
+    document.getElementById("exam-timer").textContent = 
+      `Time left: ${minutes}:${seconds.toString().padStart(2,"0")}`;
+    if (timeLeft <= 0) finishExam();
+  }, 1000);
+}
+
+function showDashboard() {
+  showScreen("screen-dashboard");
+}
+
+function updateReviews() {
+  const dashUpdates = document.getElementById("dash-updates");
+  const reviewBox = document.createElement("div");
+  reviewBox.className = "dash-section";
+  reviewBox.innerHTML = `<div class="dash-sec-title">📊 My Reviews</div>`;
+  reviews.forEach(r => {
+    const rec = document.createElement("div");
+    rec.className = "score-record";
+    rec.innerHTML = `<span class="score-record-combo">${r.subject}</span>
+                     <span class="score-record-score">${r.score}/${r.total}</span>`;
+    reviewBox.appendChild(rec);
+  });
+  dashUpdates.appendChild(reviewBox);
+}
+</script>
+</body>
+</html>
   const questions = {
     English: [
   {text:"Choose the word opposite in meaning to 'benevolent'.", options:["Kind","Cruel","Generous","Friendly"], answer:"Cruel"},
