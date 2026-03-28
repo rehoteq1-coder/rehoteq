@@ -1,0 +1,249 @@
+<script type="module">
+// ================= FIREBASE =================
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getFirestore, collection, addDoc, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  // YOUR CONFIG HERE
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+// ================= GLOBALS =================
+let currentUser = null;
+let timerInterval;
+let timeLeft = 100 * 60;
+
+let currentIndex = 0;
+
+// ================= SCREEN =================
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+// ================= AUTH =================
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    currentUser = user;
+    document.getElementById("display-name").innerText =
+      user.displayName || user.email;
+
+    showScreen('screen-welcome');
+  } else {
+    showScreen('screen-auth');
+  }
+});
+
+// ================= TIMER =================
+function startTimer(){
+  timerInterval = setInterval(() => {
+    timeLeft--;
+
+    const min = Math.floor(timeLeft / 60);
+    const sec = timeLeft % 60;
+
+    document.getElementById("timer").innerText =
+      `${min}:${sec < 10 ? '0' : ''}${sec}`;
+
+    if(timeLeft <= 0){
+      submitExam();
+    }
+
+  }, 1000);
+}
+
+function stopTimer(){
+  clearInterval(timerInterval);
+}
+
+// ================= QUESTION RENDER =================
+function renderQuestion(){
+  const q = questions[currentIndex];
+
+  document.getElementById("q-text").innerText = q.text;
+  document.getElementById("q-counter").innerText =
+    `${currentIndex + 1} / ${questions.length}`;
+
+  const optBox = document.getElementById("q-options");
+  optBox.innerHTML = "";
+
+  Object.entries(q.options).forEach(([key, val]) => {
+    const div = document.createElement("div");
+    div.className = "opt";
+
+    if(q.userAnswer === key) div.classList.add("selected");
+
+    div.innerHTML = `<div class="opt-key">${key}</div><div>${val}</div>`;
+
+    div.onclick = () => selectOption(key);
+
+    optBox.appendChild(div);
+  });
+
+  updateNavigator();
+}
+
+// ================= SELECT OPTION =================
+function selectOption(answer){
+  questions[currentIndex].userAnswer = answer;
+
+  renderQuestion();
+
+  setTimeout(() => {
+    if(currentIndex < questions.length - 1){
+      currentIndex++;
+      renderQuestion();
+    }
+  }, 400);
+}
+
+// ================= NAVIGATION =================
+window.nextQuestion = function(){
+  if(currentIndex < questions.length - 1){
+    currentIndex++;
+    renderQuestion();
+  }
+}
+
+window.prevQuestion = function(){
+  if(currentIndex > 0){
+    currentIndex--;
+    renderQuestion();
+  }
+}
+
+// ================= NAVIGATOR =================
+function updateNavigator(){
+  const grid = document.getElementById("q-grid");
+  if(!grid) return;
+
+  grid.innerHTML = "";
+
+  questions.forEach((q,i)=>{
+    const b = document.createElement("div");
+    b.className = "q-bubble";
+
+    if(q.userAnswer) b.classList.add("answered");
+    if(i === currentIndex) b.classList.add("current");
+
+    b.innerText = i+1;
+    b.onclick = () => {
+      currentIndex = i;
+      renderQuestion();
+    };
+
+    grid.appendChild(b);
+  });
+}
+
+// ================= RESULT =================
+function calculateResult(){
+  let total = 0;
+  let correct = 0;
+  let wrong = 0;
+
+  let subjectStats = {};
+
+  questions.forEach(q => {
+    if(!subjectStats[q.subject]){
+      subjectStats[q.subject] = {correct:0, total:0};
+    }
+
+    subjectStats[q.subject].total++;
+
+    if(q.userAnswer === q.correctAnswer){
+      correct++;
+      subjectStats[q.subject].correct++;
+      total += 2.5;
+    } else {
+      wrong++;
+    }
+  });
+
+  return { total, correct, wrong, subjectStats };
+}
+
+// ================= BREAKDOWN =================
+function renderBreakdown(stats){
+  const box = document.getElementById("breakdown-grid");
+  box.innerHTML = "";
+
+  Object.keys(stats).forEach(sub=>{
+    const s = stats[sub];
+    const percent = (s.correct/s.total)*100;
+
+    let cls = "bar-good";
+    if(percent < 50) cls = "bar-bad";
+    else if(percent < 70) cls = "bar-ok";
+
+    box.innerHTML += `
+      <div class="bcard">
+        <div class="bcard-name">${sub}</div>
+        <div class="bcard-bar-wrap">
+          <div class="bcard-bar ${cls}" style="width:${percent}%"></div>
+        </div>
+        <div class="bcard-score">${s.correct}/${s.total}</div>
+      </div>
+    `;
+  });
+}
+
+// ================= FEEDBACK =================
+function generateFeedback(score){
+  if(score >= 300) return "🔥 Excellent! You are ready for JAMB.";
+  if(score >= 250) return "💪 Very good. Improve weak subjects.";
+  if(score >= 200) return "⚠️ Fair. More practice needed.";
+  return "❌ Low score. Study harder.";
+}
+
+// ================= SAVE =================
+async function saveResult(result){
+  await addDoc(collection(db,"results"),{
+    userId: currentUser.uid,
+    score: result.total,
+    date: new Date()
+  });
+}
+
+// ================= SUBMIT =================
+window.confirmSubmit = function(){
+  if(confirm("Submit exam?")){
+    submitExam();
+  }
+}
+
+function submitExam(){
+  stopTimer();
+
+  const result = calculateResult();
+
+  document.getElementById("r-total-score").innerText = result.total;
+  document.getElementById("r-msg").innerText =
+    `Correct: ${result.correct} | Wrong: ${result.wrong}`;
+  document.getElementById("r-sub").innerText =
+    generateFeedback(result.total);
+
+  renderBreakdown(result.subjectStats);
+
+  saveResult(result);
+
+  showScreen("screen-results");
+}
+
+// ================= START =================
+window.startExam = function(){
+  timeLeft = 100 * 60;
+  currentIndex = 0;
+
+  questions.forEach(q => q.userAnswer = null);
+
+  startTimer();
+  renderQuestion();
+  showScreen("screen-exam");
+}
+
+</script>
