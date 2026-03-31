@@ -1,28 +1,30 @@
 {
-  "name": "Rehoteq RMS — School Result Management",
+  "name": "Rehoteq RMS \u2014 School Result Management",
   "short_name": "Rehoteq RMS",
-  "description": "School Result Management System by Rehoteq Technologies, Okitipupa",
-  "start_url": "/rms/",
-  "scope": "/rms/",
+  "description": "School Result Management System by Rehoteq Technologies",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "background_color": "#05080f",
+  "background_color": "#0a0f1e",
   "theme_color": "#c9a84c",
   "icons": [
     {
-      "src": "https://rehoteq.com/assets/resources/rehoteq-icon-192.png",
+      "src": "./icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "https://rehoteq.com/assets/resources/rehoteq-icon-512.png",
+      "src": "./icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
     }
   ],
-  "categories": ["education", "productivity"],
-  "lang": "en-NG",
-  "dir": "ltr"
+  "categories": [
+    "education",
+    "productivity"
+  ],
+  "lang": "en-NG"
 }
