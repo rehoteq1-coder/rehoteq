@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>RMS School Onboarding — Rehoteq Technologies</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,900&family=Syne:wght@600;700;800&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<!-- EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<style>
+:root{
+  --bg:#030305;--bg2:#08080f;--bg3:#0d0d18;
+  --card:rgba(255,255,255,0.03);--card2:rgba(255,255,255,0.055);
+  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.12);
+  --gold:#c9a84c;--gold2:#f0c040;--gold3:rgba(201,168,76,0.12);
+  --white:#f5f5f7;--muted:rgba(245,245,247,0.5);--muted2:rgba(245,245,247,0.28);
+  --green:#30d158;--red:#ff453a;--cyan:#32ade6;
+  --serif:'Fraunces',serif;--sans:'Syne',sans-serif;
+  --body:'DM Sans',sans-serif;--mono:'DM Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--body);background:var(--bg);color:var(--white);min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+
+/* ── HEADER ── */
+.top-bar{position:fixed;top:0;left:0;right:0;z-index:100;height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 max(20px,4vw);background:rgba(3,3,5,0.9);backdrop-filter:blur(28px);border-bottom:1px solid var(--border);}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.logo-mark{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,#5a3d08,var(--gold),var(--gold2));display:flex;align-items:center;justify-content:center;}
+.logo-mark svg{width:18px;height:18px;}
+.logo-name{font-family:var(--sans);font-size:0.82rem;font-weight:700;color:var(--white);}
+.logo-name em{color:var(--gold);font-style:normal;}
+.top-badge{font-family:var(--mono);font-size:0.6rem;color:var(--gold);background:var(--gold3);border:1px solid rgba(201,168,76,0.2);border-radius:100px;padding:4px 12px;letter-spacing:0.06em;}
+
+/* ── HERO ── */
+.hero{padding:120px max(20px,5vw) 60px;text-align:center;position:relative;overflow:hidden;}
+.hero-glow{position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:600px;height:400px;background:radial-gradient(ellipse,rgba(201,168,76,0.1) 0%,transparent 70%);pointer-events:none;}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(48,209,88,0.08);border:1px solid rgba(48,209,88,0.2);border-radius:100px;padding:5px 16px;font-family:var(--mono);font-size:0.6rem;color:var(--green);letter-spacing:0.08em;margin-bottom:24px;animation:fadeUp 0.7s ease both;}
+.live-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.5);opacity:0.5;}}
+.hero h1{font-family:var(--serif);font-size:clamp(2rem,6vw,4rem);font-weight:900;line-height:1.05;letter-spacing:-0.02em;margin-bottom:16px;animation:fadeUp 0.7s 0.1s ease both;}
+.hero h1 em{background:linear-gradient(135deg,var(--gold),var(--gold2),#fff8e0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-style:normal;}
+.hero-sub{font-size:0.95rem;color:var(--muted);max-width:520px;margin:0 auto 48px;line-height:1.85;font-weight:300;animation:fadeUp 0.7s 0.2s ease both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+
+/* ── STEP INDICATOR ── */
+.steps-wrap{max-width:700px;margin:0 auto 48px;animation:fadeUp 0.7s 0.3s ease both;}
+.steps{display:flex;align-items:center;justify-content:center;gap:0;}
+.step-item{display:flex;flex-direction:column;align-items:center;gap:6px;flex:1;}
+.step-circle{width:36px;height:36px;border-radius:50%;border:2px solid var(--border2);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:0.7rem;font-weight:700;color:var(--muted2);transition:all 0.4s;background:var(--bg2);}
+.step-circle.active{border-color:var(--gold);color:var(--gold);background:var(--gold3);}
+.step-circle.done{border-color:var(--green);color:var(--green);background:rgba(48,209,88,0.1);}
+.step-label{font-family:var(--mono);font-size:0.55rem;color:var(--muted2);text-transform:uppercase;letter-spacing:0.1em;transition:color 0.4s;text-align:center;}
+.step-label.active{color:var(--gold);}
+.step-label.done{color:var(--green);}
+.step-line{flex:1;height:1px;background:var(--border);max-width:60px;margin-bottom:22px;}
+.step-line.done{background:var(--green);}
+
+/* ── FORM CARD ── */
+.form-wrap{max-width:700px;margin:0 auto;padding:0 max(16px,3vw) 80px;}
+.form-card{background:var(--card2);border:1px solid var(--border2);border-radius:24px;padding:clamp(24px,5vw,44px);animation:fadeUp 0.5s ease both;}
+.form-card-title{font-family:var(--serif);font-size:1.5rem;font-weight:900;margin-bottom:6px;}
+.form-card-sub{font-size:0.82rem;color:var(--muted);margin-bottom:32px;line-height:1.65;}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+@media(max-width:560px){.form-grid{grid-template-columns:1fr;}}
+.form-full{grid-column:1/-1;}
+.field{display:flex;flex-direction:column;gap:7px;}
+.field label{font-family:var(--mono);font-size:0.58rem;color:var(--muted2);text-transform:uppercase;letter-spacing:0.12em;}
+.field label span{color:var(--red);margin-left:2px;}
+.field input,.field select,.field textarea{background:rgba(255,255,255,0.04);border:1px solid var(--border2);border-radius:10px;padding:11px 14px;color:var(--white);font-family:var(--body);font-size:0.85rem;outline:none;transition:border-color 0.2s,background 0.2s;width:100%;}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:rgba(201,168,76,0.5);background:rgba(201,168,76,0.04);}
+.field input::placeholder,.field textarea::placeholder{color:var(--muted2);}
+.field select option{background:#0d0d18;color:var(--white);}
+.field textarea{resize:vertical;min-height:80px;}
+.field-error{font-size:0.7rem;color:var(--red);display:none;margin-top:2px;}
+.field.has-error input,.field.has-error select,.field.has-error textarea{border-color:rgba(255,69,58,0.5);}
+.field.has-error .field-error{display:block;}
+
+/* Upload area */
+.upload-area{border:2px dashed var(--border2);border-radius:12px;padding:28px;text-align:center;cursor:pointer;transition:all 0.3s;position:relative;}
+.upload-area:hover{border-color:rgba(201,168,76,0.4);background:rgba(201,168,76,0.03);}
+.upload-area.has-file{border-color:rgba(48,209,88,0.4);background:rgba(48,209,88,0.04);}
+.upload-area input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.upload-icon{font-size:1.8rem;margin-bottom:8px;}
+.upload-text{font-size:0.82rem;color:var(--muted);line-height:1.5;}
+.upload-text strong{color:var(--gold);display:block;margin-bottom:4px;}
+.upload-filename{font-family:var(--mono);font-size:0.72rem;color:var(--green);margin-top:6px;}
+
+/* Plan cards */
+.plan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:4px;}
+@media(max-width:500px){.plan-grid{grid-template-columns:1fr;}}
+.plan-card{border:1.5px solid var(--border2);border-radius:14px;padding:18px;cursor:pointer;transition:all 0.25s;position:relative;}
+.plan-card:hover{border-color:rgba(201,168,76,0.35);}
+.plan-card.selected{border-color:var(--gold);background:var(--gold3);}
+.plan-card input[type=radio]{position:absolute;opacity:0;width:0;height:0;}
+.plan-check{position:absolute;top:12px;right:12px;width:18px;height:18px;border-radius:50%;border:2px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:0.55rem;transition:all 0.2s;}
+.plan-card.selected .plan-check{background:var(--gold);border-color:var(--gold);color:#000;}
+.plan-name{font-family:var(--sans);font-size:0.88rem;font-weight:700;margin-bottom:4px;}
+.plan-price{font-family:var(--serif);font-size:1.4rem;font-weight:900;color:var(--gold);line-height:1;}
+.plan-period{font-size:0.65rem;color:var(--muted2);}
+.plan-students{font-size:0.72rem;color:var(--muted);margin-top:8px;}
+.plan-feat{font-size:0.68rem;color:var(--muted);margin-top:4px;line-height:1.5;}
+.plan-popular{position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:var(--gold);color:#000;font-family:var(--mono);font-size:0.55rem;font-weight:700;padding:3px 10px;border-radius:100px;white-space:nowrap;}
+
+/* MOU */
+.mou-box{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:14px;padding:24px;max-height:320px;overflow-y:auto;margin-bottom:24px;font-size:0.8rem;color:var(--muted);line-height:1.9;scrollbar-width:thin;scrollbar-color:var(--gold) transparent;}
+.mou-box h3{font-family:var(--sans);font-size:0.88rem;font-weight:700;color:var(--white);margin:16px 0 8px;text-transform:uppercase;letter-spacing:0.06em;}
+.mou-box h3:first-child{margin-top:0;}
+.mou-box p{margin-bottom:10px;}
+.mou-box ol{padding-left:18px;margin-bottom:10px;}
+.mou-box ol li{margin-bottom:6px;}
+.mou-highlight{color:var(--gold);font-weight:500;}
+
+.consent-item{display:flex;align-items:flex-start;gap:14px;padding:14px 16px;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:10px;margin-bottom:10px;cursor:pointer;transition:all 0.2s;}
+.consent-item:hover{border-color:rgba(201,168,76,0.25);}
+.consent-item.checked{background:rgba(201,168,76,0.05);border-color:rgba(201,168,76,0.3);}
+.consent-box{width:20px;height:20px;border-radius:5px;border:2px solid var(--border2);flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:1px;transition:all 0.2s;}
+.consent-item.checked .consent-box{background:var(--gold);border-color:var(--gold);}
+.consent-text{font-size:0.8rem;color:var(--muted);line-height:1.6;}
+.consent-text strong{color:var(--white);display:block;margin-bottom:2px;font-size:0.82rem;}
+
+/* Signature */
+.sig-wrap{background:rgba(255,255,255,0.02);border:1px solid var(--border2);border-radius:12px;padding:20px;}
+.sig-preview{font-family:var(--serif);font-size:1.6rem;color:var(--gold);min-height:48px;margin-top:10px;padding:8px 0;border-bottom:1px solid var(--border2);font-style:italic;opacity:0.8;}
+
+/* Buttons */
+.btn-row{display:flex;gap:12px;margin-top:32px;flex-wrap:wrap;}
+.btn-primary{background:linear-gradient(135deg,#5a3d08,var(--gold),var(--gold2));color:#000;font-family:var(--sans);font-weight:700;font-size:0.88rem;padding:14px 32px;border-radius:100px;border:none;cursor:pointer;flex:1;transition:all 0.3s;box-shadow:0 0 30px rgba(201,168,76,0.2);}
+.btn-primary:hover{transform:scale(1.02);box-shadow:0 0 50px rgba(201,168,76,0.35);}
+.btn-primary:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
+.btn-secondary{background:rgba(255,255,255,0.05);border:1px solid var(--border2);color:var(--white);font-family:var(--sans);font-weight:600;font-size:0.88rem;padding:14px 28px;border-radius:100px;cursor:pointer;transition:all 0.3s;}
+.btn-secondary:hover{background:rgba(255,255,255,0.09);}
+
+/* Progress bar */
+.progress-bar{height:3px;background:var(--border);border-radius:3px;margin-bottom:28px;overflow:hidden;}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:3px;transition:width 0.5s cubic-bezier(0.4,0,0.2,1);}
+
+/* Success */
+.success-screen{display:none;text-align:center;padding:60px 20px;}
+.success-icon{width:80px;height:80px;border-radius:50%;background:rgba(48,209,88,0.1);border:2px solid rgba(48,209,88,0.3);display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto 24px;}
+.success-title{font-family:var(--serif);font-size:2rem;font-weight:900;margin-bottom:12px;}
+.success-sub{font-size:0.9rem;color:var(--muted);max-width:460px;margin:0 auto 32px;line-height:1.8;}
+.success-ref{font-family:var(--mono);font-size:0.8rem;color:var(--gold);background:var(--gold3);border:1px solid rgba(201,168,76,0.2);border-radius:10px;padding:12px 20px;display:inline-block;margin-bottom:28px;}
+.print-btn{background:transparent;border:1px solid var(--border2);color:var(--muted);font-family:var(--body);font-size:0.82rem;padding:10px 24px;border-radius:100px;cursor:pointer;margin-top:12px;}
+.print-btn:hover{border-color:var(--gold);color:var(--gold);}
+
+/* Toasts */
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--card2);border:1px solid var(--border2);border-radius:12px;padding:12px 24px;font-size:0.82rem;color:var(--white);opacity:0;transition:all 0.3s;z-index:999;white-space:nowrap;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* Info tags */
+.info-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(50,173,230,0.08);border:1px solid rgba(50,173,230,0.2);border-radius:100px;padding:4px 12px;font-family:var(--mono);font-size:0.6rem;color:var(--cyan);margin-bottom:20px;}
+
+/* Divider */
+.sec-divider{display:flex;align-items:center;gap:14px;margin:28px 0 24px;}
+.sec-divider-line{flex:1;height:1px;background:var(--border);}
+.sec-divider-label{font-family:var(--mono);font-size:0.58rem;color:var(--muted2);text-transform:uppercase;letter-spacing:0.1em;white-space:nowrap;}
+
+@media print{
+  .top-bar,.hero,.steps-wrap,.btn-row,.toast{display:none!important;}
+  body{background:#fff;color:#000;}
+  .form-card{border:1px solid #ccc;box-shadow:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <a href="https://rehoteq.com" class="logo">
+    <div class="logo-mark">
+      <svg viewBox="0 0 64 64" fill="none">
+        <defs><linearGradient id="lg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#7a5c1a"/><stop offset="100%" stop-color="#f0c040"/></linearGradient></defs>
+        <polygon points="32,2 58,17 58,47 32,62 6,47 6,17" fill="none" stroke="url(#lg)" stroke-width="2"/>
+        <text x="32" y="44" text-anchor="middle" font-family="Georgia,serif" font-size="26" font-weight="900" fill="url(#lg)">R</text>
+      </svg>
+    </div>
+    <div class="logo-name">Rehoteq <em>Technologies</em></div>
+  </a>
+  <div class="top-badge">RMS Onboarding</div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-tag"><span class="live-dot"></span>Official School Registration</div>
+  <h1>Join <em>Rehoteq RMS</em><br>Today.</h1>
+  <p class="hero-sub">Complete this form to set up your school on Nigeria's smartest result management platform. Setup is completed within 24 hours of submission.</p>
+</div>
+
+<!-- STEP INDICATOR -->
+<div class="steps-wrap">
+  <div class="steps">
+    <div class="step-item">
+      <div class="step-circle active" id="sc1">1</div>
+      <div class="step-label active" id="sl1">School Info</div>
+    </div>
+    <div class="step-line" id="line1"></div>
+    <div class="step-item">
+      <div class="step-circle" id="sc2">2</div>
+      <div class="step-label" id="sl2">Plan & Details</div>
+    </div>
+    <div class="step-line" id="line2"></div>
+    <div class="step-item">
+      <div class="step-circle" id="sc3">3</div>
+      <div class="step-label" id="sl3">MOU & Sign</div>
+    </div>
+  </div>
+</div>
+
+<!-- FORM WRAP -->
+<div class="form-wrap">
+
+<!-- ══ STEP 1: SCHOOL INFO ══ -->
+<div class="form-card" id="step1">
+  <div class="progress-bar"><div class="progress-fill" style="width:33%"></div></div>
+  <div class="form-card-title">School Information</div>
+  <div class="form-card-sub">Tell us about your school so we can set up your RMS account correctly.</div>
+
+  <div class="form-grid">
+    <div class="field form-full">
+      <label>School Name <span>*</span></label>
+      <input type="text" id="school-name" placeholder="e.g. Greenfield Secondary School"/>
+      <div class="field-error">Please enter the school name</div>
+    </div>
+
+    <div class="field form-full">
+      <label>School Address <span>*</span></label>
+      <input type="text" id="school-address" placeholder="e.g. 12 Adeola Street, Surulere"/>
+      <div class="field-error">Please enter the school address</div>
+    </div>
+
+    <div class="field">
+      <label>State <span>*</span></label>
+      <select id="school-state">
+        <option value="">Select state...</option>
+        <option>Lagos</option><option>Ogun</option><option>Oyo</option><option>Osun</option>
+        <option>Ondo</option><option>Ekiti</option><option>Kwara</option><option>Kogi</option>
+        <option>FCT — Abuja</option><option>Rivers</option><option>Delta</option><option>Edo</option>
+        <option>Anambra</option><option>Imo</option><option>Enugu</option><option>Abia</option>
+        <option>Cross River</option><option>Akwa Ibom</option><option>Bayelsa</option>
+        <option>Kano</option><option>Kaduna</option><option>Katsina</option><option>Sokoto</option>
+        <option>Zamfara</option><option>Kebbi</option><option>Niger</option><option>Nasarawa</option>
+        <option>Plateau</option><option>Benue</option><option>Taraba</option><option>Adamawa</option>
+        <option>Gombe</option><option>Bauchi</option><option>Yobe</option><option>Borno</option>
+        <option>Jigawa</option>
+      </select>
+      <div class="field-error">Please select a state</div>
+    </div>
+
+    <div class="field">
+      <label>LGA <span>*</span></label>
+      <input type="text" id="school-lga" placeholder="e.g. Surulere"/>
+      <div class="field-error">Please enter the LGA</div>
+    </div>
+
+    <div class="field">
+      <label>School Type <span>*</span></label>
+      <select id="school-type">
+        <option value="">Select type...</option>
+        <option>Private Primary School</option>
+        <option>Private Secondary School</option>
+        <option>Private Primary & Secondary (Combined)</option>
+        <option>Government School</option>
+        <option>Technical/Vocational School</option>
+        <option>Special Needs School</option>
+        <option>Islamic/Arabic School</option>
+        <option>Nursery & Primary School</option>
+      </select>
+      <div class="field-error">Please select school type</div>
+    </div>
+
+    <div class="field">
+      <label>Year Established</label>
+      <input type="number" id="school-year" placeholder="e.g. 2005" min="1900" max="2025"/>
+    </div>
+
+    <div class="field form-full">
+      <label>School Logo or Stamp (Optional)</label>
+      <div class="upload-area" id="upload-area">
+        <input type="file" id="school-logo" accept="image/*" onchange="handleFileUpload(this)"/>
+        <div class="upload-icon">🏫</div>
+        <div class="upload-text">
+          <strong>Click to upload your school logo or stamp</strong>
+          PNG, JPG or SVG — Max 2MB
+        </div>
+        <div class="upload-filename" id="upload-filename"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-divider">
+    <div class="sec-divider-line"></div>
+    <div class="sec-divider-label">Principal / Contact</div>
+    <div class="sec-divider-line"></div>
+  </div>
+
+  <div class="form-grid">
+    <div class="field">
+      <label>Principal's Full Name <span>*</span></label>
+      <input type="text" id="principal-name" placeholder="e.g. Mr. Adebayo Emmanuel"/>
+      <div class="field-error">Please enter the principal's name</div>
+    </div>
+
+    <div class="field">
+      <label>Principal's Title</label>
+      <select id="principal-title">
+        <option>Mr.</option><option>Mrs.</option><option>Miss</option><option>Dr.</option><option>Prof.</option><option>Rev.</option><option>Alhaji</option><option>Alhaja</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>WhatsApp / Phone Number <span>*</span></label>
+      <input type="tel" id="principal-phone" placeholder="e.g. 08012345678"/>
+      <div class="field-error">Please enter a phone number</div>
+    </div>
+
+    <div class="field">
+      <label>Email Address <span>*</span></label>
+      <input type="email" id="principal-email" placeholder="e.g. principal@school.com"/>
+      <div class="field-error">Please enter a valid email</div>
+    </div>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn-primary" onclick="goStep2()">Continue to Plan Selection →</button>
+  </div>
+</div>
+
+<!-- ══ STEP 2: PLAN & DETAILS ══ -->
+<div class="form-card" id="step2" style="display:none">
+  <div class="progress-bar"><div class="progress-fill" style="width:66%"></div></div>
+  <div class="form-card-title">School Size & Plan</div>
+  <div class="form-card-sub">Help us understand your school's needs and choose the right plan.</div>
+
+  <div class="form-grid">
+    <div class="field">
+      <label>Total Number of Students <span>*</span></label>
+      <input type="number" id="student-count" placeholder="e.g. 350" min="1"/>
+      <div class="field-error">Please enter number of students</div>
+    </div>
+
+    <div class="field">
+      <label>Number of Classes/Arms <span>*</span></label>
+      <input type="number" id="class-count" placeholder="e.g. 12" min="1"/>
+      <div class="field-error">Please enter number of classes</div>
+    </div>
+
+    <div class="field">
+      <label>Number of Teachers</label>
+      <input type="number" id="teacher-count" placeholder="e.g. 24" min="1"/>
+    </div>
+
+    <div class="field">
+      <label>Current Session</label>
+      <select id="current-session">
+        <option>2024/2025</option>
+        <option>2025/2026</option>
+        <option>2026/2027</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>Starting Term <span>*</span></label>
+      <select id="starting-term">
+        <option value="">Select term...</option>
+        <option>First Term</option>
+        <option>Second Term</option>
+        <option>Third Term</option>
+      </select>
+      <div class="field-error">Please select a starting term</div>
+    </div>
+
+    <div class="field">
+      <label>How did you hear about us?</label>
+      <select id="referral-source">
+        <option value="">Select...</option>
+        <option>Rehoteq Sales Visit</option>
+        <option>WhatsApp</option>
+        <option>Facebook / Instagram</option>
+        <option>Referred by another school</option>
+        <option>Google Search</option>
+        <option>rehoteq.com website</option>
+        <option>Other</option>
+      </select>
+    </div>
+
+    <div class="field form-full">
+      <label>Additional Requests or Questions</label>
+      <textarea id="extra-notes" placeholder="Any special requirements, questions, or notes for the Rehoteq team..."></textarea>
+    </div>
+  </div>
+
+  <div class="sec-divider">
+    <div class="sec-divider-line"></div>
+    <div class="sec-divider-label">Choose Your Plan</div>
+    <div class="sec-divider-line"></div>
+  </div>
+
+  <div class="info-tag">💡 One-time setup fee: ₦10,000 (paid separately)</div>
+
+  <div class="plan-grid" id="plan-grid">
+    <label class="plan-card" id="plan-basic">
+      <input type="radio" name="rms-plan" value="Basic — ₦5,000/term" onchange="selectPlan('plan-basic')"/>
+      <div class="plan-check">✓</div>
+      <div class="plan-name">Basic</div>
+      <div class="plan-price">₦5,000</div>
+      <div class="plan-period">per term</div>
+      <div class="plan-students">Up to 100 students</div>
+      <div class="plan-feat">✅ Score entry<br>✅ Auto-calculation<br>✅ Result links<br>✅ Broadsheet</div>
+    </label>
+
+    <label class="plan-card" id="plan-standard" style="position:relative">
+      <input type="radio" name="rms-plan" value="Standard — ₦10,000/term" onchange="selectPlan('plan-standard')"/>
+      <div class="plan-popular">⭐ Most Popular</div>
+      <div class="plan-check">✓</div>
+      <div class="plan-name">Standard</div>
+      <div class="plan-price">₦10,000</div>
+      <div class="plan-period">per term</div>
+      <div class="plan-students">Up to 150 students</div>
+      <div class="plan-feat">✅ All Basic features<br>✅ HOD access<br>✅ GPA & Cumulative<br>✅ Priority support</div>
+    </label>
+
+    <label class="plan-card" id="plan-premium">
+      <input type="radio" name="rms-plan" value="Premium — ₦15,000/term" onchange="selectPlan('plan-premium')"/>
+      <div class="plan-check">✓</div>
+      <div class="plan-name">Premium</div>
+      <div class="plan-price">₦15,000</div>
+      <div class="plan-period">per term</div>
+      <div class="plan-students">200+ students</div>
+      <div class="plan-feat">✅ All Standard features<br>✅ Custom school branding<br>✅ White label option<br>✅ Dedicated support</div>
+    </label>
+  </div>
+  <div class="field-error" id="plan-error" style="display:none;margin-top:8px">Please select a plan to continue</div>
+
+  <div class="btn-row">
+    <button class="btn-secondary" onclick="goStep1()">← Back</button>
+    <button class="btn-primary" onclick="goStep3()">Continue to Agreement →</button>
+  </div>
+</div>
+
+<!-- ══ STEP 3: MOU & SIGNATURE ══ -->
+<div class="form-card" id="step3" style="display:none">
+  <div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div>
+  <div class="form-card-title">Memorandum of Understanding</div>
+  <div class="form-card-sub">Please read this agreement carefully before signing. It is binding between your school and Rehoteq Technologies.</div>
+
+  <!-- MOU TEXT -->
+  <div class="mou-box" id="mou-content">
+    <h3>Memorandum of Understanding (MOU)</h3>
+    <p>This Memorandum of Understanding ("Agreement") is entered into between <span class="mou-highlight">Rehoteq Technologies</span>, a technology company registered and operating in Okitipupa, Ondo State, Nigeria ("Service Provider"), and the undersigned school institution ("Client School").</p>
+
+    <h3>1. Nature of Service</h3>
+    <p>Rehoteq Technologies agrees to provide the Client School access to the <span class="mou-highlight">Rehoteq Result Management System (RMS)</span> — a cloud-based school result management platform. The service includes student result entry, auto-calculation of scores and GPA, cumulative 3-term tracking, student result access links, and CSV broadsheet generation.</p>
+
+    <h3>2. Subscription & Payment</h3>
+    <ol>
+      <li>The Client School agrees to pay the applicable plan fee <span class="mou-highlight">per academic term</span> as selected in this form.</li>
+      <li>A one-time <span class="mou-highlight">setup fee of ₦10,000</span> is payable before or upon activation of the system.</li>
+      <li>Payment must be made in full before the start of each term. Rehoteq reserves the right to restrict access for non-payment.</li>
+      <li>Fees are subject to review with 30 days' notice. Existing term subscriptions are honoured at the agreed rate.</li>
+      <li>Payments are non-refundable once the system has been set up and activated for the Client School.</li>
+    </ol>
+
+    <h3>3. Service Delivery</h3>
+    <ol>
+      <li>Rehoteq Technologies will set up the Client School's RMS account within <span class="mou-highlight">24 hours</span> of receiving payment and the completed onboarding form.</li>
+      <li>Training and onboarding support will be provided via WhatsApp or in person where feasible.</li>
+      <li>The system will be available online 24/7, subject to scheduled maintenance windows.</li>
+      <li>Technical support is provided during business hours (Monday–Saturday, 8am–6pm WAT).</li>
+    </ol>
+
+    <h3>4. Data Privacy & Security</h3>
+    <ol>
+      <li>All student data entered into the RMS is the property of the Client School.</li>
+      <li>Rehoteq Technologies will not share, sell, or disclose student data to any third party without written consent from the Client School.</li>
+      <li>The Client School is responsible for ensuring that all data entered is accurate and lawfully obtained.</li>
+      <li>The RMS uses Firebase (Google Cloud) infrastructure with industry-standard encryption and security.</li>
+    </ol>
+
+    <h3>5. Client Responsibilities</h3>
+    <ol>
+      <li>The Client School agrees to provide accurate school and student information during setup.</li>
+      <li>The Client School will keep login credentials (passwords) confidential and not share them externally.</li>
+      <li>The Client School agrees not to misuse the platform or attempt to access data belonging to other schools.</li>
+      <li>The Client School will promptly notify Rehoteq of any technical issues or security concerns.</li>
+    </ol>
+
+    <h3>6. Intellectual Property</h3>
+    <p>The Rehoteq RMS platform, including its code, design, and systems, remains the sole intellectual property of Rehoteq Technologies. The Client School is granted a non-exclusive, non-transferable licence to use the platform during the subscription period.</p>
+
+    <h3>7. Termination</h3>
+    <ol>
+      <li>Either party may terminate this agreement with <span class="mou-highlight">14 days' written notice</span>.</li>
+      <li>Upon termination, the Client School may request an export of their data in CSV format within 30 days.</li>
+      <li>Rehoteq reserves the right to terminate immediately in cases of misuse or breach of this agreement.</li>
+    </ol>
+
+    <h3>8. Limitation of Liability</h3>
+    <p>Rehoteq Technologies shall not be liable for any indirect, incidental, or consequential damages arising from use of the platform. The maximum liability shall not exceed the subscription fees paid in the preceding term.</p>
+
+    <h3>9. Governing Law</h3>
+    <p>This agreement is governed by the laws of the Federal Republic of Nigeria. Any disputes shall be resolved through mutual negotiation, failing which, through appropriate legal channels in Ondo State, Nigeria.</p>
+
+    <h3>10. Entire Agreement</h3>
+    <p>This document, together with the selected plan and the completed onboarding form, constitutes the entire agreement between the parties.</p>
+  </div>
+
+  <!-- CONSENT CHECKBOXES -->
+  <div style="margin-bottom:24px">
+    <div style="font-family:var(--mono);font-size:0.6rem;color:var(--muted2);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:12px">Required Agreements</div>
+
+    <div class="consent-item" id="consent1" onclick="toggleConsent(1)">
+      <div class="consent-box" id="cb1"></div>
+      <div class="consent-text">
+        <strong>I have read and understood the MOU</strong>
+        I confirm that I have read the full Memorandum of Understanding above and agree to all its terms and conditions on behalf of my school.
+      </div>
+    </div>
+
+    <div class="consent-item" id="consent2" onclick="toggleConsent(2)">
+      <div class="consent-box" id="cb2"></div>
+      <div class="consent-text">
+        <strong>Payment Obligation</strong>
+        I understand that a one-time setup fee of ₦10,000 and the applicable term subscription fee are required before activation. I authorise Rehoteq Technologies to activate services upon receipt of payment.
+      </div>
+    </div>
+
+    <div class="consent-item" id="consent3" onclick="toggleConsent(3)">
+      <div class="consent-box" id="cb3"></div>
+      <div class="consent-text">
+        <strong>Data Privacy Consent</strong>
+        I consent to Rehoteq Technologies storing the school and student data I provide on secure cloud servers (Firebase/Google Cloud) for the purpose of delivering the RMS service, in accordance with the terms above.
+      </div>
+    </div>
+
+    <div class="consent-item" id="consent4" onclick="toggleConsent(4)">
+      <div class="consent-box" id="cb4"></div>
+      <div class="consent-text">
+        <strong>Authorised Representative</strong>
+        I confirm that I am the Principal, Proprietor, or an authorised representative of this school, with authority to enter into this agreement on behalf of the school.
+      </div>
+    </div>
+  </div>
+
+  <!-- DIGITAL SIGNATURE -->
+  <div class="sec-divider">
+    <div class="sec-divider-line"></div>
+    <div class="sec-divider-label">Digital Signature</div>
+    <div class="sec-divider-line"></div>
+  </div>
+
+  <div class="form-grid">
+    <div class="field">
+      <label>Full Name (as signature) <span>*</span></label>
+      <input type="text" id="sig-name" placeholder="Type your full name" oninput="updateSignature()"/>
+      <div class="sig-preview" id="sig-preview">Your name will appear here</div>
+      <div class="field-error">Please type your name as signature</div>
+    </div>
+
+    <div class="field">
+      <label>Date <span>*</span></label>
+      <input type="date" id="sig-date"/>
+      <div class="field-error">Please select today's date</div>
+    </div>
+
+    <div class="field">
+      <label>Your Role / Position <span>*</span></label>
+      <select id="sig-role">
+        <option value="">Select role...</option>
+        <option>School Principal</option>
+        <option>School Proprietor / Owner</option>
+        <option>School Proprietress</option>
+        <option>Head Teacher</option>
+        <option>School Administrator</option>
+        <option>Authorised Representative</option>
+      </select>
+      <div class="field-error">Please select your role</div>
+    </div>
+
+    <div class="field">
+      <label>Signing Location</label>
+      <input type="text" id="sig-location" placeholder="e.g. Lagos, Nigeria"/>
+    </div>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn-secondary" onclick="goStep2Back()">← Back</button>
+    <button class="btn-primary" id="submit-btn" onclick="submitForm()">
+      ✍️ Sign & Submit Application
+    </button>
+  </div>
+</div>
+
+<!-- SUCCESS SCREEN -->
+<div class="success-screen" id="success-screen">
+  <div class="success-icon">🎉</div>
+  <div class="success-title">Application Submitted!</div>
+  <div class="success-sub">Your school's RMS onboarding application has been received by Rehoteq Technologies. We will contact you within <strong>24 hours</strong> on the phone number and email you provided.</div>
+  <div class="success-ref" id="success-ref">REF: Loading...</div>
+  <div style="font-size:0.82rem;color:var(--muted);margin-bottom:20px">Next Step: Our team will WhatsApp you the payment details for setup fee and first term subscription.</div>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+    <a href="https://wa.me/2347036302585" target="_blank" class="btn-primary" style="text-decoration:none;display:inline-flex;align-items:center;gap:8px;padding:12px 24px">💬 WhatsApp Rehoteq Now</a>
+    <button class="print-btn" onclick="window.print()">🖨️ Print / Save as PDF</button>
+  </div>
+</div>
+
+</div><!-- /form-wrap -->
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ── STATE ──
+const consents = {1:false, 2:false, 3:false, 4:false};
+let selectedPlan = '';
+let logoBase64 = '';
+
+// ── INIT ──
+document.getElementById('sig-date').valueAsDate = new Date();
+
+// ── FILE UPLOAD ──
+function handleFileUpload(input) {
+  const file = input.files[0];
+  if (!file) return;
+  if (file.size > 2 * 1024 * 1024) {
+    showToast('⚠️ File too large. Max 2MB.');
+    return;
+  }
+  const reader = new FileReader();
+  reader.onload = e => {
+    logoBase64 = e.target.result;
+    document.getElementById('upload-filename').textContent = '✅ ' + file.name;
+    document.getElementById('upload-area').classList.add('has-file');
+    document.querySelector('#upload-area .upload-icon').textContent = '✅';
+  };
+  reader.readAsDataURL(file);
+}
+
+// ── PLAN SELECTION ──
+function selectPlan(id) {
+  document.querySelectorAll('.plan-card').forEach(c => c.classList.remove('selected'));
+  const card = document.getElementById(id);
+  card.classList.add('selected');
+  selectedPlan = card.querySelector('input').value;
+  document.getElementById('plan-error').style.display = 'none';
+}
+
+// ── CONSENT TOGGLES ──
+function toggleConsent(n) {
+  consents[n] = !consents[n];
+  const item = document.getElementById('consent' + n);
+  const box = document.getElementById('cb' + n);
+  item.classList.toggle('checked', consents[n]);
+  box.innerHTML = consents[n] ? '✓' : '';
+  box.style.color = consents[n] ? '#000' : '';
+}
+
+// ── SIGNATURE PREVIEW ──
+function updateSignature() {
+  const name = document.getElementById('sig-name').value;
+  const preview = document.getElementById('sig-preview');
+  preview.textContent = name || 'Your name will appear here';
+  preview.style.opacity = name ? '1' : '0.4';
+}
+
+// ── NAVIGATION ──
+function goStep2() {
+  if (!validateStep1()) return;
+  document.getElementById('step1').style.display = 'none';
+  document.getElementById('step2').style.display = 'block';
+  updateStepUI(2);
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function goStep1() {
+  document.getElementById('step2').style.display = 'none';
+  document.getElementById('step1').style.display = 'block';
+  updateStepUI(1);
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function goStep3() {
+  if (!validateStep2()) return;
+  document.getElementById('step2').style.display = 'none';
+  document.getElementById('step3').style.display = 'block';
+  updateStepUI(3);
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function goStep2Back() {
+  document.getElementById('step3').style.display = 'none';
+  document.getElementById('step2').style.display = 'block';
+  updateStepUI(2);
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function updateStepUI(active) {
+  [1,2,3].forEach(n => {
+    const circle = document.getElementById('sc' + n);
+    const label = document.getElementById('sl' + n);
+    circle.className = 'step-circle' + (n < active ? ' done' : n === active ? ' active' : '');
+    label.className = 'step-label' + (n < active ? ' done' : n === active ? ' active' : '');
+    circle.textContent = n < active ? '✓' : n;
+    if (n < 3) {
+      document.getElementById('line' + n).className = 'step-line' + (n < active ? ' done' : '');
+    }
+  });
+}
+
+// ── VALIDATION ──
+function validateStep1() {
+  let ok = true;
+  const required = {
+    'school-name': 'school name',
+    'school-address': 'address',
+    'school-state': 'state',
+    'school-lga': 'LGA',
+    'school-type': 'school type',
+    'principal-name': "principal's name",
+    'principal-phone': 'phone number',
+    'principal-email': 'email address'
+  };
+  for (const [id, label] of Object.entries(required)) {
+    const el = document.getElementById(id);
+    const field = el.closest('.field');
+    if (!el.value.trim()) {
+      field.classList.add('has-error');
+      ok = false;
+    } else {
+      field.classList.remove('has-error');
+    }
+  }
+  // Email validation
+  const email = document.getElementById('principal-email');
+  if (email.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+    email.closest('.field').classList.add('has-error');
+    ok = false;
+  }
+  if (!ok) showToast('⚠️ Please fill all required fields');
+  return ok;
+}
+
+function validateStep2() {
+  let ok = true;
+  const required = ['student-count', 'class-count', 'starting-term'];
+  required.forEach(id => {
+    const el = document.getElementById(id);
+    const field = el.closest('.field');
+    if (!el.value.trim()) {
+      field.classList.add('has-error');
+      ok = false;
+    } else {
+      field.classList.remove('has-error');
+    }
+  });
+  if (!selectedPlan) {
+    document.getElementById('plan-error').style.display = 'block';
+    ok = false;
+  }
+  if (!ok) showToast('⚠️ Please fill all required fields and select a plan');
+  return ok;
+}
+
+function validateStep3() {
+  let ok = true;
+  // All consents
+  if (!Object.values(consents).every(Boolean)) {
+    showToast('⚠️ Please check all agreement boxes');
+    return false;
+  }
+  // Signature fields
+  ['sig-name', 'sig-date', 'sig-role'].forEach(id => {
+    const el = document.getElementById(id);
+    const field = el.closest('.field');
+    if (!el.value.trim()) {
+      field.classList.add('has-error');
+      ok = false;
+    } else {
+      field.classList.remove('has-error');
+    }
+  });
+  if (!ok) showToast('⚠️ Please complete your signature details');
+  return ok;
+}
+
+// ── SUBMIT ──
+async function submitForm() {
+  if (!validateStep3()) return;
+
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  btn.textContent = '⏳ Submitting...';
+
+  // Build reference number
+  const ref = 'RMS-' + Date.now().toString(36).toUpperCase();
+  const now = new Date();
+  const submissionDate = now.toLocaleDateString('en-NG', {day:'2-digit', month:'long', year:'numeric'});
+  const submissionTime = now.toLocaleTimeString('en-NG', {hour:'2-digit', minute:'2-digit'});
+
+  // Collect all data
+  const data = {
+    ref,
+    submission_date: submissionDate + ' at ' + submissionTime,
+    school_name: document.getElementById('school-name').value.trim(),
+    school_address: document.getElementById('school-address').value.trim(),
+    school_state: document.getElementById('school-state').value,
+    school_lga: document.getElementById('school-lga').value.trim(),
+    school_type: document.getElementById('school-type').value,
+    school_year: document.getElementById('school-year').value || 'Not specified',
+    principal_name: document.getElementById('principal-title').value + ' ' + document.getElementById('principal-name').value.trim(),
+    principal_phone: document.getElementById('principal-phone').value.trim(),
+    principal_email: document.getElementById('principal-email').value.trim(),
+    student_count: document.getElementById('student-count').value,
+    class_count: document.getElementById('class-count').value,
+    teacher_count: document.getElementById('teacher-count').value || 'Not specified',
+    current_session: document.getElementById('current-session').value,
+    starting_term: document.getElementById('starting-term').value,
+    referral_source: document.getElementById('referral-source').value || 'Not specified',
+    extra_notes: document.getElementById('extra-notes').value.trim() || 'None',
+    selected_plan: selectedPlan,
+    signature_name: document.getElementById('sig-name').value.trim(),
+    signature_date: document.getElementById('sig-date').value,
+    signature_role: document.getElementById('sig-role').value,
+    signature_location: document.getElementById('sig-location').value.trim() || 'Not specified',
+    has_logo: logoBase64 ? 'Yes (attached)' : 'No',
+    mou_agreed: 'All 4 consent items confirmed ✅',
+  };
+
+  // Try EmailJS first
+  try {
+    emailjs.init('YOUR_EMAILJS_PUBLIC_KEY'); // ← Replace with your EmailJS public key
+
+    const emailBody = `
+🏫 NEW RMS SCHOOL APPLICATION
+Reference: ${data.ref}
+Submitted: ${data.submission_date}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SCHOOL INFORMATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+School Name: ${data.school_name}
+Address: ${data.school_address}
+State: ${data.school_state}
+LGA: ${data.school_lga}
+Type: ${data.school_type}
+Year Est.: ${data.school_year}
+Logo uploaded: ${data.has_logo}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PRINCIPAL / CONTACT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Name: ${data.principal_name}
+Phone/WhatsApp: ${data.principal_phone}
+Email: ${data.principal_email}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SCHOOL SIZE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Students: ${data.student_count}
+Classes: ${data.class_count}
+Teachers: ${data.teacher_count}
+Session: ${data.current_session}
+Starting Term: ${data.starting_term}
+Source: ${data.referral_source}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PLAN SELECTED
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+${data.selected_plan}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+MOU & SIGNATURE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Signed by: ${data.signature_name}
+Role: ${data.signature_role}
+Date: ${data.signature_date}
+Location: ${data.signature_location}
+MOU: ${data.mou_agreed}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ADDITIONAL NOTES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+${data.extra_notes}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Rehoteq Technologies · rehoteq.com
+    `.trim();
+
+    await emailjs.send(
+      'YOUR_SERVICE_ID',    // ← Replace with your EmailJS service ID
+      'YOUR_TEMPLATE_ID',   // ← Replace with your EmailJS template ID
+      {
+        to_email: 'rehoteq@gmail.com',
+        subject: `[RMS Application] ${data.school_name} — ${data.ref}`,
+        message: emailBody,
+        school_name: data.school_name,
+        principal_name: data.principal_name,
+        principal_phone: data.principal_phone,
+        ref_number: data.ref,
+        plan: data.selected_plan,
+      }
+    );
+    showSuccess(ref, data);
+
+  } catch(err) {
+    console.warn('EmailJS failed, using WhatsApp fallback:', err);
+    // WhatsApp fallback — always works even without EmailJS setup
+    whatsappFallback(data);
+    showSuccess(ref, data);
+  }
+}
+
+function whatsappFallback(data) {
+  const msg = `🏫 *NEW RMS APPLICATION*\n\n*School:* ${data.school_name}\n*State:* ${data.school_state}, ${data.school_lga} LGA\n*Principal:* ${data.principal_name}\n*Phone:* ${data.principal_phone}\n*Email:* ${data.principal_email}\n\n*Students:* ${data.student_count} | *Classes:* ${data.class_count}\n*Plan:* ${data.selected_plan}\n*Start:* ${data.starting_term}, ${data.current_session}\n\n*MOU Signed:* ✅ ${data.signature_name} (${data.signature_role})\n*Signed:* ${data.signature_date}\n\n*Ref:* ${data.ref}\n\n_Submitted via rehoteq.com/rms-onboarding.html_`;
+  window.open('https://wa.me/2347036302585?text=' + encodeURIComponent(msg), '_blank');
+}
+
+function showSuccess(ref, data) {
+  document.getElementById('step3').style.display = 'none';
+  const success = document.getElementById('success-screen');
+  success.style.display = 'block';
+  document.getElementById('success-ref').textContent = 'REF: ' + ref + ' | ' + data.school_name;
+  window.scrollTo({top: 0, behavior:'smooth'});
+}
+
+// ── TOAST ──
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+</script>
+</body>
+</html>
