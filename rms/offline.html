@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Offline — Rehoteq RMS</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#05080f;color:#eef2ff;font-family:'DM Sans',system-ui,sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center;}
+.icon{width:72px;height:72px;background:linear-gradient(135deg,#7a5c1a,#c9a84c,#f0c040);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:900;color:#000;margin:0 auto 24px;}
+h1{font-size:1.6rem;font-weight:700;margin-bottom:10px;color:#f0c040;}
+p{color:rgba(238,242,255,0.55);font-size:0.92rem;line-height:1.7;max-width:340px;margin-bottom:28px;}
+.tip{background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);border-radius:12px;padding:16px 20px;max-width:340px;font-size:0.82rem;color:rgba(238,242,255,0.7);line-height:1.7;margin-bottom:24px;text-align:left;}
+.tip strong{color:#c9a84c;}
+button{background:linear-gradient(135deg,#7a5c1a,#c9a84c);color:#000;border:none;padding:13px 32px;border-radius:10px;font-size:0.9rem;font-weight:700;cursor:pointer;}
+</style>
+</head>
+<body>
+<div class="icon">R</div>
+<h1>You're Offline</h1>
+<p>Rehoteq RMS needs an internet connection to sync scores and results with the cloud.</p>
+<div class="tip">
+  <strong>💡 What you can still do:</strong><br>
+  Previously loaded data may still be visible. Once your connection is restored, everything will sync automatically.
+</div>
+<button onclick="window.location.reload()">🔄 Try Again</button>
+</body>
+</html>
