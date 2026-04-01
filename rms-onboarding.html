@@ -819,91 +819,58 @@ async function submitForm() {
     selected_plan: selectedPlan,
     signature_name: document.getElementById('sig-name').value.trim(),
     signature_date: document.getElementById('sig-date').value,
-    signature_role: document.getElementById('sig-role').value,
+    sig_role: document.getElementById('sig-role').value,
     signature_location: document.getElementById('sig-location').value.trim() || 'Not specified',
     has_logo: logoBase64 ? 'Yes (attached)' : 'No',
     mou_agreed: 'All 4 consent items confirmed ✅',
   };
 
-  // Try EmailJS first
+  // ── SUBMIT TO GOOGLE SHEETS VIA APPS SCRIPT ──
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyCDcG9EORrHTuF1xLAoBLwz6tweRL_jIDvRn4wMmnVjPx6KQ_WV3vagKSWOgf6Xdzm/exec'; // ← Paste your Web App URL here after deploying
+
   try {
-    emailjs.init('YOUR_EMAILJS_PUBLIC_KEY'); // ← Replace with your EmailJS public key
+    const payload = {
+      ref: data.ref,
+      school_name: data.school_name,
+      school_address: data.school_address,
+      school_state: data.school_state,
+      school_lga: data.school_lga,
+      school_type: data.school_type,
+      school_year: data.school_year,
+      principal_name: data.principal_name,
+      principal_phone: data.principal_phone,
+      principal_email: data.principal_email,
+      student_count: data.student_count,
+      class_count: data.class_count,
+      teacher_count: data.teacher_count,
+      current_session: data.current_session,
+      starting_term: data.starting_term,
+      selected_plan: data.selected_plan,
+      signature_name: data.signature_name,
+      sig_role: data.sig_role,
+      signature_date: data.signature_date,
+      sig_location: data.sig_location,
+      referral_source: data.referral_source,
+      extra_notes: data.extra_notes,
+    };
 
-    const emailBody = `
-🏫 NEW RMS SCHOOL APPLICATION
-Reference: ${data.ref}
-Submitted: ${data.submission_date}
+    if (APPS_SCRIPT_URL) {
+      const response = await fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        mode: 'no-cors' // Google Apps Script requires no-cors
+      });
+      console.log('Saved to Google Sheets ✅');
+    }
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-SCHOOL INFORMATION
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-School Name: ${data.school_name}
-Address: ${data.school_address}
-State: ${data.school_state}
-LGA: ${data.school_lga}
-Type: ${data.school_type}
-Year Est.: ${data.school_year}
-Logo uploaded: ${data.has_logo}
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-PRINCIPAL / CONTACT
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Name: ${data.principal_name}
-Phone/WhatsApp: ${data.principal_phone}
-Email: ${data.principal_email}
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-SCHOOL SIZE
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Students: ${data.student_count}
-Classes: ${data.class_count}
-Teachers: ${data.teacher_count}
-Session: ${data.current_session}
-Starting Term: ${data.starting_term}
-Source: ${data.referral_source}
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-PLAN SELECTED
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-${data.selected_plan}
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-MOU & SIGNATURE
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Signed by: ${data.signature_name}
-Role: ${data.signature_role}
-Date: ${data.signature_date}
-Location: ${data.signature_location}
-MOU: ${data.mou_agreed}
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-ADDITIONAL NOTES
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-${data.extra_notes}
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Rehoteq Technologies · rehoteq.com
-    `.trim();
-
-    await emailjs.send(
-      'YOUR_SERVICE_ID',    // ← Replace with your EmailJS service ID
-      'YOUR_TEMPLATE_ID',   // ← Replace with your EmailJS template ID
-      {
-        to_email: 'rehoteq@gmail.com',
-        subject: `[RMS Application] ${data.school_name} — ${data.ref}`,
-        message: emailBody,
-        school_name: data.school_name,
-        principal_name: data.principal_name,
-        principal_phone: data.principal_phone,
-        ref_number: data.ref,
-        plan: data.selected_plan,
-      }
-    );
+    // Always also send via WhatsApp as backup notification
+    whatsappFallback(data);
     showSuccess(ref, data);
 
   } catch(err) {
-    console.warn('EmailJS failed, using WhatsApp fallback:', err);
-    // WhatsApp fallback — always works even without EmailJS setup
+    console.warn('Sheets save error:', err);
+    // WhatsApp fallback always works
     whatsappFallback(data);
     showSuccess(ref, data);
   }
