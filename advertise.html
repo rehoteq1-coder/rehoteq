@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta name="description" content="Advertise your business on Rehoteq Technologies — reaching thousands of schools, teachers, parents and students across Nigeria."/>
+<title>Advertise With Us — Rehoteq Technologies</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --dark:#06081A;
+  --navy:#0D1033;
+  --card:#131842;
+  --gold:#C9A84C;
+  --gold2:#F0C040;
+  --white:#FAFBFF;
+  --muted:rgba(250,251,255,0.55);
+  --muted2:rgba(250,251,255,0.3);
+  --border:rgba(255,255,255,0.07);
+  --green:#1A8C1A;
+}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--dark);
+  color:var(--white);
+  font-family:'DM Sans',sans-serif;
+  min-height:100vh;
+}
+
+/* ── NAV ── */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:14px 24px;
+  background:rgba(6,8,26,0.85);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nav-logo{
+  display:flex;align-items:center;gap:10px;
+  text-decoration:none;
+}
+.nav-r{
+  width:36px;height:36px;
+  background:linear-gradient(135deg,#8B5C00,var(--gold));
+  border-radius:9px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;
+  font-weight:900;font-size:1.1rem;color:#000;
+}
+.nav-name{
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:0.88rem;letter-spacing:0.05em;color:var(--white);
+  line-height:1.2;
+}
+.nav-name span{color:var(--gold);display:block;font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;}
+.nav-cta{
+  background:var(--gold);color:#000;
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:0.72rem;letter-spacing:0.08em;
+  padding:9px 18px;border-radius:50px;
+  text-decoration:none;
+  transition:transform 0.2s,box-shadow 0.2s;
+}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,168,76,0.3);}
+
+/* ── HERO ── */
+.hero{
+  padding:120px 24px 60px;
+  text-align:center;
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 0%,rgba(201,168,76,0.1) 0%,transparent 60%),
+    radial-gradient(ellipse 40% 40% at 20% 80%,rgba(20,40,100,0.3) 0%,transparent 50%);
+  pointer-events:none;
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(201,168,76,0.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(201,168,76,0.04) 1px,transparent 1px);
+  background-size:48px 48px;
+  pointer-events:none;
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(201,168,76,0.08);
+  border:1px solid rgba(201,168,76,0.25);
+  border-radius:50px;
+  padding:6px 16px;
+  font-family:'Syne',sans-serif;font-weight:700;
+  font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:20px;
+}
+.hero-eyebrow::before{
+  content:'';width:6px;height:6px;border-radius:50%;
+  background:var(--gold);animation:pulse 2s infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.4;transform:scale(0.8);}}
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-weight:900;font-size:clamp(2.2rem,6vw,4rem);
+  line-height:1.05;color:var(--white);
+  margin-bottom:18px;
+  position:relative;
+}
+.hero h1 em{
+  font-style:normal;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.hero-sub{
+  font-size:1rem;color:var(--muted);
+  max-width:560px;margin:0 auto 36px;
+  line-height:1.75;
+}
+.hero-stats{
+  display:flex;flex-wrap:wrap;gap:12px;justify-content:center;
+  margin-bottom:40px;
+}
+.hero-stat{
+  background:rgba(255,255,255,0.04);
+  border:1px solid var(--border);
+  border-radius:12px;padding:14px 22px;
+  text-align:center;
+}
+.hero-stat-num{
+  font-family:'Playfair Display',serif;
+  font-weight:900;font-size:1.6rem;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  display:block;
+}
+.hero-stat-lbl{
+  font-size:0.62rem;color:var(--muted2);
+  text-transform:uppercase;letter-spacing:0.12em;
+  font-family:'Syne',sans-serif;font-weight:600;
+}
+.btn-primary{
+  display:inline-block;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  color:#000;font-family:'Syne',sans-serif;font-weight:800;
+  font-size:0.82rem;letter-spacing:0.08em;
+  padding:14px 28px;border-radius:50px;
+  text-decoration:none;border:none;cursor:pointer;
+  transition:transform 0.2s,box-shadow 0.2s;
+}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(201,168,76,0.35);}
+.btn-ghost{
+  display:inline-block;
+  background:transparent;
+  color:var(--white);font-family:'Syne',sans-serif;font-weight:700;
+  font-size:0.82rem;letter-spacing:0.05em;
+  padding:13px 24px;border-radius:50px;
+  border:1px solid rgba(255,255,255,0.2);
+  text-decoration:none;cursor:pointer;
+  transition:all 0.2s;
+}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold);}
+
+/* ── SECTION ── */
+.section{padding:60px 24px;max-width:1100px;margin:0 auto;}
+.section-label{
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:0.62rem;letter-spacing:0.25em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:12px;
+  display:flex;align-items:center;gap:10px;
+}
+.section-label::after{
+  content:'';flex:1;height:1px;
+  background:linear-gradient(90deg,rgba(201,168,76,0.3),transparent);
+}
+.section-title{
+  font-family:'Playfair Display',serif;
+  font-weight:900;font-size:clamp(1.6rem,4vw,2.4rem);
+  color:var(--white);margin-bottom:10px;
+}
+.section-sub{
+  font-size:0.9rem;color:var(--muted);
+  max-width:600px;line-height:1.7;margin-bottom:40px;
+}
+
+/* ── AD PACKAGES ── */
+.packages{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:16px;
+}
+.pkg{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:28px;
+  position:relative;overflow:hidden;
+  transition:transform 0.25s,border-color 0.25s;
+}
+.pkg:hover{transform:translateY(-4px);border-color:rgba(201,168,76,0.3);}
+.pkg::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--pkg-color,var(--gold));
+}
+.pkg.featured{
+  border-color:rgba(201,168,76,0.4);
+  background:linear-gradient(135deg,rgba(201,168,76,0.06),rgba(201,168,76,0.02));
+}
+.pkg-badge{
+  position:absolute;top:16px;right:16px;
+  background:var(--gold);color:#000;
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;
+  padding:4px 10px;border-radius:50px;
+}
+.pkg-icon{
+  width:48px;height:48px;
+  background:rgba(201,168,76,0.1);
+  border:1px solid rgba(201,168,76,0.2);
+  border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:16px;
+}
+.pkg-icon svg{width:24px;height:24px;fill:none;stroke:var(--gold);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.pkg-name{
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:1.1rem;color:var(--white);margin-bottom:6px;
+}
+.pkg-location{
+  font-size:0.72rem;color:var(--gold);font-weight:700;
+  text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px;
+}
+.pkg-desc{font-size:0.82rem;color:var(--muted);line-height:1.65;margin-bottom:18px;}
+.pkg-features{list-style:none;margin-bottom:20px;}
+.pkg-features li{
+  font-size:0.78rem;color:rgba(250,251,255,0.75);
+  padding:5px 0;
+  display:flex;align-items:flex-start;gap:8px;
+}
+.pkg-features li::before{
+  content:'';
+  width:16px;height:16px;border-radius:50%;
+  background:rgba(26,140,26,0.2);border:1px solid var(--green);
+  display:inline-flex;align-items:center;justify-content:center;
+  flex-shrink:0;margin-top:2px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 6l3 3 5-5' stroke='%231A8C1A' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:center;background-size:10px;
+}
+.pkg-price{
+  display:flex;align-items:baseline;gap:4px;margin-bottom:16px;
+}
+.pkg-price-amount{
+  font-family:'Playfair Display',serif;font-weight:900;
+  font-size:1.8rem;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.pkg-price-per{font-size:0.72rem;color:var(--muted2);font-weight:500;}
+.pkg-cta{
+  display:block;text-align:center;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  color:#000;font-family:'Syne',sans-serif;font-weight:800;
+  font-size:0.78rem;letter-spacing:0.08em;
+  padding:12px;border-radius:12px;
+  text-decoration:none;
+  transition:transform 0.2s,box-shadow 0.2s;
+}
+.pkg-cta:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,168,76,0.3);}
+.pkg-cta.outline{
+  background:transparent;color:var(--white);
+  border:1px solid rgba(255,255,255,0.2);
+}
+.pkg-cta.outline:hover{border-color:var(--gold);color:var(--gold);}
+
+/* ── WHY ADVERTISE ── */
+.why-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:12px;
+}
+.why-card{
+  background:rgba(255,255,255,0.025);
+  border:1px solid var(--border);
+  border-radius:16px;padding:22px;
+  transition:border-color 0.2s;
+}
+.why-card:hover{border-color:rgba(201,168,76,0.2);}
+.why-icon{
+  width:44px;height:44px;
+  background:linear-gradient(135deg,rgba(201,168,76,0.15),rgba(201,168,76,0.05));
+  border:1px solid rgba(201,168,76,0.2);
+  border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:14px;
+}
+.why-icon svg{width:22px;height:22px;fill:none;stroke:var(--gold);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.why-title{font-family:'Syne',sans-serif;font-weight:700;font-size:0.9rem;color:var(--white);margin-bottom:6px;}
+.why-desc{font-size:0.78rem;color:var(--muted);line-height:1.6;}
+
+/* ── AD PREVIEW ── */
+.ad-preview-section{
+  background:var(--navy);
+  border:1px solid var(--border);
+  border-radius:24px;padding:36px;
+  margin:0 0 40px;
+}
+.preview-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+  margin-top:24px;
+}
+@media(max-width:640px){.preview-grid{grid-template-columns:1fr;}}
+.preview-slot{
+  border:2px dashed rgba(201,168,76,0.25);
+  border-radius:14px;
+  padding:20px;
+  text-align:center;
+  position:relative;
+  background:rgba(201,168,76,0.02);
+  min-height:120px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+}
+.preview-slot-label{
+  position:absolute;top:-10px;left:16px;
+  background:var(--navy);
+  padding:2px 10px;
+  font-family:'Syne',sans-serif;font-weight:700;font-size:0.6rem;
+  color:var(--gold);letter-spacing:0.15em;text-transform:uppercase;
+  border:1px solid rgba(201,168,76,0.2);border-radius:50px;
+}
+.preview-slot-size{
+  font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:var(--gold);
+}
+.preview-slot-name{font-size:0.75rem;color:var(--muted);}
+.preview-slot-dims{font-size:0.65rem;color:var(--muted2);}
+
+/* ── BOOKING FORM ── */
+.form-wrap{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:36px;
+}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:640px){.form-grid{grid-template-columns:1fr;}}
+.form-group{display:flex;flex-direction:column;gap:7px;}
+.form-group.full{grid-column:1/-1;}
+.form-label{
+  font-family:'Syne',sans-serif;font-weight:700;
+  font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);
+}
+.form-input,.form-select,.form-textarea{
+  background:rgba(255,255,255,0.04);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:12px 14px;
+  color:var(--white);
+  font-size:0.85rem;
+  font-family:'DM Sans',sans-serif;
+  transition:border-color 0.2s;
+  outline:none;
+  width:100%;
+}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:rgba(201,168,76,0.4);}
+.form-input::placeholder,.form-textarea::placeholder{color:var(--muted2);}
+.form-select option{background:var(--dark);color:var(--white);}
+.form-textarea{resize:vertical;min-height:90px;}
+.form-submit{
+  display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:8px;
+}
+.submit-note{font-size:0.72rem;color:var(--muted2);}
+
+/* ── FAQ ── */
+.faq-list{display:flex;flex-direction:column;gap:10px;}
+.faq{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:14px;
+  overflow:hidden;
+}
+.faq-q{
+  padding:16px 20px;
+  font-family:'Syne',sans-serif;font-weight:700;font-size:0.88rem;
+  color:var(--white);cursor:pointer;
+  display:flex;justify-content:space-between;align-items:center;
+  gap:12px;
+  user-select:none;
+}
+.faq-q:hover{color:var(--gold);}
+.faq-q .faq-arrow{
+  width:20px;height:20px;flex-shrink:0;
+  transition:transform 0.25s;
+}
+.faq-q .faq-arrow svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;}
+.faq.open .faq-arrow{transform:rotate(180deg);}
+.faq-a{
+  max-height:0;overflow:hidden;transition:max-height 0.3s ease;
+  padding:0 20px;font-size:0.82rem;color:var(--muted);line-height:1.7;
+}
+.faq.open .faq-a{max-height:200px;padding:0 20px 16px;}
+
+/* ── CTA BOTTOM ── */
+.cta-bottom{
+  background:linear-gradient(135deg,var(--gold),#8B5C00);
+  border-radius:24px;
+  padding:44px 32px;
+  text-align:center;
+  margin:40px 0;
+  position:relative;overflow:hidden;
+}
+.cta-bottom::before{
+  content:'';position:absolute;top:-60px;right:-60px;
+  width:200px;height:200px;border-radius:50%;
+  background:rgba(255,255,255,0.08);
+}
+.cta-bottom::after{
+  content:'';position:absolute;bottom:-40px;left:-40px;
+  width:150px;height:150px;border-radius:50%;
+  background:rgba(0,0,0,0.08);
+}
+.cta-bottom h2{
+  font-family:'Playfair Display',serif;font-weight:900;
+  font-size:clamp(1.5rem,4vw,2.2rem);
+  color:#000;margin-bottom:10px;position:relative;z-index:1;
+}
+.cta-bottom p{
+  font-size:0.9rem;color:rgba(0,0,0,0.65);
+  margin-bottom:24px;position:relative;z-index:1;line-height:1.65;
+}
+.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1;}
+.cta-btn-dark{
+  background:#000;color:var(--gold);
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:0.78rem;letter-spacing:0.08em;
+  padding:12px 22px;border-radius:50px;
+  text-decoration:none;
+  display:flex;align-items:center;gap:8px;
+  transition:transform 0.2s;
+}
+.cta-btn-dark:hover{transform:translateY(-2px);}
+
+/* ── FOOTER ── */
+.footer{
+  border-top:1px solid var(--border);
+  padding:24px;text-align:center;
+}
+.footer-text{font-size:0.75rem;color:var(--muted2);}
+.footer-text a{color:var(--gold);text-decoration:none;}
+
+/* ── SUCCESS MESSAGE ── */
+#success-msg{
+  display:none;
+  background:rgba(26,140,26,0.1);
+  border:1px solid var(--green);
+  border-radius:14px;padding:20px;
+  text-align:center;margin-top:16px;
+}
+#success-msg h3{font-family:'Syne',sans-serif;font-weight:800;color:var(--green);margin-bottom:6px;}
+#success-msg p{font-size:0.82rem;color:var(--muted);}
+
+@media(max-width:640px){
+  .hero{padding:100px 16px 48px;}
+  .section{padding:48px 16px;}
+  .form-wrap,.ad-preview-section{padding:22px 16px;}
+  .packages{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="/" class="nav-logo">
+    <div class="nav-r">R</div>
+    <div class="nav-name">Rehoteq
+      <span>Technologies</span>
+    </div>
+  </a>
+  <a href="#book" class="nav-cta">Book Ad Space</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div style="position:relative;z-index:1;">
+    <div class="hero-eyebrow">Advertising Opportunities</div>
+    <h1>Reach Thousands of<br/><em>Nigerian Schools</em><br/>Every Month</h1>
+    <p class="hero-sub">
+      Rehoteq Technologies connects you directly to school administrators, teachers, parents and students across Nigeria. Place your business in front of decision-makers who matter.
+    </p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="hero-stat-num">10,000+</span>
+        <span class="hero-stat-lbl">Monthly Visitors</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">500+</span>
+        <span class="hero-stat-lbl">Schools on Platform</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">Ondo</span>
+        <span class="hero-stat-lbl">+ Nationwide</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">24/7</span>
+        <span class="hero-stat-lbl">Live Visibility</span>
+      </div>
+    </div>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <a href="#book" class="btn-primary">Book Ad Space Now</a>
+      <a href="#packages" class="btn-ghost">View Packages</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY ADVERTISE -->
+<div class="section">
+  <div class="section-label">Why Rehoteq</div>
+  <h2 class="section-title">Why Advertise With Us?</h2>
+  <p class="section-sub">Our audience is not random. They are school owners, principals, class teachers, parents and students — all actively using our platform every single day.</p>
+
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-icon">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+      </div>
+      <div class="why-title">Targeted Audience</div>
+      <div class="why-desc">Every visitor is connected to education — school owners, principals, teachers, parents and students. No wasted impressions.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+      </div>
+      <div class="why-title">Nigeria-Wide Reach</div>
+      <div class="why-desc">Visitors from Ondo State, Lagos, Abuja, Port Harcourt and across Nigeria. Perfect for national and local brands alike.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">
+        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      </div>
+      <div class="why-title">Multiple Placements</div>
+      <div class="why-desc">Hero section, news page, student hub, sidebar and footer. Choose where you want to appear for maximum visibility.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">
+        <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+      </div>
+      <div class="why-title">Affordable Rates</div>
+      <div class="why-desc">Starting from ₦5,000/month — cheaper than a billboard, more targeted than radio. Genuine ROI for local businesses.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">
+        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.1 2.18 2 2 0 012.11.02h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>
+      </div>
+      <div class="why-title">Direct WhatsApp Support</div>
+      <div class="why-desc">No middleman. You deal directly with Rehoteq. Start running your ad within 24 hours of booking.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">
+        <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      </div>
+      <div class="why-title">Growing Fast</div>
+      <div class="why-desc">New schools onboard every week. Your ad audience grows with the platform. Early advertisers get the best rates.</div>
+    </div>
+  </div>
+</div>
+
+<!-- AD SLOT PREVIEW -->
+<div class="section" style="padding-top:0;">
+  <div class="ad-preview-section">
+    <div class="section-label">Ad Placements</div>
+    <h2 class="section-title">Where Your Ad Appears</h2>
+    <p class="section-sub" style="margin-bottom:0;">All ad slots are clearly labelled but professionally integrated into the page design.</p>
+
+    <div class="preview-grid">
+      <div class="preview-slot">
+        <div class="preview-slot-label">Hero Right</div>
+        <div class="preview-slot-size">Hero Banner</div>
+        <div class="preview-slot-name">Homepage — Above the Fold</div>
+        <div class="preview-slot-dims">Seen by 100% of visitors · 300×250px</div>
+      </div>
+      <div class="preview-slot">
+        <div class="preview-slot-label">News Page</div>
+        <div class="preview-slot-size">Horizontal Banner</div>
+        <div class="preview-slot-name">Tech News Page — High Engagement</div>
+        <div class="preview-slot-dims">Seen by readers · 728×90px leaderboard</div>
+      </div>
+      <div class="preview-slot">
+        <div class="preview-slot-label">Student Hub</div>
+        <div class="preview-slot-size">Sidebar Card</div>
+        <div class="preview-slot-name">Student Hub — Daily Active Users</div>
+        <div class="preview-slot-dims">Students visit daily · 160×600px</div>
+      </div>
+      <div class="preview-slot">
+        <div class="preview-slot-label">RMS Portal</div>
+        <div class="preview-slot-size">In-App Banner</div>
+        <div class="preview-slot-name">School Staff Dashboard</div>
+        <div class="preview-slot-dims">Teachers + Admin daily · 320×100px</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PACKAGES -->
+<div class="section" id="packages" style="padding-top:0;">
+  <div class="section-label">Pricing Packages</div>
+  <h2 class="section-title">Choose Your Package</h2>
+  <p class="section-sub">All packages include a custom designed banner from Rehoteq at no extra cost. Just send your logo and business details.</p>
+
+  <div class="packages">
+
+    <!-- Starter -->
+    <div class="pkg" style="--pkg-color:#555577;">
+      <div class="pkg-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </div>
+      <div class="pkg-name">Starter</div>
+      <div class="pkg-location">News Page Banner</div>
+      <div class="pkg-desc">Perfect for local businesses in Okitipupa and Ondo State who want to reach the education community.</div>
+      <ul class="pkg-features">
+        <li>Horizontal banner on News page</li>
+        <li>1 banner design included</li>
+        <li>30-day campaign</li>
+        <li>Link to your website or WhatsApp</li>
+        <li>Performance report at end of campaign</li>
+      </ul>
+      <div class="pkg-price">
+        <span class="pkg-price-amount">₦5,000</span>
+        <span class="pkg-price-per">/ month</span>
+      </div>
+      <a href="#book" class="pkg-cta outline">Book Starter</a>
+    </div>
+
+    <!-- Standard — FEATURED -->
+    <div class="pkg featured" style="--pkg-color:#C9A84C;">
+      <div class="pkg-badge">Most Popular</div>
+      <div class="pkg-icon">
+        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </div>
+      <div class="pkg-name">Standard</div>
+      <div class="pkg-location">Homepage Hero + News Page</div>
+      <div class="pkg-desc">Your brand on the most visible spot — the homepage hero section seen by every visitor the moment they land.</div>
+      <ul class="pkg-features">
+        <li>Homepage hero right column banner</li>
+        <li>News page horizontal banner</li>
+        <li>2 banner designs included</li>
+        <li>30-day campaign</li>
+        <li>WhatsApp + website click tracking</li>
+        <li>Weekly performance report</li>
+      </ul>
+      <div class="pkg-price">
+        <span class="pkg-price-amount">₦15,000</span>
+        <span class="pkg-price-per">/ month</span>
+      </div>
+      <a href="#book" class="pkg-cta">Book Standard</a>
+    </div>
+
+    <!-- Premium -->
+    <div class="pkg" style="--pkg-color:#1A6CBC;">
+      <div class="pkg-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div class="pkg-name">Premium</div>
+      <div class="pkg-location">All Pages + RMS Portal</div>
+      <div class="pkg-desc">Maximum exposure across all Rehoteq platforms including the RMS school management system used by teachers daily.</div>
+      <ul class="pkg-features">
+        <li>All Standard package placements</li>
+        <li>Student Hub sidebar card</li>
+        <li>RMS in-app banner (teachers daily)</li>
+        <li>3 banner designs included</li>
+        <li>60-day campaign</li>
+        <li>Dedicated campaign manager</li>
+        <li>Full analytics report</li>
+      </ul>
+      <div class="pkg-price">
+        <span class="pkg-price-amount">₦35,000</span>
+        <span class="pkg-price-per">/ 2 months</span>
+      </div>
+      <a href="#book" class="pkg-cta outline">Book Premium</a>
+    </div>
+
+    <!-- Custom -->
+    <div class="pkg" style="--pkg-color:#6D2E46;">
+      <div class="pkg-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M5.34 18.66l-1.41 1.41M20 12H22M2 12H4M19.07 19.07l-1.41-1.41M5.34 5.34L3.93 3.93M12 20V22M12 2V4"/></svg>
+      </div>
+      <div class="pkg-name">Custom</div>
+      <div class="pkg-location">Bespoke Campaign</div>
+      <div class="pkg-desc">For businesses with specific requirements — sponsored articles, product reviews, dedicated landing pages or long-term partnerships.</div>
+      <ul class="pkg-features">
+        <li>Custom placement and duration</li>
+        <li>Sponsored content / articles</li>
+        <li>Product or service reviews</li>
+        <li>Social media mention included</li>
+        <li>WhatsApp campaign promotion</li>
+        <li>Negotiable pricing</li>
+      </ul>
+      <div class="pkg-price">
+        <span class="pkg-price-amount">Custom</span>
+        <span class="pkg-price-per">pricing</span>
+      </div>
+      <a href="#book" class="pkg-cta outline">Enquire Now</a>
+    </div>
+
+  </div>
+</div>
+
+<!-- BOOKING FORM -->
+<div class="section" id="book">
+  <div class="section-label">Book Now</div>
+  <h2 class="section-title">Book Your Ad Space</h2>
+  <p class="section-sub">Fill the form below and we will contact you within 24 hours to confirm your booking and get your campaign running.</p>
+
+  <div class="form-wrap">
+    <form id="ad-form" onsubmit="submitAdForm(event)">
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Business / Organisation Name *</label>
+          <input type="text" class="form-input" id="biz-name" placeholder="e.g. Greenfield Pharmacy" required/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Contact Person *</label>
+          <input type="text" class="form-input" id="contact-name" placeholder="Your full name" required/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">WhatsApp Number *</label>
+          <input type="tel" class="form-input" id="wa-number" placeholder="e.g. 08012345678" required/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input type="email" class="form-input" id="email" placeholder="business@email.com"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Package *</label>
+          <select class="form-select" id="package" required>
+            <option value="">Select a package...</option>
+            <option value="Starter — ₦5,000/month">Starter — ₦5,000/month (News Page)</option>
+            <option value="Standard — ₦15,000/month">Standard — ₦15,000/month (Homepage + News)</option>
+            <option value="Premium — ₦35,000/2 months">Premium — ₦35,000/2 months (All Pages)</option>
+            <option value="Custom / Bespoke">Custom / Bespoke Campaign</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Campaign Start Date</label>
+          <input type="date" class="form-input" id="start-date"/>
+        </div>
+        <div class="form-group full">
+          <label class="form-label">Business Description / Ad Content *</label>
+          <textarea class="form-textarea" id="ad-desc" placeholder="Tell us about your business and what you want your ad to say. e.g. 'Greenfield Pharmacy — your health, our priority. Best prices on medicine and baby products in Okitipupa. Call 0801 234 5678.'" required></textarea>
+        </div>
+        <div class="form-group full">
+          <label class="form-label">Website or Social Media Link</label>
+          <input type="text" class="form-input" id="biz-link" placeholder="https://yourwebsite.com or your Instagram/Facebook page"/>
+        </div>
+        <div class="form-group full">
+          <label class="form-label">Additional Notes</label>
+          <textarea class="form-textarea" id="notes" placeholder="Any special requests, target audience, or other information..." style="min-height:70px;"></textarea>
+        </div>
+      </div>
+
+      <div class="form-submit" style="margin-top:20px;">
+        <button type="submit" class="btn-primary" style="font-size:0.82rem;padding:14px 28px;border:none;">
+          Submit Booking Request
+        </button>
+        <span class="submit-note">We will contact you on WhatsApp within 24 hours to confirm your booking.</span>
+      </div>
+    </form>
+
+    <div id="success-msg">
+      <h3>Booking Request Received!</h3>
+      <p>Thank you! We will contact you on WhatsApp within 24 hours to confirm your ad booking and get your campaign started.</p>
+      <p style="margin-top:8px;">For urgent enquiries, WhatsApp us directly: <strong style="color:var(--gold);">07036302585</strong></p>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="section" style="padding-top:0;">
+  <div class="section-label">Questions</div>
+  <h2 class="section-title">Frequently Asked Questions</h2>
+
+  <div class="faq-list">
+    <div class="faq">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Do I need to design my own banner?
+        <span class="faq-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+      </div>
+      <div class="faq-a">No. Rehoteq will design your banner for free as part of every package. Just provide your business name, logo (if available), contact number, and a brief description of your business and offer. We will create a professional banner that matches the Rehoteq design style.</div>
+    </div>
+    <div class="faq">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        How do I pay for the ad?
+        <span class="faq-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+      </div>
+      <div class="faq-a">After you submit the booking form, we will send you our bank account details or Paystack payment link via WhatsApp. Payment is required before the campaign goes live. We accept bank transfer and mobile payments.</div>
+    </div>
+    <div class="faq">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        How quickly will my ad go live?
+        <span class="faq-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+      </div>
+      <div class="faq-a">Once payment is confirmed, your ad will go live within 24 hours. For urgent campaigns, WhatsApp us directly at 07036302585 and we will prioritise your booking.</div>
+    </div>
+    <div class="faq">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Can I change my ad content during the campaign?
+        <span class="faq-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+      </div>
+      <div class="faq-a">Yes. You can request one free banner update per month. Additional updates are available at ₦2,000 per change. Simply WhatsApp us with the new content.</div>
+    </div>
+    <div class="faq">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        What types of businesses can advertise?
+        <span class="faq-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+      </div>
+      <div class="faq-a">Any legal business is welcome — pharmacies, schools, bookshops, fashion, food, technology, professional services, NGOs, event planners and more. We only decline ads for gambling, alcohol, tobacco or content that is inappropriate for a family-focused education platform.</div>
+    </div>
+    <div class="faq">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Is there a discount for long-term campaigns?
+        <span class="faq-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+      </div>
+      <div class="faq-a">Yes. Book 3 months and get the 3rd month at 50% off. Book 6 months and get 2 months free. Contact us to discuss a long-term partnership package tailored to your budget.</div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA BOTTOM -->
+<div class="section" style="padding-top:0;">
+  <div class="cta-bottom">
+    <h2>Ready to Grow Your Business?</h2>
+    <p>Join businesses already reaching Nigeria's education community through Rehoteq Technologies.<br/>Your next customer is already on our platform.</p>
+    <div class="cta-btns">
+      <a href="#book" class="cta-btn-dark">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.1 2.18 2 2 0 012.11.02h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>
+        Book Ad Space
+      </a>
+      <a href="https://wa.me/2347036302585?text=Hello%20Rehoteq!%20I%20want%20to%20advertise%20my%20business%20on%20your%20website." class="cta-btn-dark" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+        WhatsApp Us
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p class="footer-text">
+    © 2026 <a href="/">Rehoteq Technologies</a> · Okitipupa, Ondo State, Nigeria ·
+    <a href="mailto:rehoteq@gmail.com">rehoteq@gmail.com</a> ·
+    <a href="tel:07036302585">07036302585</a>
+  </p>
+</footer>
+
+<script>
+// ── FAQ Toggle ──
+function toggleFaq(el) {
+  const faq = el.closest('.faq');
+  const isOpen = faq.classList.contains('open');
+  document.querySelectorAll('.faq').forEach(f => f.classList.remove('open'));
+  if (!isOpen) faq.classList.add('open');
+}
+
+// ── Form Submit → WhatsApp ──
+function submitAdForm(e) {
+  e.preventDefault();
+
+  const biz     = document.getElementById('biz-name').value.trim();
+  const contact = document.getElementById('contact-name').value.trim();
+  const wa      = document.getElementById('wa-number').value.trim();
+  const email   = document.getElementById('email').value.trim();
+  const pkg     = document.getElementById('package').value;
+  const date    = document.getElementById('start-date').value;
+  const desc    = document.getElementById('ad-desc').value.trim();
+  const link    = document.getElementById('biz-link').value.trim();
+  const notes   = document.getElementById('notes').value.trim();
+
+  const msg = [
+    '📢 *NEW AD BOOKING REQUEST*',
+    '',
+    '*Business:* ' + biz,
+    '*Contact:* ' + contact,
+    '*WhatsApp:* ' + wa,
+    email ? '*Email:* ' + email : '',
+    '*Package:* ' + pkg,
+    date ? '*Start Date:* ' + date : '',
+    '',
+    '*Ad Description:*',
+    desc,
+    link ? '*Website/Social:* ' + link : '',
+    notes ? '*Notes:* ' + notes : '',
+    '',
+    '_Sent from rehoteq.com/advertise_'
+  ].filter(Boolean).join('\n');
+
+  // Open WhatsApp with pre-filled message
+  window.open('https://wa.me/2347036302585?text=' + encodeURIComponent(msg), '_blank');
+
+  // Show success message
+  document.getElementById('ad-form').style.display = 'none';
+  document.getElementById('success-msg').style.display = 'block';
+}
+
+// ── Set min date for start date ──
+const dateInput = document.getElementById('start-date');
+if (dateInput) {
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  dateInput.min = tomorrow.toISOString().split('T')[0];
+}
+</script>
+</body>
+</html>
