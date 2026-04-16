@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Building Construction Cost Calculator Nigeria 2025 — Rehoteq Technologies</title>
+<meta name="description" content="Calculate the cost of building a house in Nigeria. Get accurate estimates for foundation, block work, roofing, electrical, plumbing and finishing for low, mid and high budget builds. Free calculator by Rehoteq Technologies."/>
+<meta name="keywords" content="building cost calculator Nigeria, house construction cost Nigeria 2025, cost of building in Nigeria, construction estimate Nigeria, Ondo State building cost, how much to build a house Nigeria"/>
+<link rel="canonical" href="https://rehoteq.com/building.html"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;700;900&family=Outfit:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3770512274225098" crossorigin="anonymous"></script>
+<style>
+:root{
+  --bg:#050408;--deep:#09080d;--card:#100e15;--card2:#161320;
+  --border:rgba(255,255,255,0.07);
+  --gold:#c9a84c;--gold2:#f0c040;
+  --purple:#9b59f5;--amber:#ff9500;--green:#00c853;--red:#ff4444;
+  --white:#f4f0ff;--muted:rgba(244,240,255,0.45);
+  --font:'Outfit',sans-serif;--serif:'Fraunces',serif;--mono:'DM Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:var(--font);background:var(--bg);color:var(--white);min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse 60% 40% at 20% 10%,rgba(155,89,245,0.06),transparent),
+             radial-gradient(ellipse 50% 35% at 80% 80%,rgba(201,168,76,0.05),transparent);}
+
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;
+  padding:13px 20px;background:rgba(5,4,8,0.92);backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-icon{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#8b6914,var(--gold),var(--gold2));
+  display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:0.85rem;font-weight:900;color:#000;}
+.nav-name{font-family:var(--serif);font-size:0.85rem;font-weight:700;color:var(--white);}
+.nav-name span{color:var(--gold);}
+.nav-cta{background:linear-gradient(135deg,var(--gold),var(--gold2));border:none;border-radius:7px;
+  padding:7px 14px;font-family:var(--font);font-size:0.72rem;font-weight:700;color:#000;cursor:pointer;text-decoration:none;}
+
+.hero{position:relative;min-height:50vh;display:flex;align-items:center;justify-content:center;
+  text-align:center;overflow:hidden;padding:90px 20px 56px;z-index:1;}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(155,89,245,0.1);
+  border:1px solid rgba(155,89,245,0.25);border-radius:100px;padding:6px 16px;
+  font-size:0.7rem;font-weight:700;color:var(--purple);letter-spacing:0.12em;
+  text-transform:uppercase;margin-bottom:22px;}
+h1{font-family:var(--serif);font-size:clamp(1.9rem,5.5vw,3rem);font-weight:900;line-height:1.1;margin-bottom:14px;}
+h1 em{color:var(--gold);font-style:normal;}
+.hero-sub{font-size:clamp(0.82rem,2.3vw,0.96rem);color:var(--muted);line-height:1.75;max-width:520px;margin:0 auto 26px;}
+.badges{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+.badge{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;padding:5px 13px;font-size:0.68rem;color:var(--muted);}
+
+main{max-width:880px;margin:0 auto;padding:0 16px 80px;position:relative;z-index:1;}
+.ad-slot{background:rgba(255,255,255,0.015);border:1px dashed rgba(255,255,255,0.05);border-radius:12px;
+  padding:10px;margin:24px 0;min-height:90px;display:flex;align-items:center;justify-content:center;}
+.card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:22px;margin-bottom:16px;
+  box-shadow:0 20px 50px rgba(0,0,0,0.5);}
+.card-title{font-family:var(--serif);font-size:1.05rem;font-weight:700;color:var(--white);margin-bottom:4px;display:flex;align-items:center;gap:8px;}
+.card-title span{color:var(--gold);}
+.card-sub{font-size:0.75rem;color:var(--muted);margin-bottom:18px;line-height:1.55;}
+
+/* Budget selector */
+.budget-tabs{display:flex;gap:8px;margin-bottom:18px;}
+.btab{flex:1;background:var(--card2);border:2px solid var(--border);border-radius:12px;
+  padding:14px 10px;text-align:center;cursor:pointer;transition:all 0.2s;color:var(--white);font-family:var(--font);}
+.btab:hover{border-color:rgba(201,168,76,0.3);}
+.btab.active.economy{border-color:#00c853;background:rgba(0,200,83,0.08);}
+.btab.active.mid{border-color:var(--gold);background:rgba(201,168,76,0.08);}
+.btab.active.high{border-color:var(--purple);background:rgba(155,89,245,0.08);}
+.btab-icon{font-size:1.5rem;margin-bottom:6px;}
+.btab-name{font-size:0.82rem;font-weight:700;}
+.btab-range{font-size:0.62rem;color:var(--muted);margin-top:2px;}
+
+/* Building config */
+.config-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
+.cg{display:flex;flex-direction:column;gap:5px;}
+.cg label{font-size:0.67rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;}
+.cg select,.cg input{background:var(--card2);border:1px solid var(--border);border-radius:9px;
+  padding:9px 12px;color:var(--white);font-size:0.82rem;outline:none;transition:border-color 0.2s;}
+.cg select:focus,.cg input:focus{border-color:rgba(201,168,76,0.4);}
+
+/* Stage toggles */
+.stages-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;}
+.stage-item{display:flex;align-items:center;gap:10px;background:var(--card2);border:1px solid var(--border);
+  border-radius:10px;padding:10px 12px;cursor:pointer;transition:all 0.2s;}
+.stage-item.on{border-color:rgba(201,168,76,0.35);background:rgba(201,168,76,0.06);}
+.stage-chk{width:20px;height:20px;border-radius:5px;border:2px solid var(--border);flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:0.7rem;transition:all 0.15s;}
+.stage-item.on .stage-chk{background:var(--gold);border-color:var(--gold);color:#000;}
+.stage-name{font-size:0.8rem;font-weight:600;color:var(--white);}
+.stage-pct{font-size:0.62rem;color:var(--muted);}
+
+.calc-btn{width:100%;padding:15px;border:none;border-radius:12px;cursor:pointer;
+  font-family:var(--font);font-size:1rem;font-weight:700;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;
+  display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.2s;}
+.calc-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,168,76,0.3);}
+
+#results{display:none;}
+.result-hero{background:linear-gradient(135deg,rgba(201,168,76,0.1),rgba(155,89,245,0.06));
+  border:1px solid rgba(201,168,76,0.25);border-radius:14px;padding:20px;margin-bottom:14px;text-align:center;}
+.result-range{font-family:var(--serif);font-size:1.9rem;font-weight:900;color:var(--gold);line-height:1.1;}
+.result-label{font-size:0.7rem;color:var(--muted);margin-top:4px;text-transform:uppercase;letter-spacing:0.08em;}
+.result-sub{font-size:0.8rem;color:rgba(201,168,76,0.7);margin-top:6px;}
+
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;}
+.stat-card{background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center;}
+.stat-val{font-family:var(--serif);font-size:1rem;font-weight:700;color:var(--white);}
+.stat-label{font-size:0.6rem;color:var(--muted);text-transform:uppercase;margin-top:2px;}
+
+.breakdown-tbl{width:100%;border-collapse:collapse;margin-bottom:14px;font-size:0.78rem;}
+.breakdown-tbl th{background:rgba(255,255,255,0.03);color:var(--muted);font-size:0.63rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:0.07em;padding:9px 10px;text-align:left;border-bottom:1px solid var(--border);}
+.breakdown-tbl td{padding:9px 10px;border-bottom:1px solid rgba(255,255,255,0.03);color:var(--white);}
+.breakdown-tbl tr:last-child td{border-bottom:none;}
+.breakdown-tbl .total-row td{color:var(--gold);font-weight:700;font-family:var(--serif);}
+.pct-bar{height:5px;border-radius:3px;background:rgba(255,255,255,0.06);margin-top:4px;}
+.pct-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--gold),var(--gold2));}
+.note-box{background:rgba(155,89,245,0.05);border:1px solid rgba(155,89,245,0.15);border-radius:10px;
+  padding:12px;font-size:0.71rem;color:rgba(244,240,255,0.58);line-height:1.65;margin-bottom:14px;}
+.wa-btn{width:100%;padding:15px;border:none;border-radius:12px;cursor:pointer;font-family:var(--font);
+  font-size:0.95rem;font-weight:700;background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;
+  display:flex;align-items:center;justify-content:center;gap:10px;transition:all 0.2s;text-decoration:none;}
+.wa-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,211,102,0.3);}
+
+.article h2{font-family:var(--serif);font-size:1.5rem;font-weight:900;color:var(--gold);margin:40px 0 13px;}
+.article h3{font-family:var(--serif);font-size:1.1rem;font-weight:700;color:var(--white);margin:24px 0 9px;}
+.article p{font-size:0.88rem;color:rgba(244,240,255,0.75);line-height:1.87;margin-bottom:13px;}
+.article ul{padding-left:20px;margin-bottom:13px;}
+.article ul li{font-size:0.86rem;color:rgba(244,240,255,0.7);line-height:1.8;margin-bottom:4px;}
+.article ul li strong{color:var(--white);}
+.info-box{background:rgba(201,168,76,0.06);border-left:3px solid var(--gold);border-radius:0 10px 10px 0;
+  padding:13px 16px;margin:16px 0;font-size:0.84rem;color:rgba(244,240,255,0.75);line-height:1.7;}
+footer{text-align:center;padding:28px 18px;border-top:1px solid var(--border);
+  font-size:0.7rem;color:var(--muted);position:relative;z-index:1;}
+footer a{color:var(--gold);text-decoration:none;}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(100px);
+  background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:12px 20px;
+  font-size:0.82rem;color:var(--white);transition:transform 0.3s;z-index:999;white-space:nowrap;}
+.toast.show{transform:translateX(-50%) translateY(0);}
+@media(max-width:520px){
+  .budget-tabs{flex-direction:column;}
+  .config-grid{grid-template-columns:1fr;}
+  .stages-grid{grid-template-columns:1fr;}
+  .stats-row{grid-template-columns:1fr 1fr 1fr;}
+  .result-range{font-size:1.45rem;}
+}
+</style>
+</head>
+<body>
+<nav>
+  <a href="https://rehoteq.com" class="nav-logo">
+    <div class="nav-icon">R</div>
+    <div class="nav-name">Rehoteq <span>Technologies</span></div>
+  </a>
+  <a href="https://wa.me/2347036302585" class="nav-cta" target="_blank">📲 Get a Quote</a>
+</nav>
+
+<div class="hero">
+  <div style="position:relative;z-index:2;max-width:680px;">
+    <div class="hero-tag">🏗️ Free Building Calculator</div>
+    <h1>House Construction Cost<br/><em>Calculator</em> — Nigeria 2025</h1>
+    <p class="hero-sub">Select your budget level, building type and which stages you want completed. Get an instant, itemised cost estimate based on current Nigerian material and labour prices.</p>
+    <div class="badges">
+      <span class="badge">🇳🇬 Naira Pricing</span>
+      <span class="badge">🏠 1–5 Bedroom</span>
+      <span class="badge">📊 Stage by Stage</span>
+      <span class="badge">⚡ Includes Electrical</span>
+    </div>
+  </div>
+</div>
+
+<main>
+  <div class="ad-slot">
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3770512274225098" data-ad-slot="3562913083" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <!-- STEP 1: BUDGET -->
+  <div class="card">
+    <div class="card-title">💰 <span>Step 1</span> — Choose Your Budget Level</div>
+    <div class="card-sub">Each tier uses different materials, finishes and labour quality. All produce structurally sound buildings.</div>
+    <div class="budget-tabs">
+      <button class="btab economy active" data-tier="economy" onclick="selectTier('economy',this)">
+        <div class="btab-icon">🧱</div>
+        <div class="btab-name">Economy Build</div>
+        <div class="btab-range">Basic finishes · Local materials</div>
+      </button>
+      <button class="btab mid" data-tier="mid" onclick="selectTier('mid',this)">
+        <div class="btab-icon">🏠</div>
+        <div class="btab-name">Mid-Range Build</div>
+        <div class="btab-range">Good finishes · Quality materials</div>
+      </button>
+      <button class="btab high" data-tier="high" onclick="selectTier('high',this)">
+        <div class="btab-icon">🏛️</div>
+        <div class="btab-name">High-End Build</div>
+        <div class="btab-range">Premium finishes · Imported materials</div>
+      </button>
+    </div>
+  </div>
+
+  <!-- STEP 2: BUILDING CONFIG -->
+  <div class="card">
+    <div class="card-title">🏗️ <span>Step 2</span> — Building Specification</div>
+    <div class="card-sub">Describe your planned building. All sizes are approximate — the calculator gives a realistic budget range.</div>
+    <div class="config-grid">
+      <div class="cg">
+        <label>Building Type</label>
+        <select id="bld-type">
+          <option value="bungalow">Bungalow (Single Storey)</option>
+          <option value="duplex" selected>Duplex (Two Storey)</option>
+          <option value="flat">Flat / Apartment</option>
+          <option value="commercial">Commercial / Office</option>
+        </select>
+      </div>
+      <div class="cg">
+        <label>Number of Bedrooms</label>
+        <select id="bld-beds">
+          <option value="1">1 Bedroom</option>
+          <option value="2">2 Bedrooms</option>
+          <option value="3" selected>3 Bedrooms</option>
+          <option value="4">4 Bedrooms</option>
+          <option value="5">5 Bedrooms</option>
+        </select>
+      </div>
+      <div class="cg">
+        <label>Plot Size</label>
+        <select id="bld-plot">
+          <option value="small">Small (300–450 sqm)</option>
+          <option value="medium" selected>Medium (450–650 sqm)</option>
+          <option value="large">Large (650–900 sqm)</option>
+          <option value="xlarge">Extra Large (900 sqm+)</option>
+        </select>
+      </div>
+      <div class="cg">
+        <label>Foundation Type</label>
+        <select id="bld-foundation">
+          <option value="strip" selected>Strip / Raft Foundation</option>
+          <option value="pile">Pile Foundation (soft soil)</option>
+          <option value="mat">Mat Foundation</option>
+        </select>
+      </div>
+      <div class="cg">
+        <label>Roof Type</label>
+        <select id="bld-roof">
+          <option value="aluminum" selected>Aluminum Roofing Sheet</option>
+          <option value="gerard">Gerard / Stone Coated</option>
+          <option value="clay">Clay / Concrete Tiles</option>
+        </select>
+      </div>
+      <div class="cg">
+        <label>Location</label>
+        <select id="bld-location">
+          <option value="rural">Rural / Small Town</option>
+          <option value="state" selected>State Capital / Mid City</option>
+          <option value="lagos">Lagos / Abuja Metro</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3: STAGES -->
+  <div class="card">
+    <div class="card-title">📋 <span>Step 3</span> — Construction Stages</div>
+    <div class="card-sub">Tick the stages you want included in this estimate. Untick stages you are handling separately or have already completed.</div>
+    <div class="stages-grid" id="stages-grid"></div>
+  </div>
+
+  <!-- CALCULATE -->
+  <div class="card" style="padding:18px;">
+    <button class="calc-btn" onclick="calculate()">🏗️ Calculate Building Cost</button>
+  </div>
+
+  <!-- RESULTS -->
+  <div id="results">
+    <div class="card">
+      <div class="card-title">📊 <span>Your Build</span> — Cost Estimate</div>
+      <div class="result-hero">
+        <div class="result-range" id="res-cost">—</div>
+        <div class="result-label">Total Estimated Construction Cost</div>
+        <div class="result-sub" id="res-sub">—</div>
+      </div>
+      <div class="stats-row">
+        <div class="stat-card"><div class="stat-val" id="res-sqm">—</div><div class="stat-label">Est. Floor Area</div></div>
+        <div class="stat-card"><div class="stat-val" id="res-sqm-cost">—</div><div class="stat-label">Cost per m²</div></div>
+        <div class="stat-card"><div class="stat-val" id="res-months">—</div><div class="stat-label">Est. Duration</div></div>
+      </div>
+      <div style="font-size:0.74rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;">Stage Breakdown</div>
+      <table class="breakdown-tbl">
+        <thead><tr><th>Stage</th><th>% of Total</th><th>Low Estimate</th><th>High Estimate</th></tr></thead>
+        <tbody id="breakdown-body"></tbody>
+        <tfoot><tr class="total-row" id="breakdown-total"></tr></tfoot>
+      </table>
+      <div class="note-box">
+        ℹ️ Estimates are based on April 2025 Nigerian market prices for materials and labour. Actual costs vary with site conditions, contractor experience, material price fluctuations, and design complexity. Always obtain at least 3 contractor quotes before proceeding. Electrical wiring cost is included in the Electrical & Mechanical stage — use our <a href="/wiring.html" style="color:var(--gold);">Wiring Calculator</a> for a detailed electrical breakdown.
+      </div>
+      <div class="ad-slot" style="margin:0 0 14px;">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3770512274225098" data-ad-slot="6707951176" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
+      <a id="wa-btn" href="#" target="_blank" class="wa-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Send Estimate to Engineer · Get Free Consultation
+      </a>
+    </div>
+  </div>
+
+  <div class="ad-slot">
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3770512274225098" data-ad-slot="3562913083" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <article class="article">
+    <h2>How Much Does It Cost to Build a House in Nigeria? (2025 Guide)</h2>
+    <p>Building a house in Nigeria in 2025 is significantly more expensive than it was just two years ago. Cement prices have risen sharply following subsidy removal, imported materials have been affected by naira devaluation, and skilled labour costs have increased across all states. This guide by Rehoteq Technologies — engineering professionals based in Ondo State — gives you an honest, detailed breakdown of what building a house in Nigeria truly costs today.</p>
+    <div class="info-box">Building a modest 3-bedroom bungalow in Nigeria costs between <strong>₦18 million and ₦35 million</strong> in 2025 for an economy to mid-range build. A 4-bedroom duplex ranges from <strong>₦38 million to ₦90 million</strong> depending on location, finishes, and materials.</div>
+    <h3>Why Building Costs Vary So Much in Nigeria</h3>
+    <p>No two buildings in Nigeria cost the same. The factors that drive cost variance the most are: location (Lagos prices are 40–70% higher than most other states), foundation type (pile foundations on waterlogged or soft soil add ₦2–8 million), material tier (imported tiles versus locally manufactured), contractor experience, and whether you are building during or outside of the dry season (rainy season construction costs more due to productivity loss and material exposure).</p>
+    <h3>The Major Stages of Building Construction in Nigeria</h3>
+    <ul>
+      <li><strong>Foundation (8–12% of total cost):</strong> Clearing, excavation, blinding, foundation concrete, DPC. This stage is invisible in the finished building but is the most critical — cutting corners here causes structural failure. Strip and raft foundations suit most Nigerian soils; pile foundations are required in Lagos Island, riverine areas, and soft ground.</li>
+      <li><strong>Block Work / Superstructure (20–28%):</strong> Columns, beams, block laying, lintel casting, ring beams. This is the skeleton of the building and the most labour-intensive stage. In 2025, a standard 9-inch sandcrete block costs ₦700–₦950 and a 3-bedroom bungalow requires 3,500–5,000 blocks.</li>
+      <li><strong>Roofing (10–15%):</strong> Roof trusses (timber or steel), roofing sheet, fascia board, gutters. Stone-coated and Gerard roofing have become increasingly popular for mid to high-end builds despite their higher cost, due to their durability and aesthetics.</li>
+      <li><strong>Concrete and Finishes (12–18%):</strong> Floor screed, plastering, painting, ceiling work (POP or PVC), tiling, and external rendering. This stage most visibly determines whether a house looks cheap or quality.</li>
+      <li><strong>Electrical and Mechanical (8–12%):</strong> Full wiring, distribution board, plumbing, septic tank, water storage tank and pump. For solar or inverter integration, add 20–35% to this stage.</li>
+      <li><strong>Doors, Windows and Ironmongery (8–12%):</strong> Security doors, casement windows, wardrobes, kitchen units. Imported aluminium windows and doors have become expensive due to FX costs.</li>
+      <li><strong>External Works (5–10%):</strong> Perimeter fence, gate, driveway paving, drainage, landscaping. Often left for a later phase but should be budgeted from the start.</li>
+    </ul>
+    <h3>How to Save Money When Building in Nigeria Without Cutting Corners</h3>
+    <ul>
+      <li><strong>Buy materials directly from the source</strong> — purchase cement, iron rods and blocks directly from manufacturers or large distributors, not from small retailers who add significant margins.</li>
+      <li><strong>Build in the dry season</strong> — labour productivity is higher and materials are not exposed to rain damage during critical stages like casting and plastering.</li>
+      <li><strong>Avoid change-of-mind modifications</strong> — every time you change a design decision mid-construction (moving a door, adding a room, changing a fixture), it costs 3–5 times more than it would have in the planning stage.</li>
+      <li><strong>Use a bill of quantities</strong> — engage a quantity surveyor to produce a detailed material and labour schedule before you start. This prevents contractor padding and gives you a clear procurement list.</li>
+      <li><strong>Consider contractor-supplied versus owner-supplied materials</strong> — some contractors inflate material costs heavily. Consider supplying key materials (cement, iron rods) yourself and paying labour separately.</li>
+    </ul>
+    <h3>The Cost of Electrical Installation in a New Build</h3>
+    <p>Electrical installation in a new Nigerian house typically represents 8–12% of total construction cost. For a 3-bedroom bungalow, budget ₦380,000–₦780,000 for complete conduit wiring, distribution board, all outlets and fittings, and earthing. If you are adding an inverter system or solar integration from the start, this rises to ₦600,000–₦1,400,000. Rehoteq Technologies handles electrical installation for new builds across Ondo State and beyond — use our <a href="/wiring.html" style="color:var(--gold);">free wiring calculator</a> for a detailed electrical estimate.</p>
+  </article>
+</main>
+
+<footer>
+  <p style="margin-bottom:6px;"><a href="https://rehoteq.com">rehoteq.com</a> · Okitipupa, Ondo State, Nigeria · <a href="tel:+2347036302585">07036302585</a></p>
+  <p>© 2025 Rehoteq Technologies · <a href="/solar.html">Solar Calculator</a> · <a href="/wiring.html">Wiring Calculator</a> · <a href="/privacy.html">Privacy Policy</a></p>
+</footer>
+<div class="toast" id="toast"></div>
+
+<script>
+var selectedTier = 'economy';
+var STAGES = [
+  { id:'foundation',  name:'Foundation',          pct:{ economy:10, mid:9,  high:8  }, icon:'⛏️' },
+  { id:'blockwork',   name:'Block Work / Frame',  pct:{ economy:25, mid:24, high:22 }, icon:'🧱' },
+  { id:'roofing',     name:'Roofing',              pct:{ economy:12, mid:13, high:14 }, icon:'🏠' },
+  { id:'finishes',    name:'Plastering & Finishes',pct:{ economy:15, mid:16, high:18 }, icon:'🖌️' },
+  { id:'electrical',  name:'Electrical & Plumbing',pct:{ economy:10, mid:10, high:10 }, icon:'⚡' },
+  { id:'doors',       name:'Doors, Windows & Fittings',pct:{ economy:10, mid:11, high:13 }, icon:'🚪' },
+  { id:'external',    name:'External Works & Fence',pct:{ economy:8,  mid:8,  high:8  }, icon:'🌳' },
+  { id:'contingency', name:'Contingency (5–10%)', pct:{ economy:5,  mid:5,  high:5  }, icon:'🛡️' },
+];
+var stageState = {};
+STAGES.forEach(function(s){ stageState[s.id] = true; });
+
+// Base costs (₦ million) per bed+type combination — mid-range, state capital
+var BASE = {
+  bungalow:{ 1:8, 2:13, 3:20, 4:28, 5:36 },
+  duplex:  { 1:14,2:22, 3:34, 4:48, 5:62 },
+  flat:    { 1:7, 2:11, 3:17, 4:24, 5:31 },
+  commercial:{1:12,2:18,3:26,4:36,5:46},
+};
+var TIER_MULT = { economy:{low:0.60,high:0.75}, mid:{low:0.90,high:1.10}, high:{low:1.35,high:1.70} };
+var LOC_MULT  = { rural:{low:0.80,high:0.85}, state:{low:1.00,high:1.00}, lagos:{low:1.40,high:1.55} };
+var FOUND_ADD = { strip:0, pile:5000000, mat:3000000 };
+var ROOF_MULT = { aluminum:1.0, gerard:1.35, clay:1.55 };
+var SQMS = { bungalow:{1:55,2:80,3:110,4:140,5:170}, duplex:{1:80,2:120,3:170,4:210,5:250}, flat:{1:50,2:75,3:100,4:130,5:160}, commercial:{1:90,2:130,3:180,4:230,5:280} };
+var MONTHS = { economy:{bungalow:8,duplex:14,flat:7,commercial:10}, mid:{bungalow:10,duplex:18,flat:8,commercial:14}, high:{bungalow:14,duplex:24,flat:10,commercial:18} };
+
+function fmt(n){ return '₦' + (n/1e6).toFixed(1) + 'M'; }
+function fmtFull(n){ return '₦' + Math.round(n).toLocaleString('en-NG'); }
+
+function selectTier(tier, btn) {
+  selectedTier = tier;
+  document.querySelectorAll('.btab').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+}
+
+function renderStages() {
+  var grid = document.getElementById('stages-grid');
+  grid.innerHTML = STAGES.map(function(s) {
+    var on = stageState[s.id];
+    return '<div class="stage-item ' + (on?'on':'') + '" onclick="toggleStage(\'' + s.id + '\')">'
+      + '<div class="stage-chk">' + (on?'✓':'') + '</div>'
+      + '<div><div class="stage-name">' + s.icon + ' ' + s.name + '</div>'
+      + '<div class="stage-pct">~' + s.pct[selectedTier || 'mid'] + '% of total</div></div>'
+      + '</div>';
+  }).join('');
+}
+
+function toggleStage(id) {
+  stageState[id] = !stageState[id];
+  renderStages();
+}
+
+function calculate() {
+  var type     = document.getElementById('bld-type').value;
+  var beds     = parseInt(document.getElementById('bld-beds').value);
+  var location = document.getElementById('bld-location').value;
+  var found    = document.getElementById('bld-foundation').value;
+  var roof     = document.getElementById('bld-roof').value;
+  var tier     = selectedTier;
+
+  var baseM   = BASE[type][beds] * 1000000;
+  var tMult   = TIER_MULT[tier];
+  var lMult   = LOC_MULT[location];
+  var rMult   = ROOF_MULT[roof];
+  var foundAdd= FOUND_ADD[found];
+
+  // Apply multipliers
+  var rawLow  = (baseM * tMult.low  * lMult.low  * rMult) + foundAdd;
+  var rawHigh = (baseM * tMult.high * lMult.high * rMult) + foundAdd;
+
+  // Apply selected stages
+  var selectedPctTotal = STAGES.filter(function(s){ return stageState[s.id]; })
+                                .reduce(function(a,s){ return a + s.pct[tier]; }, 0);
+  var allPctTotal = STAGES.reduce(function(a,s){ return a + s.pct[tier]; }, 0);
+  var ratio = selectedPctTotal / allPctTotal;
+
+  var totalLow  = rawLow  * ratio;
+  var totalHigh = rawHigh * ratio;
+
+  // Display
+  var sqm = SQMS[type][beds];
+  var months = MONTHS[tier][type];
+
+  document.getElementById('res-cost').textContent = fmt(totalLow) + ' – ' + fmt(totalHigh);
+  document.getElementById('res-sub').textContent  = beds + '-bedroom ' + type + ' · ' + tier + ' build · ' + (location === 'lagos' ? 'Lagos/Abuja' : location === 'state' ? 'State Capital' : 'Rural') + ' location';
+  document.getElementById('res-sqm').textContent      = '~' + sqm + ' m²';
+  document.getElementById('res-sqm-cost').textContent = '₦' + Math.round(totalLow/sqm/1000) + 'k–' + Math.round(totalHigh/sqm/1000) + 'k/m²';
+  document.getElementById('res-months').textContent   = months + '–' + (months+4) + ' months';
+
+  // Stage breakdown
+  var activeStages = STAGES.filter(function(s){ return stageState[s.id]; });
+  document.getElementById('breakdown-body').innerHTML = activeStages.map(function(s) {
+    var pct = s.pct[tier];
+    var sLow  = rawLow  * (pct/100);
+    var sHigh = rawHigh * (pct/100);
+    return '<tr>'
+      + '<td style="font-weight:600;">' + s.icon + ' ' + s.name + '</td>'
+      + '<td><div style="font-size:0.75rem;color:var(--muted);">' + pct + '%</div>'
+      + '<div class="pct-bar"><div class="pct-fill" style="width:' + (pct*4) + '%"></div></div></td>'
+      + '<td style="color:#00c853;font-family:var(--mono);font-size:0.76rem;">' + fmt(sLow) + '</td>'
+      + '<td style="color:var(--amber);font-family:var(--mono);font-size:0.76rem;">' + fmt(sHigh) + '</td>'
+      + '</tr>';
+  }).join('');
+
+  document.getElementById('breakdown-total').innerHTML =
+    '<td colspan="2" style="padding:10px;color:var(--gold);font-family:var(--serif);">Total (' + activeStages.length + ' stages)</td>'
+    + '<td style="color:#00c853;font-family:var(--mono);">' + fmt(totalLow) + '</td>'
+    + '<td style="color:var(--amber);font-family:var(--mono);">' + fmt(totalHigh) + '</td>';
+
+  // WhatsApp
+  var tierLabel = {economy:'Economy',mid:'Mid-Range',high:'High-End'}[tier];
+  var activeNames = activeStages.map(function(s){ return s.name; }).join(', ');
+  var waMsg = encodeURIComponent('🏗️ *Building Cost Estimate — Rehoteq Calculator*\n\n'
+    + '*Building:* ' + beds + '-bedroom ' + type + '\n'
+    + '*Budget Tier:* ' + tierLabel + '\n'
+    + '*Location:* ' + location + '\n'
+    + '*Foundation:* ' + found + '\n'
+    + '*Roof:* ' + roof + '\n'
+    + '*Stages:* ' + activeNames + '\n\n'
+    + '*Estimated Cost:* ' + fmt(totalLow) + ' – ' + fmt(totalHigh) + '\n\n'
+    + 'Please advise on electrical installation quote. Thank you!');
+  document.getElementById('wa-btn').href = 'https://wa.me/2347036302585?text=' + waMsg;
+
+  document.getElementById('results').style.display = 'block';
+  setTimeout(function(){ document.getElementById('results').scrollIntoView({behavior:'smooth',block:'start'}); }, 100);
+  showToast('✅ Estimate ready!');
+}
+
+function showToast(msg){ var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2800); }
+
+renderStages();
+</script>
+</body>
+</html>
