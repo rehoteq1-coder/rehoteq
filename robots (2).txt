@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Prevent indexing of index.html directly (canonical is rehoteq.com/)
+Disallow: /index.html
+
+Sitemap: https://rehoteq.com/sitemap.xml
