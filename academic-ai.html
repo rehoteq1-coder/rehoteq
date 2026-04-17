@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Rehoteq Academic AI Studio — Project Topics, Research Proposals & Lecture Tools for Nigerian Universities</title>
+<meta name="description" content="AI-powered academic tools for Nigerian university students and lecturers. Generate project topics, chapter one outlines, research proposals, lecture notes and exam questions instantly."/>
+<link rel="canonical" href="https://rehoteq.com/academic-ai.html"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;700;900&family=Outfit:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<script src="https://checkout.flutterwave.com/v3.js"></script>
+<style>
+:root{
+  --bg:#03050c;--card:#0a0d1a;--card2:#0f1222;
+  --border:rgba(255,255,255,0.07);
+  --gold:#c9a84c;--gold2:#f0c040;
+  --blue:#3b82f6;--cyan:#06b6d4;--green:#10b981;
+  --purple:#8b5cf6;--red:#ef4444;--amber:#f59e0b;
+  --white:#f0f4ff;--muted:rgba(240,244,255,0.45);
+  --font:'Outfit',sans-serif;--serif:'Fraunces',serif;--mono:'DM Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:var(--font);background:var(--bg);color:var(--white);min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse 60% 40% at 10% 0%,rgba(59,130,246,0.07),transparent),
+             radial-gradient(ellipse 50% 40% at 90% 100%,rgba(201,168,76,0.05),transparent);}
+
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;
+  padding:13px 20px;background:rgba(3,5,12,0.93);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-icon{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#8b6914,var(--gold),var(--gold2));
+  display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:0.85rem;font-weight:900;color:#000;}
+.nav-name{font-family:var(--serif);font-size:0.85rem;font-weight:700;color:var(--white);}
+.nav-name span{color:var(--gold);}
+.units-pill{background:rgba(59,130,246,0.12);border:1px solid rgba(59,130,246,0.3);border-radius:20px;
+  padding:5px 14px;font-size:0.72rem;font-weight:700;color:var(--blue);cursor:pointer;}
+.units-pill span{color:var(--white);}
+
+.hero{text-align:center;padding:52px 20px 36px;position:relative;z-index:1;}
+.hero-tag{display:inline-flex;align-items:center;gap:7px;background:rgba(59,130,246,0.1);
+  border:1px solid rgba(59,130,246,0.25);border-radius:100px;padding:5px 16px;
+  font-size:0.68rem;font-weight:700;color:var(--blue);letter-spacing:0.12em;
+  text-transform:uppercase;margin-bottom:16px;}
+.hero h1{font-family:var(--serif);font-size:clamp(1.8rem,5vw,2.8rem);font-weight:900;line-height:1.1;margin-bottom:12px;}
+.hero h1 em{color:var(--gold);font-style:normal;}
+.hero p{font-size:0.88rem;color:var(--muted);max-width:540px;margin:0 auto 18px;line-height:1.75;}
+.free-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(16,185,129,0.1);
+  border:1px solid rgba(16,185,129,0.25);border-radius:8px;padding:7px 16px;
+  font-size:0.78rem;font-weight:700;color:var(--green);}
+
+main{max-width:840px;margin:0 auto;padding:0 16px 80px;position:relative;z-index:1;}
+
+/* UNIT BAR */
+.unit-bar{background:var(--card);border:1px solid var(--border);border-radius:12px;
+  padding:12px 16px;display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+.unit-info{font-size:0.78rem;color:var(--muted);}
+.unit-count{font-family:var(--serif);font-size:1.1rem;font-weight:900;color:var(--blue);}
+.buy-more{background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.25);border-radius:8px;
+  padding:6px 14px;font-size:0.72rem;font-weight:700;color:var(--blue);cursor:pointer;}
+
+/* WHO ARE YOU */
+.audience-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;}
+.aud-tab{background:var(--card);border:2px solid var(--border);border-radius:14px;
+  padding:14px;text-align:center;cursor:pointer;transition:all 0.2s;}
+.aud-tab:hover{border-color:rgba(59,130,246,0.3);}
+.aud-tab.active{border-color:var(--blue);background:rgba(59,130,246,0.08);}
+.aud-icon{font-size:1.6rem;margin-bottom:6px;}
+.aud-name{font-size:0.82rem;font-weight:700;color:var(--white);}
+.aud-desc{font-size:0.62rem;color:var(--muted);margin-top:2px;}
+
+/* TOOL TABS */
+.tool-tabs{display:grid;gap:8px;margin-bottom:16px;}
+.tool-tabs.student{grid-template-columns:repeat(3,1fr);}
+.tool-tabs.lecturer{grid-template-columns:repeat(3,1fr);}
+.tool-tab{background:var(--card);border:2px solid var(--border);border-radius:12px;
+  padding:12px 8px;text-align:center;cursor:pointer;transition:all 0.2s;}
+.tool-tab:hover{border-color:rgba(59,130,246,0.3);}
+.tool-tab.active{border-color:var(--blue);background:rgba(59,130,246,0.08);}
+.tool-tab-icon{font-size:1.2rem;margin-bottom:5px;}
+.tool-tab-name{font-size:0.72rem;font-weight:700;color:var(--white);line-height:1.3;}
+.tool-tab-cost{font-size:0.58rem;color:var(--muted);margin-top:2px;}
+
+/* FORM */
+.form-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:22px;margin-bottom:14px;}
+.form-title{font-family:var(--serif);font-size:1rem;font-weight:700;color:var(--white);margin-bottom:4px;display:flex;align-items:center;gap:8px;}
+.form-title span{color:var(--blue);}
+.form-sub{font-size:0.74rem;color:var(--muted);margin-bottom:16px;line-height:1.5;}
+.fg{display:flex;flex-direction:column;gap:5px;margin-bottom:12px;}
+.fg label{font-size:0.67rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;}
+.fg select,.fg input,.fg textarea{background:var(--card2);border:1px solid var(--border);border-radius:9px;
+  padding:9px 12px;color:var(--white);font-size:0.82rem;outline:none;transition:border-color 0.2s;font-family:var(--font);}
+.fg select:focus,.fg input:focus,.fg textarea:focus{border-color:rgba(59,130,246,0.4);}
+.fg textarea{resize:vertical;min-height:80px;line-height:1.6;}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.form-grid.three{grid-template-columns:1fr 1fr 1fr;}
+
+/* PRICE TAG */
+.price-tag{display:inline-flex;align-items:center;gap:5px;background:rgba(245,158,11,0.1);
+  border:1px solid rgba(245,158,11,0.25);border-radius:8px;padding:4px 12px;
+  font-size:0.72rem;font-weight:700;color:var(--amber);margin-bottom:14px;}
+
+.gen-btn{width:100%;padding:14px;border:none;border-radius:12px;cursor:pointer;
+  font-family:var(--font);font-size:0.95rem;font-weight:700;
+  background:linear-gradient(135deg,#1d4ed8,var(--blue));color:#fff;
+  display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.2s;}
+.gen-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(59,130,246,0.35);}
+.gen-btn:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
+
+/* OUTPUT */
+#output-section{display:none;}
+.output-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:22px;margin-bottom:14px;}
+.output-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px;}
+.output-title{font-family:var(--serif);font-size:1rem;font-weight:700;color:var(--gold);}
+.output-actions{display:flex;gap:8px;}
+.btn-dl{background:linear-gradient(135deg,var(--gold),var(--gold2));border:none;border-radius:8px;
+  padding:8px 16px;font-family:var(--font);font-size:0.75rem;font-weight:700;color:#000;cursor:pointer;}
+.btn-copy{background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:8px;
+  padding:8px 14px;font-family:var(--font);font-size:0.75rem;font-weight:600;color:var(--white);cursor:pointer;}
+#output-content{font-size:0.85rem;color:rgba(240,244,255,0.82);line-height:1.88;white-space:pre-wrap;}
+#output-content h2{font-family:var(--serif);font-size:1.1rem;color:var(--gold);margin:18px 0 8px;font-weight:700;}
+#output-content h3{font-family:var(--serif);font-size:0.95rem;color:var(--white);margin:14px 0 6px;font-weight:700;}
+#output-content strong{color:var(--white);}
+
+.loading{display:none;text-align:center;padding:32px;}
+.spinner{width:36px;height:36px;border:3px solid rgba(59,130,246,0.2);border-top-color:var(--blue);
+  border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 12px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* GATE */
+.gate-overlay{display:none;position:fixed;inset:0;background:rgba(3,5,12,0.92);
+  z-index:200;align-items:center;justify-content:center;padding:20px;}
+.gate-card{background:var(--card);border:1px solid rgba(59,130,246,0.3);border-radius:20px;
+  padding:28px;max-width:460px;width:100%;text-align:center;}
+.gate-icon{font-size:2.5rem;margin-bottom:12px;}
+.gate-title{font-family:var(--serif);font-size:1.3rem;font-weight:900;color:var(--white);margin-bottom:8px;}
+.gate-sub{font-size:0.82rem;color:var(--muted);margin-bottom:20px;line-height:1.65;}
+.bundle-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;}
+.bundle{background:var(--card2);border:2px solid var(--border);border-radius:12px;
+  padding:14px;cursor:pointer;transition:all 0.2s;text-align:center;}
+.bundle:hover,.bundle.selected{border-color:var(--blue);background:rgba(59,130,246,0.08);}
+.bundle-units{font-family:var(--serif);font-size:1.3rem;font-weight:900;color:var(--gold);}
+.bundle-label{font-size:0.65rem;color:var(--muted);margin:2px 0;}
+.bundle-price{font-size:0.88rem;font-weight:700;color:var(--white);}
+.bundle-per{font-size:0.6rem;color:var(--muted);}
+.email-row{display:flex;gap:8px;margin-bottom:14px;}
+.email-row input{flex:1;background:var(--card2);border:1px solid var(--border);border-radius:9px;
+  padding:9px 12px;color:var(--white);font-size:0.82rem;outline:none;font-family:var(--font);}
+.pay-btn{width:100%;padding:13px;border:none;border-radius:11px;cursor:pointer;
+  font-family:var(--font);font-size:0.9rem;font-weight:700;
+  background:linear-gradient(135deg,#c9a84c,#f0c040);color:#000;margin-bottom:10px;}
+.gate-close{background:none;border:none;color:var(--muted);font-size:0.78rem;cursor:pointer;font-family:var(--font);}
+
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(100px);
+  background:var(--card2);border:1px solid var(--border);border-radius:10px;
+  padding:12px 20px;font-size:0.82rem;color:var(--white);transition:transform 0.3s;z-index:999;}
+.toast.show{transform:translateX(-50%) translateY(0);}
+
+footer{border-top:1px solid var(--border);padding:24px 16px;text-align:center;
+  font-size:0.7rem;color:var(--muted);position:relative;z-index:1;}
+footer a{color:var(--gold);text-decoration:none;}
+
+@media(max-width:520px){
+  .audience-tabs{grid-template-columns:1fr 1fr;}
+  .tool-tabs.student,.tool-tabs.lecturer{grid-template-columns:1fr 1fr 1fr;}
+  .form-grid{grid-template-columns:1fr;}
+  .form-grid.three{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="https://rehoteq.com" class="nav-logo">
+    <div class="nav-icon">R</div>
+    <div class="nav-name">Rehoteq <span>Academic AI</span></div>
+  </a>
+  <button class="units-pill" onclick="showGate()">⚡ Units: <span id="nav-units">—</span></button>
+</nav>
+
+<div class="hero">
+  <div class="hero-tag">🎓 Nigerian Universities · NUC Aligned</div>
+  <h1>Academic AI Tools Built for<br/><em>Nigerian Universities</em></h1>
+  <p>Generate project topics, chapter one outlines, research proposals, lecture notes, exam questions and journal articles — instantly. Built for Nigerian students and lecturers.</p>
+  <div class="free-badge">🎁 2 Free Units — No Sign-up Needed</div>
+</div>
+
+<main>
+
+  <!-- UNIT BAR -->
+  <div class="unit-bar">
+    <div>
+      <div class="unit-info">Your available units</div>
+      <div class="unit-count" id="unit-display">— units</div>
+    </div>
+    <button class="buy-more" onclick="showGate()">+ Buy More Units</button>
+  </div>
+
+  <!-- WHO ARE YOU -->
+  <div class="form-card" style="margin-bottom:14px;">
+    <div class="form-title">👤 <span>I am a...</span></div>
+    <div class="audience-tabs" id="audience-tabs">
+      <button class="aud-tab active" onclick="switchAudience('student',this)">
+        <div class="aud-icon">🎓</div>
+        <div class="aud-name">Student</div>
+        <div class="aud-desc">HND · BSc · MSc · PhD</div>
+      </button>
+      <button class="aud-tab" onclick="switchAudience('lecturer',this)">
+        <div class="aud-icon">👨‍🏫</div>
+        <div class="aud-name">Lecturer / Researcher</div>
+        <div class="aud-desc">Courses · Journals · Exams</div>
+      </button>
+    </div>
+  </div>
+
+  <!-- STUDENT TOOLS -->
+  <div id="student-tools">
+    <div class="tool-tabs student" id="student-tool-tabs">
+      <button class="tool-tab active" onclick="switchTool('topics',this,'student')">
+        <div class="tool-tab-icon">💡</div>
+        <div class="tool-tab-name">Project Topics</div>
+        <div class="tool-tab-cost">1 unit · 10 topics</div>
+      </button>
+      <button class="tool-tab" onclick="switchTool('chapter1',this,'student')">
+        <div class="tool-tab-icon">📖</div>
+        <div class="tool-tab-name">Chapter One</div>
+        <div class="tool-tab-cost">1 unit</div>
+      </button>
+      <button class="tool-tab" onclick="switchTool('proposal',this,'student')">
+        <div class="tool-tab-icon">📋</div>
+        <div class="tool-tab-name">Research Proposal</div>
+        <div class="tool-tab-cost">1 unit</div>
+      </button>
+    </div>
+  </div>
+
+  <!-- LECTURER TOOLS -->
+  <div id="lecturer-tools" style="display:none;">
+    <div class="tool-tabs lecturer" id="lecturer-tool-tabs">
+      <button class="tool-tab active" onclick="switchTool('lecture-notes',this,'lecturer')">
+        <div class="tool-tab-icon">📝</div>
+        <div class="tool-tab-name">Lecture Notes</div>
+        <div class="tool-tab-cost">1 unit</div>
+      </button>
+      <button class="tool-tab" onclick="switchTool('exam-questions',this,'lecturer')">
+        <div class="tool-tab-icon">❓</div>
+        <div class="tool-tab-name">Exam Questions</div>
+        <div class="tool-tab-cost">1 unit</div>
+      </button>
+      <button class="tool-tab" onclick="switchTool('journal',this,'lecturer')">
+        <div class="tool-tab-icon">📰</div>
+        <div class="tool-tab-name">Journal Article</div>
+        <div class="tool-tab-cost">1 unit</div>
+      </button>
+    </div>
+  </div>
+
+  <!-- FORM CARD -->
+  <div class="form-card">
+    <div class="form-title" id="form-title">💡 <span>Project Topic</span> Generator</div>
+    <div class="form-sub" id="form-sub">Fill in your details and get 10 unique, researchable project topics aligned to Nigerian university standards.</div>
+
+    <!-- LEVEL (student only) -->
+    <div class="fg" id="level-wrap">
+      <label>Academic Level</label>
+      <select id="f-level">
+        <option value="HND">HND (Higher National Diploma)</option>
+        <option value="BSc" selected>BSc / BA / BEd (Undergraduate)</option>
+        <option value="MSc">MSc / MA / MEd (Masters)</option>
+        <option value="PhD">PhD (Doctorate)</option>
+      </select>
+    </div>
+
+    <div class="form-grid">
+      <div class="fg">
+        <label>Faculty</label>
+        <select id="f-faculty">
+          <option>Agriculture & Veterinary Sciences</option>
+          <option>Arts & Humanities</option>
+          <option>Basic Medical Sciences</option>
+          <option>Business Administration</option>
+          <option>Computer & Information Sciences</option>
+          <option>Education</option>
+          <option>Engineering & Technology</option>
+          <option>Environmental Sciences</option>
+          <option>Law</option>
+          <option>Management Sciences</option>
+          <option>Medicine & Surgery</option>
+          <option>Natural Sciences</option>
+          <option>Pharmacy & Pharmaceutical Sciences</option>
+          <option>Social Sciences</option>
+          <option>Communication & Media Studies</option>
+          <option>Public Health</option>
+          <option>Architecture & Built Environment</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label>Department / Course</label>
+        <input type="text" id="f-dept" placeholder="e.g. Computer Science, Accounting, Civil Engineering..."/>
+      </div>
+    </div>
+
+    <!-- Topic field — for chapter 1 and proposal -->
+    <div class="fg" id="topic-wrap" style="display:none;">
+      <label>Your Project Topic</label>
+      <input type="text" id="f-topic" placeholder="Enter your approved project topic here..."/>
+    </div>
+
+    <!-- Area of interest -->
+    <div class="fg" id="interest-wrap">
+      <label>Area of Interest <span style="font-size:0.62rem;color:var(--muted);font-weight:400;">(optional — helps narrow topics)</span></label>
+      <input type="text" id="f-interest" placeholder="e.g. fintech, climate change, machine learning, public health, Niger Delta..."/>
+    </div>
+
+    <!-- Lecture topic (lecturer only) -->
+    <div class="fg" id="lecture-topic-wrap" style="display:none;">
+      <label>Course / Topic Title</label>
+      <input type="text" id="f-lecture-topic" placeholder="e.g. Financial Accounting, Organic Chemistry, Constitutional Law..."/>
+    </div>
+
+    <!-- Level (lecturer) -->
+    <div class="fg" id="uni-level-wrap" style="display:none;">
+      <label>Student Level</label>
+      <select id="f-uni-level">
+        <option>100 Level</option>
+        <option>200 Level</option>
+        <option>300 Level</option>
+        <option>400 Level</option>
+        <option>500 Level</option>
+        <option>Postgraduate</option>
+      </select>
+    </div>
+
+    <!-- Exam type -->
+    <div class="fg" id="exam-type-wrap" style="display:none;">
+      <label>Examination Type</label>
+      <select id="f-exam-type">
+        <option>Continuous Assessment (CA)</option>
+        <option>Mid-Semester Exam</option>
+        <option>End of Semester Exam</option>
+        <option>Quiz</option>
+      </select>
+    </div>
+
+    <!-- No of questions -->
+    <div class="fg" id="qcount-wrap" style="display:none;">
+      <label>Number of Questions</label>
+      <select id="f-qcount">
+        <option>10 questions</option>
+        <option>20 questions</option>
+        <option>30 questions</option>
+        <option>50 questions</option>
+      </select>
+    </div>
+
+    <!-- Journal details -->
+    <div class="fg" id="journal-wrap" style="display:none;">
+      <label>Research Area / Topic for Journal</label>
+      <textarea id="f-journal-topic" placeholder="Describe the research area or topic you want to write a journal article on..."></textarea>
+    </div>
+
+    <div class="fg">
+      <label>Additional Instructions <span style="font-size:0.62rem;color:var(--muted);font-weight:400;">(optional)</span></label>
+      <input type="text" id="f-extra" placeholder="e.g. Focus on South-West Nigeria, include quantitative methodology, bilingual..."/>
+    </div>
+
+    <div class="price-tag" id="price-tag">💳 1 unit per generation</div>
+
+    <button class="gen-btn" id="gen-btn" onclick="generate()">
+      🤖 Generate with AI — 1 Unit
+    </button>
+  </div>
+
+  <!-- LOADING -->
+  <div class="loading" id="loading">
+    <div class="spinner"></div>
+    <div style="font-size:0.82rem;color:var(--muted);">AI is generating your content...<br/>This takes 15–25 seconds.</div>
+  </div>
+
+  <!-- OUTPUT -->
+  <div id="output-section">
+    <div class="output-card">
+      <div class="output-header">
+        <div class="output-title" id="output-title">💡 Project Topics</div>
+        <div class="output-actions">
+          <button class="btn-copy" onclick="copyOutput()">📋 Copy</button>
+          <button class="btn-dl" onclick="downloadOutput()">⬇️ Download</button>
+        </div>
+      </div>
+      <div id="output-content"></div>
+    </div>
+  </div>
+
+</main>
+
+<!-- GATE OVERLAY -->
+<div class="gate-overlay" id="gate-overlay">
+  <div class="gate-card">
+    <div class="gate-icon">⚡</div>
+    <div class="gate-title">Buy AI Units</div>
+    <div class="gate-sub">Each unit generates one complete output — project topics, chapter one, research proposal, lecture notes, exam questions or journal article. Units never expire.</div>
+    <div class="email-row">
+      <input type="email" id="gate-email" placeholder="Your email address"/>
+    </div>
+    <div class="bundle-grid">
+      <div class="bundle selected" data-units="5" data-amount="1500" onclick="selectBundle(this)">
+        <div class="bundle-units">5</div>
+        <div class="bundle-label">units</div>
+        <div class="bundle-price">₦1,500</div>
+        <div class="bundle-per">₦300/unit</div>
+      </div>
+      <div class="bundle" data-units="15" data-amount="3500" onclick="selectBundle(this)">
+        <div class="bundle-units">15</div>
+        <div class="bundle-label">units</div>
+        <div class="bundle-price">₦3,500</div>
+        <div class="bundle-per">₦233/unit</div>
+      </div>
+      <div class="bundle" data-units="50" data-amount="8000" onclick="selectBundle(this)">
+        <div class="bundle-units">50</div>
+        <div class="bundle-label">units</div>
+        <div class="bundle-price">₦8,000</div>
+        <div class="bundle-per">₦160/unit</div>
+      </div>
+      <div class="bundle" data-units="100" data-amount="12000" onclick="selectBundle(this)">
+        <div class="bundle-units">100</div>
+        <div class="bundle-label">units · Best Value</div>
+        <div class="bundle-price">₦12,000</div>
+        <div class="bundle-per">₦120/unit</div>
+      </div>
+    </div>
+    <button class="pay-btn" onclick="payForUnits()">💳 Pay with Flutterwave</button>
+    <br/>
+    <button class="gate-close" onclick="closeGate()">✕ Close</button>
+  </div>
+</div>
+
+<footer>
+  <p style="margin-bottom:6px;"><a href="https://rehoteq.com">rehoteq.com</a> · Okitipupa, Ondo State · <a href="tel:+2347036302585">07036302585</a> · <a href="mailto:rehoteq@gmail.com">rehoteq@gmail.com</a></p>
+  <p>© 2025 Rehoteq Technologies · <a href="/privacy.html">Privacy Policy</a> · <a href="/lesson-ai.html">Teacher AI Studio</a> · <a href="https://rehoteq1-coder.github.io/rms/">RMS</a></p>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+var FLW_KEY     = 'FLWPUBK-f33c828c210fbdcb4aea8ae3d9183861-X';
+var WORKER_URL  = 'https://lesson-ai.rehoteq.workers.dev';
+var FREE_UNITS  = 2;
+var currentTool = 'topics';
+var currentAud  = 'student';
+var selectedBundle = { units:5, amount:1500 };
+var outputText  = '';
+
+// ── UNITS ─────────────────────────────────────────────────────────
+function getUnits() {
+  var u = parseInt(localStorage.getItem('rms_acad_units') || '-1');
+  if (u === -1) { localStorage.setItem('rms_acad_units', FREE_UNITS); return FREE_UNITS; }
+  return u;
+}
+function setUnits(n) { localStorage.setItem('rms_acad_units', n); updateUnitDisplay(); }
+function deductUnit() { setUnits(Math.max(0, getUnits() - 1)); }
+function addUnits(n) { setUnits(getUnits() + n); }
+function updateUnitDisplay() {
+  var u = getUnits();
+  document.getElementById('unit-display').textContent = u + (u===1?' unit':' units') + ' remaining';
+  document.getElementById('nav-units').textContent = u;
+}
+
+// ── AUDIENCE SWITCH ───────────────────────────────────────────────
+function switchAudience(aud, btn) {
+  currentAud = aud;
+  document.querySelectorAll('.aud-tab').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  document.getElementById('student-tools').style.display = aud === 'student' ? '' : 'none';
+  document.getElementById('lecturer-tools').style.display = aud === 'lecturer' ? '' : 'none';
+
+  if (aud === 'student') {
+    currentTool = 'topics';
+    document.querySelectorAll('#student-tool-tabs .tool-tab')[0].click();
+  } else {
+    currentTool = 'lecture-notes';
+    document.querySelectorAll('#lecturer-tool-tabs .tool-tab')[0].click();
+  }
+}
+
+// ── TOOL SWITCH ───────────────────────────────────────────────────
+function switchTool(tool, btn, aud) {
+  currentTool = tool;
+  var tabs = aud === 'student'
+    ? document.querySelectorAll('#student-tool-tabs .tool-tab')
+    : document.querySelectorAll('#lecturer-tool-tabs .tool-tab');
+  tabs.forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+
+  // Show/hide fields
+  var show = function(id, v) { var el = document.getElementById(id); if(el) el.style.display = v ? '' : 'none'; };
+
+  // Reset all
+  show('level-wrap', false);
+  show('topic-wrap', false);
+  show('interest-wrap', false);
+  show('lecture-topic-wrap', false);
+  show('uni-level-wrap', false);
+  show('exam-type-wrap', false);
+  show('qcount-wrap', false);
+  show('journal-wrap', false);
+
+  if (tool === 'topics') {
+    show('level-wrap', true); show('interest-wrap', true);
+    setFormTitle('💡 <span>Project Topic</span> Generator', 'Get 10 unique, researchable project topics aligned to NUC standards and the Nigerian research context.');
+  } else if (tool === 'chapter1') {
+    show('level-wrap', true); show('topic-wrap', true);
+    setFormTitle('📖 <span>Chapter One</span> Writer', 'Enter your approved project topic and get a complete Chapter One — Introduction, Background, Problem Statement, Objectives, Research Questions, Scope, Significance and Definition of Terms.');
+  } else if (tool === 'proposal') {
+    show('level-wrap', true); show('topic-wrap', true); show('interest-wrap', true);
+    setFormTitle('📋 <span>Research Proposal</span> Builder', 'Generate a complete research proposal with all required sections for Nigerian university postgraduate and undergraduate submissions.');
+  } else if (tool === 'lecture-notes') {
+    show('lecture-topic-wrap', true); show('uni-level-wrap', true);
+    setFormTitle('📝 <span>Lecture Notes</span> Generator', 'Generate comprehensive, well-structured lecture notes for any university course topic.');
+  } else if (tool === 'exam-questions') {
+    show('lecture-topic-wrap', true); show('uni-level-wrap', true); show('exam-type-wrap', true); show('qcount-wrap', true);
+    setFormTitle('❓ <span>Exam Questions</span> Generator', 'Generate university-level exam questions with model answers and marking scheme.');
+  } else if (tool === 'journal') {
+    show('journal-wrap', true);
+    setFormTitle('📰 <span>Journal Article</span> Assistant', 'Generate a structured academic journal article draft with abstract, introduction, literature review, methodology, and references.');
+  }
+
+  document.getElementById('output-section').style.display = 'none';
+}
+
+function setFormTitle(title, sub) {
+  document.getElementById('form-title').innerHTML = title;
+  document.getElementById('form-sub').textContent = sub;
+}
+
+// ── PROMPT BUILDER ────────────────────────────────────────────────
+function buildPrompt() {
+  var faculty  = document.getElementById('f-faculty').value;
+  var dept     = document.getElementById('f-dept').value.trim();
+  var level    = document.getElementById('f-level').value;
+  var topic    = document.getElementById('f-topic').value.trim();
+  var interest = document.getElementById('f-interest').value.trim();
+  var extra    = document.getElementById('f-extra').value.trim();
+  var lecTopic = document.getElementById('f-lecture-topic').value.trim();
+  var uniLevel = document.getElementById('f-uni-level').value;
+  var examType = document.getElementById('f-exam-type').value;
+  var qcount   = document.getElementById('f-qcount').value;
+  var jTopic   = document.getElementById('f-journal-topic').value.trim();
+  var extraLine = extra ? '\nAdditional instructions: ' + extra : '';
+
+  if (currentTool === 'topics') {
+    return 'You are an expert Nigerian university academic supervisor and research consultant with deep knowledge of NUC-accredited programmes.\n\nGenerate 10 unique, original and researchable project topics for:\n\nLevel: ' + level + '\nFaculty: ' + faculty + '\nDepartment: ' + dept + (interest ? '\nArea of Interest: ' + interest : '') + extraLine + '\n\nRequirements for each topic:\n1. Must be original and researchable within Nigeria\n2. Must be specific enough to be completed within one academic year\n3. Must be relevant to current Nigerian/African challenges and opportunities\n4. Must be appropriate for the academic level (' + level + ')\n5. Avoid overly broad or too narrow topics\n\nFor each of the 10 topics provide:\n- The full project title\n- A brief 2-sentence justification explaining why it is researchable and relevant\n- Suggested research methodology (quantitative/qualitative/mixed)\n- Potential data sources in Nigeria\n\nNumber each topic clearly from 1 to 10. Make them genuinely useful for Nigerian students.';
+  }
+
+  if (currentTool === 'chapter1') {
+    return 'You are an experienced Nigerian university research supervisor.\n\nWrite a complete Chapter One for the following project:\n\nLevel: ' + level + '\nFaculty: ' + faculty + '\nDepartment: ' + dept + '\nProject Topic: ' + topic + extraLine + '\n\nChapter One must include all these sections in full:\n1. INTRODUCTION (broad context, narrowing to the topic)\n2. BACKGROUND TO THE STUDY (historical and contextual background specific to Nigeria)\n3. STATEMENT OF THE PROBLEM (specific problem being addressed, with evidence)\n4. OBJECTIVES OF THE STUDY (general objective + 4-5 specific objectives)\n5. RESEARCH QUESTIONS (corresponding to each specific objective)\n6. RESEARCH HYPOTHESES (where applicable)\n7. SIGNIFICANCE OF THE STUDY (theoretical and practical significance)\n8. SCOPE AND LIMITATIONS OF THE STUDY\n9. DEFINITION OF TERMS (define 6-8 key terms used in the study)\n10. ORGANISATION OF THE STUDY (brief description of all chapters)\n\nWrite in formal academic English appropriate for Nigerian universities. Each section should be substantive and well-developed.';
+  }
+
+  if (currentTool === 'proposal') {
+    return 'You are an expert Nigerian university research consultant.\n\nWrite a complete research proposal for:\n\nLevel: ' + level + '\nFaculty: ' + faculty + '\nDepartment: ' + dept + '\nTopic: ' + (topic || 'To be determined based on ' + (interest || dept)) + extraLine + '\n\nThe research proposal must include:\n1. TITLE PAGE details\n2. ABSTRACT (150-200 words)\n3. INTRODUCTION AND BACKGROUND\n4. STATEMENT OF THE PROBLEM\n5. RESEARCH OBJECTIVES\n6. RESEARCH QUESTIONS\n7. SIGNIFICANCE OF THE STUDY\n8. LITERATURE REVIEW (key themes and gaps)\n9. THEORETICAL FRAMEWORK\n10. RESEARCH METHODOLOGY (design, population, sampling, instruments, data analysis)\n11. SCOPE AND LIMITATIONS\n12. TIMELINE / WORK PLAN\n13. BUDGET ESTIMATE (in Naira)\n14. REFERENCES (at least 10, APA format, include Nigerian scholars)\n\nWrite in formal academic English appropriate for Nigerian universities.';
+  }
+
+  if (currentTool === 'lecture-notes') {
+    return 'You are an experienced Nigerian university lecturer.\n\nGenerate comprehensive lecture notes for:\n\nFaculty: ' + faculty + '\nDepartment: ' + dept + '\nCourse/Topic: ' + lecTopic + '\nStudent Level: ' + uniLevel + extraLine + '\n\nThe lecture notes must include:\n1. COURSE INFORMATION (Course title, code format, credit units, semester)\n2. LEARNING OBJECTIVES (5-7 measurable objectives)\n3. INTRODUCTION TO THE TOPIC\n4. MAIN CONTENT (broken into clear sections with subheadings, covering all major sub-topics)\n5. KEY DEFINITIONS AND CONCEPTS\n6. EXAMPLES AND CASE STUDIES (use Nigerian examples where relevant)\n7. DIAGRAMS/ILLUSTRATIONS (described in text)\n8. SUMMARY OF KEY POINTS\n9. SELF-ASSESSMENT QUESTIONS (10 questions)\n10. RECOMMENDED TEXTBOOKS AND REFERENCES (include Nigerian authors)\n\nWrite at the appropriate level for ' + uniLevel + ' students in a Nigerian university.';
+  }
+
+  if (currentTool === 'exam-questions') {
+    return 'You are an experienced Nigerian university examiner.\n\nGenerate ' + examType + ' questions for:\n\nFaculty: ' + faculty + '\nDepartment: ' + dept + '\nCourse/Topic: ' + lecTopic + '\nStudent Level: ' + uniLevel + '\nNumber of Questions: ' + qcount + extraLine + '\n\nRequirements:\n- Questions must be appropriate for ' + uniLevel + ' in a Nigerian university\n- Include both objective (MCQ) and theory sections where appropriate\n- For MCQ: 4 options (A-D) with correct answer indicated\n- For theory: provide model answers with mark allocation\n- Vary difficulty: 30% easy, 50% medium, 20% challenging\n- Include INSTRUCTIONS TO STUDENTS at the top\n- Include complete MARKING SCHEME at the end\n- Format professionally like a real Nigerian university examination paper\n\nHeader format:\n[UNIVERSITY NAME]\n[FACULTY / DEPARTMENT]\nCOURSE: ' + lecTopic + '\nLEVEL: ' + uniLevel + '\nEXAMINATION: ' + examType + '\nTIME ALLOWED: _____\nINSTRUCTIONS: _____';
+  }
+
+  if (currentTool === 'journal') {
+    return 'You are an expert academic writer and researcher familiar with Nigerian and African academic journals.\n\nWrite a structured academic journal article on:\n\nResearch Area: ' + jTopic + '\nFaculty Context: ' + faculty + extraLine + '\n\nThe journal article must follow this structure:\n1. TITLE (compelling and specific)\n2. AUTHORS (leave as [Author Names], [Institution])\n3. ABSTRACT (200-250 words: background, objective, methodology, findings, conclusion)\n4. KEYWORDS (5-7 keywords)\n5. INTRODUCTION (background, problem statement, objectives, significance)\n6. LITERATURE REVIEW (thematic review of relevant studies, identify research gap)\n7. THEORETICAL FRAMEWORK\n8. METHODOLOGY (research design, population, sample, instruments, data analysis)\n9. RESULTS AND DISCUSSION (present findings, discuss implications)\n10. CONCLUSION AND RECOMMENDATIONS\n11. REFERENCES (15+ references in APA format, include Nigerian/African scholars and journals)\n\nWrite in formal academic English suitable for publication in a peer-reviewed journal. Include references to relevant Nigerian institutions, policies, and contexts where appropriate.';
+  }
+}
+
+// ── GENERATE ──────────────────────────────────────────────────────
+async function generate() {
+  var dept = document.getElementById('f-dept').value.trim();
+  var lecTopic = document.getElementById('f-lecture-topic').value.trim();
+  var jTopic = document.getElementById('f-journal-topic').value.trim();
+
+  if (currentAud === 'student' && !dept) { showToast('Enter your department or course'); return; }
+  if (currentTool === 'lecture-notes' && !lecTopic) { showToast('Enter the course or topic'); return; }
+  if (currentTool === 'exam-questions' && !lecTopic) { showToast('Enter the course or topic'); return; }
+  if (currentTool === 'journal' && !jTopic) { showToast('Describe your research area'); return; }
+
+  if (getUnits() <= 0) { showGate(); return; }
+
+  var btn = document.getElementById('gen-btn');
+  btn.disabled = true;
+  document.getElementById('loading').style.display = 'block';
+  document.getElementById('output-section').style.display = 'none';
+
+  try {
+    var prompt = buildPrompt();
+    var rawText, data;
+
+    var res = await fetch(WORKER_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ prompt: prompt })
+    });
+
+    rawText = await res.text();
+    try { data = JSON.parse(rawText); } catch(e) {
+      throw new Error('Worker error: ' + rawText.substring(0, 120));
+    }
+
+    if (data.error) throw new Error(data.error.message || 'API error');
+
+    var text = '';
+    if (data.choices && data.choices[0] && data.choices[0].message) {
+      text = data.choices[0].message.content;
+    } else {
+      throw new Error('Unexpected response format. Please try again.');
+    }
+
+    outputText = text;
+    deductUnit();
+
+    var toolLabels = {
+      'topics':'💡 Project Topics', 'chapter1':'📖 Chapter One',
+      'proposal':'📋 Research Proposal', 'lecture-notes':'📝 Lecture Notes',
+      'exam-questions':'❓ Exam Questions', 'journal':'📰 Journal Article'
+    };
+    document.getElementById('output-title').textContent = toolLabels[currentTool];
+    document.getElementById('output-content').innerHTML = formatOutput(text);
+    document.getElementById('output-section').style.display = 'block';
+    document.getElementById('output-section').scrollIntoView({ behavior:'smooth', block:'start' });
+    showToast('✅ Generated! 1 unit used.');
+
+  } catch(e) {
+    showToast('Error: ' + (e.message || 'Generation failed. Check internet.'));
+    console.error(e);
+  } finally {
+    btn.disabled = false;
+    document.getElementById('loading').style.display = 'none';
+  }
+}
+
+function formatOutput(text) {
+  return text
+    .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+    .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\n\n/g, '<br/><br/>')
+    .replace(/\n/g, '<br/>');
+}
+
+function downloadOutput() {
+  if (!outputText) return;
+  var dept = document.getElementById('f-dept').value || 'Academic';
+  var labels = {'topics':'Project-Topics','chapter1':'Chapter-One','proposal':'Research-Proposal','lecture-notes':'Lecture-Notes','exam-questions':'Exam-Questions','journal':'Journal-Article'};
+  var fname = 'Rehoteq-Academic-' + labels[currentTool] + '-' + dept.replace(/\s/g,'-') + '.txt';
+  var blob = new Blob([outputText], { type:'text/plain;charset=utf-8' });
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = fname;
+  a.click();
+  showToast('⬇️ Downloading...');
+}
+
+function copyOutput() {
+  if (!outputText) return;
+  navigator.clipboard.writeText(outputText).then(function(){ showToast('📋 Copied!'); });
+}
+
+// ── PAYMENT ───────────────────────────────────────────────────────
+function showGate() { document.getElementById('gate-overlay').style.display = 'flex'; }
+function closeGate() { document.getElementById('gate-overlay').style.display = 'none'; }
+function selectBundle(el) {
+  document.querySelectorAll('.bundle').forEach(function(b){ b.classList.remove('selected'); });
+  el.classList.add('selected');
+  selectedBundle = { units:parseInt(el.dataset.units), amount:parseInt(el.dataset.amount) };
+}
+function payForUnits() {
+  var email = document.getElementById('gate-email').value.trim();
+  if (!email || !email.includes('@')) { showToast('Enter a valid email'); return; }
+  if (typeof FlutterwaveCheckout === 'undefined') { showToast('Payment not loaded. Check internet.'); return; }
+  FlutterwaveCheckout({
+    public_key: FLW_KEY,
+    tx_ref: 'REHOTEQ-ACAD-' + Date.now(),
+    amount: selectedBundle.amount,
+    currency: 'NGN',
+    customer: { email: email, name: email },
+    customizations: {
+      title: 'Rehoteq Academic AI Studio',
+      description: selectedBundle.units + ' AI Generation Units'
+    },
+    callback: function(res) {
+      if (res.status === 'successful' || res.status === 'completed') {
+        addUnits(selectedBundle.units);
+        localStorage.setItem('rms_acad_email', email);
+        closeGate();
+        showToast('✅ ' + selectedBundle.units + ' units added!');
+      } else {
+        showToast('Payment not completed.');
+      }
+    },
+    onclose: function() { showToast('Payment cancelled.'); }
+  });
+}
+
+function showToast(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(function(){ t.classList.remove('show'); }, 3000);
+}
+
+// ── INIT ──────────────────────────────────────────────────────────
+updateUnitDisplay();
+var savedEmail = localStorage.getItem('rms_acad_email');
+if (savedEmail) document.getElementById('gate-email').value = savedEmail;
+// Init form state
+switchTool('topics', document.querySelector('#student-tool-tabs .tool-tab'), 'student');
+document.getElementById('level-wrap').style.display = '';
+document.getElementById('interest-wrap').style.display = '';
+</script>
+</body>
+</html>
