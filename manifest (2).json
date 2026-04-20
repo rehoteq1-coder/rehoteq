@@ -1,0 +1,20 @@
+{
+  "name": "VoiceCoach NG — Nigerian Vocal Training",
+  "short_name": "VoiceCoach NG",
+  "description": "Discover your voice type, train your singing, detect choir parts, and compose songs in Yoruba, Igbo, Hausa and Pidgin.",
+  "start_url": "/voicecoach.html",
+  "display": "standalone",
+  "background_color": "#080612",
+  "theme_color": "#0d0a1a",
+  "orientation": "portrait",
+  "icons": [
+    { "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' rx='40' fill='%238b5cf6'/><text y='130' x='96' text-anchor='middle' font-size='120' font-family='serif'>🎤</text></svg>", "sizes": "192x192", "type": "image/svg+xml" },
+    { "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='80' fill='%238b5cf6'/><text y='360' x='256' text-anchor='middle' font-size='320' font-family='serif'>🎤</text></svg>", "sizes": "512x512", "type": "image/svg+xml" }
+  ],
+  "categories": ["music", "education", "lifestyle"],
+  "shortcuts": [
+    { "name": "Discover Voice", "url": "/voicecoach.html#discover", "description": "Detect your voice type" },
+    { "name": "AI Coach", "url": "/voicecoach.html#coach", "description": "Ask your vocal coach" },
+    { "name": "Compose", "url": "/voicecoach.html#compose", "description": "Write songs" }
+  ]
+}
