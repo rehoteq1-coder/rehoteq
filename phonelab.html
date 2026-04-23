@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta name="theme-color" content="#060d14"/>
+<title>Rehoteq PhoneLab — Smart Phone Repair Assistant</title>
+<link rel="manifest" href="phonelab-manifest.json"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="PhoneLab"/>
+<meta name="description" content="AI-powered phone repair assistant. Error decoder, firmware finder, flash wizard for Samsung, Tecno, Infinix, Itel, Xiaomi, iPhone. By Rehoteq Technologies Nigeria."/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#060d14;--s1:#0c1620;--s2:#101e2c;--s3:#162436;
+  --bd:rgba(0,200,255,0.08);--bd2:rgba(0,200,255,0.16);
+  --cyan:#00c8ff;--cyan2:rgba(0,200,255,0.12);--cyan3:rgba(0,200,255,0.06);
+  --green:#00ff88;--green2:rgba(0,255,136,0.1);
+  --orange:#ff6b2b;--orange2:rgba(255,107,43,0.1);
+  --red:#ff3b5c;--red2:rgba(255,59,92,0.1);
+  --gold:#d4a843;--gold2:rgba(212,168,67,0.1);
+  --w:#e8f4ff;--m:rgba(232,244,255,0.45);--m2:rgba(232,244,255,0.22);
+  --font:'Space Grotesk',sans-serif;
+  --mono:'JetBrains Mono',monospace;
+  --display:'Syne',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+body{font-family:var(--font);background:var(--bg);color:var(--w);min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(ellipse 60% 40% at 0% 0%,rgba(0,200,255,0.06),transparent),
+    radial-gradient(ellipse 50% 60% at 100% 100%,rgba(0,255,136,0.04),transparent);}
+
+/* ── HEADER ── */
+header{position:sticky;top:0;z-index:100;background:rgba(6,13,20,0.92);
+  backdrop-filter:blur(20px);border-bottom:1px solid var(--bd);
+  padding:14px 20px;display:flex;align-items:center;justify-content:space-between;}
+.logo{display:flex;align-items:center;gap:10px;}
+.logo-icon{width:36px;height:36px;border-radius:9px;
+  background:linear-gradient(135deg,#0c3a5c,var(--cyan));
+  display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
+.logo-text{font-family:var(--display);font-size:1rem;font-weight:800;
+  background:linear-gradient(90deg,var(--cyan),var(--green));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.logo-sub{font-size:0.55rem;color:var(--m);font-weight:500;letter-spacing:0.1em;text-transform:uppercase;margin-top:1px;}
+.beta-badge{background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.25);
+  border-radius:6px;padding:3px 9px;font-size:0.6rem;font-weight:700;color:var(--cyan);letter-spacing:0.08em;}
+
+/* ── MAIN ── */
+main{max-width:860px;margin:0 auto;padding:24px 16px 60px;position:relative;z-index:1;}
+
+/* ── HERO ── */
+.hero{text-align:center;padding:32px 0 36px;}
+.hero-tag{display:inline-flex;align-items:center;gap:7px;background:var(--green2);
+  border:1px solid rgba(0,255,136,0.2);border-radius:100px;
+  padding:6px 16px;font-size:0.65rem;font-weight:600;color:var(--green);
+  letter-spacing:0.08em;text-transform:uppercase;margin-bottom:18px;}
+.hero h1{font-family:var(--display);font-size:2.4rem;font-weight:800;
+  line-height:1.05;margin-bottom:12px;}
+.hero h1 span{background:linear-gradient(90deg,var(--cyan),var(--green));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hero-desc{font-size:0.9rem;color:var(--m);line-height:1.75;max-width:520px;margin:0 auto 24px;}
+.hero-brands{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;}
+.brand-pill{background:var(--s2);border:1px solid var(--bd);border-radius:8px;
+  padding:5px 13px;font-size:0.7rem;font-weight:600;color:var(--m);}
+
+/* ── SECTION LABELS ── */
+.sec{margin-bottom:28px;}
+.sec-hdr{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.sec-num{width:26px;height:26px;border-radius:7px;
+  background:linear-gradient(135deg,#0c3a5c,var(--cyan));
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.72rem;font-weight:700;color:#000;flex-shrink:0;}
+.sec-title{font-family:var(--display);font-size:1rem;font-weight:800;color:var(--w);}
+.sec-sub{font-size:0.72rem;color:var(--m);margin-top:1px;}
+
+/* ── CARDS ── */
+.card{background:var(--s1);border:1px solid var(--bd);border-radius:16px;padding:18px;}
+.card.cyan{border-color:rgba(0,200,255,0.2);}
+.card.green{border-color:rgba(0,255,136,0.15);}
+.card.orange{border-color:rgba(255,107,43,0.2);}
+.card.red{border-color:rgba(255,59,92,0.18);}
+
+/* ── FORM ELEMENTS ── */
+.fg{display:flex;flex-direction:column;gap:5px;margin-bottom:12px;}
+.fg label{font-size:0.65rem;font-weight:700;color:var(--m);
+  text-transform:uppercase;letter-spacing:0.1em;}
+.fg select,.fg input,.fg textarea{
+  background:var(--s2);border:1px solid var(--bd);border-radius:10px;
+  padding:10px 13px;color:var(--w);font-size:0.84rem;
+  font-family:var(--font);outline:none;width:100%;}
+.fg select:focus,.fg input:focus,.fg textarea:focus{border-color:rgba(0,200,255,0.35);}
+.fg textarea{min-height:90px;resize:vertical;font-family:var(--mono);font-size:0.78rem;line-height:1.6;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:12px 20px;border:none;border-radius:11px;cursor:pointer;
+  font-family:var(--font);font-size:0.86rem;font-weight:700;transition:all .2s;width:100%;}
+.btn:active{transform:scale(.97);}
+.btn-cyan{background:linear-gradient(135deg,#0c3a5c,#0066aa,var(--cyan));color:#000;}
+.btn-green{background:linear-gradient(135deg,#004d2a,#00aa55,var(--green));color:#000;}
+.btn-orange{background:linear-gradient(135deg,var(--orange),#ff9955);color:#000;}
+.btn-outline{background:transparent;border:1px solid var(--bd2);color:var(--w);}
+.btn-sm{padding:8px 15px;font-size:0.76rem;width:auto;border-radius:9px;}
+.btn:disabled{opacity:.5;cursor:not-allowed;}
+.btns-row{display:flex;gap:8px;flex-wrap:wrap;}
+
+/* ── AI RESPONSE ── */
+.ai-out{display:none;margin-top:14px;}
+.ai-out.show{display:block;}
+.ai-out-hdr{display:flex;align-items:center;gap:8px;margin-bottom:10px;
+  font-size:0.65rem;font-weight:700;color:var(--cyan);
+  text-transform:uppercase;letter-spacing:0.1em;}
+.ai-out-hdr::before{content:'';display:block;width:8px;height:8px;
+  border-radius:50%;background:var(--green);animation:blink 1.5s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.3;}}
+.ai-content{background:var(--s2);border:1px solid var(--bd);border-radius:12px;
+  padding:14px;font-size:0.82rem;line-height:1.85;color:rgba(232,244,255,0.82);}
+.ai-content strong{color:var(--cyan);}
+.ai-content code{font-family:var(--mono);background:rgba(0,200,255,0.08);
+  border:1px solid rgba(0,200,255,0.15);border-radius:5px;padding:1px 6px;font-size:0.76rem;color:var(--green);}
+
+/* ── LOADING ── */
+.loading{display:none;align-items:center;gap:10px;padding:14px;color:var(--m);font-size:0.8rem;}
+.loading.show{display:flex;}
+.dots span{display:inline-block;width:7px;height:7px;border-radius:50%;
+  background:var(--cyan);animation:dw .9s infinite;margin:0 2px;}
+.dots span:nth-child(2){animation-delay:.15s;}
+.dots span:nth-child(3){animation-delay:.3s;}
+@keyframes dw{0%,80%,100%{transform:scale(.5);opacity:.4;}40%{transform:scale(1);opacity:1;}}
+
+/* ── TOOL CARDS ── */
+.tools-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;}
+.tool-card{background:var(--s1);border:1px solid var(--bd);border-radius:14px;
+  padding:16px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden;}
+.tool-card:hover{border-color:var(--bd2);background:var(--s2);}
+.tool-card.active{border-color:rgba(0,200,255,0.4);background:var(--cyan2);}
+.tool-icon{font-size:1.6rem;margin-bottom:9px;}
+.tool-name{font-size:0.84rem;font-weight:700;color:var(--w);margin-bottom:3px;}
+.tool-desc{font-size:0.67rem;color:var(--m);line-height:1.5;}
+.tool-badge{position:absolute;top:10px;right:10px;font-size:0.52rem;font-weight:800;
+  padding:2px 7px;border-radius:5px;text-transform:uppercase;letter-spacing:0.08em;}
+.tb-free{background:var(--green2);border:1px solid rgba(0,255,136,0.2);color:var(--green);}
+.tb-pro{background:var(--gold2);border:1px solid rgba(212,168,67,0.2);color:var(--gold);}
+
+/* ── FIRMWARE DB ── */
+.fw-table{width:100%;border-collapse:collapse;font-size:0.78rem;}
+.fw-table th{background:var(--s2);padding:9px 12px;text-align:left;
+  font-size:0.62rem;font-weight:700;color:var(--m);text-transform:uppercase;letter-spacing:0.08em;
+  border-bottom:1px solid var(--bd);}
+.fw-table td{padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.04);color:rgba(232,244,255,0.75);}
+.fw-table tr:hover td{background:var(--s2);}
+.fw-tag{display:inline-flex;padding:2px 8px;border-radius:5px;font-size:0.6rem;font-weight:700;}
+.fw-mt{background:rgba(0,200,255,0.1);color:var(--cyan);}
+.fw-sam{background:rgba(0,100,255,0.12);color:#60aaff;}
+.fw-mi{background:rgba(255,107,43,0.1);color:var(--orange);}
+.fw-ios{background:rgba(150,150,255,0.1);color:#a0a0ff;}
+.fw-sc{background:rgba(0,255,136,0.1);color:var(--green);}
+
+/* ── ERROR DECODER ── */
+.err-examples{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;}
+.err-chip{background:var(--red2);border:1px solid rgba(255,59,92,0.2);border-radius:8px;
+  padding:5px 12px;font-family:var(--mono);font-size:0.68rem;color:rgba(255,59,92,0.9);
+  cursor:pointer;transition:all .2s;}
+.err-chip:hover{background:rgba(255,59,92,0.15);}
+
+/* ── WIZARD STEPS ── */
+.wizard-steps{display:flex;gap:0;margin-bottom:20px;overflow-x:auto;}
+.wizard-steps::-webkit-scrollbar{display:none;}
+.wstep{flex:1;min-width:70px;text-align:center;position:relative;padding-bottom:12px;}
+.wstep::after{content:'';position:absolute;bottom:5px;left:50%;right:-50%;
+  height:2px;background:var(--bd2);}
+.wstep:last-child::after{display:none;}
+.wstep.done::after{background:var(--green);}
+.wstep.active::after{background:linear-gradient(90deg,var(--green),var(--bd2));}
+.ws-num{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;font-size:0.72rem;font-weight:700;margin:0 auto 5px;
+  background:var(--s3);border:1px solid var(--bd2);color:var(--m);transition:all .3s;}
+.wstep.done .ws-num{background:var(--green);border-color:var(--green);color:#000;}
+.wstep.active .ws-num{background:var(--cyan);border-color:var(--cyan);color:#000;}
+.ws-label{font-size:0.6rem;color:var(--m);}
+.wstep.active .ws-label{color:var(--cyan);}
+
+/* ── CHIPS ── */
+.chip{display:inline-flex;align-items:center;gap:5px;background:var(--s2);
+  border:1px solid var(--bd);border-radius:8px;padding:5px 12px;
+  font-size:0.72rem;color:var(--m);cursor:pointer;transition:all .2s;margin:3px;}
+.chip:hover,.chip.sel{background:var(--cyan2);border-color:rgba(0,200,255,0.3);color:var(--cyan);}
+
+/* ── STATUS INDICATOR ── */
+.status-bar{display:flex;align-items:center;gap:8px;background:var(--s2);
+  border:1px solid var(--bd);border-radius:10px;padding:10px 14px;
+  font-family:var(--mono);font-size:0.76rem;color:var(--m);margin-bottom:10px;}
+.status-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.sd-green{background:var(--green);box-shadow:0 0 8px var(--green);}
+.sd-orange{background:var(--orange);box-shadow:0 0 8px var(--orange);}
+.sd-red{background:var(--red);box-shadow:0 0 8px var(--red);}
+.sd-grey{background:var(--m2);}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);
+  background:var(--s2);border:1px solid var(--bd2);border-radius:10px;
+  padding:10px 20px;font-size:0.8rem;z-index:9999;transition:transform .3s;
+  white-space:nowrap;pointer-events:none;}
+.toast.show{transform:translateX(-50%) translateY(0);}
+
+/* ── TABS ── */
+.tabs{display:flex;gap:0;background:var(--s1);border:1px solid var(--bd);
+  border-radius:12px;padding:4px;margin-bottom:16px;overflow-x:auto;}
+.tabs::-webkit-scrollbar{display:none;}
+.tab{flex:1;min-width:80px;padding:8px 12px;text-align:center;border-radius:9px;
+  cursor:pointer;font-size:0.75rem;font-weight:600;color:var(--m);
+  transition:all .2s;white-space:nowrap;}
+.tab.active{background:var(--cyan2);color:var(--cyan);border:1px solid rgba(0,200,255,0.25);}
+
+.tab-content{display:none;}
+.tab-content.active{display:block;}
+
+/* ── COPY BUTTON ── */
+.copy-btn{background:var(--s3);border:1px solid var(--bd);border-radius:7px;
+  padding:4px 10px;font-size:0.65rem;color:var(--m);cursor:pointer;
+  font-family:var(--mono);transition:all .2s;float:right;}
+.copy-btn:hover{color:var(--cyan);border-color:rgba(0,200,255,0.3);}
+
+.mt8{margin-top:8px;}
+.mb16{margin-bottom:16px;}
+.text-center{text-align:center;}
+.small{font-size:0.72rem;}
+.muted{color:var(--m);}
+.green{color:var(--green);}
+.cyan{color:var(--cyan);}
+.orange{color:var(--orange);}
+.red{color:var(--red);}
+
+/* ── PWA INSTALL BANNER ── */
+.pwa-banner{
+  position:fixed;bottom:0;left:0;right:0;z-index:9998;
+  background:var(--s1);border-top:1px solid var(--bd2);
+  padding:12px 16px;display:none;align-items:center;gap:12px;
+  box-shadow:0 -8px 32px rgba(0,0,0,0.4);}
+.pwa-banner.show{display:flex;}
+.pwa-icon{width:40px;height:40px;border-radius:10px;overflow:hidden;flex-shrink:0;
+  background:linear-gradient(135deg,#0c3a5c,var(--cyan));}
+.pwa-icon img{width:100%;height:100%;object-fit:contain;}
+.pwa-info{flex:1;}
+.pwa-title{font-size:0.82rem;font-weight:700;color:var(--w);}
+.pwa-sub{font-size:0.62rem;color:var(--m);margin-top:1px;}
+.pwa-btn{background:linear-gradient(135deg,#0c3a5c,var(--cyan));border:none;
+  border-radius:9px;padding:8px 16px;font-size:0.76rem;font-weight:700;
+  color:#000;cursor:pointer;flex-shrink:0;}
+.pwa-x{background:none;border:none;color:var(--m);font-size:1.1rem;
+  cursor:pointer;padding:4px;flex-shrink:0;}
+
+/* ── SPLASH ── */
+#pwa-splash{
+  position:fixed;inset:0;z-index:99999;
+  background:var(--bg);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  transition:opacity .4s;}
+#pwa-splash.hide{opacity:0;pointer-events:none;}
+.splash-logo{width:100px;height:100px;border-radius:24px;overflow:hidden;
+  box-shadow:0 0 40px rgba(0,200,255,0.3);margin-bottom:24px;
+  background:linear-gradient(135deg,#0c3a5c,var(--cyan));}
+.splash-logo img{width:100%;height:100%;object-fit:contain;}
+.splash-name{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;
+  background:linear-gradient(90deg,var(--cyan),var(--green));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  margin-bottom:4px;}
+.splash-sub{font-size:0.72rem;color:var(--m);letter-spacing:0.08em;
+  text-transform:uppercase;margin-bottom:32px;}
+.splash-bar{width:160px;height:3px;background:var(--s2);border-radius:2px;overflow:hidden;}
+.splash-fill{height:100%;border-radius:2px;
+  background:linear-gradient(90deg,var(--cyan),var(--green));
+  animation:splash-load 1.8s ease-in-out forwards;}
+@keyframes splash-load{from{width:0;}to{width:100%;}}
+.splash-dots{display:flex;gap:6px;margin-top:16px;}
+.splash-dot{width:6px;height:6px;border-radius:50%;background:var(--bd2);}
+.splash-dot.a{background:var(--cyan);}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+
+<!-- SPLASH -->
+<div id="pwa-splash">
+  <div class="splash-logo"><img src="data:image/png;base64,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" alt="R"/></div>
+  <div class="splash-name">PhoneLab</div>
+  <div class="splash-sub">by Rehoteq Technologies</div>
+  <div class="splash-bar"><div class="splash-fill"></div></div>
+  <div class="splash-dots">
+    <div class="splash-dot a"></div>
+    <div class="splash-dot"></div>
+    <div class="splash-dot"></div>
+  </div>
+</div>
+
+<!-- PWA INSTALL BANNER -->
+<div class="pwa-banner" id="pwa-banner">
+  <div class="pwa-icon"><img src="data:image/png;base64,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" alt="R"/></div>
+  <div class="pwa-info">
+    <div class="pwa-title">Install PhoneLab</div>
+    <div class="pwa-sub">Add to Home Screen · Works offline</div>
+  </div>
+  <button class="pwa-btn" id="pwa-install-btn">Install</button>
+  <button class="pwa-x" onclick="document.getElementById('pwa-banner').classList.remove('show')">✕</button>
+</div>
+
+<header>
+  <div class="logo">
+    <div class="logo-icon">🔧</div>
+    <div>
+      <div class="logo-text">Rehoteq PhoneLab</div>
+      <div class="logo-sub">Smart Phone Repair Assistant</div>
+    </div>
+  </div>
+  <div class="beta-badge">Beta v1.0</div>
+</header>
+
+<main>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">🛠️ AI-Powered · Nigeria-First · Free to Use</div>
+  <h1>Fix Phones <span>Smarter.</span><br/>Not Harder.</h1>
+  <div class="hero-desc">Instant error decoding, firmware finder, flash tool wizard and AI diagnosis for any phone. Built by a certified technician, for technicians.</div>
+  <div class="hero-brands">
+    <div class="brand-pill">📱 Samsung</div>
+    <div class="brand-pill">📱 Tecno</div>
+    <div class="brand-pill">📱 Infinix</div>
+    <div class="brand-pill">📱 Itel</div>
+    <div class="brand-pill">📱 Xiaomi</div>
+    <div class="brand-pill">📱 iPhone</div>
+    <div class="brand-pill">📱 Nokia</div>
+    <div class="brand-pill">📱 Huawei</div>
+  </div>
+</div>
+
+<!-- ══ SECTION 1: QUICK DIAGNOSIS ══ -->
+<div class="sec">
+  <div class="sec-hdr">
+    <div class="sec-num">1</div>
+    <div>
+      <div class="sec-title">Quick AI Diagnosis</div>
+      <div class="sec-sub">Describe the problem — get instant professional repair guidance</div>
+    </div>
+  </div>
+
+  <div class="card cyan">
+    <div class="form-row">
+      <div class="fg">
+        <label>Phone Brand</label>
+        <select id="diag-brand" onchange="updateModels()">
+          <option value="">— Select Brand —</option>
+          <option>Samsung</option><option>Tecno</option><option>Infinix</option>
+          <option>Itel</option><option>Xiaomi</option><option>Redmi</option>
+          <option>iPhone</option><option>Huawei</option><option>Nokia</option>
+          <option>Oppo</option><option>Vivo</option><option>Realme</option>
+          <option>Motorola</option><option>Gionee</option><option>Other</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label>Model / Series</label>
+        <input type="text" id="diag-model" placeholder="e.g. A54, Spark 10, Note 12"/>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="fg">
+        <label>Problem Type</label>
+        <select id="diag-type">
+          <option value="">— Select Problem —</option>
+          <optgroup label="Software">
+            <option>Bootloop / Stuck on logo</option>
+            <option>Brick / Dead after flash</option>
+            <option>Factory reset failed</option>
+            <option>System update failed</option>
+            <option>App crashes / lag</option>
+            <option>IMEI null / no network</option>
+            <option>FRP / Google account lock</option>
+            <option>Pattern / PIN lock</option>
+            <option>Virus / malware infected</option>
+            <option>Storage full — cannot upgrade</option>
+          </optgroup>
+          <optgroup label="Hardware-related">
+            <option>Phone not detected by PC</option>
+            <option>Download mode not working</option>
+            <option>Recovery mode not accessible</option>
+            <option>ADB not recognizing device</option>
+          </optgroup>
+        </select>
+      </div>
+      <div class="fg">
+        <label>Chipset (if known)</label>
+        <select id="diag-chip">
+          <option value="">— Unknown / Skip —</option>
+          <option>MediaTek (MTK)</option>
+          <option>Qualcomm (Snapdragon)</option>
+          <option>Exynos (Samsung)</option>
+          <option>Apple A-series</option>
+          <option>HiSilicon (Huawei/Kirin)</option>
+          <option>UNISOC (Spreadtrum)</option>
+        </select>
+      </div>
+    </div>
+    <div class="fg">
+      <label>Additional Details (optional)</label>
+      <textarea id="diag-detail" placeholder="e.g. 'Phone was flashing when it died', 'Error message shown', 'What was done before the problem', 'Software version'..."></textarea>
+    </div>
+    <button class="btn btn-cyan" onclick="runDiagnosis()">🔍 Run AI Diagnosis</button>
+    <div class="loading" id="diag-load">
+      <div class="dots"><span></span><span></span><span></span></div>
+      <span>Analysing problem and generating repair procedure...</span>
+    </div>
+    <div class="ai-out" id="diag-out">
+      <div class="ai-out-hdr">AI Diagnosis Result</div>
+      <div class="ai-content" id="diag-content"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SECTION 2: ERROR DECODER ══ -->
+<div class="sec">
+  <div class="sec-hdr">
+    <div class="sec-num">2</div>
+    <div>
+      <div class="sec-title">Flash Error Decoder</div>
+      <div class="sec-sub">Paste any error code or message — get exact cause and fix</div>
+    </div>
+  </div>
+
+  <div class="card red">
+    <div class="small muted mb16">Common errors — tap to load:</div>
+    <div class="err-examples">
+      <div class="err-chip" onclick="loadErr('Error 8038')">Error 8038</div>
+      <div class="err-chip" onclick="loadErr('Error 4032')">Error 4032</div>
+      <div class="err-chip" onclick="loadErr('BROM ERROR S_BROM_CMD_STARTCMD_FAIL')">BROM FAIL</div>
+      <div class="err-chip" onclick="loadErr('Secure Boot Check FAIL')">Secure Boot Fail</div>
+      <div class="err-chip" onclick="loadErr('FAIL (remote: Flashing is not allowed in Lock State)')">Odin Lock State</div>
+      <div class="err-chip" onclick="loadErr('adb: error: failed to get feature set: no devices/emulators found')">ADB No Device</div>
+      <div class="err-chip" onclick="loadErr('ERROR: Cannot open port')">COM Port Error</div>
+      <div class="err-chip" onclick="loadErr('No auth challenge')">No Auth Challenge</div>
+      <div class="err-chip" onclick="loadErr('Error code: 0xC000021A')">0xC000021A</div>
+    </div>
+    <div class="fg">
+      <label>Error Code / Message / Log</label>
+      <textarea id="err-input" placeholder="Paste the exact error message, error code, or flash log here...&#10;&#10;Examples:&#10;• Error 8038&#10;• BROM ERROR S_BROM_CMD_STARTCMD_FAIL (0x1A7B)&#10;• FAIL (remote: low battery)&#10;• adb: error: failed to get feature set"></textarea>
+    </div>
+    <div class="form-row">
+      <div class="fg">
+        <label>Flash Tool Used</label>
+        <select id="err-tool">
+          <option value="">— Any Tool —</option>
+          <option>SP Flash Tool (MTK)</option>
+          <option>Odin (Samsung)</option>
+          <option>Mi Flash Tool (Xiaomi)</option>
+          <option>ADB / Fastboot</option>
+          <option>3uTools (iPhone)</option>
+          <option>iTunes (iPhone)</option>
+          <option>Miracle Box</option>
+          <option>Hydra Tool</option>
+          <option>Chimera Tool</option>
+          <option>UFI Box</option>
+          <option>EasyJTAG</option>
+          <option>QFIL (Qualcomm)</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label>Phone Brand</label>
+        <select id="err-brand">
+          <option value="">— Any Brand —</option>
+          <option>Samsung</option><option>Tecno</option><option>Infinix</option>
+          <option>Itel</option><option>Xiaomi</option><option>iPhone</option>
+          <option>Huawei</option><option>Nokia</option><option>Other</option>
+        </select>
+      </div>
+    </div>
+    <button class="btn btn-orange" onclick="decodeError()">⚡ Decode Error & Get Fix</button>
+    <div class="loading" id="err-load">
+      <div class="dots"><span></span><span></span><span></span></div>
+      <span>Decoding error and generating solution...</span>
+    </div>
+    <div class="ai-out" id="err-out">
+      <div class="ai-out-hdr">Error Analysis & Solution</div>
+      <div class="ai-content" id="err-content"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SECTION 3: FLASH TOOL WIZARD ══ -->
+<div class="sec">
+  <div class="sec-hdr">
+    <div class="sec-num">3</div>
+    <div>
+      <div class="sec-title">Flash Tool Wizard</div>
+      <div class="sec-sub">Step-by-step flash guide for any brand and chipset</div>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <div class="tab active" onclick="switchTab('mtk')">MTK / Tecno / Infinix / Itel</div>
+    <div class="tab" onclick="switchTab('samsung')">Samsung Odin</div>
+    <div class="tab" onclick="switchTab('xiaomi')">Xiaomi / Redmi</div>
+    <div class="tab" onclick="switchTab('iphone')">iPhone</div>
+    <div class="tab" onclick="switchTab('adb')">ADB / Fastboot</div>
+  </div>
+
+  <!-- MTK -->
+  <div class="tab-content active" id="tab-mtk">
+    <div class="card">
+      <div style="margin-bottom:14px;">
+        <div style="font-size:0.82rem;font-weight:700;color:var(--cyan);margin-bottom:8px;">📦 SP Flash Tool — MediaTek (MTK)</div>
+        <div class="small muted">Used for: Tecno, Infinix, Itel, Nokia (MTK), most Chinese Android phones</div>
+      </div>
+      <div class="wizard-steps" id="mtk-steps">
+        <div class="wstep done"><div class="ws-num">✓</div><div class="ws-label">Prepare</div></div>
+        <div class="wstep active"><div class="ws-num">2</div><div class="ws-label">Driver</div></div>
+        <div class="wstep"><div class="ws-num">3</div><div class="ws-label">Scatter</div></div>
+        <div class="wstep"><div class="ws-num">4</div><div class="ws-label">Settings</div></div>
+        <div class="wstep"><div class="ws-num">5</div><div class="ws-label">Flash</div></div>
+        <div class="wstep"><div class="ws-num">6</div><div class="ws-label">Done</div></div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div class="status-bar"><div class="status-dot sd-green"></div><span><strong style="color:var(--w);">Step 1 — Prepare:</strong> Download SP Flash Tool v5.2152 or v6.x. Extract to folder. Do NOT run as admin yet.</span></div>
+        <div class="status-bar"><div class="status-dot sd-green"></div><span><strong style="color:var(--w);">Step 2 — Driver:</strong> Install MTK VCOM USB driver. Check Device Manager — "MTK USB Port" must appear. If driver fails, use Zadig to force-install WinUSB.</span></div>
+        <div class="status-bar"><div class="status-dot sd-green"></div><span><strong style="color:var(--w);">Step 3 — Scatter File:</strong> Open SP Flash Tool → Click "Scatter-loading" → Browse to your ROM folder → Select <code>MT6xxx_Android_scatter.txt</code></span></div>
+        <div class="status-bar"><div class="status-dot sd-orange"></div><span><strong style="color:var(--w);">Step 4 — Flash Mode:</strong> Select "Download Only" for standard flash. Select "Firmware Upgrade" if phone is bricked. NEVER use "Format All" unless you know what you're doing.</span></div>
+        <div class="status-bar"><div class="status-dot sd-orange"></div><span><strong style="color:var(--w);">Step 5 — Flash:</strong> Click Download button (green arrow). POWER OFF phone completely. Connect USB — phone auto-enters download mode. Wait for green ring.</span></div>
+        <div class="status-bar"><div class="status-dot sd-grey"></div><span><strong style="color:var(--w);">Step 6 — Complete:</strong> Green ring appears = success. Disconnect phone. Remove battery 5 seconds. Boot up normally (first boot may take 5-10 mins).</span></div>
+      </div>
+
+      <div style="margin-top:14px;">
+        <button class="btn btn-cyan" onclick="askFlashAI('MTK SP Flash Tool complete step by step guide for Tecno Infinix Itel')">🤖 Ask AI for Specific Model Help</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SAMSUNG -->
+  <div class="tab-content" id="tab-samsung">
+    <div class="card">
+      <div style="margin-bottom:14px;">
+        <div style="font-size:0.82rem;font-weight:700;color:#60aaff;margin-bottom:8px;">📦 Odin — Samsung</div>
+        <div class="small muted">Used for: All Samsung Galaxy phones and tablets</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div class="status-bar"><div class="status-dot sd-green"></div><span><strong style="color:var(--w);">Step 1:</strong> Download Odin 3.13.1 or 3.14.4 (most stable). Download correct firmware from SamFirm, SamMobile or Frija — match exact model number.</span></div>
+        <div class="status-bar"><div class="status-dot sd-green"></div><span><strong style="color:var(--w);">Step 2 — Download Mode:</strong> Power off Samsung. Hold <code>Vol Down + Home + Power</code> (old) or <code>Vol Down + Vol Up</code> while plugging USB (new models). Accept warning.</span></div>
+        <div class="status-bar"><div class="status-dot sd-green"></div><span><strong style="color:var(--w);">Step 3 — Odin Setup:</strong> Run Odin as Administrator. ID:COM port must show blue (phone detected). If not — install Samsung USB driver.</span></div>
+        <div class="status-bar"><div class="status-dot sd-orange"></div><span><strong style="color:var(--w);">Step 4 — Load Files:</strong> Extract firmware .zip. Load: AP → AP_xxx.tar.md5 | BL → BL_xxx | CP → CP_xxx | CSC → CSC_xxx (use HOME_CSC to keep data or CSC for full wipe)</span></div>
+        <div class="status-bar"><div class="status-dot sd-orange"></div><span><strong style="color:var(--w);">Step 5 — Options:</strong> Enable "Auto Reboot" and "F. Reset Time". DO NOT check Re-Partition unless scatter file issue. Click Start.</span></div>
+        <div class="status-bar"><div class="status-dot sd-grey"></div><span><strong style="color:var(--w);">Step 6:</strong> PASS (green) = success. Phone auto-reboots. First boot 5-15 mins. If FAIL — check firmware matches exact model and CSC region.</span></div>
+      </div>
+      <div style="margin-top:14px;">
+        <button class="btn btn-cyan" onclick="askFlashAI('Samsung Odin flash guide specific help')">🤖 Ask AI for Specific Samsung Help</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- XIAOMI -->
+  <div class="tab-content" id="tab-xiaomi">
+    <div class="card">
+      <div style="margin-bottom:14px;">
+        <div style="font-size:0.82rem;font-weight:700;color:var(--orange);margin-bottom:8px;">📦 Mi Flash Tool — Xiaomi / Redmi / POCO</div>
+        <div class="small muted">Used for: All Xiaomi, Redmi, POCO, Black Shark phones</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div class="status-bar"><div class="status-dot sd-green"></div><span><strong style="color:var(--w);">Step 1:</strong> Download Mi Flash Tool from Xiaomi official site. Install Mi USB driver. Download correct MIUI fastboot ROM (.tgz) for exact model from MIUI firmware site.</span></div>
+        <div class="status-bar"><div class="status-dot sd-green"></div><span><strong style="color:var(--w);">Step 2 — EDL/Fastboot Mode:</strong> Power off. Hold <code>Vol Down + Power</code> for Fastboot. For EDL mode (bricked): <code>Vol Up + Vol Down</code> while connecting USB or use testpoint.</span></div>
+        <div class="status-bar"><div class="status-dot sd-green"></div><span><strong style="color:var(--w);">Step 3:</strong> Open Mi Flash Tool. Click "Select" → browse to extracted ROM folder. Phone must show in device list.</span></div>
+        <div class="status-bar"><div class="status-dot sd-orange"></div><span><strong style="color:var(--w);">Step 4 — Flash Type:</strong> "Clean All" = full wipe (recommended for bootloop). "Save User Data" = keeps data. "Clean All and Lock" = factory state with locked bootloader.</span></div>
+        <div class="status-bar"><div class="status-dot sd-grey"></div><span><strong style="color:var(--w);">Step 5:</strong> Click Flash. Progress bar fills to 100%. Phone reboots automatically. First MIUI boot can take 8-15 minutes.</span></div>
+      </div>
+      <div style="margin-top:14px;">
+        <button class="btn btn-cyan" onclick="askFlashAI('Xiaomi Mi Flash Tool Redmi guide')">🤖 Ask AI for Specific Xiaomi Help</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- IPHONE -->
+  <div class="tab-content" id="tab-iphone">
+    <div class="card">
+      <div style="margin-bottom:14px;">
+        <div style="font-size:0.82rem;font-weight:700;color:#a0a0ff;margin-bottom:8px;">📦 iTunes / 3uTools — iPhone / iPad</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div class="status-bar"><div class="status-dot sd-green"></div><span><strong style="color:var(--w);">DFU Mode (iPhone 8+):</strong> Press Vol Up → Press Vol Down → Hold Side button 10 sec → Release Side, hold Vol Down 5 sec. Screen stays black = DFU success.</span></div>
+        <div class="status-bar"><div class="status-dot sd-green"></div><span><strong style="color:var(--w);">DFU Mode (iPhone 7):</strong> Hold Vol Down + Sleep/Wake 10 sec → Release Sleep/Wake, keep Vol Down 5 sec.</span></div>
+        <div class="status-bar"><div class="status-dot sd-green"></div><span><strong style="color:var(--w);">Recovery Mode (all):</strong> Force restart until recovery screen shows. iTunes/Finder detects automatically.</span></div>
+        <div class="status-bar"><div class="status-dot sd-orange"></div><span><strong style="color:var(--w);">iTunes Restore:</strong> Device shown in iTunes → Restore iPhone (full wipe + latest iOS) or Update (keeps data). Hold Shift+Restore to browse to specific .ipsw file.</span></div>
+        <div class="status-bar"><div class="status-dot sd-orange"></div><span><strong style="color:var(--w);">3uTools:</strong> Better than iTunes for technicians. Flash → Real Flash → browse .ipsw. Supports downgrade with signed firmware. Shows detailed device info.</span></div>
+      </div>
+      <div style="margin-top:14px;">
+        <button class="btn btn-cyan" onclick="askFlashAI('iPhone iOS repair DFU recovery mode guide')">🤖 Ask AI for iPhone Help</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADB -->
+  <div class="tab-content" id="tab-adb">
+    <div class="card">
+      <div style="margin-bottom:14px;">
+        <div style="font-size:0.82rem;font-weight:700;color:var(--green);margin-bottom:8px;">📦 ADB / Fastboot Commands</div>
+        <div class="small muted">Works on all Android phones with unlocked bootloader</div>
+      </div>
+
+      <div class="small muted mb16">Essential Commands — tap to copy:</div>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <div class="status-bar" style="cursor:pointer;" onclick="copyCmd('adb devices')">
+          <div class="status-dot sd-green"></div>
+          <span style="flex:1;"><code style="color:var(--green);font-family:var(--mono);font-size:0.8rem;">adb devices</code> <span class="muted small">— Check if device is recognized</span></span>
+          <button class="copy-btn">Copy</button>
+        </div>
+        <div class="status-bar" style="cursor:pointer;" onclick="copyCmd('adb reboot bootloader')">
+          <div class="status-dot sd-green"></div>
+          <span style="flex:1;"><code style="color:var(--green);font-family:var(--mono);font-size:0.8rem;">adb reboot bootloader</code> <span class="muted small">— Enter fastboot mode</span></span>
+          <button class="copy-btn">Copy</button>
+        </div>
+        <div class="status-bar" style="cursor:pointer;" onclick="copyCmd('adb reboot recovery')">
+          <div class="status-dot sd-green"></div>
+          <span style="flex:1;"><code style="color:var(--green);font-family:var(--mono);font-size:0.8rem;">adb reboot recovery</code> <span class="muted small">— Boot into recovery</span></span>
+          <button class="copy-btn">Copy</button>
+        </div>
+        <div class="status-bar" style="cursor:pointer;" onclick="copyCmd('fastboot oem unlock')">
+          <div class="status-dot sd-orange"></div>
+          <span style="flex:1;"><code style="color:var(--orange);font-family:var(--mono);font-size:0.8rem;">fastboot oem unlock</code> <span class="muted small">— Unlock bootloader (wipes data!)</span></span>
+          <button class="copy-btn">Copy</button>
+        </div>
+        <div class="status-bar" style="cursor:pointer;" onclick="copyCmd('fastboot flash recovery recovery.img')">
+          <div class="status-dot sd-orange"></div>
+          <span style="flex:1;"><code style="color:var(--orange);font-family:var(--mono);font-size:0.8rem;">fastboot flash recovery recovery.img</code> <span class="muted small">— Flash custom recovery</span></span>
+          <button class="copy-btn">Copy</button>
+        </div>
+        <div class="status-bar" style="cursor:pointer;" onclick="copyCmd('adb sideload update.zip')">
+          <div class="status-dot sd-green"></div>
+          <span style="flex:1;"><code style="color:var(--green);font-family:var(--mono);font-size:0.8rem;">adb sideload update.zip</code> <span class="muted small">— Sideload OTA/ROM via recovery</span></span>
+          <button class="copy-btn">Copy</button>
+        </div>
+        <div class="status-bar" style="cursor:pointer;" onclick="copyCmd('fastboot -w')">
+          <div class="status-dot sd-red"></div>
+          <span style="flex:1;"><code style="color:var(--red);font-family:var(--mono);font-size:0.8rem;">fastboot -w</code> <span class="muted small">— Wipe userdata (factory reset via fastboot)</span></span>
+          <button class="copy-btn">Copy</button>
+        </div>
+        <div class="status-bar" style="cursor:pointer;" onclick="copyCmd('adb shell wm density reset')">
+          <div class="status-dot sd-green"></div>
+          <span style="flex:1;"><code style="color:var(--green);font-family:var(--mono);font-size:0.8rem;">adb shell wm density reset</code> <span class="muted small">— Fix display/UI issues</span></span>
+          <button class="copy-btn">Copy</button>
+        </div>
+        <div class="status-bar" style="cursor:pointer;" onclick="copyCmd('adb shell pm uninstall -k --user 0 com.package.name')">
+          <div class="status-dot sd-green"></div>
+          <span style="flex:1;"><code style="color:var(--green);font-family:var(--mono);font-size:0.8rem;">adb shell pm uninstall -k --user 0</code> <span class="muted small">— Remove bloatware without root</span></span>
+          <button class="copy-btn">Copy</button>
+        </div>
+      </div>
+      <div style="margin-top:14px;">
+        <button class="btn btn-green" onclick="askFlashAI('ADB Fastboot commands Android repair')">🤖 Ask AI for Specific ADB Help</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SECTION 4: FIRMWARE FINDER ══ -->
+<div class="sec">
+  <div class="sec-hdr">
+    <div class="sec-num">4</div>
+    <div>
+      <div class="sec-title">Firmware & ROM Finder</div>
+      <div class="sec-sub">Find the correct firmware source for any brand</div>
+    </div>
+  </div>
+
+  <div class="card green">
+    <div class="form-row">
+      <div class="fg">
+        <label>Brand</label>
+        <select id="fw-brand" onchange="showFirmwareSources()">
+          <option value="">— Select Brand —</option>
+          <option>Samsung</option><option>Tecno</option><option>Infinix</option>
+          <option>Itel</option><option>Xiaomi / Redmi</option><option>iPhone / iPad</option>
+          <option>Huawei</option><option>Nokia</option><option>Oppo / Realme</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label>Exact Model Number</label>
+        <input type="text" id="fw-model" placeholder="e.g. SM-A546B, Spark 10 Pro"/>
+      </div>
+    </div>
+    <button class="btn btn-green" onclick="findFirmware()">🔎 Find Firmware Sources + AI Guide</button>
+    <div class="loading" id="fw-load">
+      <div class="dots"><span></span><span></span><span></span></div>
+      <span>Finding firmware sources and flash guide...</span>
+    </div>
+    <div class="ai-out" id="fw-out">
+      <div class="ai-out-hdr">Firmware Sources & Flash Guide</div>
+      <div class="ai-content" id="fw-content"></div>
+    </div>
+  </div>
+
+  <!-- FIRMWARE SOURCE TABLE -->
+  <div style="margin-top:12px;overflow-x:auto;">
+    <table class="fw-table">
+      <thead>
+        <tr>
+          <th>Brand</th><th>Chipset</th><th>Flash Tool</th><th>ROM Source</th><th>Difficulty</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="fw-tag fw-sam">Samsung</span></td><td>Exynos / Snapdragon</td><td>Odin 3.13+</td><td>SamMobile · Frija · SamFirm</td><td>⭐⭐</td></tr>
+        <tr><td><span class="fw-tag fw-mt">Tecno</span></td><td>MediaTek</td><td>SP Flash Tool</td><td>Hovatek · Firmwarefile.com</td><td>⭐⭐</td></tr>
+        <tr><td><span class="fw-tag fw-mt">Infinix</span></td><td>MediaTek</td><td>SP Flash Tool</td><td>Hovatek · Infinixrom.com</td><td>⭐⭐</td></tr>
+        <tr><td><span class="fw-tag fw-mt">Itel</span></td><td>MediaTek / UNISOC</td><td>SP Flash / ResearchDownload</td><td>Itelrom.com · Firmwarefile</td><td>⭐⭐⭐</td></tr>
+        <tr><td><span class="fw-tag fw-mi">Xiaomi</span></td><td>Qualcomm / MTK</td><td>Mi Flash Tool</td><td>MIUI.com · Xiaomifirmwareupdater</td><td>⭐⭐</td></tr>
+        <tr><td><span class="fw-tag fw-ios">iPhone</span></td><td>Apple A-series</td><td>iTunes / 3uTools</td><td>ipsw.me · 3uTools built-in</td><td>⭐⭐</td></tr>
+        <tr><td><span class="fw-tag fw-sc">Huawei</span></td><td>Kirin / Qualcomm</td><td>HiSuite / Chimera</td><td>Huawei official · Chimera Tool</td><td>⭐⭐⭐</td></tr>
+        <tr><td><span class="fw-tag fw-mi">Oppo/Realme</span></td><td>MTK / Qualcomm</td><td>QFIL / MsmDownload</td><td>Oppo official · Firmwarefile</td><td>⭐⭐⭐</td></tr>
+        <tr><td><span class="fw-tag fw-sc">Nokia</span></td><td>Qualcomm / MTK</td><td>QFIL / SP Flash</td><td>Nokiafirmware.com</td><td>⭐⭐⭐</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ══ SECTION 5: FREE AI CHAT ══ -->
+<div class="sec">
+  <div class="sec-hdr">
+    <div class="sec-num">5</div>
+    <div>
+      <div class="sec-title">Repair AI Assistant</div>
+      <div class="sec-sub">Ask anything — flash errors, hardware faults, software bugs, upgrade paths</div>
+    </div>
+  </div>
+
+  <div class="card cyan">
+    <div class="qp-examples" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;">
+      <div class="chip" onclick="loadChat(this)">Tecno Spark 8C bootloop</div>
+      <div class="chip" onclick="loadChat(this)">Samsung A54 FRP bypass</div>
+      <div class="chip" onclick="loadChat(this)">Infinix Hot 20 dead after flash</div>
+      <div class="chip" onclick="loadChat(this)">MTK driver not installing</div>
+      <div class="chip" onclick="loadChat(this)">iPhone stuck on recovery loop</div>
+      <div class="chip" onclick="loadChat(this)">IMEI null after flash fix</div>
+    </div>
+
+    <div id="chat-msgs" style="height:260px;overflow-y:auto;background:var(--s2);border:1px solid var(--bd);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:8px;margin-bottom:10px;">
+      <div class="msg-ai" style="background:var(--s3);border:1px solid var(--bd);border-radius:10px;padding:10px 12px;font-size:0.8rem;line-height:1.7;">
+        <div style="font-size:0.6rem;color:var(--cyan);font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">🔧 PhoneLab AI</div>
+        Hello! I am your Rehoteq PhoneLab assistant — a specialist in phone repair, flashing, firmware, ADB commands and troubleshooting. Ask me anything about any phone brand or repair problem.
+      </div>
+    </div>
+
+    <div class="loading" id="chat-load" style="margin-bottom:8px;">
+      <div class="dots"><span></span><span></span><span></span></div>
+      <span>Searching repair database...</span>
+    </div>
+
+    <div style="display:flex;gap:8px;">
+      <input style="flex:1;background:var(--s2);border:1px solid var(--bd);border-radius:10px;padding:10px 13px;color:var(--w);font-size:0.82rem;font-family:var(--font);outline:none;"
+        id="chat-in" placeholder="Ask about any phone repair problem..."
+        onkeydown="if(event.key==='Enter')sendChat()"/>
+      <button style="background:linear-gradient(135deg,#0c3a5c,var(--cyan));border:none;border-radius:10px;padding:10px 16px;color:#000;font-weight:700;cursor:pointer;font-size:0.9rem;" onclick="sendChat()">↑</button>
+    </div>
+    <div style="font-size:0.62rem;color:var(--m2);margin-top:7px;text-align:center;">Powered by Rehoteq AI · Specialist in Nigerian market phones · Free to use</div>
+  </div>
+</div>
+
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script>
+var WORKER = 'https://lesson-ai.rehoteq.workers.dev';
+
+// ── TOAST ──
+function toast(msg){
+  var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
+  setTimeout(function(){t.classList.remove('show');},3000);
+}
+
+// ── TABS ──
+function switchTab(id){
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');});
+  document.querySelectorAll('.tab-content').forEach(function(t){t.classList.remove('active');});
+  document.getElementById('tab-'+id).classList.add('active');
+  // Find and activate tab button
+  var tabs=document.querySelectorAll('.tab');
+  var map={'mtk':0,'samsung':1,'xiaomi':2,'iphone':3,'adb':4};
+  if(tabs[map[id]])tabs[map[id]].classList.add('active');
+}
+
+// ── COPY COMMAND ──
+function copyCmd(cmd){
+  navigator.clipboard.writeText(cmd).then(function(){toast('✓ Copied: '+cmd);}).catch(function(){toast('Tap the command text to copy');});
+}
+
+// ── LOAD ERROR ──
+function loadErr(err){
+  document.getElementById('err-input').value=err;
+  document.getElementById('err-input').focus();
+}
+
+// ── LOAD CHAT ──
+function loadChat(el){
+  document.getElementById('chat-in').value=el.textContent;
+  sendChat();
+}
+
+// ── AI CALL ──
+async function callAI(prompt){
+  var res=await fetch(WORKER,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt:prompt})});
+  var data=await res.json();
+  return data.choices&&data.choices[0]?data.choices[0].message.content:'Could not get response. Check internet.';
+}
+
+function formatAI(text){
+  return text
+    .replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>')
+    .replace(/`([^`]+)`/g,'<code>$1</code>')
+    .replace(/\n\n/g,'<br/><br/>')
+    .replace(/\n/g,'<br/>')
+    .replace(/###\s*([^\n<]+)/g,'<strong style="color:var(--cyan);font-size:0.85rem;display:block;margin-top:10px;">$1</strong>')
+    .replace(/##\s*([^\n<]+)/g,'<strong style="color:var(--cyan);">$1</strong>')
+    .replace(/•\s/g,'<span style="color:var(--cyan);">•</span> ')
+    .replace(/⚠️/g,'<span style="color:var(--orange);">⚠️</span>')
+    .replace(/✅/g,'<span style="color:var(--green);">✅</span>')
+    .replace(/❌/g,'<span style="color:var(--red);">❌</span>');
+}
+
+// ── DIAGNOSIS ──
+async function runDiagnosis(){
+  var brand=document.getElementById('diag-brand').value;
+  var model=document.getElementById('diag-model').value;
+  var type=document.getElementById('diag-type').value;
+  var chip=document.getElementById('diag-chip').value;
+  var detail=document.getElementById('diag-detail').value;
+  if(!type){toast('Select a problem type first');return;}
+  var load=document.getElementById('diag-load');
+  var out=document.getElementById('diag-out');
+  load.classList.add('show');out.classList.remove('show');
+
+  var prompt='You are an expert phone repair technician with 15+ years experience specializing in African market phones — Samsung, Tecno, Infinix, Itel, Xiaomi, iPhone and all brands common in Nigeria.\n\n';
+  prompt+='A technician has brought in this phone:\n';
+  if(brand)prompt+='Brand: '+brand+'\n';
+  if(model)prompt+='Model: '+model+'\n';
+  if(chip)prompt+='Chipset: '+chip+'\n';
+  prompt+='Problem: '+type+'\n';
+  if(detail)prompt+='Additional details: '+detail+'\n\n';
+  prompt+='Provide a PROFESSIONAL repair diagnosis with:\n';
+  prompt+='1. **Root Cause** — What most likely caused this problem\n';
+  prompt+='2. **Exact Tools Needed** — Flash tool name and version, drivers, cables\n';
+  prompt+='3. **Step-by-Step Repair Procedure** — Numbered, detailed steps\n';
+  prompt+='4. **Firmware/ROM Source** — Where to download the correct firmware\n';
+  prompt+='5. **Common Mistakes to Avoid** — What could make it worse\n';
+  prompt+='6. **Success Indicators** — How to know the repair worked\n\n';
+  prompt+='Be specific, practical and direct. This is for a professional technician in Nigeria.';
+
+  try{
+    var result=await callAI(prompt);
+    document.getElementById('diag-content').innerHTML=formatAI(result);
+    out.classList.add('show');
+  }catch(e){
+    document.getElementById('diag-content').textContent='Error: Check your internet connection.';
+    out.classList.add('show');
+  }
+  load.classList.remove('show');
+}
+
+// ── ERROR DECODER ──
+async function decodeError(){
+  var err=document.getElementById('err-input').value.trim();
+  if(!err){toast('Paste an error message first');return;}
+  var tool=document.getElementById('err-tool').value;
+  var brand=document.getElementById('err-brand').value;
+  var load=document.getElementById('err-load');
+  var out=document.getElementById('err-out');
+  load.classList.add('show');out.classList.remove('show');
+
+  var prompt='You are a senior phone repair specialist and flash tool expert.\n\n';
+  prompt+='Decode this error and provide the solution:\n';
+  prompt+='Error: '+err+'\n';
+  if(tool)prompt+='Flash Tool: '+tool+'\n';
+  if(brand)prompt+='Phone Brand: '+brand+'\n\n';
+  prompt+='Provide:\n';
+  prompt+='1. **Error Meaning** — What this error actually means in plain English\n';
+  prompt+='2. **Root Cause** — Why this error occurs (top 3 causes)\n';
+  prompt+='3. **Fix — Step by Step** — Exact steps to resolve\n';
+  prompt+='4. **Quick Fixes to Try First** — Easiest solutions first\n';
+  prompt+='5. **If Problem Persists** — Escalation path\n\n';
+  prompt+='Be specific and technical. The technician needs actionable steps immediately.';
+
+  try{
+    var result=await callAI(prompt);
+    document.getElementById('err-content').innerHTML=formatAI(result);
+    out.classList.add('show');
+  }catch(e){
+    document.getElementById('err-content').textContent='Error connecting. Check internet.';
+    out.classList.add('show');
+  }
+  load.classList.remove('show');
+}
+
+// ── FIRMWARE FINDER ──
+async function findFirmware(){
+  var brand=document.getElementById('fw-brand').value;
+  var model=document.getElementById('fw-model').value;
+  if(!brand){toast('Select a brand first');return;}
+  var load=document.getElementById('fw-load');
+  var out=document.getElementById('fw-out');
+  load.classList.add('show');out.classList.remove('show');
+
+  var prompt='You are a phone firmware expert for the Nigerian/African market.\n\n';
+  prompt+='Find firmware information for:\nBrand: '+brand+'\n';
+  if(model)prompt+='Model: '+model+'\n\n';
+  prompt+='Provide:\n';
+  prompt+='1. **Exact Firmware Sources** — Website URLs and how to find correct version\n';
+  prompt+='2. **How to Identify Correct Firmware** — Model number, region, build number matching\n';
+  prompt+='3. **Flash Tool Required** — Exact tool name, recommended version\n';
+  prompt+='4. **Pre-Flash Checklist** — Things to verify before flashing\n';
+  prompt+='5. **Warning** — Common mistakes that brick phones of this brand\n\n';
+  prompt+='Focus on free, reliable sources. Avoid paid sites where free alternatives exist.';
+
+  try{
+    var result=await callAI(prompt);
+    document.getElementById('fw-content').innerHTML=formatAI(result);
+    out.classList.add('show');
+  }catch(e){
+    document.getElementById('fw-content').textContent='Error connecting. Check internet.';
+    out.classList.add('show');
+  }
+  load.classList.remove('show');
+}
+
+// ── FLASH AI HELP ──
+async function askFlashAI(context){
+  document.getElementById('chat-in').value=context;
+  sendChat();
+  window.scrollTo({top:document.getElementById('chat-msgs').getBoundingClientRect().top+window.scrollY-80,behavior:'smooth'});
+}
+
+// ── CHAT ──
+async function sendChat(){
+  var inp=document.getElementById('chat-in');
+  var msg=inp.value.trim();if(!msg)return;
+  addMsg(msg,'user');inp.value='';
+  var load=document.getElementById('chat-load');load.classList.add('show');
+
+  var prompt='You are Rehoteq PhoneLab AI — a senior phone repair technician and software specialist with expertise in:\n';
+  prompt+='- Flash tools: SP Flash Tool, Odin, Mi Flash, ADB/Fastboot, 3uTools, Miracle Box, Hydra Tool, QFIL\n';
+  prompt+='- Brands: Samsung, Tecno, Infinix, Itel, Xiaomi, Redmi, iPhone, Huawei, Nokia, Oppo, Realme\n';
+  prompt+='- Nigerian market phones and repair scenarios\n';
+  prompt+='- Error codes, firmware sources, bootloop fixes, FRP bypass, IMEI repair\n\n';
+  prompt+='Answer this technician\'s question professionally and specifically:\n'+msg+'\n\n';
+  prompt+='Give practical, actionable steps. Be direct and technical. If the answer involves commands, show the exact command. Nigerian market context where relevant.';
+
+  try{
+    var result=await callAI(prompt);
+    addMsg(result,'ai');
+  }catch(e){addMsg('Connection error. Check internet and try again.','ai');}
+  load.classList.remove('show');
+}
+
+function addMsg(text,role){
+  var msgs=document.getElementById('chat-msgs');
+  var d=document.createElement('div');
+  d.style.cssText='border-radius:10px;padding:10px 12px;font-size:0.8rem;line-height:1.7;';
+  if(role==='user'){
+    d.style.background='rgba(0,200,255,0.08)';
+    d.style.border='1px solid rgba(0,200,255,0.15)';
+    d.style.alignSelf='flex-end';
+    d.textContent=text;
+  }else{
+    d.style.background='var(--s3)';
+    d.style.border='1px solid var(--bd)';
+    d.innerHTML='<div style="font-size:.6rem;color:var(--cyan);font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;">🔧 PhoneLab AI</div>'+formatAI(text);
+  }
+  msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;
+}
+
+
+// ── PWA: SPLASH ──
+window.addEventListener('load', function(){
+  setTimeout(function(){
+    var sp = document.getElementById('pwa-splash');
+    if(sp){ sp.classList.add('hide'); setTimeout(function(){ sp.style.display='none'; }, 400); }
+  }, 2200);
+});
+
+// ── PWA: INSTALL PROMPT ──
+var deferredPrompt;
+window.addEventListener('beforeinstallprompt', function(e){
+  e.preventDefault();
+  deferredPrompt = e;
+  setTimeout(function(){ document.getElementById('pwa-banner').classList.add('show'); }, 3000);
+});
+document.getElementById('pwa-install-btn').addEventListener('click', function(){
+  if(deferredPrompt){
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(function(){ deferredPrompt = null; });
+  }
+  document.getElementById('pwa-banner').classList.remove('show');
+});
+window.addEventListener('appinstalled', function(){
+  toast('✅ PhoneLab installed! Find it on your home screen.');
+  document.getElementById('pwa-banner').classList.remove('show');
+});
+</script>
+</body>
+</html>

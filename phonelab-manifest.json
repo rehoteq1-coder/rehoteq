@@ -1,0 +1,47 @@
+{
+  "name": "Rehoteq PhoneLab \u2014 Phone Repair Assistant",
+  "short_name": "PhoneLab",
+  "description": "AI-powered phone repair assistant. Error decoder, firmware finder, flash wizard for Samsung, Tecno, Infinix, Itel, Xiaomi, iPhone.",
+  "start_url": "/phonelab.html",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#060d14",
+  "theme_color": "#060d14",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": [
+    "utilities",
+    "tools",
+    "productivity"
+  ],
+  "shortcuts": [
+    {
+      "name": "Error Decoder",
+      "url": "/phonelab.html",
+      "description": "Decode flash errors instantly"
+    },
+    {
+      "name": "AI Diagnosis",
+      "url": "/phonelab.html",
+      "description": "Diagnose any phone problem"
+    },
+    {
+      "name": "Flash Wizard",
+      "url": "/phonelab.html",
+      "description": "Step-by-step flash guide"
+    }
+  ]
+}
