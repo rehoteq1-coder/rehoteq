@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta name="theme-color" content="#0a0e1a"/>
+<title>Rehoteq Research Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<script src="https://checkout.flutterwave.com/v3.js"></script>
+<script src="https://unpkg.com/docx@8.5.0/build/index.min.js"></script>
+<style>
+:root{--bg:#0a0e1a;--s1:#0f1525;--s2:#141c2e;--s3:#1a2438;--s4:#1f2c42;--bd:rgba(100,160,255,0.08);--bd2:rgba(100,160,255,0.16);--bd3:rgba(100,160,255,0.25);--blue:#4a90d9;--blue2:rgba(74,144,217,0.12);--gold:#c9a84c;--gold2:#e8c96a;--goldl:rgba(201,168,76,0.12);--green:#2ecc71;--greenl:rgba(46,204,113,0.1);--purple:#7c5cbf;--purplel:rgba(124,92,191,0.1);--red:#e74c3c;--redl:rgba(231,76,60,0.1);--teal:#1abc9c;--teall:rgba(26,188,156,0.1);--w:#e8f0fe;--m:rgba(232,240,254,0.5);--m2:rgba(232,240,254,0.25);--serif:"Playfair Display",serif;--font:"Inter",sans-serif;--mono:"JetBrains Mono",monospace;}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+body{font-family:var(--font);background:var(--bg);color:var(--w);min-height:100vh;overflow:hidden;}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse 60% 40% at 0% 0%,rgba(74,144,217,0.06),transparent),radial-gradient(ellipse 50% 50% at 100% 100%,rgba(201,168,76,0.05),transparent);}
+header{position:sticky;top:0;z-index:100;background:rgba(10,14,26,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--bd);padding:12px 20px;display:flex;align-items:center;justify-content:space-between;}
+.logo{display:flex;align-items:center;gap:10px;}
+.logo-icon{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,#1a3a6e,var(--blue));display:flex;align-items:center;justify-content:center;font-size:1rem;}
+.logo-name{font-family:var(--serif);font-size:.95rem;font-weight:700;color:var(--w);}
+.logo-sub{font-size:.5rem;color:var(--gold);font-weight:600;letter-spacing:.12em;text-transform:uppercase;margin-top:1px;}
+.hdr-right{display:flex;align-items:center;gap:8px;}
+.tier-pill{padding:4px 11px;border-radius:20px;font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;}
+.tp-free{background:var(--s2);border:1px solid var(--bd);color:var(--m);}
+.tp-standard{background:var(--blue2);border:1px solid var(--bd3);color:var(--blue);}
+.tp-professional{background:var(--goldl);border:1px solid rgba(201,168,76,.3);color:var(--gold);}
+.units-badge{background:var(--s2);border:1px solid var(--bd);border-radius:8px;padding:4px 10px;font-size:.63rem;color:var(--m);font-family:var(--mono);}
+.upg-btn{background:linear-gradient(135deg,var(--gold),var(--gold2));border:none;border-radius:8px;padding:6px 13px;font-size:.72rem;font-weight:700;color:#000;cursor:pointer;}
+.app{display:flex;height:calc(100vh - 53px);overflow:hidden;}
+.sidebar{width:210px;flex-shrink:0;background:var(--s1);border-right:1px solid var(--bd);display:flex;flex-direction:column;overflow-y:auto;}
+.sidebar::-webkit-scrollbar{display:none;}
+.sb-section{padding:10px 8px 4px;}
+.sb-label{font-size:.57rem;font-weight:700;color:var(--m2);text-transform:uppercase;letter-spacing:.12em;padding:0 6px;margin-bottom:5px;}
+.sb-item{display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:9px;cursor:pointer;font-size:.76rem;color:var(--m);transition:all .2s;margin-bottom:2px;user-select:none;border:1px solid transparent;}
+.sb-item:hover{background:var(--s2);color:var(--w);}
+.sb-item.active{background:var(--blue2);color:var(--blue);border-color:rgba(74,144,217,.2);}
+.sb-icon{font-size:.88rem;width:17px;text-align:center;flex-shrink:0;}
+.sb-div{height:1px;background:var(--bd);margin:6px 10px;}
+.proj-item{display:flex;align-items:center;gap:7px;padding:7px 10px;border-radius:8px;cursor:pointer;font-size:.7rem;color:var(--m);transition:all .2s;border:1px solid transparent;}
+.proj-item:hover,.proj-item.active{background:var(--s2);border-color:var(--bd2);color:var(--w);}
+.proj-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.new-proj{display:flex;align-items:center;justify-content:center;gap:5px;padding:7px;border:1px dashed var(--bd);border-radius:8px;cursor:pointer;font-size:.7rem;color:var(--m);transition:all .2s;margin:4px 8px;}
+.new-proj:hover{border-color:var(--bd2);color:var(--w);}
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+.toolbar{display:flex;align-items:center;gap:5px;padding:8px 14px;border-bottom:1px solid var(--bd);background:var(--s1);flex-shrink:0;overflow-x:auto;}
+.toolbar::-webkit-scrollbar{display:none;}
+.tb{display:flex;align-items:center;gap:4px;padding:5px 10px;border:1px solid var(--bd);border-radius:7px;background:var(--s2);color:var(--m);font-size:.7rem;font-weight:500;cursor:pointer;transition:all .2s;white-space:nowrap;font-family:var(--font);}
+.tb:hover{background:var(--s3);color:var(--w);border-color:var(--bd2);}
+.tb-sep{width:1px;height:20px;background:var(--bd);flex-shrink:0;margin:0 2px;}
+.tb-sel{background:var(--s2);border:1px solid var(--bd);border-radius:7px;padding:5px 8px;color:var(--m);font-size:.7rem;font-family:var(--font);outline:none;}
+.panels{flex:1;display:flex;overflow:hidden;}
+.editor-panel{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+.editor-hdr{padding:11px 16px;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.doc-title{background:transparent;border:none;outline:none;font-family:var(--serif);font-size:1.05rem;font-weight:700;color:var(--w);flex:1;padding:2px 0;}
+.doc-title::placeholder{color:var(--m2);}
+.doc-meta{font-size:.6rem;color:var(--m2);display:flex;gap:10px;align-items:center;}
+.save-ind{color:var(--green);font-size:.58rem;}
+.editor-wrap{flex:1;overflow-y:auto;padding:20px 24px;}
+.editor-wrap::-webkit-scrollbar{width:4px;}
+.editor-wrap::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:2px;}
+#editor{min-height:400px;outline:none;font-family:var(--font);font-size:.9rem;line-height:1.9;color:rgba(232,240,254,.88);max-width:700px;margin:0 auto;}
+#editor:empty:before{content:attr(data-ph);color:var(--m2);pointer-events:none;}
+#editor h1,#editor h2,#editor h3{font-family:var(--serif);color:var(--w);margin:18px 0 8px;}
+#editor h1{font-size:1.5rem;}#editor h2{font-size:1.2rem;}#editor h3{font-size:1rem;}
+#editor p{margin-bottom:10px;}
+#editor blockquote{border-left:3px solid var(--blue);padding-left:12px;color:var(--m);font-style:italic;margin:10px 0;}
+#editor table{border-collapse:collapse;width:100%;margin:10px 0;font-size:.84rem;}
+#editor td,#editor th{border:1px solid var(--bd);padding:7px 10px;}
+#editor th{background:var(--s2);font-weight:600;}
+.wc-bar{padding:6px 24px;border-top:1px solid var(--bd);display:flex;align-items:center;gap:14px;flex-shrink:0;background:var(--s1);font-size:.62rem;color:var(--m2);}
+.wc-bar span{color:var(--m);font-weight:600;}
+.ai-panel{width:300px;flex-shrink:0;border-left:1px solid var(--bd);display:flex;flex-direction:column;background:var(--s1);overflow:hidden;}
+.ai-ph{padding:11px 12px;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between;}
+.ai-pt{font-size:.8rem;font-weight:700;color:var(--w);display:flex;align-items:center;gap:6px;}
+.ai-tabs{display:flex;gap:3px;padding:8px 10px;border-bottom:1px solid var(--bd);flex-wrap:wrap;}
+.ai-tab{padding:4px 9px;border-radius:6px;font-size:.63rem;font-weight:600;color:var(--m);cursor:pointer;transition:all .2s;border:1px solid transparent;white-space:nowrap;}
+.ai-tab.active{background:var(--blue2);color:var(--blue);border-color:rgba(74,144,217,.22);}
+.ai-body{flex:1;overflow-y:auto;padding:11px;}
+.ai-body::-webkit-scrollbar{width:3px;}
+.ai-body::-webkit-scrollbar-thumb{background:rgba(255,255,255,.08);}
+.atc{display:none;} .atc.active{display:block;}
+.fg{display:flex;flex-direction:column;gap:4px;margin-bottom:9px;}
+.fg label{font-size:.58rem;font-weight:700;color:var(--m);text-transform:uppercase;letter-spacing:.09em;}
+.fg select,.fg input,.fg textarea{background:var(--s2);border:1px solid var(--bd);border-radius:8px;padding:7px 10px;color:var(--w);font-size:.76rem;font-family:var(--font);outline:none;width:100%;}
+.fg select:focus,.fg input:focus,.fg textarea:focus{border-color:rgba(74,144,217,.35);}
+.fg textarea{min-height:65px;resize:vertical;}
+.ai-btn{width:100%;padding:9px;border:none;border-radius:8px;cursor:pointer;font-family:var(--font);font-size:.78rem;font-weight:700;transition:all .2s;margin-bottom:7px;}
+.ai-btn:active{transform:scale(.97);}
+.btn-blue{background:linear-gradient(135deg,#1a3a6e,var(--blue));color:#fff;}
+.btn-ghost{background:var(--s3);border:1px solid var(--bd);color:var(--m);}
+.ai-res{background:var(--s2);border:1px solid var(--bd);border-radius:9px;padding:11px;font-size:.76rem;line-height:1.75;color:rgba(232,240,254,.8);margin-bottom:7px;display:none;max-height:260px;overflow-y:auto;}
+.ai-res.show{display:block;}
+.ai-acts{display:none;gap:5px;margin-bottom:8px;}
+.ai-acts.show{display:flex;}
+.act-btn{flex:1;padding:6px;border:1px solid var(--bd);border-radius:6px;background:var(--s3);color:var(--m);font-size:.65rem;cursor:pointer;font-family:var(--font);transition:all .2s;}
+.act-btn:hover{background:var(--s4);color:var(--w);}
+.ai-load{display:none;align-items:center;gap:7px;padding:9px;color:var(--m);font-size:.73rem;}
+.ai-load.show{display:flex;}
+.dots span{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--blue);animation:dw .9s infinite;margin:0 2px;}
+.dots span:nth-child(2){animation-delay:.15s;} .dots span:nth-child(3){animation-delay:.3s;}
+@keyframes dw{0%,80%,100%{transform:scale(.5);opacity:.4;}40%{transform:scale(1);opacity:1;}}
+.modal-ov{position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:500;display:none;align-items:center;justify-content:center;padding:20px;}
+.modal-ov.show{display:flex;}
+.modal{background:var(--s1);border:1px solid var(--bd2);border-radius:16px;padding:22px;width:100%;max-width:460px;max-height:90vh;overflow-y:auto;}
+.modal-title{font-family:var(--serif);font-size:1.15rem;font-weight:700;color:var(--w);margin-bottom:5px;}
+.modal-sub{font-size:.73rem;color:var(--m);margin-bottom:16px;line-height:1.6;}
+.mcl{float:right;background:none;border:none;color:var(--m);font-size:1.1rem;cursor:pointer;margin-top:-2px;}
+.mg{display:flex;flex-direction:column;gap:4px;margin-bottom:10px;}
+.mg label{font-size:.6rem;font-weight:700;color:var(--m);text-transform:uppercase;letter-spacing:.08em;}
+.mg input,.mg select{background:var(--s2);border:1px solid var(--bd);border-radius:9px;padding:8px 11px;color:var(--w);font-size:.8rem;font-family:var(--font);outline:none;}
+.mg input:focus,.mg select:focus{border-color:rgba(74,144,217,.35);}
+.modal-btn{width:100%;padding:11px;border:none;border-radius:9px;cursor:pointer;font-family:var(--font);font-size:.84rem;font-weight:700;transition:all .2s;}
+.btn-modal-blue{background:linear-gradient(135deg,#1a3a6e,var(--blue));color:#fff;}
+.btn-modal-gold{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;}
+.tier-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;}
+.tier-card{background:var(--s2);border:2px solid var(--bd);border-radius:11px;padding:13px;text-align:center;cursor:pointer;transition:all .2s;}
+.tier-card.sel,.tier-card:hover{border-color:var(--blue);background:var(--blue2);}
+.t-price{font-family:var(--serif);font-size:1.1rem;font-weight:700;color:var(--gold);}
+.t-name{font-size:.68rem;font-weight:700;color:var(--w);margin-top:3px;}
+.t-units{font-size:.6rem;color:var(--m);margin-top:2px;}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(60px);background:var(--s2);border:1px solid var(--bd2);border-radius:9px;padding:8px 16px;font-size:.76rem;z-index:999;transition:transform .3s;white-space:nowrap;pointer-events:none;}
+.toast.show{transform:translateX(-50%) translateY(0);}
+@media(max-width:900px){.sidebar{position:fixed;left:-210px;top:53px;height:calc(100vh - 53px);z-index:200;transition:left .3s;}.sidebar.open{left:0;}.ai-panel{width:260px;}}
+@media(max-width:600px){.ai-panel{display:none;}.panels{display:block;}.editor-panel{height:100%;}}
+</style>
+</head>
+<body><header>
+  <div class="logo">
+    <div class="logo-icon">📚</div>
+    <div><div class="logo-name">Research Studio</div><div class="logo-sub">by Rehoteq Technologies</div></div>
+  </div>
+  <div class="hdr-right">
+    <div class="units-badge" id="units-badge">3 units</div>
+    <div class="tier-pill tp-free" id="tier-pill">Free</div>
+    <button class="upg-btn" onclick="showUpgrade()">⭐ Upgrade</button>
+  </div>
+</header>
+
+<div class="app">
+<!-- SIDEBAR -->
+<div class="sidebar" id="sidebar">
+  <div class="sb-section">
+    <div class="sb-label">Projects</div>
+    <div id="proj-list"></div>
+    <div class="new-proj" onclick="newProject()">+ New Project</div>
+  </div>
+  <div class="sb-div"></div>
+  <div class="sb-section">
+    <div class="sb-label">AI Writing Tools</div>
+    <div class="sb-item active" id="sb-proofread" onclick="openTool('proofread')"><span class="sb-icon">✅</span>Proofreader</div>
+    <div class="sb-item" id="sb-litreview" onclick="openTool('litreview')"><span class="sb-icon">📋</span>Literature Review</div>
+    <div class="sb-item" id="sb-abstract" onclick="openTool('abstract')"><span class="sb-icon">📑</span>Abstract Generator</div>
+    <div class="sb-item" id="sb-methodology" onclick="openTool('methodology')"><span class="sb-icon">🏗</span>Methodology Builder</div>
+    <div class="sb-item" id="sb-citation" onclick="openTool('citation')"><span class="sb-icon">🔖</span>Citation Formatter</div>
+    <div class="sb-item" id="sb-data" onclick="openTool('data')"><span class="sb-icon">📊</span>Data Narrative</div>
+  </div>
+  <div class="sb-div"></div>
+  <div class="sb-section">
+    <div class="sb-label">Field-Specific</div>
+    <div class="sb-item" id="sb-legal" onclick="openTool('legal')"><span class="sb-icon">⚖️</span>Legal Drafter</div>
+    <div class="sb-item" id="sb-medical" onclick="openTool('medical')"><span class="sb-icon">🏥</span>Clinical Writer</div>
+    <div class="sb-item" id="sb-engineering" onclick="openTool('engineering')"><span class="sb-icon">⚙️</span>Technical Report</div>
+    <div class="sb-item" id="sb-finance" onclick="openTool('finance')"><span class="sb-icon">💰</span>Financial Analysis</div>
+    <div class="sb-item" id="sb-agric" onclick="openTool('agric')"><span class="sb-icon">🌾</span>Field/Lab Report</div>
+    <div class="sb-item" id="sb-proposal" onclick="openTool('proposal')"><span class="sb-icon">📝</span>Grant Proposal</div>
+  </div>
+  <div class="sb-div"></div>
+  <div class="sb-section">
+    <div class="sb-label">Training & Corporate</div>
+    <div class="sb-item" id="sb-training" onclick="openTool('training')"><span class="sb-icon">🎓</span>Training Programme</div>
+    <div class="sb-item" id="sb-handout" onclick="openTool('handout')"><span class="sb-icon">📋</span>Participant Handout</div>
+    <div class="sb-item" id="sb-casestudy" onclick="openTool('casestudy')"><span class="sb-icon">🏢</span>Case Study Builder</div>
+    <div class="sb-item" id="sb-assessment" onclick="openTool('assessment')"><span class="sb-icon">📝</span>Assessment/Quiz</div>
+    <div class="sb-item" id="sb-policy" onclick="openTool('policy')"><span class="sb-icon">📜</span>Policy & Procedure</div>
+    <div class="sb-item" id="sb-report" onclick="openTool('report')"><span class="sb-icon">📊</span>Corporate Report</div>
+  </div>
+  <div class="sb-div"></div>
+  <div class="sb-section">
+    <div class="sb-label">Export</div>
+    <div class="sb-item" onclick="exportWord()"><span class="sb-icon">📝</span>Export as Word (.docx)</div>
+    <div class="sb-item" onclick="exportPDF()"><span class="sb-icon">📄</span>Export as PDF</div>
+    <div class="sb-item" onclick="exportTxt()"><span class="sb-icon">🔤</span>Export as Text</div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="toolbar">
+    <button class="tb" onclick="fmt('bold')"><b>B</b></button>
+    <button class="tb" onclick="fmt('italic')"><i>I</i></button>
+    <button class="tb" onclick="fmt('underline')"><u>U</u></button>
+    <div class="tb-sep"></div>
+    <select class="tb-sel" onchange="fmtBlock(this.value)">
+      <option value="p">Paragraph</option>
+      <option value="h1">Heading 1</option>
+      <option value="h2">Heading 2</option>
+      <option value="h3">Heading 3</option>
+      <option value="blockquote">Quote</option>
+    </select>
+    <div class="tb-sep"></div>
+    <button class="tb" onclick="fmt('insertUnorderedList')">• List</button>
+    <button class="tb" onclick="fmt('insertOrderedList')">1. List</button>
+    <div class="tb-sep"></div>
+    <button class="tb" onclick="insertTable()">⊞ Table</button>
+    <button class="tb" onclick="saveProject()" style="color:var(--green);">💾 Save</button>
+    <button class="tb" onclick="exportWord()" style="color:var(--blue);">📝 Word</button>
+    <button class="tb" onclick="exportPDF()" style="color:var(--red);">📄 PDF</button>
+  </div>
+
+  <div class="panels">
+    <div class="editor-panel">
+      <div class="editor-hdr">
+        <input class="doc-title" id="doc-title" placeholder="Untitled Research Document" oninput="autoSave()"/>
+        <div class="doc-meta"><span class="save-ind" id="save-ind">● Saved</span></div>
+      </div>
+      <div class="editor-wrap">
+        <div id="editor" contenteditable="true" spellcheck="true"
+          data-ph="Start writing your research here. Use the AI tools on the right to generate, proofread and improve your work..."
+          oninput="updateWC();autoSave();"></div>
+      </div>
+      <div class="wc-bar">
+        Words: <span id="wc-w">0</span> &nbsp; Chars: <span id="wc-c">0</span> &nbsp; Paras: <span id="wc-p">0</span> &nbsp; ~<span id="wc-t">0</span> min read
+      </div>
+    </div>
+
+    <!-- AI PANEL -->
+    <div class="ai-panel" id="ai-panel">
+      <div class="ai-ph">
+        <div class="ai-pt">🤖 AI Tools</div>
+        <button style="background:none;border:none;color:var(--m);cursor:pointer;" onclick="document.getElementById('ai-panel').style.display='none'">✕</button>
+      </div>
+      <div class="ai-tabs">
+        <div class="ai-tab active" onclick="swTab('proofread',this)">Proofread</div>
+        <div class="ai-tab" onclick="swTab('litreview',this)">Lit Review</div>
+        <div class="ai-tab" onclick="swTab('abstract',this)">Abstract</div>
+        <div class="ai-tab" onclick="swTab('methodology',this)">Method</div>
+        <div class="ai-tab" onclick="swTab('field',this)">Field</div>
+        <div class="ai-tab" onclick="swTab('citation',this)">Citation</div>
+        <div class="ai-tab" onclick="swTab('training',this)">Training</div>
+      </div>
+      <div class="ai-body">
+
+        <!-- PROOFREAD -->
+        <div class="atc active" id="atc-proofread">
+          <div class="fg"><label>Level</label><select id="pr-level"><option>Undergraduate</option><option>Postgraduate</option><option>PhD</option><option>Professional</option></select></div>
+          <div class="fg"><label>Field</label><select id="pr-field"><option>General Academic</option><option>Legal</option><option>Medical</option><option>Engineering</option><option>Finance</option><option>Agricultural</option><option>Computer Science</option><option>Social Sciences</option></select></div>
+          <div class="fg"><label>Text (or leave empty for full doc)</label><textarea id="pr-text" placeholder="Paste text or leave empty to use document..."></textarea></div>
+          <button class="ai-btn btn-blue" onclick="runProofread()">✅ Proofread & Improve</button>
+          <button class="ai-btn btn-ghost" onclick="loadDoc('pr-text')">📄 Use Current Doc</button>
+          <div class="ai-load" id="ld-proofread"><div class="dots"><span></span><span></span><span></span></div><span>Proofreading...</span></div>
+          <div class="ai-res" id="res-proofread"></div>
+          <div class="ai-acts" id="act-proofread"><button class="act-btn" onclick="insertRes('proofread')">↙ Insert</button><button class="act-btn" onclick="copyRes('proofread')">Copy</button></div>
+        </div>
+
+        <!-- LIT REVIEW -->
+        <div class="atc" id="atc-litreview">
+          <div class="fg"><label>Topic</label><input type="text" id="lr-topic" placeholder="e.g. AI in Nigerian healthcare"/></div>
+          <div class="fg"><label>Field</label><select id="lr-field"><option>General</option><option>Medical</option><option>Engineering</option><option>Law</option><option>Finance</option><option>Agriculture</option><option>Computer Science</option><option>Education</option><option>Pharmacy</option></select></div>
+          <div class="fg"><label>Scope</label><select id="lr-scope"><option>Nigerian context</option><option>African context</option><option>Global perspective</option><option>Comparative (Nigeria vs Global)</option></select></div>
+          <div class="fg"><label>Depth</label><select id="lr-depth"><option>Brief (2-3 paragraphs)</option><option>Standard (4-6 paragraphs)</option><option>Comprehensive (8+ paragraphs)</option></select></div>
+          <button class="ai-btn btn-blue" onclick="runLitReview()">📋 Generate Literature Review</button>
+          <div class="ai-load" id="ld-litreview"><div class="dots"><span></span><span></span><span></span></div><span>Generating...</span></div>
+          <div class="ai-res" id="res-litreview"></div>
+          <div class="ai-acts" id="act-litreview"><button class="act-btn" onclick="insertRes('litreview')">↙ Insert</button><button class="act-btn" onclick="copyRes('litreview')">Copy</button></div>
+        </div>
+
+        <!-- ABSTRACT -->
+        <div class="atc" id="atc-abstract">
+          <div class="fg"><label>Paper Title</label><input type="text" id="abs-title" placeholder="Full title of your research"/></div>
+          <div class="fg"><label>Key Content / Findings</label><textarea id="abs-text" placeholder="Paste key points or your paper content..."></textarea></div>
+          <div class="fg"><label>Style</label><select id="abs-style"><option>Structured (Background/Aim/Method/Results/Conclusion)</option><option>Unstructured (Narrative)</option><option>Extended (600 words)</option></select></div>
+          <div class="fg"><label>Citation Format</label><select id="abs-cite"><option>APA 7th</option><option>MLA</option><option>Harvard</option><option>Vancouver</option><option>IEEE</option></select></div>
+          <button class="ai-btn btn-blue" onclick="runAbstract()">📑 Generate Abstract</button>
+          <div class="ai-load" id="ld-abstract"><div class="dots"><span></span><span></span><span></span></div><span>Writing abstract...</span></div>
+          <div class="ai-res" id="res-abstract"></div>
+          <div class="ai-acts" id="act-abstract"><button class="act-btn" onclick="insertRes('abstract')">↙ Insert</button><button class="act-btn" onclick="copyRes('abstract')">Copy</button></div>
+        </div>
+
+        <!-- METHODOLOGY -->
+        <div class="atc" id="atc-methodology">
+          <div class="fg"><label>Research Topic</label><input type="text" id="meth-topic" placeholder="Your research topic"/></div>
+          <div class="fg"><label>Research Type</label><select id="meth-type"><option>Quantitative</option><option>Qualitative</option><option>Mixed Methods</option><option>Experimental</option><option>Case Study</option><option>Survey</option><option>Systematic Review</option></select></div>
+          <div class="fg"><label>Field</label><select id="meth-field"><option>Medical/Health</option><option>Engineering</option><option>Social Sciences</option><option>Agriculture</option><option>Computer Science</option><option>Business/Finance</option><option>Law</option><option>Education</option></select></div>
+          <div class="fg"><label>Sample/Context</label><input type="text" id="meth-ctx" placeholder="e.g. 200 students in Lagos"/></div>
+          <button class="ai-btn btn-blue" onclick="runMethodology()">🏗 Build Methodology</button>
+          <div class="ai-load" id="ld-methodology"><div class="dots"><span></span><span></span><span></span></div><span>Building...</span></div>
+          <div class="ai-res" id="res-methodology"></div>
+          <div class="ai-acts" id="act-methodology"><button class="act-btn" onclick="insertRes('methodology')">↙ Insert</button><button class="act-btn" onclick="copyRes('methodology')">Copy</button></div>
+        </div>
+
+        <!-- FIELD TOOLS -->
+        <div class="atc" id="atc-field">
+          <div class="fg"><label>Your Field</label>
+            <select id="field-sel" onchange="loadFieldUI()">
+              <option value="legal">⚖️ Legal / Law</option>
+              <option value="medical">🏥 Medical / Clinical</option>
+              <option value="engineering">⚙️ Engineering / Technical</option>
+              <option value="finance">💰 Finance / Accounting</option>
+              <option value="agric">🌾 Agriculture / Biomedical</option>
+              <option value="proposal">📝 Grant / Research Proposal</option>
+              <option value="data">📈 Data Analysis Narrative</option>
+            </select>
+          </div>
+          <div id="field-ui"></div>
+          <div class="ai-load" id="ld-field"><div class="dots"><span></span><span></span><span></span></div><span>Generating...</span></div>
+          <div class="ai-res" id="res-field"></div>
+          <div class="ai-acts" id="act-field"><button class="act-btn" onclick="insertRes('field')">↙ Insert</button><button class="act-btn" onclick="copyRes('field')">Copy</button></div>
+        </div>
+
+        <!-- CITATION -->
+        <div class="atc" id="atc-citation">
+          <div class="fg"><label>Format</label><select id="cite-fmt"><option>APA 7th Edition</option><option>MLA 9th Edition</option><option>Harvard</option><option>Vancouver</option><option>IEEE</option><option>Chicago</option><option>OSCOLA (Legal)</option></select></div>
+          <div class="fg"><label>Source Details</label><textarea id="cite-src" placeholder="Paste source info: author, title, year, publisher, DOI, URL..."></textarea></div>
+          <button class="ai-btn btn-blue" onclick="runCitation()">🔖 Format Citation</button>
+          <div class="fg"><label>Bulk Reformat (paste multiple)</label><textarea id="cite-bulk" placeholder="Paste multiple references to reformat all at once..."></textarea></div>
+          <button class="ai-btn btn-ghost" onclick="runBulkCite()">📚 Bulk Reformat</button>
+          <div class="ai-load" id="ld-citation"><div class="dots"><span></span><span></span><span></span></div><span>Formatting...</span></div>
+          <div class="ai-res" id="res-citation"></div>
+          <div class="ai-acts" id="act-citation"><button class="act-btn" onclick="insertRes('citation')">↙ Insert</button><button class="act-btn" onclick="copyRes('citation')">Copy</button></div>
+        </div>
+
+        <!-- TRAINING & CORPORATE -->
+        <div class="atc" id="atc-training">
+          <div class="fg"><label>Training Topic</label>
+            <input type="text" id="tr-topic" placeholder="e.g. Financial Insurance and Assurance for Management"/>
+          </div>
+          <div class="fg"><label>Document to Generate</label>
+            <select id="tr-doctype">
+              <option value="programme">Full Training Programme (Agenda + Schedule)</option>
+              <option value="facilitator">Facilitator Guide (Session Notes)</option>
+              <option value="handout">Participant Handout / Workbook</option>
+              <option value="casestudy">Nigerian Case Studies (x3)</option>
+              <option value="assessment">Pre/Post Assessment Questions</option>
+              <option value="actionplan">Action Plan Template</option>
+              <option value="certificate">Certificate of Participation</option>
+              <option value="fullpack">Complete Training Pack (All Documents)</option>
+            </select>
+          </div>
+          <div class="fg"><label>Industry / Sector</label>
+            <select id="tr-industry">
+              <option>Financial Services / Banking</option>
+              <option>Insurance / Assurance</option>
+              <option>Manufacturing</option>
+              <option>Oil and Gas</option>
+              <option>Healthcare</option>
+              <option>Public Sector / Government</option>
+              <option>Telecommunications</option>
+              <option>Agriculture</option>
+              <option>Education</option>
+              <option>General Corporate</option>
+            </select>
+          </div>
+          <div class="fg"><label>Duration</label>
+            <select id="tr-duration">
+              <option>Half Day (3-4 hours)</option>
+              <option>1 Day (6-8 hours)</option>
+              <option>2 Days</option>
+              <option>3 Days</option>
+              <option>1 Week</option>
+            </select>
+          </div>
+          <div class="fg"><label>Target Audience</label>
+            <select id="tr-audience">
+              <option>Senior Management / Directors</option>
+              <option>Middle Management</option>
+              <option>Finance / Accounting Staff</option>
+              <option>HR Professionals</option>
+              <option>General Staff / Mixed</option>
+              <option>New Employees / Inductees</option>
+              <option>Board Members</option>
+            </select>
+          </div>
+          <div class="fg"><label>Facilitator / Organisation</label>
+            <input type="text" id="tr-facilitator" placeholder="e.g. ICAN, John Doe FCCA"/>
+          </div>
+          <div class="fg"><label>Key Topics to Cover</label>
+            <textarea id="tr-topics" style="min-height:55px;" placeholder="e.g. Risk management, NAICOM guidelines, claims process, insurance products..."></textarea>
+          </div>
+          <button class="ai-btn btn-blue" onclick="runTraining()">🎓 Generate Training Document</button>
+          <div class="ai-load" id="ld-training"><div class="dots"><span></span><span></span><span></span></div><span>Generating training document...</span></div>
+          <div class="ai-res" id="res-training"></div>
+          <div class="ai-acts" id="act-training">
+            <button class="act-btn" onclick="insertRes('training')">&#8601; Insert</button>
+            <button class="act-btn" onclick="copyRes('training')">Copy</button>
+            <button class="act-btn" onclick="insertRes('training');saveProject();">Insert+Save</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- NEW PROJECT MODAL -->
+<div class="modal-ov" id="modal-newproj">
+  <div class="modal">
+    <button class="mcl" onclick="closeModal('modal-newproj')">✕</button>
+    <div class="modal-title">New Research Project</div>
+    <div class="modal-sub">Create a workspace for your research documents.</div>
+    <div class="mg"><label>Title</label><input type="text" id="np-title" placeholder="e.g. PhD Thesis Chapter 3"/></div>
+    <div class="mg"><label>Field</label>
+      <select id="np-field">
+        <option value="general">General Academic</option><option value="legal">Legal / Law</option>
+        <option value="medical">Medical / Clinical</option><option value="engineering">Engineering</option>
+        <option value="finance">Finance / Accounting</option><option value="agric">Agriculture / Biomedical</option>
+        <option value="cs">Computer Science</option><option value="social">Social Sciences</option>
+        <option value="education">Education</option><option value="pharmacy">Pharmacy</option>
+        <option value="architecture">Architecture</option>
+      </select>
+    </div>
+    <div class="mg"><label>Level</label>
+      <select id="np-level">
+        <option>Undergraduate (BSc/HND)</option><option>Postgraduate (MSc/MBA)</option>
+        <option>PhD / Doctoral</option><option>Professional / Industry</option>
+      </select>
+    </div>
+    <button class="modal-btn btn-modal-blue" onclick="createProject()" style="margin-top:4px;">Create Project</button>
+  </div>
+</div>
+
+<!-- UPGRADE MODAL -->
+<div class="modal-ov" id="modal-upgrade">
+  <div class="modal">
+    <button class="mcl" onclick="closeModal('modal-upgrade')">✕</button>
+    <div class="modal-title">Upgrade Your Plan</div>
+    <div class="modal-sub">More AI generations, unlimited projects, all professional tools.</div>
+    <div class="tier-grid">
+      <div class="tier-card sel" data-tier="standard" data-amt="2000" onclick="selTier(this)"><div class="t-price">N2,000</div><div class="t-name">Standard</div><div class="t-units">50 units - 3 projects</div></div>
+      <div class="tier-card" data-tier="professional" data-amt="5000" onclick="selTier(this)"><div class="t-price">N5,000</div><div class="t-name">Professional</div><div class="t-units">200 units - Unlimited</div></div>
+      <div class="tier-card" data-tier="institution" data-amt="50000" onclick="selTier(this)"><div class="t-price">N50,000</div><div class="t-name">Institution</div><div class="t-units">Unlimited - Team</div></div>
+      <div class="tier-card" data-tier="custom" data-amt="0" onclick="selTier(this)"><div class="t-price">Custom</div><div class="t-name">Enterprise</div><div class="t-units">Call us</div></div>
+    </div>
+    <div class="mg"><label>Email</label><input type="email" id="upg-email" placeholder="your@email.com"/></div>
+    <button class="modal-btn btn-modal-gold" onclick="doUpgrade()">Upgrade Now</button>
+    <div style="text-align:center;font-size:.6rem;color:var(--m2);margin-top:7px;">Secure via Flutterwave - 07036302585</div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script>
+var WORKER='https://lesson-ai.rehoteq.workers.dev';
+var FLW_KEY='FLWPUBK-f33c828c210fbdcb4aea8ae3d9183861-X';
+var S={
+  tier:localStorage.getItem('rs_tier')||'free',
+  units:parseInt(localStorage.getItem('rs_units')||'3'),
+  projects:JSON.parse(localStorage.getItem('rs_projects')||'[]'),
+  cur:null,selAmt:2000,saveTimer:null
+};
+var TUNITS={free:3,standard:50,professional:200,institution:99999};
+var FCOLORS={legal:'#a37dd4',medical:'#e87b6e',engineering:'#1abc9c',finance:'#c9a84c',agric:'#2ecc71',general:'#4a90d9',cs:'#4a90d9',social:'#7c5cbf',education:'#e8a030',pharmacy:'#e87b6e',architecture:'#1abc9c'};
+var FLABELS={legal:'Legal',medical:'Medical',engineering:'Engineering',finance:'Finance',agric:'Agric',general:'Academic',cs:'CompSci',social:'Social',education:'Education',pharmacy:'Pharmacy',architecture:'Architecture'};
+var PCOLORS=['#4a90d9','#c9a84c','#2ecc71','#e87b6e','#a37dd4','#1abc9c'];
+
+function toast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},3000);}
+function updateTierUI(){var p=document.getElementById('tier-pill'),u=document.getElementById('units-badge');p.textContent=S.tier.charAt(0).toUpperCase()+S.tier.slice(1);p.className='tier-pill tp-'+S.tier;u.textContent=S.tier==='institution'?'Unlimited':S.units+' units';}
+function checkUnits(){if(S.tier==='institution')return true;if(S.units<=0){showUpgrade();toast('No units left. Upgrade to continue.');return false;}S.units--;localStorage.setItem('rs_units',S.units);updateTierUI();return true;}
+function showUpgrade(){document.getElementById('modal-upgrade').classList.add('show');}
+function closeModal(id){document.getElementById(id).classList.remove('show');}
+function openModal(id){document.getElementById(id).classList.add('show');}
+
+function renderProjects(){
+  var l=document.getElementById('proj-list');
+  if(!S.projects.length){l.innerHTML='<div style="font-size:.68rem;color:var(--m2);padding:6px 10px;">No projects yet</div>';return;}
+  l.innerHTML=S.projects.map(function(p,i){
+    var c=PCOLORS[i%PCOLORS.length],a=S.cur&&S.cur.id===p.id;
+    return '<div class="proj-item'+(a?' active':'')+'" onclick="loadProject(\''+p.id+'\')"><div class="proj-dot" style="background:'+c+';"></div><span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">'+p.title+'</span><span onclick="delProj(event,\''+p.id+'\')" style="color:var(--m2);font-size:.65rem;padding:2px 4px;">x</span></div>';
+  }).join('');
+}
+
+function newProject(){
+  var max=S.tier==='free'?1:S.tier==='standard'?3:99;
+  if(S.projects.length>=max){toast('Upgrade to create more projects');showUpgrade();return;}
+  openModal('modal-newproj');
+  setTimeout(function(){document.getElementById('np-title').focus();},100);
+}
+
+function createProject(){
+  var t=document.getElementById('np-title').value.trim();
+  var f=document.getElementById('np-field').value;
+  var l=document.getElementById('np-level').value;
+  if(!t){toast('Enter a project title');return;}
+  var p={id:'p'+Date.now(),title:t,field:f,level:l,content:'',docTitle:t,created:new Date().toISOString()};
+  S.projects.unshift(p);saveProjects();closeModal('modal-newproj');loadProject(p.id);
+  document.getElementById('np-title').value='';toast('Project created: '+t);
+}
+
+function loadProject(id){
+  var p=S.projects.find(function(x){return x.id===id;});
+  if(!p)return;S.cur=p;
+  document.getElementById('doc-title').value=p.docTitle||p.title;
+  document.getElementById('editor').innerHTML=p.content||'';
+  updateWC();renderProjects();
+}
+
+function saveProject(){
+  if(!S.cur)return;
+  S.cur.content=document.getElementById('editor').innerHTML;
+  S.cur.docTitle=document.getElementById('doc-title').value;
+  saveProjects();
+  var i=document.getElementById('save-ind');i.textContent='Saved';i.style.color='var(--green)';
+}
+
+function autoSave(){
+  clearTimeout(S.saveTimer);
+  var i=document.getElementById('save-ind');i.textContent='Saving...';i.style.color='var(--m2)';
+  S.saveTimer=setTimeout(saveProject,1200);
+}
+
+function saveProjects(){localStorage.setItem('rs_projects',JSON.stringify(S.projects));renderProjects();}
+
+function delProj(e,id){
+  e.stopPropagation();
+  if(!confirm('Delete this project?'))return;
+  S.projects=S.projects.filter(function(p){return p.id!==id;});
+  if(S.cur&&S.cur.id===id){S.cur=null;document.getElementById('editor').innerHTML='';document.getElementById('doc-title').value='';}
+  saveProjects();toast('Deleted');
+}
+
+function fmt(cmd){document.execCommand(cmd,false,null);document.getElementById('editor').focus();}
+function fmtBlock(t){document.execCommand('formatBlock',false,t);document.getElementById('editor').focus();}
+function insertTable(){document.execCommand('insertHTML',false,'<table><tr><th>Col 1</th><th>Col 2</th><th>Col 3</th></tr><tr><td>Data</td><td>Data</td><td>Data</td></tr><tr><td>Data</td><td>Data</td><td>Data</td></tr></table><p></p>');}
+
+function updateWC(){
+  var txt=document.getElementById('editor').innerText||'';
+  var w=txt.trim()?txt.trim().split(/\s+/).length:0;
+  document.getElementById('wc-w').textContent=w.toLocaleString();
+  document.getElementById('wc-c').textContent=txt.length.toLocaleString();
+  document.getElementById('wc-p').textContent=txt.split(/\n\n+/).filter(function(p){return p.trim();}).length;
+  document.getElementById('wc-t').textContent=Math.max(1,Math.ceil(w/200));
+}
+
+function loadDoc(id){document.getElementById(id).value=(document.getElementById('editor').innerText||'').slice(0,3000);toast('Document loaded');}
+
+async function exportWord(){
+  var title = document.getElementById('doc-title').value || 'Research Document';
+  var editorEl = document.getElementById('editor');
+  var text = editorEl.innerText || '';
+
+  if(!text.trim()){ toast('Document is empty'); return; }
+  toast('Building Word document...');
+
+  try {
+    var docxLib = window.docx;
+    if(!docxLib){ toast('Word export not available. Check internet connection.'); return; }
+
+    var D = docxLib;
+    var paras = [];
+
+    // Title paragraph
+    paras.push(new D.Paragraph({
+      heading: D.HeadingLevel.TITLE,
+      children: [new D.TextRun({ text: title, bold: true, size: 36, font: 'Arial' })]
+    }));
+
+    // Separator
+    paras.push(new D.Paragraph({ children: [] }));
+
+    // Parse content from editor
+    var lines = text.split('\n');
+    lines.forEach(function(line) {
+      var trimmed = line.trim();
+      if(!trimmed) {
+        paras.push(new D.Paragraph({ children: [] }));
+        return;
+      }
+      // Detect headings by common patterns
+      if(trimmed.startsWith('=== ') && trimmed.endsWith(' ===')) {
+        paras.push(new D.Paragraph({
+          heading: D.HeadingLevel.HEADING_1,
+          children: [new D.TextRun({ text: trimmed.replace(/===/g,'').trim(), bold: true, font: 'Arial', size: 28 })]
+        }));
+      } else if(trimmed.match(/^[A-Z][A-Z\s]+:$/) || trimmed.match(/^SECTION \d/)) {
+        paras.push(new D.Paragraph({
+          heading: D.HeadingLevel.HEADING_2,
+          children: [new D.TextRun({ text: trimmed, bold: true, font: 'Arial', size: 24 })]
+        }));
+      } else if(trimmed.match(/^\d+\.\s/) || trimmed.match(/^[A-Z]\.\s/)) {
+        paras.push(new D.Paragraph({
+          numbering: { reference: 'numbers', level: 0 },
+          children: [new D.TextRun({ text: trimmed.replace(/^\d+\.\s|^[A-Z]\.\s/, ''), font: 'Arial', size: 22 })]
+        }));
+      } else if(trimmed.startsWith('- ') || trimmed.startsWith('* ')) {
+        paras.push(new D.Paragraph({
+          numbering: { reference: 'bullets', level: 0 },
+          children: [new D.TextRun({ text: trimmed.replace(/^[-*]\s/, ''), font: 'Arial', size: 22 })]
+        }));
+      } else {
+        paras.push(new D.Paragraph({
+          children: [new D.TextRun({ text: trimmed, font: 'Arial', size: 22 })],
+          spacing: { after: 100 }
+        }));
+      }
+    });
+
+    var doc = new D.Document({
+      styles: {
+        default: { document: { run: { font: 'Arial', size: 22 } } },
+        paragraphStyles: [
+          { id: 'Heading1', name: 'Heading 1', basedOn: 'Normal', next: 'Normal', quickFormat: true,
+            run: { size: 28, bold: true, font: 'Arial', color: '1A3A6E' },
+            paragraph: { spacing: { before: 240, after: 120 }, outlineLevel: 0 } },
+          { id: 'Heading2', name: 'Heading 2', basedOn: 'Normal', next: 'Normal', quickFormat: true,
+            run: { size: 24, bold: true, font: 'Arial', color: '2E5090' },
+            paragraph: { spacing: { before: 200, after: 100 }, outlineLevel: 1 } },
+        ]
+      },
+      numbering: {
+        config: [
+          { reference: 'bullets', levels: [{ level: 0, format: D.LevelFormat.BULLET, text: '•',
+              alignment: D.AlignmentType.LEFT, style: { paragraph: { indent: { left: 720, hanging: 360 } } } }] },
+          { reference: 'numbers', levels: [{ level: 0, format: D.LevelFormat.DECIMAL, text: '%1.',
+              alignment: D.AlignmentType.LEFT, style: { paragraph: { indent: { left: 720, hanging: 360 } } } }] }
+        ]
+      },
+      sections: [{
+        properties: {
+          page: {
+            size: { width: 11906, height: 16838 },
+            margin: { top: 1440, right: 1440, bottom: 1440, left: 1800 }
+          }
+        },
+        headers: {
+          default: new D.Header({
+            children: [new D.Paragraph({
+              children: [
+                new D.TextRun({ text: 'Rehoteq Research Studio  |  ', color: '888888', size: 16 }),
+                new D.TextRun({ text: title, color: '888888', size: 16 })
+              ],
+              border: { bottom: { style: D.BorderStyle.SINGLE, size: 4, color: 'CCCCCC', space: 1 } }
+            })]
+          })
+        },
+        footers: {
+          default: new D.Footer({
+            children: [new D.Paragraph({
+              children: [
+                new D.TextRun({ text: 'Generated by Rehoteq Research Studio  |  rehoteq.com  |  Page ', color: '888888', size: 16 }),
+                new D.TextRun({ children: [new D.PageNumber(D.NumberFormat.DECIMAL)], color: '888888', size: 16 })
+              ],
+              alignment: D.AlignmentType.CENTER,
+              border: { top: { style: D.BorderStyle.SINGLE, size: 4, color: 'CCCCCC', space: 1 } }
+            })]
+          })
+        },
+        children: paras
+      }]
+    });
+
+    D.Packer.toBlob(doc).then(function(blob) {
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = title.replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '-') + '.docx';
+      a.click();
+      toast('Word document downloaded!');
+    });
+
+  } catch(e) {
+    console.error(e);
+    toast('Error generating Word doc: ' + e.message);
+  }
+}
+
+function exportPDF(){
+  var title = document.getElementById('doc-title').value || 'Research Document';
+  var content = document.getElementById('editor').innerHTML;
+  var date = new Date().toLocaleDateString('en-NG', {day:'numeric',month:'long',year:'numeric'});
+
+  var win = window.open('', '_blank');
+  win.document.write(
+    '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>' + title + '</title>' +
+    '<style>' +
+    '@page { size: A4; margin: 2.5cm 2cm 2.5cm 2.5cm; }' +
+    'body { font-family: "Times New Roman", serif; font-size: 12pt; line-height: 1.8; color: #111; }' +
+    '.cover { text-align: center; padding: 80px 0 60px; border-bottom: 2px solid #1a3a6e; margin-bottom: 40px; }' +
+    '.cover-org { font-size: 10pt; color: #666; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 30px; }' +
+    '.cover-title { font-size: 22pt; font-weight: bold; color: #1a3a6e; margin-bottom: 16px; line-height: 1.3; }' +
+    '.cover-meta { font-size: 10pt; color: #888; margin-top: 20px; }' +
+    '.content { max-width: 100%; }' +
+    'h1 { font-size: 16pt; color: #1a3a6e; border-bottom: 1px solid #ccc; padding-bottom: 6px; margin: 24pt 0 10pt; }' +
+    'h2 { font-size: 13pt; color: #2e5090; margin: 18pt 0 8pt; }' +
+    'h3 { font-size: 11pt; font-weight: bold; margin: 14pt 0 6pt; }' +
+    'p { margin-bottom: 8pt; text-align: justify; }' +
+    'table { border-collapse: collapse; width: 100%; margin: 12pt 0; font-size: 10pt; }' +
+    'td, th { border: 1px solid #999; padding: 6pt 8pt; }' +
+    'th { background: #e8eef7; font-weight: bold; }' +
+    'blockquote { border-left: 3px solid #1a3a6e; padding-left: 12pt; color: #444; font-style: italic; margin: 10pt 0; }' +
+    '.footer { margin-top: 40px; padding-top: 10px; border-top: 1px solid #ccc; font-size: 9pt; color: #888; text-align: center; }' +
+    '@media print { .no-print { display: none; } body { margin: 0; } }' +
+    '.print-btn { position: fixed; bottom: 20px; right: 20px; background: #1a3a6e; color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-size: 14px; font-family: Arial; z-index: 999; }' +
+    '</style></head><body>' +
+    '<div class="cover">' +
+    '<div class="cover-org">Rehoteq Research Studio</div>' +
+    '<div class="cover-title">' + title + '</div>' +
+    '<div class="cover-meta">Generated: ' + date + '  |  rehoteq.com/research-studio.html</div>' +
+    '</div>' +
+    '<div class="content">' + content + '</div>' +
+    '<div class="footer">Rehoteq Research Studio &mdash; rehoteq.com &mdash; 07036302585</div>' +
+    '<button class="print-btn no-print" onclick="window.print()">🖨 Print / Save PDF</button>' +
+    '</body></html>'
+  );
+  win.document.close();
+  setTimeout(function(){ win.print(); }, 800);
+}
+
+function exportTxt(){
+  var t=document.getElementById('doc-title').value||'Research';
+  var txt='=== '+t+' ===\n\n'+(document.getElementById('editor').innerText||'');
+  var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([txt],{type:'text/plain'}));a.download=t.replace(/\s+/g,'-')+'.txt';a.click();toast('Exported!');
+}
+function exportHtml(){
+  var t=document.getElementById('doc-title').value||'Research';
+  var h='<!DOCTYPE html><html><head><meta charset="UTF-8"><title>'+t+'</title><style>body{font-family:Georgia,serif;max-width:800px;margin:60px auto;line-height:1.8;color:#111;padding:0 20px;}h1,h2,h3{font-weight:700;}table{border-collapse:collapse;width:100%;}td,th{border:1px solid #ccc;padding:8px;}</style></head><body><h1>'+t+'</h1>'+document.getElementById('editor').innerHTML+'</body></html>';
+  var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([h],{type:'text/html'}));a.download=t.replace(/\s+/g,'-')+'.html';a.click();toast('Exported!');
+}
+function printDoc(){
+  var t=document.getElementById('doc-title').value||'Research';
+  var w=window.open('','_blank');
+  w.document.write('<!DOCTYPE html><html><head><meta charset="UTF-8"><title>'+t+'</title><style>body{font-family:Georgia,serif;max-width:780px;margin:60px auto;line-height:1.9;color:#111;font-size:12pt;}h1{font-size:18pt;}h2{font-size:14pt;}table{border-collapse:collapse;width:100%;}td,th{border:1px solid #999;padding:6px;}@media print{body{margin:20px;}}</style></head><body><h1>'+t+'</h1>'+document.getElementById('editor').innerHTML+'</body></html>');
+  w.document.close();setTimeout(function(){w.print();},500);
+}
+
+async function callAI(prompt,lid,rid,aid){
+  if(!checkUnits())return;
+  var l=document.getElementById('ld-'+lid),r=document.getElementById('res-'+rid),a=document.getElementById('act-'+aid);
+  l.classList.add('show');r.classList.remove('show');a.classList.remove('show');
+  try{
+    var resp=await fetch(WORKER,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt:prompt})});
+    var d=await resp.json();
+    var txt=d.choices&&d.choices[0]?d.choices[0].message.content:'No response.';
+    r.innerHTML=txt.replace(/\n/g,'<br>').replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>');
+    r.classList.add('show');a.classList.add('show');
+  }catch(e){r.innerHTML='Connection error. Check internet.';r.classList.add('show');}
+  l.classList.remove('show');
+}
+
+function insertRes(id){
+  var r=document.getElementById('res-'+id);
+  if(!r||!r.innerText)return;
+  document.getElementById('editor').focus();
+  document.execCommand('insertHTML',false,'<p>'+r.innerHTML+'</p>');
+  toast('Inserted into document');
+}
+function copyRes(id){
+  var r=document.getElementById('res-'+id);
+  if(!r)return;
+  navigator.clipboard.writeText(r.innerText).then(function(){toast('Copied!');});
+}
+
+function runProofread(){
+  var txt=document.getElementById('pr-text').value.trim()||document.getElementById('editor').innerText;
+  var level=document.getElementById('pr-level').value,field=document.getElementById('pr-field').value;
+  if(!txt.trim()){toast('Enter text to proofread');return;}
+  var p='You are a senior academic editor specializing in '+field+' at '+level+' level.\n\nProofread and improve this text. Provide:\n1. **Corrected Version** - the improved text\n2. **Key Issues Found** - list of corrections\n3. **Tone Assessment** - is academic tone appropriate?\n4. **Suggestions** - structural improvements\n\nText:\n'+txt.slice(0,2000);
+  callAI(p,'proofread','proofread','proofread');
+}
+
+function runLitReview(){
+  var topic=document.getElementById('lr-topic').value.trim();
+  if(!topic){toast('Enter a research topic');return;}
+  var field=document.getElementById('lr-field').value,scope=document.getElementById('lr-scope').value,depth=document.getElementById('lr-depth').value;
+  var p='Write a '+depth+' literature review on: '+topic+'\nField: '+field+'\nScope: '+scope+'\n\nStructure: Introduction to theme, Key theoretical frameworks, Previous studies and findings, Gaps in literature, How this study addresses the gap.\nUse academic citation format (Author, Year). Focus on '+scope+'.';
+  callAI(p,'litreview','litreview','litreview');
+}
+
+function runAbstract(){
+  var title=document.getElementById('abs-title').value.trim(),txt=document.getElementById('abs-text').value.trim();
+  if(!title&&!txt){toast('Enter paper title or content');return;}
+  var p='Write a professional academic abstract in '+document.getElementById('abs-style').value+' format.\n\nTitle: '+title+'\nContent: '+(txt||'Generate based on title')+'\nCitation format: '+document.getElementById('abs-cite').value+'\n\nKeep within 250-300 words. Use formal academic language.';
+  callAI(p,'abstract','abstract','abstract');
+}
+
+function runMethodology(){
+  var topic=document.getElementById('meth-topic').value.trim();
+  if(!topic){toast('Enter research topic');return;}
+  var p='Write a detailed methodology section for '+document.getElementById('meth-field').value+' research.\n\nTopic: '+topic+'\nDesign: '+document.getElementById('meth-type').value+'\nContext: '+document.getElementById('meth-ctx').value+'\n\nInclude: Research Design, Population/Sampling, Data Collection, Instruments, Analysis Techniques, Validity/Reliability, Ethics.';
+  callAI(p,'methodology','methodology','methodology');
+}
+
+function loadFieldUI(){
+  var f=document.getElementById('field-sel').value;
+  var ui={
+    legal:'<div class="fg"><label>Document Type</label><select id="f-type"><option>Contract Draft</option><option>Legal Brief</option><option>Case Summary</option><option>Legal Memo</option><option>Court Affidavit</option><option>Legal Opinion</option></select></div><div class="fg"><label>Facts / Instructions</label><textarea id="f-detail" placeholder="Describe the situation, parties, key facts..."></textarea></div><button class="ai-btn btn-blue" onclick="runField()">Generate Legal Document</button>',
+    medical:'<div class="fg"><label>Document Type</label><select id="f-type"><option>Clinical Case Study</option><option>Patient Assessment</option><option>Medical Research Section</option><option>Clinical Trial Protocol</option><option>Discharge Summary</option></select></div><div class="fg"><label>Clinical Details</label><textarea id="f-detail" placeholder="Patient info, symptoms, diagnosis, treatment..."></textarea></div><button class="ai-btn btn-blue" onclick="runField()">Generate Clinical Document</button>',
+    engineering:'<div class="fg"><label>Report Type</label><select id="f-type"><option>Feasibility Study</option><option>Technical Report</option><option>Design Report</option><option>Project Proposal</option><option>Safety Assessment</option></select></div><div class="fg"><label>Engineering Branch</label><select id="f-branch"><option>Civil/Structural</option><option>Electrical/Electronic</option><option>Mechanical</option><option>Chemical</option><option>Solar/Renewable</option><option>Software/IT</option></select></div><div class="fg"><label>Project Details</label><textarea id="f-detail" placeholder="Project description, specs, requirements..."></textarea></div><button class="ai-btn btn-blue" onclick="runField()">Generate Technical Report</button>',
+    finance:'<div class="fg"><label>Document Type</label><select id="f-type"><option>Financial Analysis Report</option><option>Audit Memo</option><option>Investment Appraisal</option><option>Budget Narrative</option><option>Financial Statement Notes</option></select></div><div class="fg"><label>Data / Context</label><textarea id="f-detail" placeholder="Paste figures, ratios, trends or describe the financial situation..."></textarea></div><button class="ai-btn btn-blue" onclick="runField()">Generate Financial Document</button>',
+    agric:'<div class="fg"><label>Document Type</label><select id="f-type"><option>Field Research Report</option><option>Laboratory Report</option><option>Agricultural Survey</option><option>Biomedical Research Section</option><option>Environmental Impact</option></select></div><div class="fg"><label>Details</label><textarea id="f-detail" placeholder="Research details, findings, methods..."></textarea></div><button class="ai-btn btn-blue" onclick="runField()">Generate Field Report</button>',
+    proposal:'<div class="fg"><label>Research Title</label><input type="text" id="f-ptitle" placeholder="Full research title"/></div><div class="fg"><label>Field</label><select id="f-pfield"><option>Medical</option><option>Engineering</option><option>Agriculture</option><option>Social Sciences</option><option>Computer Science</option><option>Finance</option><option>Education</option></select></div><div class="fg"><label>Funding Body</label><input type="text" id="f-body" placeholder="e.g. TETFund, WHO, World Bank"/></div><div class="fg"><label>Objectives</label><textarea id="f-detail" placeholder="List your research objectives..."></textarea></div><button class="ai-btn btn-blue" onclick="runField()">Generate Grant Proposal</button>',
+    data:'<div class="fg"><label>Field</label><select id="f-dfield"><option>Medical</option><option>Engineering</option><option>Social Sciences</option><option>Finance</option><option>Agriculture</option></select></div><div class="fg"><label>Paste Your Data/Results</label><textarea id="f-detail" placeholder="Tables, statistics, percentages, SPSS output..."></textarea></div><div class="fg"><label>Analysis Type</label><select id="f-dtype"><option>Descriptive Statistics</option><option>Regression Analysis</option><option>Hypothesis Testing</option><option>Survey Analysis</option><option>Thematic Analysis</option></select></div><button class="ai-btn btn-blue" onclick="runField()">Write Data Analysis</button>'
+  };
+  document.getElementById('field-ui').innerHTML=ui[f]||'';
+}
+
+function runField(){
+  var f=document.getElementById('field-sel').value;
+  var det=(document.getElementById('f-detail')||{value:''}).value;
+  var type=(document.getElementById('f-type')||{value:''}).value;
+  var p='';
+  if(f==='legal'){p='You are a senior Nigerian legal professional. Draft a professional '+type+'.\nFacts: '+det+'\nUse proper Nigerian/common law legal language.';}
+  else if(f==='medical'){p='You are a medical professional. Write a professional '+type+'.\nDetails: '+det+'\nUse appropriate clinical terminology.';}
+  else if(f==='engineering'){var branch=(document.getElementById('f-branch')||{value:'Engineering'}).value;p='You are a professional '+branch+' engineer. Write a detailed '+type+'.\nProject: '+det+'\nInclude technical specs and professional engineering language.';}
+  else if(f==='finance'){p='You are a professional accountant/analyst. Write a '+type+'.\nData: '+det+'\nUse proper financial language, reference GAAP/IFRS where applicable.';}
+  else if(f==='agric'){p='You are an agricultural/biomedical researcher. Write a '+type+'.\nDetails: '+det;}
+  else if(f==='proposal'){var ptitle=(document.getElementById('f-ptitle')||{value:''}).value;var pfield=(document.getElementById('f-pfield')||{value:''}).value;var body=(document.getElementById('f-body')||{value:''}).value;p='Write a comprehensive research grant proposal.\nTitle: '+ptitle+'\nField: '+pfield+'\nFunding Body: '+body+'\nObjectives: '+det+'\nInclude: Introduction, Problem Statement, Objectives, Methodology, Expected Outcomes, Budget, Conclusion.';}
+  else if(f==='data'){var dtype=(document.getElementById('f-dtype')||{value:''}).value;var dfield=(document.getElementById('f-dfield')||{value:''}).value;p='Write a professional data analysis narrative for '+dtype+' in '+dfield+'.\nData: '+det+'\nExplain findings, interpret results, discuss implications.';}
+  if(!p){toast('Fill in the required fields');return;}
+  callAI(p,'field','field','field');
+}
+
+function runCitation(){
+  var fmt=document.getElementById('cite-fmt').value,src=document.getElementById('cite-src').value.trim();
+  if(!src){toast('Enter source details');return;}
+  var p='Format this source as '+fmt+' citation.\nSource: '+src+'\n\nProvide:\n1. In-text citation\n2. Full reference list entry\n3. Note if any info is missing.';
+  callAI(p,'citation','citation','citation');
+}
+
+function runBulkCite(){
+  var fmt=document.getElementById('cite-fmt').value,bulk=document.getElementById('cite-bulk').value.trim();
+  if(!bulk){toast('Paste references to reformat');return;}
+  callAI('Reformat all these references into proper '+fmt+' format:\n\n'+bulk,'citation','citation','citation');
+}
+
+function swTab(tab,el){
+  document.querySelectorAll('.ai-tab').forEach(function(t){t.classList.remove('active');});
+  document.querySelectorAll('.atc').forEach(function(t){t.classList.remove('active');});
+  el.classList.add('active');
+  var c=document.getElementById('atc-'+tab);if(c)c.classList.add('active');
+}
+
+function openTool(tool){
+  document.querySelectorAll('.sb-item').forEach(function(t){t.classList.remove('active');});
+  var sb=document.getElementById('sb-'+tool);if(sb)sb.classList.add('active');
+  var tabMap={proofread:'proofread',litreview:'litreview',abstract:'abstract',methodology:'methodology',citation:'citation',data:'field',legal:'field',medical:'field',engineering:'field',finance:'field',agric:'field',proposal:'field',training:'training',handout:'training',casestudy:'training',assessment:'training'};
+  var fieldMap={legal:'legal',medical:'medical',engineering:'engineering',finance:'finance',agric:'agric',proposal:'proposal',data:'data'};
+  var tab=tabMap[tool]||'proofread';
+  document.querySelectorAll('.ai-tab').forEach(function(t){t.classList.remove('active');});
+  document.querySelectorAll('.atc').forEach(function(t){t.classList.remove('active');});
+  var tabs=document.querySelectorAll('.ai-tab');
+  var tidx={proofread:0,litreview:1,abstract:2,methodology:3,field:4,citation:5,training:6};
+  if(tabs[tidx[tab]])tabs[tidx[tab]].classList.add('active');
+  var c=document.getElementById('atc-'+tab);if(c)c.classList.add('active');
+  if(fieldMap[tool]){var sel=document.getElementById('field-sel');if(sel){sel.value=fieldMap[tool];loadFieldUI();}}
+  document.getElementById('ai-panel').style.display='';
+}
+
+function selTier(el){document.querySelectorAll('.tier-card').forEach(function(t){t.classList.remove('sel');});el.classList.add('sel');S.selAmt=parseInt(el.dataset.amt)||0;}
+
+function doUpgrade(){
+  var email=document.getElementById('upg-email').value.trim();
+  if(!email||!email.includes('@')){toast('Enter your email');return;}
+  var sel=document.querySelector('.tier-card.sel');
+  var tier=sel?sel.dataset.tier:'standard';
+  if(tier==='custom'){toast('Call 07036302585 for enterprise pricing');closeModal('modal-upgrade');return;}
+  var amt=parseInt(sel?sel.dataset.amt:2000);
+  if(typeof FlutterwaveCheckout==='undefined'){toast('Payment not loaded. Check internet.');return;}
+  FlutterwaveCheckout({public_key:FLW_KEY,tx_ref:'REHOTEQ-RS-'+Date.now(),amount:amt,currency:'NGN',customer:{email:email,name:email},customizations:{title:'Rehoteq Research Studio',description:'Upgrade to '+tier},
+    callback:function(res){
+      if(res.status==='successful'||res.status==='completed'){
+        S.tier=tier;S.units=TUNITS[tier]||50;localStorage.setItem('rs_tier',tier);localStorage.setItem('rs_units',S.units);
+        updateTierUI();closeModal('modal-upgrade');toast('Upgraded to '+tier+'!');
+      }
+    },onclose:function(){toast('Payment cancelled.');}
+  });
+}
+
+
+// ── TRAINING DOCUMENT GENERATOR ──
+function runTraining(){
+  var topic    = document.getElementById('tr-topic').value.trim();
+  var doctype  = document.getElementById('tr-doctype').value;
+  var industry = document.getElementById('tr-industry').value;
+  var duration = document.getElementById('tr-duration').value;
+  var audience = document.getElementById('tr-audience').value;
+  var facil    = document.getElementById('tr-facilitator').value;
+  var topics   = document.getElementById('tr-topics').value;
+  if(!topic){ toast('Enter a training topic'); return; }
+
+  var base = 'Topic: '+topic+'. Industry: '+industry+'. Duration: '+duration+'. Audience: '+audience+(facil?'. Facilitator: '+facil:'')+(topics?'. Key Topics: '+topics:'')+'. Nigerian regulatory context (NAICOM, CBN, ICAN, SEC) where applicable.';
+
+  var prompt = '';
+  if(doctype==='programme'){
+    prompt = 'You are a professional Nigerian corporate training consultant and ICAN-certified facilitator. Create a COMPLETE detailed Training Programme. '+base+' Include: Programme title and overview, 5+ SMART learning objectives, detailed day-by-day schedule with morning/afternoon time slots, activities, breaks, materials required, assessment strategy, expected outcomes. Format professionally with clear headings.';
+  } else if(doctype==='facilitator'){
+    prompt = 'You are an expert Nigerian corporate training facilitator. Write a detailed Facilitator Guide. '+base+' For each session include: session title and duration, learning objectives, key content points, delivery method, discussion questions for participants, activities with instructions, key takeaways, transition notes. Include Nigerian examples and statistics throughout.';
+  } else if(doctype==='handout'){
+    prompt = 'You are a professional training content developer. Create a comprehensive Participant Handout and Workbook. '+base+' Include: welcome and overview, learning objectives, key concepts and definitions with Nigerian context, summary notes per topic, regulatory references (Nigerian laws, NAICOM, CBN, ICAN), key frameworks, note-taking sections, glossary of terms, further reading. Format as a professional printable handout.';
+  } else if(doctype==='casestudy'){
+    prompt = 'You are a Nigerian business consultant and training expert. Create 3 detailed Case Studies for training. '+base+' For each case study: case title, background (realistic Nigerian company), the situation/problem, key issues, 4+ discussion questions, facilitator notes with key points, lesson learned. Use Naira figures and Nigerian regulatory environment.';
+  } else if(doctype==='assessment'){
+    prompt = 'You are a professional training assessor. Create a comprehensive Assessment. '+base+' Include: Section A - Pre-training assessment (10 multiple choice questions), Section B - Post-training assessment (10 multiple choice + 3 short answer + 2 scenario questions), Section C - Practical application scenario. Include Answer Key at end. Use Nigerian context throughout.';
+  } else if(doctype==='actionplan'){
+    prompt = 'Create a professional Post-Training Action Plan Template. '+base+' Include: participant details section, key learnings (3 most important things learned), application plan table (Action Item, How I Will Apply It, Timeline, Resources Needed, Success Measure), support required from management, 30-day goals, 90-day goals, challenges and how to overcome them, commitment statement and signature section.';
+  } else if(doctype==='certificate'){
+    prompt = 'Design text content for a professional Certificate of Participation. Training: '+topic+'. Organisation: '+(facil||'Rehoteq Training Institute')+'. Duration: '+duration+'. Include: certificate header, main body text with [PARTICIPANT NAME] placeholder, training description paragraph, competency statement, date and signature lines, CPD hours note for ICAN, certificate number format. Make it formal and suitable for framing.';
+  } else {
+    prompt = 'You are a senior Nigerian corporate training consultant. Generate a COMPLETE TRAINING DOCUMENT PACK. '+base+' Generate in sections: Section 1 - Programme Overview (title, objectives, schedule outline). Section 2 - Day-by-Day Agenda (detailed timetable with sessions, breaks, activities). Section 3 - Key Content Notes (main concepts, frameworks, Nigerian regulatory context). Section 4 - Case Study (one detailed Nigerian case study with discussion questions). Section 5 - Assessment (10 mixed questions with answer key). Section 6 - Action Plan Template (post-training commitment form). Use professional language throughout.';
+  }
+  callAI(prompt, 'training', 'training', 'training');
+}
+
+
+function insertAndSave(id){
+  insertRes(id);
+  setTimeout(saveProject, 500);
+  toast('Inserted and saved to project!');
+}
+
+// Update openTool to handle training tools
+var _origOpenTool = openTool;
+openTool = function(tool){
+  var trainingTools = ['training','handout','casestudy','assessment','policy','report'];
+  if(trainingTools.indexOf(tool) > -1){
+    document.querySelectorAll('.sb-item').forEach(function(t){t.classList.remove('active');});
+    var sb = document.getElementById('sb-'+tool);
+    if(sb) sb.classList.add('active');
+    // Switch to training tab
+    document.querySelectorAll('.ai-tab').forEach(function(t){t.classList.remove('active');});
+    document.querySelectorAll('.atc').forEach(function(t){t.classList.remove('active');});
+    var tabs = document.querySelectorAll('.ai-tab');
+    if(tabs[6]) tabs[6].classList.add('active');
+    var c = document.getElementById('atc-training');
+    if(c) c.classList.add('active');
+    // Pre-select document type based on sidebar item
+    var dtMap = {handout:'handout', casestudy:'casestudy', assessment:'assessment', report:'fullpack', policy:'facilitator'};
+    var sel = document.getElementById('tr-doctype');
+    if(sel && dtMap[tool]) sel.value = dtMap[tool];
+    document.getElementById('ai-panel').style.display = '';
+  } else {
+    _origOpenTool(tool);
+  }
+};
+
+window.addEventListener('load',function(){
+  updateTierUI();renderProjects();
+  if(S.projects.length>0)loadProject(S.projects[0].id);
+  updateWC();loadFieldUI();
+});
+</script>
+</body>
+</html>
