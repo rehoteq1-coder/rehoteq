@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta name="description" content="Rehoteq Technologies — Professional Solar PV Installation, Electrical Engineering, CCTV Security, and Computer Hardware services in Okitipupa, Ondo State, Nigeria."/>
+<meta name="keywords" content="solar installation Nigeria, solar panel Okitipupa, electrical engineer Ondo State, CCTV installation Nigeria, computer hardware repair Nigeria, Rehoteq"/>
+<meta property="og:title" content="Engineering Services — Rehoteq Technologies"/>
+<meta property="og:description" content="Certified Solar PV, Electrical, CCTV and Computer Hardware engineering services in Ondo State, Nigeria."/>
+<title>Engineering Services | Rehoteq Technologies — Okitipupa, Ondo State</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,700;0,900;1,900&family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --black:#050508;--dark:#0a0a0f;--card:#111118;--card2:#18181f;
+  --gold:#f5c842;--gold2:#d4a843;--green:#22c55e;--teal:#0ea5e9;
+  --orange:#f97316;--purple:#8b5cf6;
+  --t1:#fff;--t2:#c8d0e0;--t3:#7a8499;
+  --serif:'Fraunces',serif;--sans:'Outfit',sans-serif;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--t1);font-family:var(--sans);overflow-x:hidden;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(5,5,8,.9);backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(245,200,66,.1);
+  display:flex;align-items:center;justify-content:space-between;padding:14px 5%;}
+.nav-brand{font-family:var(--serif);font-weight:900;font-size:1.1rem;
+  color:var(--t1);text-decoration:none;}
+.nav-brand span{color:var(--gold);}
+.nav-links{display:flex;align-items:center;gap:24px;}
+.nav-links a{color:var(--t2);text-decoration:none;font-size:.88rem;font-weight:500;}
+.nav-links a:hover{color:var(--gold);}
+.nav-cta{background:var(--gold);color:#000;border:none;border-radius:8px;
+  padding:9px 20px;font-weight:800;font-size:.85rem;cursor:pointer;
+  font-family:var(--sans);text-decoration:none;transition:all .2s;}
+.nav-cta:hover{background:#e0b030;transform:translateY(-1px);}
+@media(max-width:700px){.nav-links{display:none;}}
+
+/* HERO */
+.hero{min-height:92vh;display:flex;align-items:center;position:relative;
+  overflow:hidden;padding:120px 5% 80px;}
+.hero-img{position:absolute;inset:0;
+  background:url('https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=1400&q=80') center/cover no-repeat;
+  opacity:.18;}
+.hero-overlay{position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(5,5,8,.95) 0%,rgba(5,5,8,.7) 50%,rgba(5,5,8,.4) 100%);}
+.hero-content{position:relative;z-index:2;max-width:680px;}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;
+  background:rgba(245,200,66,.12);border:1px solid rgba(245,200,66,.3);
+  border-radius:100px;padding:6px 16px;font-size:.75rem;font-weight:800;
+  color:var(--gold);margin-bottom:20px;text-transform:uppercase;letter-spacing:.08em;}
+.hero-title{font-family:var(--serif);font-size:clamp(2.5rem,6vw,4.5rem);
+  font-weight:900;line-height:1.05;margin-bottom:20px;}
+.hero-title span{color:var(--gold);font-style:italic;}
+.hero-sub{font-size:1.05rem;color:var(--t2);line-height:1.8;margin-bottom:32px;max-width:560px;}
+.hero-certs{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:32px;}
+.cert-badge{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
+  border-radius:8px;padding:8px 14px;font-size:.78rem;font-weight:700;color:var(--t2);
+  display:flex;align-items:center;gap:6px;}
+.cert-badge span{color:var(--gold);}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;}
+.btn-gold{background:var(--gold);color:#000;border:none;border-radius:10px;
+  padding:13px 28px;font-weight:800;font-size:.95rem;cursor:pointer;
+  font-family:var(--sans);text-decoration:none;display:inline-flex;
+  align-items:center;gap:8px;transition:all .2s;}
+.btn-gold:hover{background:#e0b030;transform:translateY(-2px);box-shadow:0 8px 30px rgba(245,200,66,.3);}
+.btn-outline{background:transparent;color:var(--t1);border:2px solid rgba(255,255,255,.2);
+  border-radius:10px;padding:13px 28px;font-weight:700;font-size:.95rem;cursor:pointer;
+  font-family:var(--sans);text-decoration:none;display:inline-flex;
+  align-items:center;gap:8px;transition:all .2s;}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold);}
+
+/* SECTION */
+section{padding:80px 5%;}
+.sec-tag{display:inline-block;background:rgba(245,200,66,.1);
+  border:1px solid rgba(245,200,66,.2);border-radius:100px;
+  padding:5px 16px;font-size:.72rem;font-weight:800;color:var(--gold);
+  text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px;}
+.sec-title{font-family:var(--serif);font-size:clamp(1.8rem,4vw,2.8rem);
+  font-weight:900;line-height:1.15;margin-bottom:14px;}
+.sec-sub{font-size:.95rem;color:var(--t2);line-height:1.8;max-width:560px;}
+
+/* SERVICES */
+.services-grid{display:grid;gap:2px;margin-top:50px;}
+
+/* each service = full-width card with image */
+.svc-card{display:grid;grid-template-columns:1fr 1fr;min-height:420px;
+  border-radius:24px;overflow:hidden;border:1px solid rgba(255,255,255,.06);}
+.svc-card.reverse{direction:rtl;}
+.svc-card.reverse > *{direction:ltr;}
+.svc-img{position:relative;overflow:hidden;min-height:280px;}
+.svc-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease;}
+.svc-card:hover .svc-img img{transform:scale(1.05);}
+.svc-img-overlay{position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(0,0,0,.3),transparent);}
+.svc-img-badge{position:absolute;top:20px;left:20px;
+  background:rgba(0,0,0,.7);backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.15);border-radius:100px;
+  padding:6px 14px;font-size:.72rem;font-weight:800;color:var(--gold);
+  text-transform:uppercase;letter-spacing:.08em;}
+.svc-content{background:var(--card);padding:40px;display:flex;
+  flex-direction:column;justify-content:center;}
+.svc-ico{font-size:2.5rem;margin-bottom:16px;}
+.svc-name{font-family:var(--serif);font-size:1.8rem;font-weight:900;
+  color:var(--t1);margin-bottom:12px;line-height:1.2;}
+.svc-desc{font-size:.9rem;color:var(--t2);line-height:1.8;margin-bottom:20px;}
+.svc-list{list-style:none;margin-bottom:24px;}
+.svc-list li{display:flex;align-items:flex-start;gap:8px;font-size:.85rem;
+  color:var(--t2);padding:5px 0;}
+.svc-list li::before{content:'✓';color:var(--green);font-weight:900;flex-shrink:0;}
+.svc-link{display:inline-flex;align-items:center;gap:6px;color:var(--gold);
+  font-weight:800;font-size:.88rem;text-decoration:none;transition:gap .2s;}
+.svc-link:hover{gap:10px;}
+
+/* WHY US */
+.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:16px;margin-top:40px;}
+.why-card{background:var(--card);border:1px solid rgba(255,255,255,.07);
+  border-radius:16px;padding:24px;text-align:center;transition:all .2s;}
+.why-card:hover{border-color:rgba(245,200,66,.3);transform:translateY(-3px);}
+.why-ico{font-size:2.2rem;margin-bottom:12px;}
+.why-title{font-weight:800;font-size:.95rem;color:var(--t1);margin-bottom:6px;}
+.why-desc{font-size:.82rem;color:var(--t3);line-height:1.6;}
+
+/* PROCESS */
+.process-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:16px;margin-top:40px;counter-reset:step;}
+.process-step{background:var(--card);border:1px solid rgba(255,255,255,.07);
+  border-radius:16px;padding:24px;position:relative;counter-increment:step;}
+.process-step::before{content:counter(step,'01');
+  font-family:var(--serif);font-size:3rem;font-weight:900;
+  color:rgba(245,200,66,.12);position:absolute;top:12px;right:16px;line-height:1;}
+.process-ico{font-size:1.8rem;margin-bottom:12px;}
+.process-title{font-weight:800;font-size:.95rem;color:var(--t1);margin-bottom:6px;}
+.process-desc{font-size:.82rem;color:var(--t3);line-height:1.6;}
+
+/* CTA */
+.cta-wrap{background:linear-gradient(135deg,#0a0a10,#141420);
+  border:1px solid rgba(245,200,66,.15);border-radius:24px;
+  padding:60px;text-align:center;margin:0 0 0 0;}
+.cta-contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:16px;margin-top:32px;}
+.contact-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  border-radius:14px;padding:20px;text-align:center;}
+.contact-ico{font-size:1.8rem;margin-bottom:8px;}
+.contact-label{font-size:.72rem;color:var(--t3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;}
+.contact-val{font-weight:700;color:var(--t1);font-size:.95rem;}
+.contact-val a{color:var(--gold);text-decoration:none;}
+
+/* FOOTER */
+footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);
+  padding:32px 5%;text-align:center;}
+.footer-brand{font-family:var(--serif);font-size:1.2rem;font-weight:900;
+  color:var(--gold);margin-bottom:6px;}
+.footer-links{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin:14px 0;}
+.footer-links a{color:var(--t3);text-decoration:none;font-size:.82rem;}
+.footer-links a:hover{color:var(--gold);}
+.footer-copy{font-size:.75rem;color:var(--t3);}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .svc-card{grid-template-columns:1fr;}
+  .svc-card.reverse{direction:ltr;}
+  .svc-img{min-height:220px;}
+  .svc-content{padding:28px 20px;}
+  section{padding:60px 5%;}
+  .cta-wrap{padding:40px 20px;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="https://rehoteq.com" class="nav-brand">Reho<span>teq</span></a>
+  <div class="nav-links">
+    <a href="#solar">Solar</a>
+    <a href="#electrical">Electrical</a>
+    <a href="#cctv">CCTV</a>
+    <a href="#computer">Computer</a>
+    <a href="rsms-landing.html">RSMS</a>
+  </div>
+  <a href="https://wa.me/2347036302585?text=Hello%20Rehoteq%2C%20I%20need%20an%20engineering%20service%20quote" class="nav-cta" target="_blank">Get Quote →</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-img"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-tag">⚡ Certified Engineering Services</div>
+    <h1 class="hero-title">Power. Security.<br/><span>Technology.</span></h1>
+    <p class="hero-sub">
+      Professional solar PV installation, electrical engineering, CCTV security systems, and computer hardware services — delivered by certified engineers in Okitipupa and across Ondo State.
+    </p>
+    <div class="hero-certs">
+      <div class="cert-badge"><span>✓</span> Certified Solar PV Engineer</div>
+      <div class="cert-badge"><span>✓</span> Certified Electrical Engineer</div>
+      <div class="cert-badge"><span>✓</span> Based in Okitipupa, Ondo State</div>
+    </div>
+    <div class="hero-btns">
+      <a href="https://wa.me/2347036302585?text=Hello%20Rehoteq%2C%20I%20need%20an%20engineering%20service%20quote" class="btn-gold" target="_blank">
+        📱 Get Free Quote
+      </a>
+      <a href="#services" class="btn-outline">View Services ↓</a>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services" style="padding-top:40px;padding-bottom:40px;">
+  <div class="sec-tag">What We Do</div>
+  <h2 class="sec-title">Engineering Services<br/>That Actually Work</h2>
+  <p class="sec-sub">Every job done by certified professionals. No shortcuts. No comebacks. Just clean, reliable work that lasts.</p>
+</section>
+
+<!-- SOLAR -->
+<section id="solar" style="padding:0 5% 40px;">
+  <div class="svc-card">
+    <div class="svc-img">
+      <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&q=80" alt="Solar panel installation" loading="lazy"/>
+      <div class="svc-img-overlay"></div>
+      <div class="svc-img-badge">☀️ Solar PV</div>
+    </div>
+    <div class="svc-content">
+      <div class="svc-ico">☀️</div>
+      <div class="svc-name">Solar PV<br/>Installation</div>
+      <div class="svc-desc">End-to-end solar power solutions for homes, schools, churches, offices, and businesses. Designed to eliminate generator dependency and slash electricity costs permanently.</div>
+      <ul class="svc-list">
+        <li>Site survey and energy load assessment</li>
+        <li>Solar panel, inverter, and battery sizing</li>
+        <li>Professional mounting and wiring</li>
+        <li>Hybrid systems (solar + grid + generator)</li>
+        <li>Maintenance and monitoring</li>
+        <li>Warranties on all installations</li>
+      </ul>
+      <a href="https://wa.me/2347036302585?text=Hello%20Rehoteq%2C%20I%20need%20a%20solar%20installation%20quote" class="svc-link" target="_blank">
+        Get Solar Quote →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ELECTRICAL -->
+<section id="electrical" style="padding:0 5% 40px;">
+  <div class="svc-card reverse">
+    <div class="svc-img">
+      <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&q=80" alt="Electrical installation" loading="lazy"/>
+      <div class="svc-img-overlay"></div>
+      <div class="svc-img-badge">⚡ Electrical</div>
+    </div>
+    <div class="svc-content">
+      <div class="svc-ico">⚡</div>
+      <div class="svc-name">Electrical<br/>Installation</div>
+      <div class="svc-desc">Complete electrical installations for new buildings, renovations, and upgrades. Done right the first time by a certified electrical engineer — because bad wiring kills.</div>
+      <ul class="svc-list">
+        <li>New building wiring and installation</li>
+        <li>Distribution boards and circuit breakers</li>
+        <li>Industrial and commercial wiring</li>
+        <li>Fault finding and repairs</li>
+        <li>Earthing and lightning protection</li>
+        <li>Load management and upgrade</li>
+      </ul>
+      <a href="https://wa.me/2347036302585?text=Hello%20Rehoteq%2C%20I%20need%20an%20electrical%20installation%20quote" class="svc-link" target="_blank">
+        Get Electrical Quote →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CCTV -->
+<section id="cctv" style="padding:0 5% 40px;">
+  <div class="svc-card">
+    <div class="svc-img">
+      <img src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?w=800&q=80" alt="CCTV security camera installation" loading="lazy"/>
+      <div class="svc-img-overlay"></div>
+      <div class="svc-img-badge">🎥 CCTV & Security</div>
+    </div>
+    <div class="svc-content">
+      <div class="svc-ico">🎥</div>
+      <div class="svc-name">CCTV & Security<br/>Systems</div>
+      <div class="svc-desc">Keep your property, school, or business under watchful eyes 24/7. HD cameras, remote viewing from your phone, and professional cable management — not DIY guesswork.</div>
+      <ul class="svc-list">
+        <li>HD and IP camera installation</li>
+        <li>DVR/NVR setup and configuration</li>
+        <li>Remote viewing on phone/laptop</li>
+        <li>Indoor and outdoor cameras</li>
+        <li>Schools, homes, offices, warehouses</li>
+        <li>Access control systems</li>
+      </ul>
+      <a href="https://wa.me/2347036302585?text=Hello%20Rehoteq%2C%20I%20need%20a%20CCTV%20installation%20quote" class="svc-link" target="_blank">
+        Get CCTV Quote →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- COMPUTER -->
+<section id="computer" style="padding:0 5% 60px;">
+  <div class="svc-card reverse">
+    <div class="svc-img">
+      <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80" alt="Computer hardware repair" loading="lazy"/>
+      <div class="svc-img-overlay"></div>
+      <div class="svc-img-badge">💻 Computer Hardware</div>
+    </div>
+    <div class="svc-content">
+      <div class="svc-ico">💻</div>
+      <div class="svc-name">Computer Hardware<br/>Services</div>
+      <div class="svc-desc">From school computer labs to office workstations — procurement, setup, repair, and maintenance. We keep your systems running so your work never stops.</div>
+      <ul class="svc-list">
+        <li>Desktop and laptop repair</li>
+        <li>Computer lab setup for schools</li>
+        <li>Hardware upgrades (RAM, SSD, etc.)</li>
+        <li>Network setup and configuration</li>
+        <li>Printer and peripheral servicing</li>
+        <li>Data recovery and backup</li>
+      </ul>
+      <a href="https://wa.me/2347036302585?text=Hello%20Rehoteq%2C%20I%20need%20computer%20hardware%20services" class="svc-link" target="_blank">
+        Get Computer Quote →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section style="background:var(--dark);">
+  <div class="sec-tag">Why Rehoteq</div>
+  <h2 class="sec-title">What Makes Us<br/>Different</h2>
+  <p class="sec-sub">Anyone can buy equipment. Not everyone has the certification, experience, and local knowledge to install it correctly.</p>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-ico">🎓</div>
+      <div class="why-title">Certified Engineers</div>
+      <div class="why-desc">Our lead engineer holds certifications in both Electrical Engineering and Solar PV — not self-taught, not guesswork.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-ico">📍</div>
+      <div class="why-title">Locally Based</div>
+      <div class="why-desc">We are in Okitipupa. When you call, we come. No waiting weeks for a Lagos technician who doesn't know the area.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-ico">🛡️</div>
+      <div class="why-title">Quality Guaranteed</div>
+      <div class="why-desc">We use quality-tested components and stand behind every installation with proper warranties and after-service support.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-ico">💡</div>
+      <div class="why-title">Technology + Engineering</div>
+      <div class="why-desc">Unique combination of software (RSMS, RehoCheck) and hardware skills means we see the full picture — not just one part.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-ico">💰</div>
+      <div class="why-title">Fair Pricing</div>
+      <div class="why-desc">Professional work at prices that reflect Ondo State realities. No Lagos markup, no inflated import costs passed to you.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-ico">📞</div>
+      <div class="why-title">Responsive Support</div>
+      <div class="why-desc">WhatsApp us and get a response. Proper after-installation support, not the silence that follows many Nigerian contractors.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section>
+  <div class="sec-tag">How It Works</div>
+  <h2 class="sec-title">From Quote to<br/>Completion</h2>
+  <p class="sec-sub">Simple, transparent process. No surprises.</p>
+  <div class="process-grid">
+    <div class="process-step">
+      <div class="process-ico">📱</div>
+      <div class="process-title">1. Contact Us</div>
+      <div class="process-desc">WhatsApp or call us. Describe what you need — we respond same day.</div>
+    </div>
+    <div class="process-step">
+      <div class="process-ico">🏠</div>
+      <div class="process-title">2. Site Visit</div>
+      <div class="process-desc">We visit your location, assess the job, and give you a detailed written quote. No obligation.</div>
+    </div>
+    <div class="process-step">
+      <div class="process-ico">✅</div>
+      <div class="process-title">3. Approval</div>
+      <div class="process-desc">You approve the quote and timeline. We agree on a start date that works for you.</div>
+    </div>
+    <div class="process-step">
+      <div class="process-ico">🔧</div>
+      <div class="process-title">4. Installation</div>
+      <div class="process-desc">Our certified team executes the job professionally, on schedule, with minimal disruption.</div>
+    </div>
+    <div class="process-step">
+      <div class="process-ico">🎓</div>
+      <div class="process-title">5. Handover</div>
+      <div class="process-desc">We walk you through everything, answer questions, and hand over with documentation.</div>
+    </div>
+    <div class="process-step">
+      <div class="process-ico">📞</div>
+      <div class="process-title">6. Ongoing Support</div>
+      <div class="process-desc">We remain available for maintenance, upgrades, and any issues that arise post-installation.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="background:var(--dark);">
+  <div class="cta-wrap">
+    <div class="sec-tag">Ready to Start?</div>
+    <h2 class="sec-title" style="margin-bottom:12px;">Get Your Free<br/><span style="color:var(--gold);font-style:italic;">Engineering Quote</span></h2>
+    <p style="color:var(--t2);max-width:500px;margin:0 auto 32px;font-size:.95rem;line-height:1.7;">
+      Tell us what you need. We come to you, assess the job, and give you an honest quote. No pressure, no hidden charges.
+    </p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:32px;">
+      <a href="https://wa.me/2347036302585?text=Hello%20Rehoteq%2C%20I%20need%20an%20engineering%20service%20quote" class="btn-gold" target="_blank">
+        📱 WhatsApp Us Now
+      </a>
+      <a href="tel:+2347036302585" class="btn-outline">
+        📞 Call Directly
+      </a>
+    </div>
+    <div class="cta-contact-grid">
+      <div class="contact-card">
+        <div class="contact-ico">📱</div>
+        <div class="contact-label">WhatsApp & Phone</div>
+        <div class="contact-val"><a href="https://wa.me/2347036302585">07036302585</a></div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-ico">📱</div>
+        <div class="contact-label">Alternative</div>
+        <div class="contact-val"><a href="tel:+2348166519177">08166519177</a></div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-ico">✉️</div>
+        <div class="contact-label">Email</div>
+        <div class="contact-val"><a href="mailto:rehoteq@gmail.com">rehoteq@gmail.com</a></div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-ico">📍</div>
+        <div class="contact-label">Location</div>
+        <div class="contact-val">Okitipupa, Ondo State</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Rehoteq Technologies</div>
+  <p style="color:var(--t3);font-size:.82rem;">Okitipupa, Ondo State, Nigeria — Technology & Engineering</p>
+  <div class="footer-links">
+    <a href="https://rehoteq.com">Home</a>
+    <a href="rsms-landing.html">RSMS</a>
+    <a href="https://rehoteq.com/about.html">About</a>
+    <a href="https://rehoteq.com/privacy.html">Privacy</a>
+    <a href="https://wa.me/2347036302585">WhatsApp</a>
+  </div>
+  <div class="footer-copy">© 2025 Rehoteq Technologies. All rights reserved.</div>
+</footer>
+
+<script>
+// Scroll reveal animation
+var observer = new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    if(entry.isIntersecting){
+      entry.target.style.opacity='1';
+      entry.target.style.transform='translateY(0)';
+    }
+  });
+},{threshold:0.1});
+
+document.querySelectorAll('.svc-card,.why-card,.process-step,.contact-card').forEach(function(el){
+  el.style.opacity='0';
+  el.style.transform='translateY(20px)';
+  el.style.transition='opacity .5s ease, transform .5s ease';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
