@@ -804,6 +804,55 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:4rem 1.5
   .fg{grid-template-columns:1fr;}
   .chat-win{width:calc(100vw - 32px);right:16px;bottom:90px;}
 }
+
+/* ═══ REHOTEQ ECOSYSTEM & APPS LAUNCHER ═══ */
+.top-ecosystem-bar{background:linear-gradient(90deg,#070b16,#10162c,#070b16);border-bottom:1px solid rgba(201,168,76,0.22);padding:8px 1.5rem;font-size:0.75rem;position:sticky;top:0;z-index:205;}
+.teb-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+.teb-left{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.teb-tag{background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.3);color:var(--gold);font-weight:700;font-size:0.65rem;text-transform:uppercase;letter-spacing:0.08em;padding:3px 9px;border-radius:20px;display:inline-flex;align-items:center;gap:4px;}
+.teb-links{display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.teb-link{color:rgba(240,244,255,0.7);text-decoration:none;transition:color 0.2s;font-weight:500;font-size:0.74rem;}
+.teb-link:hover{color:var(--gold);}
+.teb-hl{color:#f0c040;font-weight:700;}
+.teb-contact{color:var(--gold);text-decoration:none;font-weight:700;font-size:0.73rem;display:inline-flex;align-items:center;gap:4px;}
+@media(max-width:850px){.top-ecosystem-bar{display:none;}}
+
+/* ECOSYSTEM GRID SECTION */
+.eco-section{padding:5rem 1.5rem;background:linear-gradient(180deg,rgba(5,8,15,0.92),rgba(9,14,28,0.98),rgba(5,8,15,0.92));border-top:1px solid var(--border);border-bottom:1px solid var(--border);position:relative;}
+.eco-filter-tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:1.8rem 0 2.4rem;}
+.eco-tab{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:30px;padding:8px 18px;font-size:0.78rem;font-weight:600;color:var(--muted);cursor:pointer;transition:all 0.2s;}
+.eco-tab:hover,.eco-tab.active{background:linear-gradient(135deg,rgba(201,168,76,0.22),rgba(201,168,76,0.1));border-color:var(--gold);color:var(--gold);}
+.eco-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:20px;max-width:1150px;margin:0 auto;}
+.eco-card{background:linear-gradient(145deg,#0c1020,#121730);border:1px solid var(--border);border-radius:18px;padding:24px;display:flex;flex-direction:column;justify-content:space-between;transition:all 0.3s;position:relative;overflow:hidden;}
+.eco-card:hover{transform:translateY(-4px);border-color:rgba(201,168,76,0.4);box-shadow:0 14px 35px rgba(0,0,0,0.45);}
+.eco-card-flagship{border-color:rgba(201,168,76,0.38);background:linear-gradient(145deg,#12162a,#1a2142);}
+.eco-card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.eco-icon{width:46px;height:46px;border-radius:12px;background:rgba(201,168,76,0.1);display:flex;align-items:center;justify-content:center;font-size:1.6rem;}
+.eco-pill{font-size:0.62rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:3px 10px;border-radius:20px;border:1px solid;}
+.eco-pill-live{background:rgba(0,209,102,0.1);border-color:rgba(0,209,102,0.3);color:var(--green);}
+.eco-pill-app{background:rgba(0,194,224,0.1);border-color:rgba(0,194,224,0.3);color:var(--cyan);}
+.eco-pill-gold{background:rgba(201,168,76,0.12);border-color:rgba(201,168,76,0.3);color:var(--gold);}
+.eco-pill-store{background:rgba(245,158,11,0.12);border-color:rgba(245,158,11,0.3);color:#f59e0b;}
+.eco-title{font-family:var(--sans);font-size:1.08rem;font-weight:800;color:var(--white);margin-bottom:4px;}
+.eco-domain{font-family:var(--mono);font-size:0.7rem;color:var(--gold);margin-bottom:8px;display:block;}
+.eco-desc{font-size:0.82rem;color:rgba(240,244,255,0.65);line-height:1.6;margin-bottom:18px;flex-grow:1;}
+.eco-links{display:flex;gap:8px;flex-wrap:wrap;}
+.eco-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:9px 16px;border-radius:8px;font-size:0.75rem;font-weight:700;text-decoration:none;transition:all 0.2s;}
+.eco-btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;}
+.eco-btn-primary:hover{box-shadow:0 0 15px rgba(201,168,76,0.4);transform:translateY(-1px);}
+.eco-btn-secondary{background:rgba(255,255,255,0.06);border:1px solid var(--border2);color:var(--white);}
+.eco-btn-secondary:hover{border-color:var(--gold);color:var(--gold);}
+
+/* COOKIE CONSENT BANNER */
+.cookie-banner{position:fixed;bottom:20px;left:20px;right:20px;max-width:700px;margin:0 auto;background:rgba(10,14,28,0.96);backdrop-filter:blur(24px);border:1px solid rgba(201,168,76,0.3);border-radius:16px;padding:18px 22px;z-index:9999;box-shadow:0 20px 50px rgba(0,0,0,0.6);display:none;align-items:center;justify-content:space-between;gap:18px;}
+.cookie-banner.show{display:flex;}
+.cookie-text{font-size:0.8rem;color:rgba(240,244,255,0.85);line-height:1.6;}
+.cookie-text a{color:var(--gold);text-decoration:underline;}
+.cookie-btns{display:flex;gap:10px;flex-shrink:0;}
+.cookie-btn-acc{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;border:none;border-radius:8px;padding:8px 18px;font-size:0.76rem;font-weight:700;cursor:pointer;}
+.cookie-btn-dec{background:rgba(255,255,255,0.08);border:1px solid var(--border);color:var(--white);border-radius:8px;padding:8px 14px;font-size:0.76rem;cursor:pointer;}
+@media(max-width:640px){.cookie-banner{flex-direction:column;bottom:10px;left:10px;right:10px;padding:14px;}}
+
 </style>
 
 <!-- ═══ SEO: CANONICAL + ROBOTS ═══ -->
@@ -849,7 +898,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:4rem 1.5
   },
   "sameAs": [
     "https://play.google.com/store/apps/details?id=com.rehoteq.rehocheck",
-    "https://rehoteq1-coder.github.io/rms/"
+    "https://rsms.rehoteq.com/"
   ],
   "address": {
     "@type": "PostalAddress",
@@ -890,7 +939,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:4rem 1.5
       "@type": "ListItem",
       "position": 1,
       "name": "Rehoteq RMS — School Result Management System",
-      "url": "https://rehoteq1-coder.github.io/rms/",
+      "url": "https://rsms.rehoteq.com/",
       "description": "Cloud-based school result management system for Nigerian schools. Score entry, result sheets, attendance, fee management and parent portal."
     },
     {
@@ -946,7 +995,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:4rem 1.5
       },
       "sameAs": [
         "https://play.google.com/store/apps/details?id=com.rehoteq.rehocheck",
-        "https://rehoteq1-coder.github.io/rms/"
+        "https://rsms.rehoteq.com/"
       ],
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
@@ -977,6 +1026,26 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:4rem 1.5
 <body>
 
 <div class="cursor-glow" id="cursor-glow"></div>
+
+<!-- TOP ECOSYSTEM BAR -->
+<div class="top-ecosystem-bar">
+  <div class="teb-inner">
+    <div class="teb-left">
+      <span class="teb-tag">🌐 Rehoteq Ecosystem</span>
+      <div class="teb-links">
+        <a href="https://rsms.rehoteq.com" target="_blank" class="teb-link teb-hl">🏫 RSMS Portal</a>
+        <a href="https://rehosprint.rehoteq.com" target="_blank" class="teb-link teb-hl">⚡ RehoSprint CBT</a>
+        <a href="https://shop.rehoteq.com" target="_blank" class="teb-link teb-hl">🛒 Rehoteq Shop</a>
+        <a href="/lesson-ai.html" class="teb-link">🤖 AI Studio</a>
+        <a href="/solar.html" class="teb-link">☀️ Solar Tool</a>
+        <a href="/wiring.html" class="teb-link">⚡ Wiring Estimator</a>
+        <a href="/voicecoach.html" class="teb-link">🎤 VoiceCoach</a>
+        <a href="/phonelab.html" class="teb-link">🔧 PhoneLab</a>
+      </div>
+    </div>
+    <a href="https://wa.me/2347036302585" target="_blank" class="teb-contact">💬 +234 703 630 2585</a>
+  </div>
+</div>
 
 <!-- NAV -->
 <nav id="nav">
@@ -1009,18 +1078,18 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:4rem 1.5
     <div class="nav-brand">Rehoteq <em>Technologies</em></div>
   </a>
   <div class="nav-links">
+    <a href="#ecosystem" style="color:var(--gold);font-weight:700;">🌐 Apps &amp; Ecosystem</a>
     <a href="#services">Services</a>
     <a href="#tools">Free Tools</a>
-    <a href="/lesson-ai.html" target="_blank" style="color:rgba(155,92,246,0.85);">🤖 AI Studio</a>
+    <a href="https://rsms.rehoteq.com" target="_blank" style="color:#f0c040;font-weight:700;">🏫 RSMS</a>
+    <a href="https://rehosprint.rehoteq.com" target="_blank" style="color:#00d166;font-weight:700;">⚡ RehoSprint</a>
+    <a href="https://shop.rehoteq.com" target="_blank" style="color:#00c2e0;font-weight:700;">🛒 Shop</a>
+    <a href="/lesson-ai.html" target="_blank" style="color:rgba(155,92,246,0.9);">🤖 AI Studio</a>
     <a href="/voicecoach.html" target="_blank" style="color:rgba(212,168,67,0.9);">🎤 VoiceCoach</a>
     <a href="/phonelab.html" target="_blank" style="color:rgba(0,200,255,0.9);">🔧 PhoneLab</a>
     <a href="#about">About</a>
-    <a href="#rms">Result System</a>
-    <a href="#engineering">Engineering</a>
-    <a href="#rehocheck">RehoCheck</a>
-    <a href="/news.html" target="_blank">Tech News</a>
+    <a href="/news.html" target="_blank">News</a>
     <a href="#pricing">Pricing</a>
-    <a href="#book">Book Service</a>
     <a href="/advertise.html" style="color:var(--gold);font-weight:700;">Advertise</a>
     <a href="https://rsms.rehoteq.com" target="_blank" class="nav-cta">Login to RMS →</a>
   </div>
@@ -1031,16 +1100,25 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:4rem 1.5
 
 <div class="mobile-nav" id="mobile-nav">
   <button class="mobile-close" onclick="toggleMenu()">✕</button>
-  <a href="#services" onclick="toggleMenu()">Services</a>
-  <a href="#tools" onclick="toggleMenu()">Free Tools</a>
-  <a href="#rms" onclick="toggleMenu()">Result System</a>
-  <a href="#engineering" onclick="toggleMenu()">Engineering</a>
-  <a href="#rehocheck" onclick="toggleMenu()">RehoCheck</a>
-  <a href="/news.html" target="_blank" onclick="toggleMenu()">News Portal</a>
+  <a href="#ecosystem" onclick="toggleMenu()" style="color:var(--gold);">🌐 Apps &amp; Ecosystem</a>
+  <a href="https://rsms.rehoteq.com" target="_blank" onclick="toggleMenu()" style="color:#f0c040;">🏫 RSMS School Portal →</a>
+  <a href="https://rehosprint.rehoteq.com" target="_blank" onclick="toggleMenu()" style="color:#00d166;">⚡ RehoSprint Fast CBT →</a>
+  <a href="https://shop.rehoteq.com" target="_blank" onclick="toggleMenu()" style="color:#00c2e0;">🛒 Rehoteq Store &amp; Shop →</a>
+  <a href="/lesson-ai.html" target="_blank" onclick="toggleMenu()">🤖 AI Lesson Studio</a>
+  <a href="/academic-ai.html" target="_blank" onclick="toggleMenu()">🎓 Academic AI Studio</a>
+  <a href="/voicecoach.html" target="_blank" onclick="toggleMenu()">🎤 VoiceCoach AI</a>
+  <a href="/phonelab.html" target="_blank" onclick="toggleMenu()">🔧 PhoneLab Repairs</a>
+  <a href="/solar.html" onclick="toggleMenu()">☀️ Solar PV Calculator</a>
+  <a href="/wiring.html" onclick="toggleMenu()">⚡ Wiring Calculator</a>
+  <a href="/building.html" onclick="toggleMenu()">🏗️ Building Calculator</a>
+  <a href="/rehoteq-jamb-cbt.html" onclick="toggleMenu()">📝 JAMB CBT Suite</a>
+  <a href="/news.html" target="_blank" onclick="toggleMenu()">📰 News Portal</a>
+  <a href="#services" onclick="toggleMenu()">Engineering Services</a>
   <a href="#pricing" onclick="toggleMenu()">Pricing</a>
-  <a href="#contact" onclick="toggleMenu()">Contact</a>
+  <a href="/about.html" onclick="toggleMenu()">About Us</a>
+  <a href="/contact.html" onclick="toggleMenu()">Contact Us</a>
   <a href="/advertise.html" onclick="toggleMenu()" style="color:var(--gold);font-weight:700;">Advertise With Us</a>
-  <a href="https://rsms.rehoteq.com" target="_blank" style="color:var(--gold);">Login to RMS →</a>
+  <a href="https://rsms.rehoteq.com" target="_blank" style="color:var(--gold);">Login to RSMS →</a>
 </div>
 
 <!-- HERO -->
@@ -1101,14 +1179,192 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:4rem 1.5
   </div>
 </div>
 
+<!-- ════════════════════════════════════════════════════════════════
+     REHOTEQ ECOSYSTEM & CONNECTED APPS SECTION
+════════════════════════════════════════════════════════════════ -->
+<section id="ecosystem" class="eco-section">
+  <div class="si">
+    <div class="stag" style="justify-content:center;">Central Hub &amp; Connected Applications</div>
+    <h2 class="stitle" style="text-align:center;">Rehoteq Digital <em>Ecosystem</em></h2>
+    <p class="ssub" style="text-align:center;margin:0 auto 1.5rem;">Direct access to our flagship platforms, subdomains, AI studios, and certified engineering calculators.</p>
+
+    <div class="eco-filter-tabs">
+      <button class="eco-tab active" onclick="filterEco('all', this)">All Platforms &amp; Apps</button>
+      <button class="eco-tab" onclick="filterEco('subdomain', this)">Flagship Subdomains</button>
+      <button class="eco-tab" onclick="filterEco('ai', this)">AI Studios</button>
+      <button class="eco-tab" onclick="filterEco('calc', this)">Engineering Tools</button>
+      <button class="eco-tab" onclick="filterEco('edu', this)">Education &amp; Portals</button>
+    </div>
+
+    <div class="eco-grid">
+
+      <!-- CARD 1: RSMS -->
+      <div class="eco-card eco-card-flagship" data-eco="subdomain">
+        <div>
+          <div class="eco-card-head">
+            <div class="eco-icon">🏫</div>
+            <span class="eco-pill eco-pill-live">● Live Platform</span>
+          </div>
+          <div class="eco-title">Rehoteq School Management System</div>
+          <span class="eco-domain">rsms.rehoteq.com</span>
+          <p class="eco-desc">Complete cloud result management, broadsheets, student report cards, automated CA/Exam grading, and parent portal. Used by schools across Ondo State.</p>
+        </div>
+        <div class="eco-links">
+          <a href="https://rsms.rehoteq.com" target="_blank" class="eco-btn eco-btn-primary">Login to RSMS →</a>
+          <a href="/rsms-onboarding.html" class="eco-btn eco-btn-secondary">Onboard School</a>
+          <a href="/rsms-landing.html" class="eco-btn eco-btn-secondary">Overview</a>
+        </div>
+      </div>
+
+      <!-- CARD 2: RehoSprint -->
+      <div class="eco-card eco-card-flagship" data-eco="subdomain">
+        <div>
+          <div class="eco-card-head">
+            <div class="eco-icon">⚡</div>
+            <span class="eco-pill eco-pill-live">● Live CBT Suite</span>
+          </div>
+          <div class="eco-title">RehoSprint — Fast CBT &amp; Prep</div>
+          <span class="eco-domain">rehosprint.rehoteq.com</span>
+          <p class="eco-desc">High-speed timed CBT simulator, sprint practice drills for JAMB UTME, WAEC, NECO, and Post-UTME candidates with instant scoring and explanations.</p>
+        </div>
+        <div class="eco-links">
+          <a href="https://rehosprint.rehoteq.com" target="_blank" class="eco-btn eco-btn-primary">Launch RehoSprint →</a>
+          <a href="/rehoteq-jamb-cbt.html" class="eco-btn eco-btn-secondary">JAMB Practice</a>
+        </div>
+      </div>
+
+      <!-- CARD 3: Rehoteq Shop -->
+      <div class="eco-card eco-card-flagship" data-eco="subdomain">
+        <div>
+          <div class="eco-card-head">
+            <div class="eco-icon">🛒</div>
+            <span class="eco-pill eco-pill-store">● Online Store</span>
+          </div>
+          <div class="eco-title">Rehoteq Store &amp; Hardware</div>
+          <span class="eco-domain">shop.rehoteq.com</span>
+          <p class="eco-desc">Certified mono-crystalline solar panels, hybrid inverters, LiFePO4 batteries, electrical installation materials, computers, and diagnostic gadgets.</p>
+        </div>
+        <div class="eco-links">
+          <a href="https://shop.rehoteq.com" target="_blank" class="eco-btn eco-btn-primary">Visit Rehoteq Shop →</a>
+          <a href="/solar.html" class="eco-btn eco-btn-secondary">Solar Sizing</a>
+        </div>
+      </div>
+
+      <!-- CARD 4: AI Lesson Studio -->
+      <div class="eco-card" data-eco="ai">
+        <div>
+          <div class="eco-card-head">
+            <div class="eco-icon">🤖</div>
+            <span class="eco-pill eco-pill-app">EdTech AI</span>
+          </div>
+          <div class="eco-title">AI Lesson Studio for Teachers</div>
+          <span class="eco-domain">rehoteq.com/lesson-ai.html</span>
+          <p class="eco-desc">AI-powered lesson plans, schemes of work, lesson notes, and classroom mock exam question generators aligned with WAEC/NECO curriculum.</p>
+        </div>
+        <div class="eco-links">
+          <a href="/lesson-ai.html" class="eco-btn eco-btn-primary">Open Lesson Studio →</a>
+          <a href="/rehoteq-teacher-portal.html" class="eco-btn eco-btn-secondary">Teacher Portal</a>
+        </div>
+      </div>
+
+      <!-- CARD 5: Academic AI Studio -->
+      <div class="eco-card" data-eco="ai">
+        <div>
+          <div class="eco-card-head">
+            <div class="eco-icon">🎓</div>
+            <span class="eco-pill eco-pill-app">University AI</span>
+          </div>
+          <div class="eco-title">Academic AI Project Studio</div>
+          <span class="eco-domain">rehoteq.com/academic-ai.html</span>
+          <p class="eco-desc">Generate verified project topics, Chapter One outlines, research proposals, seminar notes, and test questions for Nigerian universities.</p>
+        </div>
+        <div class="eco-links">
+          <a href="/academic-ai.html" class="eco-btn eco-btn-primary">Open Academic AI →</a>
+          <a href="/research-studio.html" class="eco-btn eco-btn-secondary">Research Lab</a>
+        </div>
+      </div>
+
+      <!-- CARD 6: VoiceCoach NG -->
+      <div class="eco-card" data-eco="ai">
+        <div>
+          <div class="eco-card-head">
+            <div class="eco-icon">🎤</div>
+            <span class="eco-pill eco-pill-gold">Audio AI &amp; PWA</span>
+          </div>
+          <div class="eco-title">VoiceCoach NG Vocal Trainer</div>
+          <span class="eco-domain">rehoteq.com/voicecoach.html</span>
+          <p class="eco-desc">AI vocal coach for singers and public speakers. Vocal range tester, SATB choir part detector, pitch practice, and multilingual songwriting.</p>
+        </div>
+        <div class="eco-links">
+          <a href="/voicecoach.html" class="eco-btn eco-btn-primary">Launch VoiceCoach →</a>
+        </div>
+      </div>
+
+      <!-- CARD 7: PhoneLab -->
+      <div class="eco-card" data-eco="calc">
+        <div>
+          <div class="eco-card-head">
+            <div class="eco-icon">🔧</div>
+            <span class="eco-pill eco-pill-gold">Diagnostics &amp; PWA</span>
+          </div>
+          <div class="eco-title">PhoneLab Mobile Repair Assistant</div>
+          <span class="eco-domain">rehoteq.com/phonelab.html</span>
+          <p class="eco-desc">AI hardware diagnostics, error code decoder, firmware finder, and flash wizard for Tecno, Infinix, Samsung, iPhone, and Xiaomi.</p>
+        </div>
+        <div class="eco-links">
+          <a href="/phonelab.html" class="eco-btn eco-btn-primary">Launch PhoneLab →</a>
+        </div>
+      </div>
+
+      <!-- CARD 8: Engineering Calculators -->
+      <div class="eco-card" data-eco="calc">
+        <div>
+          <div class="eco-card-head">
+            <div class="eco-icon">🧮</div>
+            <span class="eco-pill eco-pill-app">Free Tools</span>
+          </div>
+          <div class="eco-title">Solar &amp; Wiring Calculators</div>
+          <span class="eco-domain">rehoteq.com/solar.html · /wiring.html</span>
+          <p class="eco-desc">Certified calculation tools for solar PV sizing, inverter rating, conduit/surface house wiring materials, and construction cost estimates.</p>
+        </div>
+        <div class="eco-links">
+          <a href="/solar.html" class="eco-btn eco-btn-primary">Solar Calc →</a>
+          <a href="/wiring.html" class="eco-btn eco-btn-secondary">Wiring Calc</a>
+          <a href="/building.html" class="eco-btn eco-btn-secondary">Building Calc</a>
+        </div>
+      </div>
+
+      <!-- CARD 9: Learning Hubs & Security -->
+      <div class="eco-card" data-eco="edu">
+        <div>
+          <div class="eco-card-head">
+            <div class="eco-icon">🛡️</div>
+            <span class="eco-pill eco-pill-live">Resources &amp; News</span>
+          </div>
+          <div class="eco-title">Student Hub, News &amp; RehoCheck</div>
+          <span class="eco-domain">rehoteq.com/hub.html</span>
+          <p class="eco-desc">JAMB CBT simulator, cyber awareness quizzes, Nigerian tech news portal, and RehoCheck cybersecurity protection app on Android.</p>
+        </div>
+        <div class="eco-links">
+          <a href="/rehoteq-student-hub.html" class="eco-btn eco-btn-primary">Student Hub →</a>
+          <a href="/news.html" class="eco-btn eco-btn-secondary">Tech News</a>
+          <a href="https://play.google.com/store/apps/details?id=com.rehoteq.rehocheck" target="_blank" class="eco-btn eco-btn-secondary">RehoCheck App</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
 <!-- AD SPOT TOP -->
 <div style="max-width:1060px;margin:0 auto;padding:0 1.5rem;">
   <div class="ad-banner">
     <ins class="adsbygoogle"
       style="display:block;width:100%;min-height:90px;"
       data-ad-client="ca-pub-3770512274225098"
-      data-ad-slot="auto"
-      data-ad-format="horizontal"
+      data-ad-slot="3562913083"
+      data-ad-format="auto"
       data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
   </div>
@@ -1193,16 +1449,16 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:4rem 1.5
 <section id="tools">
   <div class="si">
     <div class="stag">Free Online Tools</div>
-    <h2 class="stitle">Engineering <em>Calculators</em></h2>
-    <p class="ssub">Instant, accurate cost estimates for solar, wiring and more — built by certified engineers, free to use.</p>
+    <h2 class="stitle">Engineering <em>Calculators &amp; AI</em></h2>
+    <p class="ssub">Instant, accurate cost estimates for solar, wiring, building and AI planning — built by certified engineers, free to use.</p>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:2rem;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:2rem;" class="pricing-wrap">
 
       <!-- Solar Calculator Card -->
       <a href="/solar.html" style="text-decoration:none;display:block;background:linear-gradient(145deg,#0f1220,#141828);border:1px solid rgba(255,149,0,0.2);border-radius:20px;padding:24px;position:relative;overflow:hidden;transition:all 0.3s;" onmouseover="this.style.borderColor='rgba(255,149,0,0.5)';this.style.transform='translateY(-4px)';this.style.boxShadow='0 16px 40px rgba(255,149,0,0.15)'" onmouseout="this.style.borderColor='rgba(255,149,0,0.2)';this.style.transform='translateY(0)';this.style.boxShadow='none'">
         <div style="position:absolute;top:-30px;right:-30px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(255,149,0,0.12),transparent);pointer-events:none;"></div>
         <div style="font-size:2.4rem;margin-bottom:12px;">☀️</div>
-        <div style="font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:900;color:#f0f4ff;margin-bottom:6px;">Solar PV Calculator</div>
+        <div style="font-family:'Fraunces',serif;font-size:1.15rem;font-weight:900;color:#f0f4ff;margin-bottom:6px;">Solar PV Calculator</div>
         <div style="font-size:0.78rem;color:rgba(240,244,255,0.55);line-height:1.6;margin-bottom:16px;">Enter your appliances. Get panel count, battery size, inverter rating and full cost estimate in Naira.</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:16px;">
           <div style="background:rgba(255,149,0,0.08);border-radius:8px;padding:8px 10px;text-align:center;">
@@ -1227,7 +1483,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:4rem 1.5
       <a href="/wiring.html" style="text-decoration:none;display:block;background:linear-gradient(145deg,#0c1020,#111528);border:1px solid rgba(0,180,255,0.18);border-radius:20px;padding:24px;position:relative;overflow:hidden;transition:all 0.3s;" onmouseover="this.style.borderColor='rgba(0,180,255,0.45)';this.style.transform='translateY(-4px)';this.style.boxShadow='0 16px 40px rgba(0,180,255,0.12)'" onmouseout="this.style.borderColor='rgba(0,180,255,0.18)';this.style.transform='translateY(0)';this.style.boxShadow='none'">
         <div style="position:absolute;top:-30px;right:-30px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(0,180,255,0.1),transparent);pointer-events:none;"></div>
         <div style="font-size:2.4rem;margin-bottom:12px;">⚡</div>
-        <div style="font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:900;color:#f0f4ff;margin-bottom:6px;">Wiring Cost Calculator</div>
+        <div style="font-family:'Fraunces',serif;font-size:1.15rem;font-weight:900;color:#f0f4ff;margin-bottom:6px;">Wiring Cost Calculator</div>
         <div style="font-size:0.78rem;color:rgba(240,244,255,0.55);line-height:1.6;margin-bottom:16px;">Conduit, surface, trunking or smart automated wiring — get a full cost breakdown by room in seconds.</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:16px;">
           <div style="background:rgba(0,180,255,0.07);border-radius:8px;padding:8px 10px;text-align:center;">
@@ -1250,84 +1506,95 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:4rem 1.5
 
     </div>
 
-    <!-- AI Lesson Studio card -->
-    <div class="ai-studio-card">
-      <div class="ai-studio-orb"></div>
-      <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
-        <div style="font-size:2.2rem;">🤖</div>
-        <div style="flex:1;min-width:200px;">
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
-            <div style="font-family:'Playfair Display',serif;font-size:1.08rem;font-weight:900;color:#f0f4ff;">AI Lesson Studio</div>
-            <span style="background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.25);border-radius:20px;padding:2px 9px;font-size:0.6rem;font-weight:700;color:#10b981;">NEW</span>
+    <!-- AI Lesson Studio & Academic AI Cards Grid -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;" class="pricing-wrap">
+      
+      <!-- AI Lesson Studio card -->
+      <div style="background:linear-gradient(145deg,#0c0e1e,#111328);border:1px solid rgba(155,92,246,0.22);border-radius:20px;padding:22px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;">
+        <div style="position:absolute;top:-30px;right:-30px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(155,92,246,0.12),transparent);pointer-events:none;"></div>
+        <div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+            <span style="font-size:1.8rem;">🤖</span>
+            <div style="font-family:'Fraunces',serif;font-size:1.05rem;font-weight:900;color:#f0f4ff;">AI Lesson Studio</div>
+            <span style="background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.25);border-radius:20px;padding:2px 8px;font-size:0.6rem;font-weight:700;color:#10b981;">TEACHERS</span>
           </div>
-          <div style="font-size:0.75rem;color:rgba(240,244,255,0.5);line-height:1.55;">Generate lesson plans, lesson notes, test questions and mock exam papers instantly — WAEC/NECO aligned. Built for Nigerian teachers. 2 free units included.</div>
+          <div style="font-size:0.78rem;color:rgba(240,244,255,0.55);line-height:1.6;margin-bottom:14px;">Generate WAEC/NECO aligned lesson plans, comprehensive lesson notes, and mock exam questions in seconds.</div>
         </div>
-        <a href="/lesson-ai.html" class="ai-studio-btn">🤖 Try Free →</a>
+        <a href="/lesson-ai.html" style="display:inline-flex;align-items:center;justify-content:center;gap:6px;background:linear-gradient(135deg,#7c3aed,#a855f7);border-radius:9px;padding:10px 18px;font-size:0.78rem;font-weight:700;color:#fff;text-decoration:none;">🤖 Open Lesson Studio →</a>
       </div>
+
+      <!-- Academic AI Studio card -->
+      <div style="background:linear-gradient(145deg,#0a0d1a,#0f1222);border:1px solid rgba(59,130,246,0.22);border-radius:20px;padding:22px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;">
+        <div style="position:absolute;top:-30px;right:-30px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(59,130,246,0.12),transparent);pointer-events:none;"></div>
+        <div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+            <span style="font-size:1.8rem;">🎓</span>
+            <div style="font-family:'Fraunces',serif;font-size:1.05rem;font-weight:900;color:#f0f4ff;">Academic AI Studio</div>
+            <span style="background:rgba(59,130,246,0.12);border:1px solid rgba(59,130,246,0.25);border-radius:20px;padding:2px 8px;font-size:0.6rem;font-weight:700;color:#3b82f6;">UNIVERSITY</span>
+          </div>
+          <div style="font-size:0.78rem;color:rgba(240,244,255,0.55);line-height:1.6;margin-bottom:14px;">Project topic generator, Chapter One outlines, research proposals and seminar frameworks for tertiary students.</div>
+        </div>
+        <a href="/academic-ai.html" style="display:inline-flex;align-items:center;justify-content:center;gap:6px;background:linear-gradient(135deg,#1d4ed8,#3b82f6);border-radius:9px;padding:10px 18px;font-size:0.78rem;font-weight:700;color:#fff;text-decoration:none;">🎓 Open Academic Studio →</a>
+      </div>
+
     </div>
 
-    <!-- Building calculator card -->
-    <div style="margin-top:16px;background:linear-gradient(145deg,#0f0c18,#130f20);border:1px solid rgba(155,89,245,0.18);border-radius:20px;padding:22px;position:relative;overflow:hidden;transition:all 0.3s;" class="building-card-hover">
-      <div style="position:absolute;top:-30px;right:-30px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(155,89,245,0.1),transparent);pointer-events:none;"></div>
-      <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
-        <div style="font-size:2.2rem;">🏗️</div>
-        <div style="flex:1;min-width:200px;">
-          <div style="font-family:'Playfair Display',serif;font-size:1.08rem;font-weight:900;color:#f0f4ff;margin-bottom:4px;">Building Cost Calculator</div>
-          <div style="font-size:0.75rem;color:rgba(240,244,255,0.5);line-height:1.55;">Economy, mid-range or high-end — get a stage-by-stage construction cost estimate for any building type in Nigeria.</div>
+    <!-- Building, VoiceCoach & PhoneLab Row -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:16px;" class="pricing-wrap">
+      
+      <!-- Building Calculator -->
+      <div style="background:linear-gradient(145deg,#0f0c18,#130f20);border:1px solid rgba(155,89,245,0.2);border-radius:18px;padding:20px;display:flex;flex-direction:column;justify-content:space-between;">
+        <div>
+          <div style="font-size:1.8rem;margin-bottom:8px;">🏗️</div>
+          <div style="font-family:'Fraunces',serif;font-size:0.98rem;font-weight:900;color:#f0f4ff;margin-bottom:4px;">Building Cost Estimator</div>
+          <div style="font-size:0.75rem;color:rgba(240,244,255,0.5);line-height:1.55;margin-bottom:14px;">Stage-by-stage construction cost estimates in Nigeria for bungalows, duplexes and commercial blocks.</div>
         </div>
-        <a href="/building.html" style="display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,rgba(155,89,245,0.15),rgba(155,89,245,0.08));border:1px solid rgba(155,89,245,0.3);border-radius:9px;padding:10px 18px;font-size:0.78rem;font-weight:700;color:#b57df5;text-decoration:none;white-space:nowrap;">🏗️ Open Calculator →</a>
+        <a href="/building.html" style="display:inline-flex;align-items:center;justify-content:center;gap:6px;background:rgba(155,89,245,0.15);border:1px solid rgba(155,89,245,0.3);border-radius:8px;padding:9px 14px;font-size:0.74rem;font-weight:700;color:#b57df5;text-decoration:none;">🏗️ Building Calc →</a>
       </div>
+
+      <!-- VoiceCoach NG -->
+      <div style="background:linear-gradient(145deg,#100c1e,#16112a);border:1px solid rgba(212,168,67,0.2);border-radius:18px;padding:20px;display:flex;flex-direction:column;justify-content:space-between;">
+        <div>
+          <div style="font-size:1.8rem;margin-bottom:8px;">🎤</div>
+          <div style="font-family:'Fraunces',serif;font-size:0.98rem;font-weight:900;color:#f0f4ff;margin-bottom:4px;">VoiceCoach NG</div>
+          <div style="font-size:0.75rem;color:rgba(240,244,255,0.5);line-height:1.55;margin-bottom:14px;">AI vocal trainer, pitch detection (SATB choir parts), speech training &amp; multilingual song composer.</div>
+        </div>
+        <a href="/voicecoach.html" style="display:inline-flex;align-items:center;justify-content:center;gap:6px;background:rgba(212,168,67,0.15);border:1px solid rgba(212,168,67,0.3);border-radius:8px;padding:9px 14px;font-size:0.74rem;font-weight:700;color:var(--gold);text-decoration:none;">🎤 VoiceCoach App →</a>
+      </div>
+
+      <!-- PhoneLab Diagnostics -->
+      <div style="background:linear-gradient(145deg,#06101c,#0a1728);border:1px solid rgba(0,200,255,0.2);border-radius:18px;padding:20px;display:flex;flex-direction:column;justify-content:space-between;">
+        <div>
+          <div style="font-size:1.8rem;margin-bottom:8px;">🔧</div>
+          <div style="font-family:'Fraunces',serif;font-size:0.98rem;font-weight:900;color:#f0f4ff;margin-bottom:4px;">PhoneLab Diagnostics</div>
+          <div style="font-size:0.75rem;color:rgba(240,244,255,0.5);line-height:1.55;margin-bottom:14px;">Error decoder, firmware finder, and flash wizard for Samsung, Tecno, Infinix, iPhone &amp; Xiaomi.</div>
+        </div>
+        <a href="/phonelab.html" style="display:inline-flex;align-items:center;justify-content:center;gap:6px;background:rgba(0,200,255,0.12);border:1px solid rgba(0,200,255,0.3);border-radius:8px;padding:9px 14px;font-size:0.74rem;font-weight:700;color:#00c8ff;text-decoration:none;">🔧 PhoneLab Tool →</a>
+      </div>
+
     </div>
 
     <!-- Article teasers -->
-    <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+    <div style="margin-top:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;">
       <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:15px;">
         <div style="font-size:0.62rem;font-weight:700;color:rgba(0,180,216,0.7);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:5px;">Expert Guide</div>
-        <div style="font-family:'Playfair Display',serif;font-size:0.88rem;font-weight:700;color:#f0f4ff;margin-bottom:5px;">IoT Automated Electrical Systems in Nigeria</div>
+        <div style="font-family:'Fraunces',serif;font-size:0.86rem;font-weight:700;color:#f0f4ff;margin-bottom:5px;">IoT Automated Electrical Systems</div>
         <a href="/iot-electrical-systems.html" style="font-size:0.72rem;color:#c9a84c;font-weight:700;text-decoration:none;">📖 Read Article →</a>
       </div>
       <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:15px;">
         <div style="font-size:0.62rem;font-weight:700;color:rgba(255,59,59,0.7);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:5px;">Safety Guide</div>
-        <div style="font-family:'Playfair Display',serif;font-size:0.88rem;font-weight:700;color:#f0f4ff;margin-bottom:5px;">10 Electrical Dangers in Nigerian Homes</div>
+        <div style="font-family:'Fraunces',serif;font-size:0.86rem;font-weight:700;color:#f0f4ff;margin-bottom:5px;">10 Electrical Dangers in Homes</div>
         <a href="/electrical-safety-nigeria.html" style="font-size:0.72rem;color:#c9a84c;font-weight:700;text-decoration:none;">📖 Read Article →</a>
       </div>
       <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:15px;">
         <div style="font-size:0.62rem;font-weight:700;color:rgba(0,200,83,0.7);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:5px;">Solar Guide</div>
-        <div style="font-family:'Playfair Display',serif;font-size:0.88rem;font-weight:700;color:#f0f4ff;margin-bottom:5px;">Lithium vs Tubular vs Gel — Best Solar Battery in Nigeria</div>
+        <div style="font-family:'Fraunces',serif;font-size:0.86rem;font-weight:700;color:#f0f4ff;margin-bottom:5px;">Lithium vs Tubular Solar Batteries</div>
         <a href="/solar-battery-guide.html" style="font-size:0.72rem;color:#c9a84c;font-weight:700;text-decoration:none;">📖 Read Article →</a>
       </div>
       <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:15px;">
-        <div style="font-size:0.62rem;font-weight:700;color:rgba(155,89,245,0.7);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:5px;">Cost Guide</div>
-        <div style="font-family:'Playfair Display',serif;font-size:0.88rem;font-weight:700;color:#f0f4ff;margin-bottom:5px;">How Much Does It Cost to Build a House in Nigeria?</div>
-        <a href="/building.html" style="font-size:0.72rem;color:#c9a84c;font-weight:700;text-decoration:none;">📖 Read & Calculate →</a>
-      </div>
-    </div>
-
-    <!-- Academic AI card -->
-    <div style="margin-top:12px;background:linear-gradient(145deg,#0a0d1a,#0f1222);border:1px solid rgba(59,130,246,0.2);border-radius:20px;padding:22px;position:relative;overflow:hidden;transition:all 0.3s;" class="academic-ai-card">
-      <div style="position:absolute;top:-30px;right:-30px;width:130px;height:130px;border-radius:50%;background:radial-gradient(circle,rgba(59,130,246,0.1),transparent);pointer-events:none;"></div>
-      <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
-        <div style="font-size:2.2rem;">🎓</div>
-        <div style="flex:1;min-width:200px;">
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
-            <div style="font-family:'Playfair Display',serif;font-size:1.08rem;font-weight:900;color:#f0f4ff;">Academic AI Studio</div>
-            <span style="background:rgba(59,130,246,0.12);border:1px solid rgba(59,130,246,0.25);border-radius:20px;padding:2px 9px;font-size:0.6rem;font-weight:700;color:#3b82f6;">UNIVERSITY</span>
-          </div>
-          <div style="font-size:0.75rem;color:rgba(240,244,255,0.5);line-height:1.55;">Project topics, Chapter One, research proposals, lecture notes and exam questions for Nigerian university students and lecturers.</div>
-        </div>
-        <a href="/voicecoach.html" style="display:block;background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.2);border-radius:20px;padding:24px;text-decoration:none;transition:all 0.3s;margin-bottom:16px;">
-            <div style="font-size:1.8rem;margin-bottom:10px;">🎤</div>
-            <div style="font-size:0.9rem;font-weight:800;color:#f0f4ff;margin-bottom:6px;">VoiceCoach NG</div>
-            <span style="background:rgba(212,168,67,0.12);border:1px solid rgba(212,168,67,0.25);border-radius:20px;padding:2px 10px;font-size:0.65rem;font-weight:700;color:#d4a843;text-transform:uppercase;letter-spacing:0.1em;">NEW PWA</span>
-            <div style="font-size:0.8rem;color:rgba(240,244,255,0.55);margin-top:10px;line-height:1.65;">Discover your voice type, train pitch accuracy, detect choir parts (SATB), compose songs in Yoruba, Igbo, Hausa and Pidgin. Free — install on any phone.</div>
-          </a>
-<a href="/phonelab.html" target="_blank" style="display:inline-flex;align-items:flex-start;flex-direction:column;background:rgba(0,200,255,0.04);border:1px solid rgba(0,200,255,0.15);border-radius:16px;padding:20px;text-decoration:none;transition:all 0.2s;width:100%;">
-            <div style="font-size:1.4rem;margin-bottom:8px;">🔧</div>
-            <div style="font-family:serif;font-size:1.05rem;font-weight:700;color:#e8f4ff;margin-bottom:6px;">PhoneLab</div>
-            <span style="background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.25);border-radius:20px;padding:2px 10px;font-size:0.65rem;font-weight:700;color:#00c8ff;text-transform:uppercase;letter-spacing:0.1em;">NEW PWA</span>
-            <div style="font-size:0.8rem;color:rgba(240,244,255,0.55);margin-top:10px;line-height:1.65;">AI-powered phone repair assistant. Error decoder, firmware finder, flash wizard for Samsung, Tecno, Infinix, Itel, Xiaomi and iPhone. Free for all technicians.</div>
-          </a>
-<a href="/academic-ai.html" style="display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#1d4ed8,#3b82f6);border-radius:9px;padding:10px 18px;font-size:0.78rem;font-weight:700;color:#fff;text-decoration:none;white-space:nowrap;">🎓 Try Free →</a>
+        <div style="font-size:0.62rem;font-weight:700;color:rgba(155,89,245,0.7);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:5px;">CBT Suite</div>
+        <div style="font-family:'Fraunces',serif;font-size:0.86rem;font-weight:700;color:#f0f4ff;margin-bottom:5px;">JAMB CBT Exam Practice Simulator</div>
+        <a href="/rehoteq-jamb-cbt.html" style="font-size:0.72rem;color:#c9a84c;font-weight:700;text-decoration:none;">🎯 Start Practice →</a>
       </div>
     </div>
 
@@ -1433,8 +1700,8 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:4rem 1.5
     <ins class="adsbygoogle"
       style="display:block;width:100%;min-height:250px;"
       data-ad-client="ca-pub-3770512274225098"
-      data-ad-slot="auto"
-      data-ad-format="rectangle"
+      data-ad-slot="6707951176"
+      data-ad-format="auto"
       data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
   </div>
@@ -1782,7 +2049,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:4rem 1.5
       <ins class="adsbygoogle"
         style="display:block;width:100%;min-height:90px;"
         data-ad-client="ca-pub-3770512274225098"
-        data-ad-slot="auto"
+        data-ad-slot="3562913083"
         data-ad-format="horizontal"
         data-full-width-responsive="true"></ins>
       <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
@@ -1813,7 +2080,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:4rem 1.5
       <a href="https://wa.me/2347036302585" target="_blank" class="wa">💬 07036302585</a>
       <a href="https://wa.me/2348166519177" target="_blank" class="wa">💬 08166519177</a>
     </div>
-    <div style="font-size:0.8rem;color:var(--muted);margin-bottom:2rem;">📧 <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bac8dfd2d5cedfcbfaddd7dbd3d694d9d5d7">[email&#160;protected]</a></div>
+    <div style="font-size:0.8rem;color:var(--muted);margin-bottom:2rem;">📧 <a href="mailto:rehoteq@gmail.com">rehoteq@gmail.com</a></div>
     <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
       <a href="https://rsms.rehoteq.com" target="_blank" class="btn-g">Access School RMS →</a>
       <a href="https://rehoteq1-coder.github.io/RehoCheck/" target="_blank" class="btn-o">Try RehoCheck Free</a>
@@ -1902,38 +2169,55 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:4rem 1.5
   <div class="fg">
     <div>
       <div class="fb-name">Rehoteq <span>Technologies</span></div>
-      <div class="fb-tag">Smarter Solutions for a Better Tomorrow. Complete technology services for homes, schools and businesses across Nigeria.</div>
-      <div class="fb-dom">rehoteq.com</div>
+      <div class="fb-tag">Smarter Solutions for a Better Tomorrow. Complete software engineering, solar energy, electrical installations, and AI tools across Nigeria and beyond.</div>
+      <div class="fb-dom">rehoteq.com · Okitipupa, Ondo State, Nigeria</div>
+      <div style="margin-top:12px;font-size:0.75rem;color:var(--muted);line-height:1.7;">
+        📞 <a href="tel:+2347036302585" style="color:var(--gold);">+234 703 630 2585</a> · <a href="tel:+2348166519177" style="color:var(--gold);">+234 816 651 9177</a><br/>
+        ✉️ <a href="mailto:rehoteq@gmail.com" style="color:var(--gold);">rehoteq@gmail.com</a>
+      </div>
     </div>
     <div class="fc">
-      <h4>Software</h4>
-      <a href="#rms">School Result System</a>
-      <a href="#rehocheck">RehoCheck App</a>
-      <a href="https://rsms.rehoteq.com" target="_blank">Login to RMS</a>
+      <h4>Flagship Subdomains</h4>
+      <a href="https://rsms.rehoteq.com" target="_blank">🏫 RSMS — School Result System</a>
+      <a href="https://rehosprint.rehoteq.com" target="_blank">⚡ RehoSprint — Fast CBT Suite</a>
+      <a href="https://shop.rehoteq.com" target="_blank">🛒 Rehoteq Shop — Solar &amp; Tech</a>
+      <a href="/rsms-onboarding.html">🎓 RSMS School Onboarding</a>
+      <a href="/rsms-landing.html">📑 RSMS Platform Presentation</a>
       <a href="https://play.google.com/store/apps/details?id=com.rehoteq.rehocheck" target="_blank" style="display:flex;align-items:center;gap:5px;">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76a2.26 2.26 0 01-.86-.74 2.1 2.1 0 01-.32-1.18V2.16C2 1.62 2.2 1.14 2.58.76l.1-.08 11.62 11.62-.1.08L3.18 23.76zm15.09-8.47l-2.9-1.66-3.24 3.24 3.24 3.24 2.92-1.67a2.08 2.08 0 000-3.15zM2.1.26L13.84 12 2.1 23.74A2.1 2.1 0 012 23V1a2.1 2.1 0 01.1-.74zM14.7 12.86l-11.6 6.64 9.64-9.64 1.96 2.28v.72z"/></svg>
-        RehoCheck on Play Store ✅</a>
+        RehoCheck on Google Play ✅
+      </a>
     </div>
     <div class="fc">
-      <h4>Engineering</h4>
-      <a href="#engineering">Electrical Installation</a>
-      <a href="#engineering">Solar PV Systems</a>
-      <a href="#engineering">Computer Hardware</a>
-      <a href="#engineering">IT Support</a>
+      <h4>AI &amp; Engineering Tools</h4>
+      <a href="/lesson-ai.html">🤖 AI Lesson Studio for Teachers</a>
+      <a href="/academic-ai.html">🎓 Academic AI Project Studio</a>
+      <a href="/voicecoach.html">🎤 VoiceCoach Vocal Trainer</a>
+      <a href="/phonelab.html">🔧 PhoneLab Phone Repair Lab</a>
+      <a href="/solar.html">☀️ Solar PV Cost Calculator</a>
+      <a href="/wiring.html">⚡ Electrical Wiring Estimator</a>
+      <a href="/building.html">🏗️ House Construction Calculator</a>
+      <a href="/rehoteq-services.html">🛠️ Engineering Services</a>
     </div>
     <div class="fc">
-      <h4>Contact</h4>
-      <a href="https://wa.me/2347036302585" target="_blank">07036302585</a>
-      <a href="https://wa.me/2348166519177" target="_blank">08166519177</a>
-      <a href="/cdn-cgi/l/email-protection#dcaeb9b4b3a8b9ad9cbbb1bdb5b0f2bfb3b1"><span class="__cf_email__" data-cfemail="d3a1b6bbbca7b6a293b4beb2babffdb0bcbe">[email&#160;protected]</span></a>
-      <a href="/news.html" target="_blank">News Portal</a>
+      <h4>Portals &amp; Legal</h4>
+      <a href="/rehoteq-jamb-cbt.html">📝 Pre-JAMB CBT Practice</a>
+      <a href="/rehoteq-student-hub.html">🎓 Student Cyber &amp; Study Hub</a>
+      <a href="/rehoteq-teacher-portal.html">👨‍🏫 Teacher Resource Portal</a>
+      <a href="/news.html">📰 Nigeria Tech News</a>
+      <a href="/advertise.html">📢 Advertise With Us</a>
+      <a href="/about.html">🏛️ About Rehoteq</a>
+      <a href="/contact.html">📞 Contact Support</a>
+      <a href="/privacy.html">🔒 Privacy Policy</a>
+      <a href="/terms.html">⚖️ Terms of Use</a>
     </div>
   </div>
   <div class="fb-bottom">
-    <div class="fb-copy">© 2025 Rehoteq Technologies. All rights reserved. &nbsp;|&nbsp; <a href="/about.html" style="color:var(--gold);text-decoration:none;">About Us</a> &nbsp;|&nbsp; <a href="/contact.html" style="color:var(--gold);text-decoration:none;">Contact</a> &nbsp;|&nbsp; <a href="/privacy.html" style="color:var(--gold);text-decoration:none;">Privacy Policy</a> &nbsp;|&nbsp; <a href="/terms.html" style="color:var(--gold);text-decoration:none;">Terms</a> &nbsp;|&nbsp; <a href="/news.html" target="_blank" style="color:var(--gold);text-decoration:none;">News Portal</a></div>
-    <div class="fb-flag">Built in Nigeria 🇳🇬</div>
+    <div class="fb-copy">© 2026 Rehoteq Technologies. All rights reserved. &nbsp;|&nbsp; <a href="/about.html" style="color:var(--gold);">About Us</a> &nbsp;|&nbsp; <a href="/contact.html" style="color:var(--gold);">Contact</a> &nbsp;|&nbsp; <a href="/privacy.html" style="color:var(--gold);">Privacy Policy</a> &nbsp;|&nbsp; <a href="/terms.html" style="color:var(--gold);">Terms of Use</a> &nbsp;|&nbsp; <a href="/advertise.html" style="color:var(--gold);">Advertise</a> &nbsp;|&nbsp; <a href="/news.html" style="color:var(--gold);">News Portal</a></div>
+    <div class="fb-flag">Built with Pride in Nigeria 🇳🇬</div>
   </div>
 </footer>
+
 
 <!-- AI CHATBOT -->
 <div class="chat-fab" id="chat-fab" onclick="toggleChat()">
@@ -2013,6 +2297,42 @@ window.addEventListener('load',function(){
   },800);
 });
 
+
+// ECOSYSTEM FILTER
+function filterEco(cat, btn) {
+  var tabs = document.querySelectorAll('.eco-tab');
+  for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove('active');
+  if (btn) btn.classList.add('active');
+  var cards = document.querySelectorAll('.eco-card');
+  for (var i = 0; i < cards.length; i++) {
+    var c = cards[i];
+    if (cat === 'all' || c.getAttribute('data-eco') === cat) {
+      c.style.display = 'flex';
+    } else {
+      c.style.display = 'none';
+    }
+  }
+}
+
+// COOKIE CONSENT
+function acceptCookies() {
+  localStorage.setItem('rehoteq_cookie_consent', 'accepted');
+  var b = document.getElementById('cookie-banner');
+  if (b) b.classList.remove('show');
+}
+function closeCookieBanner() {
+  var b = document.getElementById('cookie-banner');
+  if (b) b.classList.remove('show');
+}
+window.addEventListener('load', function() {
+  if (!localStorage.getItem('rehoteq_cookie_consent')) {
+    setTimeout(function() {
+      var b = document.getElementById('cookie-banner');
+      if (b) b.classList.add('show');
+    }, 1500);
+  }
+});
+
 // SERVICE FORM
 function submitForm(){
   var name=document.getElementById('f-name').value.trim();
@@ -2035,7 +2355,7 @@ function submitForm(){
 var chatOpen=false;
 
 var REPLIES=[
-  {k:['rms','result','school','management','score'],r:'Hi! Our School Result Management System works on any phone!\n\nFeatures:\n- Auto-calculation and GPA\n- Cumulative 3-term scoring\n- Student result links\n- Broadsheet download\n\nVisit: rehoteq1-coder.github.io/rms\nWhatsApp: 07036302585'},
+  {k:['rms','result','school','management','score'],r:'Hi! Our School Result Management System works on any phone!\n\nFeatures:\n- Auto-calculation and GPA\n- Cumulative 3-term scoring\n- Student result links\n- Broadsheet download\n\nVisit: rsms.rehoteq.com\nWhatsApp: 07036302585'},
   {k:['price','pricing','cost','how much','fee','plan','basic','standard','premium','white'],r:'RMS Pricing per term:\n\nBasic: N5,000 (100 students)\nStandard: N10,000 (150 students)\nPremium: N15,000 (200+ students)\nWhite Label: N20,000\n\nSetup fee: N10,000 (once only)\nWhatsApp: 07036302585'},
   {k:['rehocheck','cyber','scam','phishing','fake','virus','security','link'],r:'RehoCheck is our FREE security app!\n\n- Scan any website or link\n- Detect fake news with AI\n- Google Safe Browsing\n- 70+ virus scan engines\n- Web and Android\n\nSearch RehoCheck on Play Store!\nWhatsApp: 07036302585'},
   {k:['solar','panel','inverter','battery','energy','pv','renewable'],r:'We install complete Solar PV systems!\n\n- Solar panel installation\n- Inverter and battery systems\n- Off-grid and hybrid systems\n- Maintenance and repairs\n\nServing Okitipupa area.\nWhatsApp: 07036302585'},
@@ -2152,6 +2472,18 @@ window.addEventListener('DOMContentLoaded',function(){
     <div class="side-icon">💬</div>
     <div class="side-label">WhatsApp</div>
   </a>
+</div>
+
+
+<!-- COOKIE & AD CONSENT BANNER -->
+<div class="cookie-banner" id="cookie-banner">
+  <div class="cookie-text">
+    🍪 <strong>Cookie &amp; Advertising Notice:</strong> We use cookies and Google AdSense to personalize content, ads, and analyze traffic across rehoteq.com and our connected tools. By using our site, you agree to our <a href="/privacy.html" target="_blank">Privacy Policy</a> and <a href="/terms.html" target="_blank">Terms</a>.
+  </div>
+  <div class="cookie-btns">
+    <button class="cookie-btn-acc" onclick="acceptCookies()">Accept All</button>
+    <button class="cookie-btn-dec" onclick="closeCookieBanner()">Close</button>
+  </div>
 </div>
 
 </body>
