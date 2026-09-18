@@ -4,100 +4,62 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3770512274225098" crossorigin="anonymous"></script>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Rehoteq RMS Flier</title>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,900&family=Syne:wght@400;700;800&family=DM+Sans:wght@400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<title>Rehoteq Official Marketing Fliers &amp; Posters</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,900&family=Syne:wght@400;700;800&family=DM+Sans:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-body{background:#222;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:2rem;gap:2rem;font-family:'DM Sans',sans-serif;}
+body{background:#0a0d18;color:#eef2ff;display:flex;flex-direction:column;align-items:center;min-height:100vh;padding:2rem 1rem;gap:1.5rem;font-family:'DM Sans',sans-serif;}
 
-/* PRINT BUTTON */
-.print-btn{background:linear-gradient(135deg,#7a5c1a,#c9a84c);color:#000;font-family:'Syne',sans-serif;font-weight:700;font-size:0.85rem;padding:10px 24px;border-radius:8px;border:none;cursor:pointer;margin-bottom:1rem;}
-.print-note{color:#888;font-size:0.72rem;text-align:center;margin-top:-0.5rem;}
+.top-controls{
+  display:flex;flex-direction:column;align-items:center;gap:12px;max-width:900px;width:100%;
+}
+.flyer-tabs{
+  display:flex;gap:8px;flex-wrap:wrap;justify-content:center;
+}
+.f-tab{
+  background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:#eef2ff;
+  padding:8px 18px;border-radius:20px;font-size:0.8rem;font-weight:700;cursor:pointer;transition:all 0.2s;
+}
+.f-tab:hover{background:rgba(201,168,76,0.1);border-color:#c9a84c;}
+.f-tab.active{background:linear-gradient(135deg,#7a5c1a,#c9a84c,#f0c040);color:#000;border-color:transparent;}
+
+.print-btn{background:linear-gradient(135deg,#7a5c1a,#c9a84c,#f0c040);color:#000;font-family:'Syne',sans-serif;font-weight:700;font-size:0.85rem;padding:10px 24px;border-radius:8px;border:none;cursor:pointer;}
+.print-note{color:#888;font-size:0.75rem;text-align:center;}
 
 /* FLIER CONTAINER */
 .flier-wrap{
   width:100%;max-width:900px;
   box-shadow:0 30px 80px rgba(0,0,0,0.7);
+  display:none;
 }
+.flier-wrap.active{display:block;}
 
-/* ============================================================
-   FLIER 1 — RMS LANDSCAPE
-   ============================================================ */
 .flier{
   width:100%;aspect-ratio:16/9;
   background:linear-gradient(145deg,#050810,#0a0f1e,#0f1628);
   position:relative;overflow:hidden;
   display:flex;flex-direction:column;
-  border-radius:12px;
+  border-radius:14px;border:1px solid rgba(201,168,76,0.3);
 }
 
 /* Background elements */
 .fl-grid{
   position:absolute;inset:0;
-  background-image:
-    linear-gradient(rgba(201,168,76,0.06) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(201,168,76,0.06) 1px,transparent 1px);
+  background-image:linear-gradient(rgba(201,168,76,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,0.06) 1px,transparent 1px);
   background-size:50px 50px;
 }
-.fl-orb1{
-  position:absolute;width:500px;height:500px;border-radius:50%;
-  background:radial-gradient(circle,rgba(201,168,76,0.12),transparent 60%);
-  top:-200px;right:-100px;
-}
-.fl-orb2{
-  position:absolute;width:300px;height:300px;border-radius:50%;
-  background:radial-gradient(circle,rgba(0,194,224,0.06),transparent 60%);
-  bottom:-100px;left:200px;
-}
-.fl-orb3{
-  position:absolute;width:200px;height:200px;border-radius:50%;
-  background:radial-gradient(circle,rgba(0,209,102,0.05),transparent 60%);
-  bottom:50px;left:-50px;
-}
+.fl-orb1{position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,0.12),transparent 60%);top:-200px;right:-100px;}
+.fl-orb2{position:absolute;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(0,194,224,0.08),transparent 60%);bottom:-100px;left:200px;}
 
 /* Top accent bar */
-.fl-top-bar{
-  position:absolute;top:0;left:0;right:0;height:4px;
-  background:linear-gradient(90deg,transparent,#c9a84c,#f0c040,#f0c040,#c9a84c,transparent);
-}
-.fl-bottom-bar{
-  position:absolute;bottom:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,transparent,#c9a84c,transparent);
-  opacity:0.4;
-}
-
-/* Corner decorations */
-.fl-corner-tl{
-  position:absolute;top:12px;left:12px;
-  width:30px;height:30px;
-  border-top:2px solid rgba(201,168,76,0.5);
-  border-left:2px solid rgba(201,168,76,0.5);
-}
-.fl-corner-tr{
-  position:absolute;top:12px;right:12px;
-  width:30px;height:30px;
-  border-top:2px solid rgba(201,168,76,0.5);
-  border-right:2px solid rgba(201,168,76,0.5);
-}
-.fl-corner-bl{
-  position:absolute;bottom:12px;left:12px;
-  width:30px;height:30px;
-  border-bottom:2px solid rgba(201,168,76,0.3);
-  border-left:2px solid rgba(201,168,76,0.3);
-}
-.fl-corner-br{
-  position:absolute;bottom:12px;right:12px;
-  width:30px;height:30px;
-  border-bottom:2px solid rgba(201,168,76,0.3);
-  border-right:2px solid rgba(201,168,76,0.3);
-}
+.fl-top-bar{position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,transparent,#c9a84c,#f0c040,#f0c040,#c9a84c,transparent);}
+.fl-bottom-bar{position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#c9a84c,transparent);opacity:0.4;}
 
 /* Main content layout */
 .fl-body{
   position:relative;z-index:1;
   flex:1;display:grid;
   grid-template-columns:1.2fr 1fr;
-  gap:0;
 }
 
 /* LEFT PANEL */
@@ -105,9 +67,9 @@ body{background:#222;display:flex;flex-direction:column;align-items:center;justi
   padding:2rem 1.5rem 2rem 2.5rem;
   display:flex;flex-direction:column;
   justify-content:space-between;
-  border-right:1px solid rgba(201,168,76,0.1);
+  border-right:1px solid rgba(201,168,76,0.12);
 }
-.fl-logo-row{display:flex;align-items:center;gap:10px;margin-bottom:1rem;}
+.fl-logo-row{display:flex;align-items:center;gap:10px;margin-bottom:0.8rem;}
 .fl-logo-mark{
   width:38px;height:38px;border-radius:10px;
   background:linear-gradient(135deg,#7a5c1a,#c9a84c,#f0c040);
@@ -116,59 +78,54 @@ body{background:#222;display:flex;flex-direction:column;align-items:center;justi
   box-shadow:0 0 20px rgba(201,168,76,0.4);
   flex-shrink:0;
 }
-.fl-logo-text{
-  font-family:'Syne',sans-serif;font-size:0.78rem;font-weight:700;color:#eef2ff;
-}
+.fl-logo-text{font-family:'Syne',sans-serif;font-size:0.82rem;font-weight:700;color:#eef2ff;}
 .fl-logo-text em{color:#c9a84c;font-style:normal;}
 .fl-logo-sub{font-size:0.55rem;color:rgba(238,242,255,0.4);text-transform:uppercase;letter-spacing:0.1em;}
 
 .fl-tag{
-  font-family:'DM Mono',monospace;font-size:0.58rem;color:#c9a84c;
+  font-family:'DM Mono',monospace;font-size:0.6rem;color:#c9a84c;
   text-transform:uppercase;letter-spacing:0.15em;
-  display:flex;align-items:center;gap:8px;margin-bottom:0.6rem;
+  display:flex;align-items:center;gap:8px;margin-bottom:0.5rem;
 }
 .fl-tag::before{content:'';width:20px;height:1px;background:#c9a84c;}
 
 .fl-headline{
   font-family:'Fraunces',serif;
-  font-size:clamp(1.4rem,4vw,2.2rem);
+  font-size:clamp(1.4rem,3.5vw,2.1rem);
   font-weight:900;line-height:1.05;
   color:#eef2ff;margin-bottom:0.8rem;
 }
-.fl-headline .gold{
-  color:#f0c040;
-  text-shadow:0 0 30px rgba(240,192,64,0.4);
-}
+.fl-headline .gold{color:#f0c040;text-shadow:0 0 30px rgba(240,192,64,0.4);}
 .fl-headline .block{display:block;}
 
 .fl-sub{
-  font-size:0.72rem;color:rgba(238,242,255,0.55);
-  line-height:1.7;margin-bottom:1.2rem;max-width:280px;
+  font-size:0.75rem;color:rgba(238,242,255,0.65);
+  line-height:1.6;margin-bottom:1rem;max-width:320px;
 }
 
-.fl-features{display:flex;flex-direction:column;gap:7px;margin-bottom:1.2rem;}
+.fl-features{display:flex;flex-direction:column;gap:6px;margin-bottom:1rem;}
 .fl-feat{
   display:flex;align-items:center;gap:8px;
-  font-size:0.7rem;color:rgba(238,242,255,0.8);
+  font-size:0.72rem;color:rgba(238,242,255,0.85);
 }
 .fl-feat-icon{
   width:18px;height:18px;border-radius:4px;flex-shrink:0;
   background:rgba(0,209,102,0.15);border:1px solid rgba(0,209,102,0.3);
   display:flex;align-items:center;justify-content:center;
-  font-size:0.55rem;color:#00d166;font-weight:800;
+  font-size:0.6rem;color:#00d166;font-weight:800;
 }
 
 .fl-cta-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
 .fl-cta{
   background:linear-gradient(135deg,#7a5c1a,#c9a84c,#f0c040);
   color:#000;font-family:'Syne',sans-serif;font-weight:700;
-  font-size:0.7rem;padding:9px 18px;border-radius:8px;
+  font-size:0.72rem;padding:9px 18px;border-radius:8px;
   box-shadow:0 4px 20px rgba(201,168,76,0.3);
   white-space:nowrap;
 }
 .fl-url{
-  font-family:'DM Mono',monospace;font-size:0.6rem;
-  color:rgba(201,168,76,0.6);
+  font-family:'DM Mono',monospace;font-size:0.65rem;
+  color:rgba(201,168,76,0.8);
 }
 
 /* RIGHT PANEL */
@@ -181,7 +138,7 @@ body{background:#222;display:flex;flex-direction:column;align-items:center;justi
 .fl-badge{
   align-self:flex-start;
   background:rgba(0,209,102,0.1);border:1px solid rgba(0,209,102,0.25);
-  border-radius:20px;padding:5px 14px;
+  border-radius:20px;padding:4px 12px;
   font-family:'DM Mono',monospace;font-size:0.58rem;
   color:#00d166;font-weight:700;text-transform:uppercase;
   letter-spacing:0.06em;display:flex;align-items:center;gap:6px;
@@ -192,213 +149,477 @@ body{background:#222;display:flex;flex-direction:column;align-items:center;justi
 }
 
 /* Price cards */
-.fl-prices{display:flex;flex-direction:column;gap:8px;}
+.fl-prices{display:flex;flex-direction:column;gap:7px;}
 .fl-price-title{
   font-family:'Syne',sans-serif;font-size:0.65rem;font-weight:700;
   color:rgba(238,242,255,0.5);text-transform:uppercase;letter-spacing:0.1em;
-  margin-bottom:4px;
+  margin-bottom:2px;
 }
 .fl-price-card{
   background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);
-  border-radius:8px;padding:8px 12px;
+  border-radius:8px;padding:7px 12px;
   display:flex;justify-content:space-between;align-items:center;
 }
 .fl-price-card.hot{
-  background:rgba(201,168,76,0.06);
-  border-color:rgba(201,168,76,0.2);
+  background:rgba(201,168,76,0.08);
+  border-color:rgba(201,168,76,0.3);
 }
-.fl-price-plan{font-family:'Syne',sans-serif;font-size:0.65rem;font-weight:700;color:#eef2ff;}
-.fl-price-stu{font-size:0.58rem;color:rgba(238,242,255,0.4);}
+.fl-price-plan{font-family:'Syne',sans-serif;font-size:0.68rem;font-weight:700;color:#eef2ff;}
+.fl-price-stu{font-size:0.58rem;color:rgba(238,242,255,0.45);}
 .fl-price-amount{font-family:'Fraunces',serif;font-size:0.95rem;font-weight:900;}
-.fl-price-card.hot .fl-price-amount{color:#c9a84c;}
-.fl-price-card:not(.hot) .fl-price-amount{color:rgba(238,242,255,0.7);}
-.fl-price-period{font-size:0.5rem;color:rgba(238,242,255,0.35);}
+.fl-price-card.hot .fl-price-amount{color:#f0c040;}
+.fl-price-card:not(.hot) .fl-price-amount{color:rgba(238,242,255,0.8);}
+.fl-price-period{font-size:0.52rem;color:rgba(238,242,255,0.4);}
 .fl-hot-badge{
   font-size:0.5rem;font-weight:800;color:#000;
-  background:#c9a84c;border-radius:4px;padding:2px 6px;
+  background:#f0c040;border-radius:4px;padding:2px 6px;
   text-transform:uppercase;letter-spacing:0.06em;
 }
 
 /* Contact row */
 .fl-contact{
-  background:rgba(201,168,76,0.05);border:1px solid rgba(201,168,76,0.15);
+  background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.2);
   border-radius:8px;padding:10px 12px;
 }
 .fl-contact-title{
-  font-family:'DM Mono',monospace;font-size:0.55rem;color:#c9a84c;
+  font-family:'DM Mono',monospace;font-size:0.58rem;color:#c9a84c;
   text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;
 }
 .fl-contact-items{display:flex;flex-direction:column;gap:4px;}
 .fl-contact-item{
-  font-size:0.65rem;color:rgba(238,242,255,0.7);
+  font-size:0.68rem;color:rgba(238,242,255,0.8);
   display:flex;align-items:center;gap:6px;
 }
 .fl-contact-dot{
-  width:4px;height:4px;border-radius:50%;background:#c9a84c;flex-shrink:0;
-}
-
-/* Testimonial */
-.fl-testi{
-  font-family:'Fraunces',serif;font-size:0.68rem;font-style:italic;
-  color:rgba(238,242,255,0.45);line-height:1.6;
-  border-left:2px solid rgba(201,168,76,0.3);padding-left:10px;
+  width:5px;height:5px;border-radius:50%;background:#c9a84c;flex-shrink:0;
 }
 
 /* BOTTOM BAR */
 .fl-bottom{
   position:relative;z-index:1;
-  background:rgba(201,168,76,0.06);
-  border-top:1px solid rgba(201,168,76,0.1);
+  background:rgba(201,168,76,0.08);
+  border-top:1px solid rgba(201,168,76,0.15);
   padding:8px 2.5rem;
   display:flex;align-items:center;justify-content:space-between;
 }
-.fl-bottom-left{
-  font-family:'DM Mono',monospace;font-size:0.58rem;
-  color:rgba(201,168,76,0.6);
-}
-.fl-bottom-center{
-  font-family:'Fraunces',serif;font-size:0.75rem;
-  color:rgba(238,242,255,0.3);font-style:italic;
-}
-.fl-bottom-right{
-  font-family:'DM Mono',monospace;font-size:0.58rem;
-  color:rgba(238,242,255,0.3);
-}
+.fl-bottom-left{font-family:'DM Mono',monospace;font-size:0.62rem;color:rgba(201,168,76,0.8);}
+.fl-bottom-center{font-family:'Fraunces',serif;font-size:0.75rem;color:rgba(238,242,255,0.5);font-style:italic;}
+.fl-bottom-right{font-family:'DM Mono',monospace;font-size:0.62rem;color:rgba(238,242,255,0.5);}
 
-/* ============================================================
-   PRINT STYLES
-   ============================================================ */
 @media print{
   body{background:#fff;padding:0;}
-  .print-btn,.print-note{display:none;}
-  .flier-wrap{max-width:100%;box-shadow:none;}
+  .top-controls{display:none;}
+  .flier-wrap{max-width:100%;box-shadow:none;display:block!important;}
   .flier{border-radius:0;}
 }
 </style>
 </head>
 <body>
 
-<button class="print-btn" onclick="window.print()">🖨️ Print / Save as Image</button>
-<div class="print-note">To save as image: Print → Save as PDF, or screenshot the flier</div>
+<div class="top-controls">
+  <div class="flyer-tabs">
+    <button class="f-tab active" onclick="showFlyer('rms', this)">🏫 1. School RSMS Flyer</button>
+    <button class="f-tab" onclick="showFlyer('solar', this)">☀️ 2. Solar PV Flyer</button>
+    <button class="f-tab" onclick="showFlyer('cbt', this)">⚡ 3. RehoSprint CBT Flyer</button>
+    <button class="f-tab" onclick="showFlyer('phonelab', this)">🔧 4. PhoneLab AI Flyer</button>
+  </div>
+  <button class="print-btn" onclick="window.print()">🖨️ Print / Save Flyer as PDF</button>
+  <div class="print-note">Tip: Select "Save as PDF" or take a screenshot to share directly on WhatsApp &amp; Facebook.</div>
+</div>
 
-<!-- FLIER -->
-<div class="flier-wrap">
+<!-- FLIER 1: RSMS (SCHOOLS) -->
+<div class="flier-wrap active" id="flyer-rms">
   <div class="flier">
-    <!-- Background -->
-    <div class="fl-grid"></div>
-    <div class="fl-orb1"></div>
-    <div class="fl-orb2"></div>
-    <div class="fl-orb3"></div>
-    <div class="fl-top-bar"></div>
-    <div class="fl-bottom-bar"></div>
-    <div class="fl-corner-tl"></div>
-    <div class="fl-corner-tr"></div>
-    <div class="fl-corner-bl"></div>
-    <div class="fl-corner-br"></div>
+    <div class="fl-grid"></div><div class="fl-orb1"></div><div class="fl-orb2"></div>
+    <div class="fl-top-bar"></div><div class="fl-bottom-bar"></div>
 
-    <!-- Main Body -->
     <div class="fl-body">
-
-      <!-- LEFT -->
       <div class="fl-left">
         <div>
           <div class="fl-logo-row">
             <div class="fl-logo-mark">R</div>
             <div>
               <div class="fl-logo-text">Rehoteq <em>Technologies</em></div>
-              <div class="fl-logo-sub">Smarter Solutions for a Better Tomorrow</div>
+              <div class="fl-logo-sub">Smarter Solutions for Nigerian Schools</div>
             </div>
           </div>
           <div class="fl-tag">School Result Management System</div>
           <div class="fl-headline">
-            <span class="block">Results in</span>
+            <span class="block">Compute Results in</span>
             <span class="block gold">Seconds,</span>
             <span class="block">Not Weeks</span>
           </div>
           <div class="fl-sub">
-            Cloud-based result management that works on any phone. Teachers enter scores, system handles everything else — automatically.
+            Cloud result portal for primary &amp; secondary schools. Teachers enter scores on phone; system automates broadsheets, WAEC grades &amp; parent PDF report cards.
           </div>
           <div class="fl-features">
-            <div class="fl-feat"><div class="fl-feat-icon">✓</div>Works on any phone — no app download</div>
-            <div class="fl-feat"><div class="fl-feat-icon">✓</div>Auto CA, GPA and cumulative scoring</div>
-            <div class="fl-feat"><div class="fl-feat-icon">✓</div>Student result links — control fee defaulters</div>
-            <div class="fl-feat"><div class="fl-feat-icon">✓</div>Printable report cards instantly</div>
-            <div class="fl-feat"><div class="fl-feat-icon">✓</div>White Label — your school branding</div>
+            <div class="fl-feat"><div class="fl-feat-icon">✓</div>Works on any smartphone or computer</div>
+            <div class="fl-feat"><div class="fl-feat-icon">✓</div>Automated GPA, positions &amp; teacher remarks</div>
+            <div class="fl-feat"><div class="fl-feat-icon">✓</div>Unique parent links — block fee defaulters</div>
+            <div class="fl-feat"><div class="fl-feat-icon">✓</div>White Label — your school name, badge &amp; colors</div>
           </div>
         </div>
         <div>
           <div class="fl-cta-row">
-            <div class="fl-cta">Try it FREE → rsms.rehoteq.com</div>
+            <div class="fl-cta">Try it Live → rsms.rehoteq.com</div>
           </div>
-          <div class="fl-url" style="margin-top:6px;">🌐 rehoteq.com</div>
+          <div class="fl-url" style="margin-top:5px;">🌐 rehoteq.com · Okitipupa, Ondo State</div>
         </div>
       </div>
 
-      <!-- RIGHT -->
       <div class="fl-right">
-        <div class="fl-badge">● Live & Active</div>
+        <div class="fl-badge">● Locked Dec 2026 Rates</div>
 
         <div class="fl-prices">
-          <div class="fl-price-title">Subscription Plans</div>
+          <div class="fl-price-title">Guaranteed 2026 Pricing</div>
           <div class="fl-price-card">
             <div>
-              <div class="fl-price-plan">Basic</div>
+              <div class="fl-price-plan">Starter</div>
               <div class="fl-price-stu">Up to 100 students</div>
             </div>
             <div style="text-align:right;">
-              <div class="fl-price-amount">N5,000</div>
+              <div class="fl-price-amount">₦10,000</div>
               <div class="fl-price-period">per term</div>
             </div>
           </div>
           <div class="fl-price-card hot">
             <div>
               <div class="fl-price-plan">Standard <span class="fl-hot-badge">Popular</span></div>
-              <div class="fl-price-stu">Up to 150 students</div>
+              <div class="fl-price-stu">Up to 250 students</div>
             </div>
             <div style="text-align:right;">
-              <div class="fl-price-amount">N10,000</div>
+              <div class="fl-price-amount">₦20,000</div>
               <div class="fl-price-period">per term</div>
             </div>
           </div>
           <div class="fl-price-card">
             <div>
               <div class="fl-price-plan">Premium</div>
-              <div class="fl-price-stu">200+ students</div>
+              <div class="fl-price-stu">500+ students &amp; fees</div>
             </div>
             <div style="text-align:right;">
-              <div class="fl-price-amount">N15,000</div>
+              <div class="fl-price-amount">₦25,000</div>
               <div class="fl-price-period">per term</div>
             </div>
           </div>
-          <div style="font-size:0.58rem;color:rgba(238,242,255,0.3);text-align:center;margin-top:2px;">
-            One-time setup fee: N10,000
-          </div>
-        </div>
-
-        <div class="fl-testi">
-          "Computing results has become so easy. Teachers enter scores from their phones and result sheets are ready immediately."
-          <div style="margin-top:4px;font-style:normal;font-size:0.6rem;color:rgba(238,242,255,0.3);">— Staff, Govt Technical College Okitipupa</div>
         </div>
 
         <div class="fl-contact">
-          <div class="fl-contact-title">Contact Us Today</div>
+          <div class="fl-contact-title">Book Free School Setup</div>
           <div class="fl-contact-items">
             <div class="fl-contact-item"><div class="fl-contact-dot"></div>WhatsApp: 07036302585</div>
-            <div class="fl-contact-item"><div class="fl-contact-dot"></div>WhatsApp: 08166519177</div>
+            <div class="fl-contact-item"><div class="fl-contact-dot"></div>Call: 08166519177</div>
+            <div class="fl-contact-item"><div class="fl-contact-dot"></div>Portal: rsms.rehoteq.com</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fl-bottom">
+      <div class="fl-bottom-left">rehoteq.com/rsms-landing.html</div>
+      <div class="fl-bottom-center">24-Hour Express School Onboarding 🇳🇬</div>
+      <div class="fl-bottom-right">Setup Fee: ₦10,000 Once</div>
+    </div>
+  </div>
+</div>
+
+<!-- FLIER 2: SOLAR PV -->
+<div class="flier-wrap" id="flyer-solar">
+  <div class="flier">
+    <div class="fl-grid"></div><div class="fl-orb1"></div><div class="fl-orb2"></div>
+    <div class="fl-top-bar"></div><div class="fl-bottom-bar"></div>
+
+    <div class="fl-body">
+      <div class="fl-left">
+        <div>
+          <div class="fl-logo-row">
+            <div class="fl-logo-mark">⚡</div>
+            <div>
+              <div class="fl-logo-text">Rehoteq <em>Engineering</em></div>
+              <div class="fl-logo-sub">Certified Solar PV &amp; Electrical Concept</div>
+            </div>
+          </div>
+          <div class="fl-tag">Solar PV &amp; Inverter Installation</div>
+          <div class="fl-headline">
+            <span class="block">Say Goodbye to</span>
+            <span class="block gold">Blackouts &amp; Fuel,</span>
+            <span class="block">24/7 Clean Energy</span>
+          </div>
+          <div class="fl-sub">
+            Professional solar installations by certified electrical engineers. Pure sine wave inverters, long-lasting LiFePO4 lithium batteries, and guaranteed safety.
+          </div>
+          <div class="fl-features">
+            <div class="fl-feat"><div class="fl-feat-icon">✓</div>Zero noise, zero fuel, zero fumes</div>
+            <div class="fl-feat"><div class="fl-feat-icon">✓</div>Calculated for Nigerian inductive loads (TV, fridge, fans, AC)</div>
+            <div class="fl-feat"><div class="fl-feat-icon">✓</div>Grade-A Tier-1 Monocrystalline solar panels</div>
+            <div class="fl-feat"><div class="fl-feat-icon">✓</div>Free online load sizing: rehoteq.com/solar.html</div>
+          </div>
+        </div>
+        <div>
+          <div class="fl-cta-row">
+            <div class="fl-cta">Calculate Your Load → rehoteq.com/solar.html</div>
+          </div>
+          <div class="fl-url" style="margin-top:5px;">📍 Okitipupa, Ondo State &amp; Nationwide</div>
+        </div>
+      </div>
+
+      <div class="fl-right">
+        <div class="fl-badge">● Certified Engineering</div>
+
+        <div class="fl-prices">
+          <div class="fl-price-title">Popular Solar Packages</div>
+          <div class="fl-price-card">
+            <div>
+              <div class="fl-price-plan">1.5 kVA Mini Home</div>
+              <div class="fl-price-stu">Fans, TV, Decoder, Lighting</div>
+            </div>
+            <div style="text-align:right;">
+              <div class="fl-price-amount">Custom</div>
+              <div class="fl-price-period">LiFePO4 Lithium</div>
+            </div>
+          </div>
+          <div class="fl-price-card hot">
+            <div>
+              <div class="fl-price-plan">3.5 kVA Family Hybrid <span class="fl-hot-badge">Popular</span></div>
+              <div class="fl-price-stu">Fridge, Fans, TVs, Computer</div>
+            </div>
+            <div style="text-align:right;">
+              <div class="fl-price-amount">Certified</div>
+              <div class="fl-price-period">MPPT High Yield</div>
+            </div>
+          </div>
+          <div class="fl-price-card">
+            <div>
+              <div class="fl-price-plan">5 kVA - 10 kVA Commercial</div>
+              <div class="fl-price-stu">Offices, Schools, Inverter AC</div>
+            </div>
+            <div style="text-align:right;">
+              <div class="fl-price-amount">Heavy Duty</div>
+              <div class="fl-price-period">48V Battery Bank</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="fl-contact">
+          <div class="fl-contact-title">Get Free Sizing &amp; Quote</div>
+          <div class="fl-contact-items">
+            <div class="fl-contact-item"><div class="fl-contact-dot"></div>WhatsApp Engr. Toye: 07036302585</div>
+            <div class="fl-contact-item"><div class="fl-contact-dot"></div>Call Engineering: 08166519177</div>
             <div class="fl-contact-item"><div class="fl-contact-dot"></div>Email: rehoteq@gmail.com</div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- BOTTOM BAR -->
     <div class="fl-bottom">
-      <div class="fl-bottom-left">rehoteq.com</div>
-      <div class="fl-bottom-center">Smarter Solutions for a Better Tomorrow 🇳🇬</div>
-      <div class="fl-bottom-right">Setup done within 24 hours</div>
+      <div class="fl-bottom-left">rehoteq.com/solar.html</div>
+      <div class="fl-bottom-center">Tested Quality · No Fake Sub-Standard Equipment</div>
+      <div class="fl-bottom-right">Residential &amp; Commercial</div>
     </div>
   </div>
 </div>
+
+<!-- FLIER 3: REHOSPRINT CBT -->
+<div class="flier-wrap" id="flyer-cbt">
+  <div class="flier">
+    <div class="fl-grid"></div><div class="fl-orb1"></div><div class="fl-orb2"></div>
+    <div class="fl-top-bar"></div><div class="fl-bottom-bar"></div>
+
+    <div class="fl-body">
+      <div class="fl-left">
+        <div>
+          <div class="fl-logo-row">
+            <div class="fl-logo-mark" style="background:linear-gradient(135deg,#0c4a6e,#0284c7,#38bdf8);color:#fff;">⚡</div>
+            <div>
+              <div class="fl-logo-text">RehoSprint <em>CBT</em></div>
+              <div class="fl-logo-sub">By Rehoteq Technologies Nigeria</div>
+            </div>
+          </div>
+          <div class="fl-tag">Pre-JAMB, WAEC &amp; Post-UTME Practice</div>
+          <div class="fl-headline">
+            <span class="block">Score 300+ in</span>
+            <span class="block gold">JAMB UTME,</span>
+            <span class="block">Fast CBT Drills</span>
+          </div>
+          <div class="fl-sub">
+            High-speed timed CBT exam simulator. 10,000+ authentic past questions with instant answer explanations, speed analytics, and nationwide leaderboard.
+          </div>
+          <div class="fl-features">
+            <div class="fl-feat"><div class="fl-feat-icon">✓</div>Full 4-subject timed UTME test simulations</div>
+            <div class="fl-feat"><div class="fl-feat-icon">✓</div>Step-by-step calculations &amp; answer rationales</div>
+            <div class="fl-feat"><div class="fl-feat-icon">✓</div>Academic AI: Project topics, chapter outlines &amp; seminar builder</div>
+            <div class="fl-feat"><div class="fl-feat-icon">✓</div>Works on Android, iPhone &amp; laptops</div>
+          </div>
+        </div>
+        <div>
+          <div class="fl-cta-row">
+            <div class="fl-cta" style="background:linear-gradient(135deg,#0284c7,#38bdf8);color:#000;">Practice Free → rehosprint.rehoteq.com</div>
+          </div>
+          <div class="fl-url" style="margin-top:5px;">🎓 rehoteq.com/academic-ai.html</div>
+        </div>
+      </div>
+
+      <div class="fl-right">
+        <div class="fl-badge" style="color:#38bdf8;border-color:rgba(56,189,248,0.4);">● 2026 UTME Ready</div>
+
+        <div class="fl-prices">
+          <div class="fl-price-title">Student Suites</div>
+          <div class="fl-price-card hot" style="background:rgba(2,132,199,0.1);border-color:rgba(56,189,248,0.3);">
+            <div>
+              <div class="fl-price-plan">RehoSprint CBT</div>
+              <div class="fl-price-stu">All JAMB Subject Combos</div>
+            </div>
+            <div style="text-align:right;">
+              <div class="fl-price-amount" style="color:#38bdf8;">FREE</div>
+              <div class="fl-price-period">rehosprint.rehoteq.com</div>
+            </div>
+          </div>
+          <div class="fl-price-card">
+            <div>
+              <div class="fl-price-plan">Academic AI Studio</div>
+              <div class="fl-price-stu">Undergraduate Thesis &amp; Seminar</div>
+            </div>
+            <div style="text-align:right;">
+              <div class="fl-price-amount">Instant</div>
+              <div class="fl-price-period">rehoteq.com/academic-ai.html</div>
+            </div>
+          </div>
+          <div class="fl-price-card">
+            <div>
+              <div class="fl-price-plan">VoiceCoach NG</div>
+              <div class="fl-price-stu">Vocal Range, Pitch &amp; Sol-fa</div>
+            </div>
+            <div style="text-align:right;">
+              <div class="fl-price-amount">Free</div>
+              <div class="fl-price-period">rehoteq.com/voicecoach.html</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="fl-contact">
+          <div class="fl-contact-title">Connect With Us</div>
+          <div class="fl-contact-items">
+            <div class="fl-contact-item"><div class="fl-contact-dot"></div>WhatsApp Student Help: 07036302585</div>
+            <div class="fl-contact-item"><div class="fl-contact-dot"></div>CBT Portal: rehosprint.rehoteq.com</div>
+            <div class="fl-contact-item"><div class="fl-contact-dot"></div>Main Hub: rehoteq.com</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fl-bottom">
+      <div class="fl-bottom-left">rehosprint.rehoteq.com</div>
+      <div class="fl-bottom-center">Nigeria's Fastest Pre-JAMB CBT Platform 🇳🇬</div>
+      <div class="fl-bottom-right">100% Free Practice</div>
+    </div>
+  </div>
+</div>
+
+<!-- FLIER 4: PHONELAB AI -->
+<div class="flier-wrap" id="flyer-phonelab">
+  <div class="flier">
+    <div class="fl-grid"></div><div class="fl-orb1"></div><div class="fl-orb2"></div>
+    <div class="fl-top-bar"></div><div class="fl-bottom-bar"></div>
+
+    <div class="fl-body">
+      <div class="fl-left">
+        <div>
+          <div class="fl-logo-row">
+            <div class="fl-logo-mark" style="background:linear-gradient(135deg,#064e3b,#10b981,#34d399);color:#000;">🔧</div>
+            <div>
+              <div class="fl-logo-text">Rehoteq <em>PhoneLab</em></div>
+              <div class="fl-logo-sub">Smart Repair Assistant for Technicians</div>
+            </div>
+          </div>
+          <div class="fl-tag">AI Hardware &amp; Flashing Diagnostics</div>
+          <div class="fl-headline">
+            <span class="block">Fix Phones</span>
+            <span class="block gold">Smarter,</span>
+            <span class="block">Not Harder</span>
+          </div>
+          <div class="fl-sub">
+            Instant error decoding for SP Flash Tool, Odin, UnlockTool, and Pandora. Find tested firmware, test points, and AI troubleshooting for Samsung, Tecno, Infinix, and iPhone.
+          </div>
+          <div class="fl-features">
+            <div class="fl-feat"><div class="fl-feat-icon">✓</div>Instant error decodes with step-by-step fixes</div>
+            <div class="fl-feat"><div class="fl-feat-icon">✓</div>Tested firmware finder for Nigerian market phones</div>
+            <div class="fl-feat"><div class="fl-feat-icon">✓</div>Hardware ISP pinouts, EDL testpoints &amp; schematics</div>
+            <div class="fl-feat"><div class="fl-feat-icon">✓</div>Built by a certified technician, for technicians</div>
+          </div>
+        </div>
+        <div>
+          <div class="fl-cta-row">
+            <div class="fl-cta" style="background:linear-gradient(135deg,#10b981,#34d399);color:#000;">Launch PhoneLab → rehoteq.com/phonelab.html</div>
+          </div>
+          <div class="fl-url" style="margin-top:5px;">🛠️ Free PWA Tool · Works Offline</div>
+        </div>
+      </div>
+
+      <div class="fl-right">
+        <div class="fl-badge" style="color:#10b981;border-color:rgba(16,185,129,0.3);">● Beta v1.0 Free</div>
+
+        <div class="fl-prices">
+          <div class="fl-price-title">Supported Phone Brands</div>
+          <div class="fl-price-card hot" style="background:rgba(16,185,129,0.08);border-color:rgba(16,185,129,0.3);">
+            <div>
+              <div class="fl-price-plan">Tecno, Infinix &amp; Itel</div>
+              <div class="fl-price-stu">MTK &amp; Unisoc SPD DA / Auth Files</div>
+            </div>
+            <div style="text-align:right;">
+              <div class="fl-price-amount" style="color:#34d399;">100%</div>
+              <div class="fl-price-period">Supported</div>
+            </div>
+          </div>
+          <div class="fl-price-card">
+            <div>
+              <div class="fl-price-plan">Samsung Galaxy</div>
+              <div class="fl-price-stu">Odin Flash, PIT, FRP &amp; KG Lock</div>
+            </div>
+            <div style="text-align:right;">
+              <div class="fl-price-amount">Instant</div>
+              <div class="fl-price-period">Decoded</div>
+            </div>
+          </div>
+          <div class="fl-price-card">
+            <div>
+              <div class="fl-price-plan">Xiaomi &amp; iPhones</div>
+              <div class="fl-price-stu">EDL Boot, DFU &amp; Error 4013</div>
+            </div>
+            <div style="text-align:right;">
+              <div class="fl-price-amount">AI Guided</div>
+              <div class="fl-price-period">Database</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="fl-contact">
+          <div class="fl-contact-title">Technician Support</div>
+          <div class="fl-contact-items">
+            <div class="fl-contact-item"><div class="fl-contact-dot"></div>WhatsApp Tech Helpline: 07036302585</div>
+            <div class="fl-contact-item"><div class="fl-contact-dot"></div>Web App: rehoteq.com/phonelab.html</div>
+            <div class="fl-contact-item"><div class="fl-contact-dot"></div>Store: shop.rehoteq.com</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fl-bottom">
+      <div class="fl-bottom-left">rehoteq.com/phonelab.html</div>
+      <div class="fl-bottom-center">Specialist in Nigerian Market Phone Repairs 🇳🇬</div>
+      <div class="fl-bottom-right">Free to Use</div>
+    </div>
+  </div>
+</div>
+
+<script>
+function showFlyer(id, btn){
+  document.querySelectorAll('.f-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.flier-wrap').forEach(w => w.classList.remove('active'));
+  btn.classList.add('active');
+  var el = document.getElementById('flyer-' + id);
+  if(el) el.classList.add('active');
+}
+</script>
 
 </body>
 </html>
