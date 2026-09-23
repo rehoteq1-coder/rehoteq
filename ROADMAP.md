@@ -4,6 +4,14 @@
 
 ---
 
+## Phase 1 implementation update — 2026-09-23
+
+Phase 0 PR #10 is merged and its Pages build was verified `built`. Phase 1 implementation now includes four cornerstone lessons, four calculators, a 25-entry Knowledge Base, reciprocal hub/spoke links and nine sitemap additions. Local validation: **51 HTML files / 44 sitemap URLs / 0 errors / 0 warnings**, plus 17 calculator tests, 6 content tests and browser checks at 360px/1280px.
+
+**Publication is pending practitioner/editorial review, not claimed complete.** Examples are explicitly illustrative because approved real job notes and a signed technical review were not supplied; none were invented. Search Console indexing and traffic results also require owner access. See [the Phase 1 handoff](docs/PHASE1-HANDOFF.md) for URLs, methodology, tests and the remaining publication/measurement checklist. The original brief below is retained for context.
+
+---
+
 ## 1. Current state (read before doing anything)
 
 ### Shipped to production (merged PRs — live on rehoteq.com)
@@ -72,11 +80,11 @@ DoD per tool: card on `tools.html` + Academy path step where relevant + one guid
 - Decision needed: single `knowledge-base.html` index (fast) vs individual entry pages (better long-tail SEO). Suggest: start as **one curated index page** linked from Academy; split later if volume justifies.
 
 ### D. Phase 1 definition of done
-- [ ] Push Phase 0, PR merged, Pages `built` (FIRST)
+- [x] Push Phase 0, PR merged, Pages `built` (FIRST) — PR #10 verified 2026-09-23
 - [ ] 4 cornerstone lessons live, each ↔ path ↔ tool cross-linked
 - [ ] 3–5 calculators live on tools.html, linked from Academy paths
-- [ ] KB index (if time) with ≥20 entries
-- [ ] `site_check.py` 0 errors; sitemap matches reality
+- [x] KB index (if time) with ≥20 entries — 25 entries implemented; publication pending review
+- [x] `site_check.py` 0 errors; sitemap matches reality — 51 HTML files / 44 sitemap URLs locally
 - [ ] GSC: request indexing for `/academy.html`, `/tools.html`, `/labs.html`, new tools + lessons; watch "Alternate page" report stay quiet
 - [ ] Note results (impressions/clicks) for the Phase 2 report
 
