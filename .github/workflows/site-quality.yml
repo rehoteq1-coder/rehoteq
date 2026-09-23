@@ -15,3 +15,16 @@ jobs:
           python-version: "3.12"
       - name: Run site checks (JSON-LD, internal links, sitemap, canonical/SEO invariants)
         run: python scripts/site_check.py
+      - name: Check Phase 1 content, metadata and cross-links
+        run: python -m unittest discover -s tests -p 'test_*.py'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Test calculator formulas and validation
+        run: node --test tests/calculators.test.cjs
+      - name: Install browser test tooling outside the static site
+        run: |
+          npm install --prefix "$RUNNER_TEMP/browser-tools" --no-audit --no-fund playwright@1.58.2
+          "$RUNNER_TEMP/browser-tools/node_modules/.bin/playwright" install --with-deps chromium
+      - name: Check mobile, desktop and calculator interactions
+        run: NODE_PATH="$RUNNER_TEMP/browser-tools/node_modules" node tests/phase1_browser.cjs
