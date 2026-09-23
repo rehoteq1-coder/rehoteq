@@ -1,0 +1,17 @@
+name: Site quality
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run site checks (JSON-LD, internal links, sitemap, canonical/SEO invariants)
+        run: python scripts/site_check.py

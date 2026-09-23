@@ -1,0 +1,14 @@
+# Jekyll runs on every GitHub Pages deploy (legacy build). For now most pages
+# are passed through untouched; this config only enables whitelisted plugins
+# so pages can adopt front-matter features (e.g. redirect_from) incrementally.
+#
+# Deliberately NOT enabled: jekyll-sitemap — the site ships a hand-curated
+# sitemap.xml (kept honest by scripts/site_check.py instead); the plugin would
+# conflict with the static file and would list internal/admin pages.
+url: "https://rehoteq.com"
+title: "Rehoteq Technologies"
+description: "Technology for education, energy and digital transformation in Nigeria."
+
+plugins:
+  - jekyll-redirect-from
+  - jekyll-seo-tag
