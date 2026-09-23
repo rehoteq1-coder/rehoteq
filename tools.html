@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Rehoteq Tools — Free Calculators & Digital Tools for Nigeria | Solar, Wiring, Education</title>
+<meta name="description" content="Free online tools built by Rehoteq Technologies for Nigerian homes, schools and businesses: solar PV cost calculator, wiring cost estimator, building cost calculator, JAMB CBT practice, AI studios and more."/>
+<link rel="canonical" href="https://rehoteq.com/tools.html"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;700;900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#030305;--card:#0f1220;--card2:#141828;--border:rgba(255,255,255,0.07);--gold:#c9a84c;--gold2:#f0c040;--white:#f0f4ff;--muted:rgba(240,244,255,0.5);--font:'Outfit',sans-serif;--serif:'Fraunces',serif;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:var(--font);background:var(--bg);color:var(--white);line-height:1.7;}
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 20px;background:rgba(3,3,5,0.92);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);flex-wrap:wrap;}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-icon{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#8b6914,var(--gold),var(--gold2));display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:0.85rem;font-weight:900;color:#000;}
+.nav-name{font-family:var(--serif);font-size:0.85rem;font-weight:700;color:var(--white);}
+.nav-name span{color:var(--gold);}
+.nav-links{display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.nav-links a{font-size:0.72rem;color:var(--muted);text-decoration:none;}
+.nav-links a:hover,.nav-links a.active{color:var(--gold);}
+.nav-cta{background:linear-gradient(135deg,var(--gold),var(--gold2));border:none;border-radius:7px;padding:7px 14px;font-family:var(--font);font-size:0.72rem;font-weight:700;color:#000;cursor:pointer;text-decoration:none;}
+.page{max-width:960px;margin:0 auto;padding:0 18px 80px;}
+.hero{padding:60px 0 40px;text-align:center;border-bottom:1px solid var(--border);margin-bottom:48px;}
+.hero-tag{display:inline-block;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.2);border-radius:100px;padding:5px 16px;font-size:0.68rem;font-weight:700;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:18px;}
+.hero h1{font-family:var(--serif);font-size:clamp(2rem,5vw,2.8rem);font-weight:900;margin-bottom:14px;line-height:1.1;}
+.hero h1 span{color:var(--gold);}
+.hero p{font-size:0.95rem;color:var(--muted);max-width:640px;margin:0 auto;line-height:1.8;}
+.crumbs{font-size:0.7rem;color:var(--muted);margin:-28px 0 30px;text-align:center;}
+.crumbs a{color:var(--gold);}
+.section{margin-bottom:56px;}
+.section h2{font-family:var(--serif);font-size:1.5rem;font-weight:900;color:var(--white);margin-bottom:8px;}
+.section h2 span{color:var(--gold);}
+.section .lead{font-size:0.88rem;color:var(--muted);margin-bottom:18px;line-height:1.8;}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;display:block;text-decoration:none;transition:all 0.25s;position:relative;}
+.card:hover{border-color:rgba(201,168,76,0.45);transform:translateY(-2px);}
+.card.feature{grid-column:1 / -1;background:linear-gradient(160deg,rgba(201,168,76,0.07),transparent 60%);}
+.card-icon{font-size:1.5rem;margin-bottom:8px;}
+.card-title{font-family:var(--serif);font-size:1.05rem;font-weight:700;color:var(--white);margin-bottom:6px;}
+.card-desc{font-size:0.8rem;color:var(--muted);line-height:1.65;}
+.card-meta{font-size:0.68rem;color:var(--gold);font-weight:600;margin-top:10px;letter-spacing:0.04em;}
+.tag{display:inline-block;font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;background:rgba(0,194,224,0.1);border:1px solid rgba(0,194,224,0.25);color:#5ad9ef;border-radius:20px;padding:2px 10px;margin-bottom:8px;}
+.note{background:var(--card);border-left:3px solid var(--gold);border-radius:0 12px 12px 0;padding:16px 18px;font-size:0.83rem;color:rgba(240,244,255,0.75);line-height:1.75;}
+.note strong{color:var(--gold);}
+.cta-box{background:linear-gradient(135deg,rgba(201,168,76,0.1),rgba(201,168,76,0.02));border:1px solid rgba(201,168,76,0.25);border-radius:16px;padding:26px;text-align:center;}
+.cta-box h3{font-family:var(--serif);font-size:1.25rem;font-weight:900;margin-bottom:8px;}
+.cta-box p{font-size:0.85rem;color:var(--muted);margin-bottom:16px;}
+.btn{display:inline-block;background:linear-gradient(135deg,var(--gold),var(--gold2));border-radius:8px;padding:10px 22px;font-size:0.8rem;font-weight:700;color:#000;text-decoration:none;margin:0 6px 8px;}
+.btn.ghost{background:transparent;border:1px solid rgba(201,168,76,0.4);color:var(--gold);}
+footer{border-top:1px solid var(--border);padding:26px 18px;text-align:center;font-size:0.7rem;color:var(--muted);}
+footer a{color:var(--gold);text-decoration:none;}
+@media(max-width:640px){.cards{grid-template-columns:1fr;}}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Rehoteq Tools",
+  "description": "Free calculators and digital tools for Nigerian homes, schools and businesses.",
+  "url": "https://rehoteq.com/tools.html",
+  "isPartOf": {"@type": "WebSite", "name": "Rehoteq Technologies", "url": "https://rehoteq.com/"},
+  "publisher": {"@type": "Organization", "name": "Rehoteq Technologies", "url": "https://rehoteq.com/"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://rehoteq.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://rehoteq.com/tools.html"}
+  ]
+}
+</script>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo"><div class="nav-icon">R</div><div class="nav-name">Rehoteq <span>Technologies</span></div></a>
+  <div class="nav-links">
+    <a href="/academy.html">Academy</a>
+    <a href="/tools.html" class="active">Tools</a>
+    <a href="/labs.html">Labs</a>
+    <a href="/news.html">Guides</a>
+    <a href="/about.html">About</a>
+    <a href="https://wa.me/2347036302585" class="nav-cta" target="_blank">📲 Contact</a>
+  </div>
+</nav>
+
+<div class="page">
+  <header class="hero">
+    <div class="hero-tag">Rehoteq Tools</div>
+    <h1>Free tools that do the <span>maths</span> for you</h1>
+    <p>Calculators and practical tools built by Nigerian engineers and educators — free to use, no sign-up. Get a defensible number before anyone quotes you, before any exam, before any project starts.</p>
+  </header>
+  <p class="crumbs"><a href="/">Home</a> / Tools</p>
+
+  <section class="section">
+    <h2>Energy &amp; <span>Electrical</span></h2>
+    <p class="lead">Built from real installation jobs — sized for Nigerian loads, tariffs and conditions.</p>
+    <div class="cards">
+      <a class="card feature" href="/solar.html">
+        <div class="card-icon">☀️</div>
+        <div class="card-title">Solar PV Cost Calculator</div>
+        <div class="card-desc">Enter your appliances and usage to estimate panels, batteries, inverter size and budget for a solar system in Nigeria. The right first step before any installer visit — pair it with the <a href="/guides/solar-load-audit-nigeria.html" style="color:var(--gold);">load audit guide</a>.</div>
+        <div class="card-meta">OPEN SOLAR CALCULATOR →</div>
+      </a>
+      <a class="card" href="/wiring.html">
+        <div class="card-icon">⚡</div>
+        <div class="card-title">Wiring Cost Estimator</div>
+        <div class="card-desc">Estimate home and office electrical wiring costs — points, conduit runs and materials — before accepting a quote.</div>
+        <div class="card-meta">ESTIMATE WIRING COST →</div>
+      </a>
+      <a class="card" href="/building.html">
+        <div class="card-icon">🏗️</div>
+        <div class="card-title">Building Cost Calculator</div>
+        <div class="card-desc">Construction cost estimates for Nigerian building projects, so the electrical and solar budget sits inside a realistic total.</div>
+        <div class="card-meta">ESTIMATE BUILDING COST →</div>
+      </a>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Education &amp; <span>Study</span></h2>
+    <p class="lead">Practice and production tools for students, teachers and researchers.</p>
+    <div class="cards">
+      <a class="card" href="/rehoteq-jamb-cbt.html">
+        <div class="card-icon">📝</div>
+        <div class="card-title">Pre-JAMB CBT Practice</div>
+        <div class="card-desc">Free computer-based test practice under realistic conditions — the closest thing to exam day before exam day.</div>
+        <div class="card-meta">START PRACTICE →</div>
+      </a>
+      <a class="card" href="/lesson-ai.html">
+        <div class="card-icon">🤖</div>
+        <div class="card-title">AI Lesson Studio (Teachers)</div>
+        <div class="card-desc">Generate lesson plans, notes, tests and mock exams aligned to Nigerian classrooms.</div>
+        <div class="card-meta">OPEN LESSON STUDIO →</div>
+      </a>
+      <a class="card" href="/academic-ai.html">
+        <div class="card-icon">🎓</div>
+        <div class="card-title">Academic AI Studio (University)</div>
+        <div class="card-desc">Project topics, research proposals and lecture tools for Nigerian university work.</div>
+        <div class="card-meta">OPEN ACADEMIC STUDIO →</div>
+      </a>
+      <a class="card" href="/research-studio.html">
+        <div class="card-icon">🔬</div>
+        <div class="card-title">Research Studio</div>
+        <div class="card-desc">Structure, track and manage serious research projects from question to write-up.</div>
+        <div class="card-meta">OPEN RESEARCH STUDIO →</div>
+      </a>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Devices, Media &amp; <span>Security</span></h2>
+    <div class="cards">
+      <a class="card" href="/phonelab.html">
+        <div class="card-icon">🔧</div>
+        <div class="card-title">PhoneLab — Phone Repair Assistant</div>
+        <div class="card-desc">Structured diagnostics guidance for common smartphone faults — narrow the problem before you buy a part.</div>
+        <div class="card-meta">OPEN PHONELAB →</div>
+      </a>
+      <a class="card" href="/voicecoach.html">
+        <div class="card-icon">🎤</div>
+        <div class="card-title">VoiceCoach NG</div>
+        <div class="card-desc">Vocal training tools built for Nigerian voices — practice, warm-ups and structured improvement.</div>
+        <div class="card-meta">OPEN VOICECOACH →</div>
+      </a>
+      <a class="card" href="/hub.html">
+        <div class="card-icon">🔐</div>
+        <div class="card-title">Cyber Quiz &amp; Security Checks</div>
+        <div class="card-desc">Test your scam-spotting instincts with the student Cyber Quiz — and see how RehoCheck scans links for threats.</div>
+        <div class="card-meta">VISIT THE HUB →</div>
+      </a>
+      <a class="card" href="/guides/whatsapp-phishing-protection-nigeria.html">
+        <div class="card-icon">🛡️</div>
+        <div class="card-title">Phishing Survival Guide</div>
+        <div class="card-desc">Not a tool — a habit. The verification routine that stops most WhatsApp and email attacks in Nigeria.</div>
+        <div class="card-meta">READ THE GUIDE →</div>
+      </a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="note"><strong>How these tools work:</strong> everything runs in your browser — your numbers are not stored or sent to us, and there is no account. Estimates are estimates: they assume standard load profiles and current Nigerian material ranges. A site survey by a licensed professional still replaces no calculator's judgement.</div>
+  </section>
+
+  <section class="section">
+    <div class="cta-box">
+      <h3>Missing a tool you need?</h3>
+      <p>Cable sizing, voltage drop, battery/inverter sizing, GPA calculators and more are on our build list. Tell us what would save you the most time.</p>
+      <a class="btn" href="/contact.html">Suggest a tool</a>
+      <a class="btn ghost" href="/academy.html">Learn with the Academy</a>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <p style="margin-bottom:6px;"><a href="/">rehoteq.com</a> · Okitipupa, Ondo State, Nigeria · <a href="tel:+2347036302585">07036302585</a> · <a href="mailto:rehoteq@gmail.com">rehoteq@gmail.com</a></p>
+  <p>© 2026 Rehoteq Technologies · <a href="/academy.html">Academy</a> · <a href="/tools.html">Tools</a> · <a href="/labs.html">Labs</a> · <a href="/news.html">Guides</a> · <a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></p>
+</footer>
+
+</body>
+</html>

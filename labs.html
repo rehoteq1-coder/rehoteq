@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Rehoteq Labs — Technology Projects for Education, Energy & Security in Nigeria</title>
+<meta name="description" content="The technology portfolio of Rehoteq Technologies: school result management (RSMS), RehoCheck security app, CBT platform, AI studios and research projects — problem, solution, stage and roadmap for each."/>
+<link rel="canonical" href="https://rehoteq.com/labs.html"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;700;900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#030305;--card:#0f1220;--card2:#141828;--border:rgba(255,255,255,0.07);--gold:#c9a84c;--gold2:#f0c040;--green:#00d166;--cyan:#00c2e0;--amber:#ffb020;--white:#f0f4ff;--muted:rgba(240,244,255,0.5);--font:'Outfit',sans-serif;--serif:'Fraunces',serif;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:var(--font);background:var(--bg);color:var(--white);line-height:1.7;}
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 20px;background:rgba(3,3,5,0.92);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);flex-wrap:wrap;}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-icon{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#8b6914,var(--gold),var(--gold2));display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:0.85rem;font-weight:900;color:#000;}
+.nav-name{font-family:var(--serif);font-size:0.85rem;font-weight:700;color:var(--white);}
+.nav-name span{color:var(--gold);}
+.nav-links{display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.nav-links a{font-size:0.72rem;color:var(--muted);text-decoration:none;}
+.nav-links a:hover,.nav-links a.active{color:var(--gold);}
+.nav-cta{background:linear-gradient(135deg,var(--gold),var(--gold2));border:none;border-radius:7px;padding:7px 14px;font-family:var(--font);font-size:0.72rem;font-weight:700;color:#000;cursor:pointer;text-decoration:none;}
+.page{max-width:960px;margin:0 auto;padding:0 18px 80px;}
+.hero{padding:60px 0 40px;text-align:center;border-bottom:1px solid var(--border);margin-bottom:48px;}
+.hero-tag{display:inline-block;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.2);border-radius:100px;padding:5px 16px;font-size:0.68rem;font-weight:700;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:18px;}
+.hero h1{font-family:var(--serif);font-size:clamp(2rem,5vw,2.8rem);font-weight:900;margin-bottom:14px;line-height:1.1;}
+.hero h1 span{color:var(--gold);}
+.hero p{font-size:0.95rem;color:var(--muted);max-width:660px;margin:0 auto;line-height:1.8;}
+.crumbs{font-size:0.7rem;color:var(--muted);margin:-28px 0 30px;text-align:center;}
+.crumbs a{color:var(--gold);}
+.section{margin-bottom:56px;}
+.section h2{font-family:var(--serif);font-size:1.5rem;font-weight:900;color:var(--white);margin-bottom:8px;}
+.section h2 span{color:var(--gold);}
+.section .lead{font-size:0.88rem;color:var(--muted);margin-bottom:18px;line-height:1.8;}
+.project{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:14px;transition:all 0.25s;}
+.project:hover{border-color:rgba(201,168,76,0.35);}
+.project-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:10px;}
+.project-name{font-family:var(--serif);font-size:1.15rem;font-weight:900;color:var(--white);}
+.project-name a{color:inherit;text-decoration:none;}
+.project-name a:hover{color:var(--gold);}
+.pills{display:flex;gap:6px;flex-wrap:wrap;}
+.pill{font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;border-radius:20px;padding:3px 10px;border:1px solid;}
+.pill.cat{background:rgba(0,194,224,0.08);border-color:rgba(0,194,224,0.25);color:#5ad9ef;}
+.pill.live{background:rgba(0,209,102,0.08);border-color:rgba(0,209,102,0.3);color:var(--green);}
+.pill.dev{background:rgba(255,176,32,0.08);border-color:rgba(255,176,32,0.3);color:var(--amber);}
+.pill.beta{background:rgba(201,168,76,0.08);border-color:rgba(201,168,76,0.3);color:var(--gold);}
+.row{display:grid;grid-template-columns:110px 1fr;gap:6px 14px;font-size:0.83rem;margin-top:8px;}
+.row dt{color:var(--gold);font-weight:700;font-size:0.68rem;text-transform:uppercase;letter-spacing:0.06em;padding-top:3px;}
+.row dd{color:rgba(240,244,255,0.78);line-height:1.7;}
+.project-links{margin-top:12px;font-size:0.75rem;}
+.project-links a{color:var(--gold);text-decoration:none;font-weight:600;margin-right:14px;}
+.project-links a:hover{text-decoration:underline;}
+.note{background:var(--card);border-left:3px solid var(--gold);border-radius:0 12px 12px 0;padding:16px 18px;font-size:0.83rem;color:rgba(240,244,255,0.75);line-height:1.75;margin-bottom:22px;}
+.note strong{color:var(--gold);}
+.cta-box{background:linear-gradient(135deg,rgba(201,168,76,0.1),rgba(201,168,76,0.02));border:1px solid rgba(201,168,76,0.25);border-radius:16px;padding:26px;text-align:center;}
+.cta-box h3{font-family:var(--serif);font-size:1.25rem;font-weight:900;margin-bottom:8px;}
+.cta-box p{font-size:0.85rem;color:var(--muted);margin-bottom:16px;max-width:560px;margin-left:auto;margin-right:auto;}
+.btn{display:inline-block;background:linear-gradient(135deg,var(--gold),var(--gold2));border-radius:8px;padding:10px 22px;font-size:0.8rem;font-weight:700;color:#000;text-decoration:none;margin:0 6px 8px;}
+.btn.ghost{background:transparent;border:1px solid rgba(201,168,76,0.4);color:var(--gold);}
+footer{border-top:1px solid var(--border);padding:26px 18px;text-align:center;font-size:0.7rem;color:var(--muted);}
+footer a{color:var(--gold);text-decoration:none;}
+@media(max-width:560px){.row{grid-template-columns:1fr;}.row dt{padding-top:8px;}}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Rehoteq Labs",
+  "description": "Technology projects by Rehoteq Technologies across education, energy, cybersecurity and AI.",
+  "url": "https://rehoteq.com/labs.html",
+  "isPartOf": {"@type": "WebSite", "name": "Rehoteq Technologies", "url": "https://rehoteq.com/"},
+  "publisher": {"@type": "Organization", "name": "Rehoteq Technologies", "url": "https://rehoteq.com/"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://rehoteq.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Labs", "item": "https://rehoteq.com/labs.html"}
+  ]
+}
+</script>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo"><div class="nav-icon">R</div><div class="nav-name">Rehoteq <span>Technologies</span></div></a>
+  <div class="nav-links">
+    <a href="/academy.html">Academy</a>
+    <a href="/tools.html">Tools</a>
+    <a href="/labs.html" class="active">Labs</a>
+    <a href="/news.html">Guides</a>
+    <a href="/about.html">About</a>
+    <a href="https://wa.me/2347036302585" class="nav-cta" target="_blank">📲 Contact</a>
+  </div>
+</nav>
+
+<div class="page">
+  <header class="hero">
+    <div class="hero-tag">Rehoteq Labs</div>
+    <h1>What we're <span>building</span></h1>
+    <p>A working portfolio of Rehoteq technology projects — each one shown the way engineers actually track them: the problem, the solution, the technology, who it serves, and what stage it's at today. Some are live and serving users; some are in active development. We show both.</p>
+  </header>
+  <p class="crumbs"><a href="/">Home</a> / Labs</p>
+
+  <section class="section">
+    <h2>Live <span>Products</span></h2>
+    <p class="lead">In production, with real users.</p>
+
+    <div class="project">
+      <div class="project-head">
+        <span class="project-name"><a href="/rsms-landing.html">Rehoteq RMS — School Result Management</a></span>
+        <span class="pills"><span class="pill cat">EdTech</span><span class="pill live">Live</span></span>
+      </div>
+      <dl class="row">
+        <dt>Problem</dt><dd>Nigerian schools still run results on paper and fragile spreadsheets — errors, delays, and parents who can't see progress.</dd>
+        <dt>Solution</dt><dd>Cloud result management built for Nigerian terms and sessions: teachers enter scores from any phone, results, report cards and broadsheets generate automatically, designed to work on 3G.</dd>
+        <dt>Users</dt><dd>Secondary schools — administrators, teachers, parents and students.</dd>
+        <dt>Stage</dt><dd>Live and serving schools. Multi-tenant portals for staff and students.</dd>
+      </dl>
+      <div class="project-links"><a href="/rsms-landing.html">Product page →</a><a href="https://rsms.rehoteq.com" target="_blank" rel="noopener">Open RSMS →</a></div>
+    </div>
+
+    <div class="project">
+      <div class="project-head">
+        <span class="project-name">RehoCheck — Link &amp; Scam Checker</span>
+        <span class="pills"><span class="pill cat">Cybersecurity</span><span class="pill live">Live on Google Play</span></span>
+      </div>
+      <dl class="row">
+        <dt>Problem</dt><dd>Nigerian users are targeted by phishing links, fake news headlines and scam sites faster than awareness campaigns can keep up.</dd>
+        <dt>Solution</dt><dd>Free Android app: scan any link, website or news headline for threat signals in seconds, in plain language.</dd>
+        <dt>Users</dt><dd>Everyday Android users, schools and small businesses.</dd>
+        <dt>Stage</dt><dd>Published on Google Play; ongoing model and rule improvements.</dd>
+      </dl>
+      <div class="project-links"><a href="https://play.google.com/store/apps/details?id=com.rehoteq.rehocheck" target="_blank" rel="noopener">Get it on Google Play →</a></div>
+    </div>
+
+    <div class="project">
+      <div class="project-head">
+        <span class="project-name"><a href="/rehoteq-jamb-cbt.html">CBT &amp; Assessment Platform</a></span>
+        <span class="pills"><span class="pill cat">Education</span><span class="pill live">Live</span></span>
+      </div>
+      <dl class="row">
+        <dt>Problem</dt><dd>Students meet computer-based testing for the first time on exam day — when the interface itself becomes the obstacle.</dd>
+        <dt>Solution</dt><dd>Practice CBT under realistic conditions, plus school-ready assessment workflows that feed the same ecosystem as RMS.</dd>
+        <dt>Users</dt><dd>Pre-JAMB candidates and schools running internal CBT.</dd>
+        <dt>Stage</dt><dd>Pre-JAMB practice live; school assessment tools expanding with RSMS.</dd>
+      </dl>
+      <div class="project-links"><a href="/rehoteq-jamb-cbt.html">Start practice →</a><a href="/guides/cbt-readiness-checklist-nigerian-schools.html">School CBT readiness guide →</a></div>
+    </div>
+
+    <div class="project">
+      <div class="project-head">
+        <span class="project-name"><a href="/lesson-ai.html">AI Studios for Teachers &amp; Students</a></span>
+        <span class="pills"><span class="pill cat">AI / EdTech</span><span class="pill live">Live</span></span>
+      </div>
+      <dl class="row">
+        <dt>Problem</dt><dd>Lesson planning and university project work eat hours that Nigerian teachers and students rarely have.</dd>
+        <dt>Solution</dt><dd>Two focused studios: Lesson AI (plans, notes, tests, mock exams for classrooms) and Academic AI (project topics, proposals, lecture tools for universities).</dd>
+        <dt>Users</dt><dd>Teachers in secondary schools; undergraduates and lecturers.</dd>
+        <dt>Stage</dt><dd>Both live on the web, with usage units and continuous prompt improvements.</dd>
+      </dl>
+      <div class="project-links"><a href="/lesson-ai.html">Lesson AI →</a><a href="/academic-ai.html">Academic AI →</a></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>In <span>Development</span></h2>
+    <p class="lead">Shaped in the open — shown before they're finished, on purpose.</p>
+
+    <div class="project">
+      <div class="project-head">
+        <span class="project-name">Rehoteq Security</span>
+        <span class="pills"><span class="pill cat">Security Tech</span><span class="pill dev">Development</span></span>
+      </div>
+      <dl class="row">
+        <dt>Problem</dt><dd>Households and SMEs have no simple answer to "is this safe?" — for devices, links, or configurations.</dd>
+        <dt>Solution</dt><dd>A wider security layer around RehoCheck: guided checks and plain-language risk reporting for non-experts.</dd>
+        <dt>Stage</dt><dd>Active development, building on the RehoCheck threat-signals pipeline.</dd>
+        <dt>Looking for</dt><dd>Security researchers and Android testers in Nigeria.</dd>
+      </dl>
+      <div class="project-links"><a href="/contact.html">Offer to test or collaborate →</a></div>
+    </div>
+
+    <div class="project">
+      <div class="project-head">
+        <span class="project-name">CCC Dataset — Cultural Heritage for Computer Vision</span>
+        <span class="pills"><span class="pill cat">AI / Data</span><span class="pill dev">Development</span></span>
+      </div>
+      <dl class="row">
+        <dt>Problem</dt><dd>Computer-vision models trained mostly on non-African visual data recognise the world unevenly.</dd>
+        <dt>Solution</dt><dd>A curated dataset project documenting Nigerian cultural content for research and model training.</dd>
+        <dt>Stage</dt><dd>Dataset development and annotation quality workflows.</dd>
+        <dt>Looking for</dt><dd>AI researchers, universities, computer-vision developers and cultural institutions.</dd>
+      </dl>
+      <div class="project-links"><a href="/contact.html">Discuss collaboration →</a></div>
+    </div>
+
+    <div class="project">
+      <div class="project-head">
+        <span class="project-name"><a href="/platform.html">Rehoteq Platform — One Login</a></span>
+        <span class="pills"><span class="pill cat">Platform</span><span class="pill dev">Development</span></span>
+      </div>
+      <dl class="row">
+        <dt>Problem</dt><dd>Each Rehoteq tool currently has its own door — a fragmented experience as the family grows.</dd>
+        <dt>Solution</dt><dd>A single identity layer across RMS, studios, hubs and future products.</dd>
+        <dt>Stage</dt><dd>Early development; RSMS remains independently accessible meanwhile.</dd>
+      </dl>
+      <div class="project-links"><a href="/platform.html">See the concept →</a></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Field <span>Engineering</span></h2>
+    <p class="lead">Software doesn't stop at the screen — our engineering deployments feed the same knowledge base.</p>
+
+    <div class="project">
+      <div class="project-head">
+        <span class="project-name"><a href="/projects/ekiti-state-university-computer-ict-laboratory.html">Ekiti State University ICT Laboratory</a></span>
+        <span class="pills"><span class="pill cat">Infrastructure</span><span class="pill beta">Ongoing project</span></span>
+      </div>
+      <dl class="row">
+        <dt>Scope</dt><dd>Computer &amp; ICT laboratory supply and installation for a university environment.</dd>
+        <dt>Why it matters</dt><dd>Real deployments ground our guides, calculators and training in what actually happens on site.</dd>
+      </dl>
+      <div class="project-links"><a href="/projects/ekiti-state-university-computer-ict-laboratory.html">Project details →</a></div>
+    </div>
+
+    <div class="project">
+      <div class="project-head">
+        <span class="project-name">Solar &amp; Electrical Engineering Practice</span>
+        <span class="pills"><span class="pill cat">EnergyTech</span><span class="pill live">Live</span></span>
+      </div>
+      <dl class="row">
+        <dt>Scope</dt><dd>Ongoing solar PV, inverter and wiring installations across South-West Nigeria — the source material for our calculators and academy guides.</dd>
+        <dt>Tools from this work</dt><dd><a href="/solar.html" style="color:var(--gold);">Solar calculator</a>, <a href="/wiring.html" style="color:var(--gold);">wiring estimator</a>, load-audit and battery guides.</dd>
+      </dl>
+      <div class="project-links"><a href="/rehoteq-services.html">Engineering services →</a></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="note"><strong>Why show unfinished work?</strong> Because the interesting part of a technology company is what it's solving, not just what it has shipped. Statuses on this page are updated as projects move — if you're a researcher, institution or security professional who wants to work on any of these, the door is open.</div>
+    <div class="cta-box">
+      <h3>Partnership, research or investment enquiries</h3>
+      <p>We work with schools, institutions, security researchers and partners who want Nigerian-built technology with a real deployment record. Tell us what you're trying to do.</p>
+      <a class="btn" href="/contact.html">Contact Rehoteq</a>
+      <a class="btn ghost" href="/about.html">About the company</a>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <p style="margin-bottom:6px;"><a href="/">rehoteq.com</a> · Okitipupa, Ondo State, Nigeria · <a href="tel:+2347036302585">07036302585</a> · <a href="mailto:rehoteq@gmail.com">rehoteq@gmail.com</a></p>
+  <p>© 2026 Rehoteq Technologies · <a href="/academy.html">Academy</a> · <a href="/tools.html">Tools</a> · <a href="/labs.html">Labs</a> · <a href="/news.html">Guides</a> · <a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></p>
+</footer>
+
+</body>
+</html>
