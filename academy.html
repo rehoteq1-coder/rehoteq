@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Rehoteq Academy — Free Practical Lessons & Guides for Nigeria | Solar, Electrical, Digital Skills</title>
+<meta name="description" content="Free, practical technology lessons for Nigerian students, teachers, technicians and small businesses: solar PV, electrical installation, cybersecurity, school ICT and digital skills — written by practising engineers and trainers."/>
+<link rel="canonical" href="https://rehoteq.com/academy.html"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;700;900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#030305;--card:#0f1220;--card2:#141828;--border:rgba(255,255,255,0.07);--gold:#c9a84c;--gold2:#f0c040;--white:#f0f4ff;--muted:rgba(240,244,255,0.5);--font:'Outfit',sans-serif;--serif:'Fraunces',serif;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:var(--font);background:var(--bg);color:var(--white);line-height:1.7;}
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 20px;background:rgba(3,3,5,0.92);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);flex-wrap:wrap;}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-icon{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#8b6914,var(--gold),var(--gold2));display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:0.85rem;font-weight:900;color:#000;}
+.nav-name{font-family:var(--serif);font-size:0.85rem;font-weight:700;color:var(--white);}
+.nav-name span{color:var(--gold);}
+.nav-links{display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.nav-links a{font-size:0.72rem;color:var(--muted);text-decoration:none;}
+.nav-links a:hover,.nav-links a.active{color:var(--gold);}
+.nav-cta{background:linear-gradient(135deg,var(--gold),var(--gold2));border:none;border-radius:7px;padding:7px 14px;font-family:var(--font);font-size:0.72rem;font-weight:700;color:#000;cursor:pointer;text-decoration:none;}
+.page{max-width:960px;margin:0 auto;padding:0 18px 80px;}
+.hero{padding:60px 0 40px;text-align:center;border-bottom:1px solid var(--border);margin-bottom:48px;}
+.hero-tag{display:inline-block;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.2);border-radius:100px;padding:5px 16px;font-size:0.68rem;font-weight:700;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:18px;}
+.hero h1{font-family:var(--serif);font-size:clamp(2rem,5vw,2.8rem);font-weight:900;margin-bottom:14px;line-height:1.1;}
+.hero h1 span{color:var(--gold);}
+.hero p{font-size:0.95rem;color:var(--muted);max-width:640px;margin:0 auto;line-height:1.8;}
+.crumbs{font-size:0.7rem;color:var(--muted);margin:-28px 0 30px;text-align:center;}
+.crumbs a{color:var(--gold);}
+.section{margin-bottom:56px;}
+.section h2{font-family:var(--serif);font-size:1.5rem;font-weight:900;color:var(--white);margin-bottom:8px;}
+.section h2 span{color:var(--gold);}
+.section .lead{font-size:0.88rem;color:var(--muted);margin-bottom:18px;line-height:1.8;}
+.section p{font-size:0.9rem;color:rgba(240,244,255,0.75);line-height:1.88;margin-bottom:14px;}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;display:block;text-decoration:none;transition:all 0.25s;}
+.card:hover{border-color:rgba(201,168,76,0.45);transform:translateY(-2px);}
+.card-icon{font-size:1.5rem;margin-bottom:8px;}
+.card-title{font-family:var(--serif);font-size:1rem;font-weight:700;color:var(--white);margin-bottom:6px;}
+.card-desc{font-size:0.8rem;color:var(--muted);line-height:1.65;}
+.card-meta{font-size:0.68rem;color:var(--gold);font-weight:600;margin-top:10px;letter-spacing:0.04em;}
+.path{background:linear-gradient(160deg,rgba(201,168,76,0.05),transparent 55%);border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:14px;}
+.path-head{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+.path-icon{font-size:1.6rem;}
+.path-title{font-family:var(--serif);font-size:1.12rem;font-weight:900;color:var(--white);}
+.path-desc{font-size:0.82rem;color:var(--muted);margin-bottom:14px;line-height:1.7;}
+.steps{list-style:none;counter-reset:step;}
+.steps li{counter-increment:step;position:relative;padding:9px 0 9px 40px;border-top:1px dashed var(--border);font-size:0.85rem;color:rgba(240,244,255,0.78);}
+.steps li::before{content:counter(step);position:absolute;left:0;top:9px;width:24px;height:24px;border-radius:50%;background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.3);color:var(--gold);font-size:0.7rem;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.steps a{color:var(--gold);text-decoration:none;font-weight:600;}
+.steps a:hover{text-decoration:underline;}
+.steps .hint{display:block;font-size:0.72rem;color:var(--muted);font-weight:400;}
+.note{background:var(--card);border-left:3px solid var(--gold);border-radius:0 12px 12px 0;padding:16px 18px;font-size:0.83rem;color:rgba(240,244,255,0.75);line-height:1.75;}
+.note strong{color:var(--gold);}
+.pill-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
+.pill{background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);border-radius:20px;padding:6px 14px;font-size:0.7rem;color:var(--gold);font-weight:600;text-decoration:none;}
+.cta-box{background:linear-gradient(135deg,rgba(201,168,76,0.1),rgba(201,168,76,0.02));border:1px solid rgba(201,168,76,0.25);border-radius:16px;padding:26px;text-align:center;}
+.cta-box h3{font-family:var(--serif);font-size:1.25rem;font-weight:900;margin-bottom:8px;}
+.cta-box p{font-size:0.85rem;color:var(--muted);margin-bottom:16px;}
+.btn{display:inline-block;background:linear-gradient(135deg,var(--gold),var(--gold2));border-radius:8px;padding:10px 22px;font-size:0.8rem;font-weight:700;color:#000;text-decoration:none;margin:0 6px 8px;}
+.btn.ghost{background:transparent;border:1px solid rgba(201,168,76,0.4);color:var(--gold);}
+footer{border-top:1px solid var(--border);padding:26px 18px;text-align:center;font-size:0.7rem;color:var(--muted);}
+footer a{color:var(--gold);text-decoration:none;}
+@media(max-width:640px){.cards{grid-template-columns:1fr;}}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Rehoteq Academy",
+  "description": "Free practical technology lessons and guides for Nigerian students, teachers, technicians and small businesses.",
+  "url": "https://rehoteq.com/academy.html",
+  "isPartOf": {"@type": "WebSite", "name": "Rehoteq Technologies", "url": "https://rehoteq.com/"},
+  "publisher": {"@type": "Organization", "name": "Rehoteq Technologies", "url": "https://rehoteq.com/"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://rehoteq.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Academy", "item": "https://rehoteq.com/academy.html"}
+  ]
+}
+</script>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo"><div class="nav-icon">R</div><div class="nav-name">Rehoteq <span>Technologies</span></div></a>
+  <div class="nav-links">
+    <a href="/academy.html" class="active">Academy</a>
+    <a href="/tools.html">Tools</a>
+    <a href="/labs.html">Labs</a>
+    <a href="/news.html">Guides</a>
+    <a href="/about.html">About</a>
+    <a href="https://wa.me/2347036302585" class="nav-cta" target="_blank">📲 Contact</a>
+  </div>
+</nav>
+
+<div class="page">
+  <header class="hero">
+    <div class="hero-tag">Rehoteq Academy</div>
+    <h1>Learn practical technology <span>skills</span></h1>
+    <p>Free lessons, guides and practice tools for Nigerian students, teachers, technicians and small-business owners — written by practising engineers and trainers, not scraped from the internet. Start with a learning path below, or jump straight to a topic.</p>
+  </header>
+  <p class="crumbs"><a href="/">Home</a> / Academy</p>
+
+  <section class="section">
+    <h2>Learning <span>Paths</span></h2>
+    <p class="lead">Follow a path in order — each step builds on the last, from first principles to a working, costed result you can act on.</p>
+
+    <div class="path">
+      <div class="path-head"><span class="path-icon">☀️</span><span class="path-title">Solar &amp; Backup Power</span></div>
+      <p class="path-desc">Understand what you actually need before anyone quotes you — loads, batteries, panels, then the numbers.</p>
+      <ol class="steps">
+        <li><a href="/guides/solar-load-audit-nigeria.html">Do a solar load audit</a><span class="hint">List, prioritise and estimate every load you want to power.</span></li>
+        <li><a href="/solar-battery-guide.html">Choose the right battery</a><span class="hint">Lithium vs tubular vs gel/AGM — and the installer questions to ask.</span></li>
+        <li><a href="/guides/generator-changeover-electrical-safety-nigeria.html">Understand changeover safety</a><span class="hint">How generator backup should (and should not) be wired.</span></li>
+        <li><a href="/solar.html">Size and cost it with the calculator</a><span class="hint">Turn your load list into panel, battery and budget estimates for Nigeria.</span></li>
+      </ol>
+    </div>
+
+    <div class="path">
+      <div class="path-head"><span class="path-icon">⚡</span><span class="path-title">Electrical Installation &amp; Safety</span></div>
+      <p class="path-desc">For homeowners, apprentices and anyone supervising wiring work — learn what is safe, what is not, and what to demand from an installer.</p>
+      <ol class="steps">
+        <li><a href="/electrical-safety-nigeria.html">Electrical safety fundamentals</a><span class="hint">Practical warning signs in Nigerian homes and sensible next steps.</span></li>
+        <li><a href="/wiring.html">Estimate a wiring job properly</a><span class="hint">Use the wiring cost calculator before accepting any quote.</span></li>
+        <li><a href="/iot-electrical-systems.html">Plan smart (IoT) electrical systems</a><span class="hint">Control, resilience and cyber-security basics for automated homes.</span></li>
+        <li><a href="/building.html">Cost the building work around it</a><span class="hint">Construction cost estimates for the wider project.</span></li>
+      </ol>
+    </div>
+
+    <div class="path">
+      <div class="path-head"><span class="path-icon">🏫</span><span class="path-title">ICT for Teachers &amp; Schools</span></div>
+      <p class="path-desc">For teachers, HODs and school administrators digitising records, running CBT, or just getting more out of classroom technology.</p>
+      <ol class="steps">
+        <li><a href="/guides/digitising-school-results-nigeria.html">Digitise school results safely</a><span class="hint">A controlled move from paper and spreadsheets to trustworthy digital records.</span></li>
+        <li><a href="/guides/cbt-readiness-checklist-nigerian-schools.html">Run a CBT readiness check</a><span class="hint">Devices, process, fairness and contingency — before exam day.</span></li>
+        <li><a href="/guides/parent-portal-data-protection-nigeria.html">Protect data in parent portals</a><span class="hint">Privacy, access control and incident response for schools online.</span></li>
+        <li><a href="/lesson-ai.html">Build lesson plans with AI Studio</a><span class="hint">Lesson plans, notes, tests and mock exams for Nigerian classrooms.</span></li>
+        <li><a href="/rehoteq-teacher-portal.html">Open the Teacher Resource Portal</a><span class="hint">Teaching resources in one place.</span></li>
+      </ol>
+    </div>
+
+    <div class="path">
+      <div class="path-head"><span class="path-icon">💻</span><span class="path-title">Digital Skills, Study &amp; Cyber Safety</span></div>
+      <p class="path-desc">For students and young professionals building real, employable skills.</p>
+      <ol class="steps">
+        <li><a href="/guides/whatsapp-phishing-protection-nigeria.html">Protect yourself from phishing</a><span class="hint">Pause, verify independently, secure the account — the habit that stops most attacks.</span></li>
+        <li><a href="/rehoteq-jamb-cbt.html">Practise with the Pre-JAMB CBT</a><span class="hint">Free computer-based practice under real exam conditions.</span></li>
+        <li><a href="/rehoteq-student-hub.html">Explore careers &amp; the Cyber Quiz</a><span class="hint">Tech career paths and interactive security quizzes.</span></li>
+        <li><a href="/academic-ai.html">Use the Academic AI Studio</a><span class="hint">Project topics, research proposals and lecture tools for university work.</span></li>
+        <li><a href="/research-studio.html">Go deeper with Research Studio</a><span class="hint">Structure and manage serious research work.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>The <span>Library</span></h2>
+    <p class="lead">Prefer to browse instead of following a path? Everything free lives here.</p>
+    <div class="cards">
+      <a class="card" href="/news.html">
+        <div class="card-icon">📚</div>
+        <div class="card-title">Guides Hub</div>
+        <div class="card-desc">All our source-led, Nigerian-context guides in one place — schools, solar, electrical safety and cyber safety. Every guide states its sources and limitations.</div>
+        <div class="card-meta">BROWSE ALL GUIDES →</div>
+      </a>
+      <a class="card" href="/tools.html">
+        <div class="card-icon">🧰</div>
+        <div class="card-title">Practice Tools &amp; Calculators</div>
+        <div class="card-desc">Learning sticks when you use it. Estimate solar systems, wiring costs, building budgets and more with our free calculators.</div>
+        <div class="card-meta">OPEN THE TOOLS →</div>
+      </a>
+      <a class="card" href="/hub.html">
+        <div class="card-icon">🎓</div>
+        <div class="card-title">Student &amp; Teacher Hub</div>
+        <div class="card-desc">A single doorway to quizzes, career guidance and classroom resources for students and teachers.</div>
+        <div class="card-meta">VISIT THE HUB →</div>
+      </a>
+      <a class="card" href="/editorial-policy.html">
+        <div class="card-icon">⚖️</div>
+        <div class="card-title">Editorial Policy</div>
+        <div class="card-desc">How we research, write, source and correct our educational content — and where a guide stops being enough and a professional is needed.</div>
+        <div class="card-meta">READ THE POLICY →</div>
+      </a>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Why learn here</h2>
+    <div class="note">
+      <strong>Practitioners, not paraphrasers.</strong> Rehoteq content is written by a certified electrical &amp; solar PV engineer and NSQ-trained assessor who installs systems and trains people for a living — and by an editorial team that cites primary sources and states limitations openly. Where a topic needs a licensed professional on site, we say so instead of pretending a web page can replace one. Following Nigeria's digital-education push, we prioritise practical digital skills, teacher competency and tools that work on real Nigerian connections and budgets.
+    </div>
+    <div class="pill-row">
+      <span class="pill">☀️ Solar PV</span>
+      <span class="pill">⚡ Electrical</span>
+      <span class="pill">🔐 Cybersecurity</span>
+      <span class="pill">🖥️ Computer maintenance</span>
+      <span class="pill">🤖 AI tools</span>
+      <span class="pill">🏫 School ICT</span>
+      <span class="pill">📈 Digital skills</span>
+      <span class="pill">✍️ Technical writing</span>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="cta-box">
+      <h3>Want a lesson we haven't written yet?</h3>
+      <p>Tell us the topic — a real question from a real job or classroom. The best ones become free guides.</p>
+      <a class="btn" href="/contact.html">Request a topic</a>
+      <a class="btn ghost" href="/news.html">Browse existing guides</a>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <p style="margin-bottom:6px;"><a href="/">rehoteq.com</a> · Okitipupa, Ondo State, Nigeria · <a href="tel:+2347036302585">07036302585</a> · <a href="mailto:rehoteq@gmail.com">rehoteq@gmail.com</a></p>
+  <p>© 2026 Rehoteq Technologies · <a href="/academy.html">Academy</a> · <a href="/tools.html">Tools</a> · <a href="/labs.html">Labs</a> · <a href="/news.html">Guides</a> · <a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></p>
+</footer>
+
+</body>
+</html>
