@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Rehoteq Insight — Data & Research Centre | Nigeria Technology Index & Reports</title>
+<meta name="description" content="Rehoteq Insight is the data and research centre of Rehoteq Technologies. Nigeria Technology Index tracking digital adoption, school tech readiness, internet, AI, solar, digital skills, ICT. Original reports professionals, journalists and researchers can reference."/>
+<link rel="canonical" href="https://rehoteq.com/insight.html"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;700;900&family=Outfit:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#030305;--card:#0f1220;--card2:#141828;--border:rgba(255,255,255,0.07);--gold:#c9a84c;--gold2:#f0c040;--green:#00d166;--cyan:#00c2e0;--amber:#ffb020;--white:#f0f4ff;--muted:rgba(240,244,255,0.5);--font:'Outfit',sans-serif;--serif:'Fraunces',serif;--mono:'DM Mono',monospace;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:var(--font);background:var(--bg);color:var(--white);line-height:1.7;}
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 20px;background:rgba(3,3,5,0.92);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);flex-wrap:wrap;}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-icon{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#8b6914,var(--gold),var(--gold2));display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:0.85rem;font-weight:900;color:#000;}
+.nav-name{font-family:var(--serif);font-size:0.85rem;font-weight:700;color:var(--white);}
+.nav-name span{color:var(--gold);}
+.nav-links{display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.nav-links a{font-size:0.72rem;color:var(--muted);text-decoration:none;}
+.nav-links a:hover,.nav-links a.active{color:var(--gold);}
+.nav-cta{background:linear-gradient(135deg,var(--gold),var(--gold2));border:none;border-radius:7px;padding:7px 14px;font-family:var(--font);font-size:0.72rem;font-weight:700;color:#000;cursor:pointer;text-decoration:none;}
+.page{max-width:1020px;margin:0 auto;padding:0 18px 80px;}
+.hero{padding:70px 0 44px;text-align:center;border-bottom:1px solid var(--border);margin-bottom:48px;position:relative;overflow:hidden;}
+.hero-tag{display:inline-block;background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.25);border-radius:100px;padding:6px 18px;font-size:0.68rem;font-weight:700;color:var(--gold);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:18px;}
+.hero h1{font-family:var(--serif);font-size:clamp(2.2rem,5vw,3.2rem);font-weight:900;margin-bottom:14px;line-height:1.05;}
+.hero h1 span{color:var(--gold);}
+.hero p{font-size:0.98rem;color:var(--muted);max-width:720px;margin:0 auto;line-height:1.85;}
+.hero p strong{color:var(--white);}
+.crumbs{font-size:0.7rem;color:var(--muted);margin:-28px 0 30px;text-align:center;}
+.crumbs a{color:var(--gold);}
+.section{margin-bottom:60px;}
+.section h2{font-family:var(--serif);font-size:1.6rem;font-weight:900;color:var(--white);margin-bottom:10px;}
+.section h2 span{color:var(--gold);}
+.lead{font-size:0.9rem;color:var(--muted);margin-bottom:20px;line-height:1.8;max-width:760px;}
+.index-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:20px;}
+.index-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;position:relative;overflow:hidden;transition:all 0.25s;}
+.index-card:hover{border-color:rgba(201,168,76,0.3);transform:translateY(-2px);}
+.index-card.featured{background:linear-gradient(145deg,rgba(201,168,76,0.08),rgba(201,168,76,0.02));border-color:rgba(201,168,76,0.25);grid-column:1/-1;display:grid;grid-template-columns:1.1fr 1fr;gap:20px;align-items:center;}
+.index-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px;}
+.index-name{font-family:var(--serif);font-size:1.05rem;font-weight:800;color:var(--white);}
+.index-score{font-family:var(--serif);font-size:1.8rem;font-weight:900;color:var(--gold);}
+.index-bar{width:100%;height:6px;background:rgba(255,255,255,0.06);border-radius:100px;overflow:hidden;margin:8px 0 10px;}
+.index-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:100px;}
+.index-desc{font-size:0.8rem;color:var(--muted);line-height:1.65;}
+.index-meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;}
+.tag{font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;border-radius:20px;padding:3px 10px;border:1px solid rgba(201,168,76,0.2);background:rgba(201,168,76,0.08);color:var(--gold);}
+
+.report{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:16px;transition:all 0.25s;display:grid;grid-template-columns:1fr 200px;gap:20px;align-items:start;}
+.report:hover{border-color:rgba(201,168,76,0.3);}
+.report-main h3{font-family:var(--serif);font-size:1.15rem;font-weight:900;color:var(--white);margin-bottom:6px;}
+.report-main .report-sub{font-family:var(--mono);font-size:0.65rem;color:var(--gold);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px;}
+.report-main p{font-size:0.85rem;color:rgba(240,244,255,0.7);line-height:1.75;margin-bottom:10px;}
+.report-stats{display:flex;flex-direction:column;gap:10px;}
+.stat-box{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center;}
+.stat-num{font-family:var(--serif);font-size:1.4rem;font-weight:900;color:var(--gold);}
+.stat-lbl{font-size:0.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;margin-top:2px;}
+.report-actions{margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;}
+.btn{font-size:0.72rem;font-weight:700;padding:8px 14px;border-radius:8px;text-decoration:none;display:inline-flex;gap:6px;align-items:center;}
+.btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;}
+.btn-ghost{background:transparent;border:1px solid rgba(201,168,76,0.3);color:var(--gold);}
+
+.method{background:linear-gradient(135deg,rgba(201,168,76,0.06),transparent);border:1px solid rgba(201,168,76,0.15);border-radius:16px;padding:24px;margin-top:24px;}
+.method h3{font-family:var(--serif);font-size:1.1rem;font-weight:900;color:var(--gold);margin-bottom:10px;}
+.method ul{padding-left:18px;}
+.method li{font-size:0.83rem;color:rgba(240,244,255,0.7);margin-bottom:6px;line-height:1.7;}
+
+.cta-box{background:linear-gradient(135deg,rgba(201,168,76,0.1),rgba(201,168,76,0.02));border:1px solid rgba(201,168,76,0.25);border-radius:16px;padding:28px;text-align:center;margin-top:32px;}
+.cta-box h3{font-family:var(--serif);font-size:1.3rem;font-weight:900;margin-bottom:8px;}
+.cta-box p{font-size:0.85rem;color:var(--muted);margin-bottom:18px;max-width:600px;margin-left:auto;margin-right:auto;}
+
+footer{border-top:1px solid var(--border);padding:26px 18px;text-align:center;font-size:0.7rem;color:var(--muted);}
+footer a{color:var(--gold);text-decoration:none;}
+
+@media(max-width:760px){
+  .index-card.featured{grid-template-columns:1fr;}
+  .report{grid-template-columns:1fr;}
+  .report-stats{flex-direction:row;flex-wrap:wrap;}
+  .stat-box{flex:1;min-width:90px;}
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Rehoteq Insight — Data & Research Centre",
+  "description": "Original technology data and research reports for Nigeria: Nigeria Technology Index, State of Digital Education, Solar Cost, AI Adoption, School Tech Readiness, TVET Skills.",
+  "url": "https://rehoteq.com/insight.html",
+  "isPartOf": {"@type": "WebSite", "name": "Rehoteq Technologies", "url": "https://rehoteq.com/"},
+  "publisher": {"@type": "Organization", "name": "Rehoteq Technologies", "url": "https://rehoteq.com/"}
+}
+</script>
+</head>
+<body>
+<nav>
+  <a href="/" class="nav-logo"><div class="nav-icon">R</div><div class="nav-name">Rehoteq <span>Technologies</span></div></a>
+  <div class="nav-links">
+    <a href="/#ecosystem">Ecosystem</a>
+    <a href="/academy.html">Academy</a>
+    <a href="/tools.html">Tools</a>
+    <a href="/labs.html">Labs</a>
+    <a href="/insight.html" class="active">Insight</a>
+    <a href="/about.html">About</a>
+    <a href="https://wa.me/2347036302585" class="nav-cta" target="_blank">📲 Partner With Us</a>
+  </div>
+</nav>
+
+<div class="page">
+  <header class="hero">
+    <div class="hero-tag">📊 Rehoteq Insight • Data & Research Centre</div>
+    <h1>Original data Nigerian professionals can <span>reference</span></h1>
+    <p>Not another blog. Rehoteq Insight publishes <strong>original indices and field reports</strong> on technology adoption in Nigeria — because original data is the most valuable asset a technology company outside the traditional tech centres can create. Built in Okitipupa, Nigeria. Designed for Africa.</p>
+  </header>
+  <p class="crumbs"><a href="/">Home</a> / Insight</p>
+
+  <section class="section">
+    <h2>Nigeria <span>Technology Index</span></h2>
+    <p class="lead">A composite, quarterly-updated index tracking technology adoption across Nigeria. Each dimension is scored 0–100 from field surveys, installation data, platform usage and public datasets. Methodology is published openly — this is research, not marketing.</p>
+
+    <div class="index-card featured">
+      <div>
+        <div class="index-top"><div class="index-name">Rehoteq Nigeria Technology Index — Composite</div><div class="index-score">42/100</div></div>
+        <div class="index-bar"><div class="index-fill" style="width:42%;"></div></div>
+        <div class="index-desc">Overall technology readiness across 7 dimensions. Weighted composite of Digital Adoption, School Tech Readiness, Internet Access, AI Adoption, Solar Adoption, Digital Skills and ICT Infrastructure. Baseline Q1 2026 from Ondo State pilot + national public data.</div>
+        <div class="index-meta"><span class="tag">Baseline: Q1 2026</span><span class="tag">Coverage: Ondo pilot → National</span><span class="tag">Update: Quarterly</span></div>
+      </div>
+      <div class="index-grid" style="grid-template-columns:1fr 1fr;">
+        <div class="index-card" style="margin:0;"><div class="index-top"><div class="index-name" style="font-size:0.85rem;">Digital Adoption</div><div class="index-score" style="font-size:1.2rem;">48</div></div><div class="index-bar"><div class="index-fill" style="width:48%;"></div></div><div class="index-desc" style="font-size:0.72rem;">Smartphone, internet use, digital payments in households & SMEs.</div></div>
+        <div class="index-card" style="margin:0;"><div class="index-top"><div class="index-name" style="font-size:0.85rem;">School Tech Readiness</div><div class="index-score" style="font-size:1.2rem;">31</div></div><div class="index-bar"><div class="index-fill" style="width:31%;"></div></div><div class="index-desc" style="font-size:0.72rem;">ICT labs, power backup, teacher ICT competency, result digitisation.</div></div>
+        <div class="index-card" style="margin:0;"><div class="index-top"><div class="index-name" style="font-size:0.85rem;">Internet Access</div><div class="index-score" style="font-size:1.2rem;">44</div></div><div class="index-bar"><div class="index-fill" style="width:44%;"></div></div><div class="index-desc" style="font-size:0.72rem;">Coverage, affordability, 3G/4G availability, school connectivity.</div></div>
+        <div class="index-card" style="margin:0;"><div class="index-top"><div class="index-name" style="font-size:0.85rem;">AI Adoption</div><div class="index-score" style="font-size:1.2rem;">22</div></div><div class="index-bar"><div class="index-fill" style="width:22%;background:linear-gradient(90deg,#9b5cf6,#c9a84c);"></div></div><div class="index-desc" style="font-size:0.72rem;">Awareness and actual use among SMEs, teachers and students.</div></div>
+        <div class="index-card" style="margin:0;"><div class="index-top"><div class="index-name" style="font-size:0.85rem;">Solar Adoption</div><div class="index-score" style="font-size:1.2rem;">36</div></div><div class="index-bar"><div class="index-fill" style="width:36%;background:linear-gradient(90deg,#ff9500,#f0c040);"></div></div><div class="index-desc" style="font-size:0.72rem;">Household & SME solar, inverter/battery ownership, payback awareness.</div></div>
+        <div class="index-card" style="margin:0;"><div class="index-top"><div class="index-name" style="font-size:0.85rem;">Digital Skills</div><div class="index-score" style="font-size:1.2rem;">38</div></div><div class="index-bar"><div class="index-fill" style="width:38%;"></div></div><div class="index-desc" style="font-size:0.72rem;">Basic ICT, cybersecurity hygiene, CBT familiarity.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Flagship <span>Reports</span></h2>
+    <p class="lead">Each report is field-based, source-led and built from real Rehoteq deployments, surveys and calculator usage. We publish methodology, limitations and raw ranges — so journalists, researchers and institutions can cite us.</p>
+
+    <div class="report">
+      <div class="report-main">
+        <div class="report-sub">Education • Field Survey • Upcoming Q2 2026</div>
+        <h3>2027 State of Digital Education in Ondo State</h3>
+        <p>How ready are secondary schools in Ondo State for digital learning? We surveyed 40+ schools across Okitipupa, Irele and Ese-Odo on ICT lab functionality, internet access, power backup, teacher digital competency and parent-portal adoption. First report to benchmark rural and semi-urban schools outside Akure.</p>
+        <p><strong>Why it matters:</strong> Gives SUBEB, NGOs and EdTech partners a baseline to fund interventions where they matter most — not just in state capitals.</p>
+        <div class="report-actions"><a class="btn btn-gold" href="/contact.html">Get notified on release →</a><a class="btn btn-ghost" href="/labs.html">See data pipeline</a></div>
+      </div>
+      <div class="report-stats">
+        <div class="stat-box"><div class="stat-num">40+</div><div class="stat-lbl">Schools surveyed</div></div>
+        <div class="stat-box"><div class="stat-num">3</div><div class="stat-lbl">LGAs covered</div></div>
+        <div class="stat-box"><div class="stat-num">5</div><div class="stat-lbl">Readiness dimensions</div></div>
+        <div class="stat-box"><div class="stat-num">Q2 2026</div><div class="stat-lbl">Publication</div></div>
+      </div>
+    </div>
+
+    <div class="report">
+      <div class="report-main">
+        <div class="report-sub">Energy • Real Quote Tracker • In Development</div>
+        <h3>Solar Energy Cost Report — Nigeria 2026</h3>
+        <p>Real installation quotes aggregated from South-West Nigeria field work — panel cost per Wp, battery cost per kWh (lithium vs tubular vs gel), inverter cost per kVA, installation labour, and payback vs grid/diesel. Not scraped prices — numbers from jobs we actually quoted and installed.</p>
+        <p><strong>Why it matters:</strong> Homeowners can verify any installer quote against a transparent range. Researchers can track solar affordability trends over time.</p>
+        <div class="report-actions"><a class="btn btn-gold" href="/solar.html">See Solar Calculator →</a><a class="btn btn-ghost" href="/solar-battery-guide.html">Read Battery Guide</a></div>
+      </div>
+      <div class="report-stats">
+        <div class="stat-box"><div class="stat-num">50+</div><div class="stat-lbl">Quotes tracked</div></div>
+        <div class="stat-box"><div class="stat-num">₦/Wp</div><div class="stat-lbl">Cost metric</div></div>
+        <div class="stat-box"><div class="stat-num">Live</div><div class="stat-lbl">Calculator data</div></div>
+        <div class="stat-box"><div class="stat-num">Q3 2026</div><div class="stat-lbl">Publication</div></div>
+      </div>
+    </div>
+
+    <div class="report">
+      <div class="report-main">
+        <div class="report-sub">Technology • SME Survey • Research Phase</div>
+        <h3>AI Adoption Among Nigerian SMEs</h3>
+        <p>Are Nigerian small businesses actually using AI? We interview SME owners, teachers and technicians on awareness, actual use cases (writing, customer support, marketing, education), barriers (cost, trust, skills, internet) and willingness to pay. Built from Rehoteq Academy and AI Studio usage patterns.</p>
+        <p><strong>Why it matters:</strong> Moves beyond hype to real adoption data — useful for product builders, accelerators and policy.</p>
+        <div class="report-actions"><a class="btn btn-gold" href="/contact.html">Participate in survey →</a><a class="btn btn-ghost" href="/academy.html">See Academy</a></div>
+      </div>
+      <div class="report-stats">
+        <div class="stat-box"><div class="stat-num">100</div><div class="stat-lbl">Target SMEs</div></div>
+        <div class="stat-box"><div class="stat-num">4</div><div class="stat-lbl">Use-case clusters</div></div>
+        <div class="stat-box"><div class="stat-num">Live</div><div class="stat-lbl">AI Studio signals</div></div>
+        <div class="stat-box"><div class="stat-num">Q4 2026</div><div class="stat-lbl">Publication</div></div>
+      </div>
+    </div>
+
+    <div class="report">
+      <div class="report-main">
+        <div class="report-sub">Education • Benchmark • Planned</div>
+        <h3>Nigerian School Technology Readiness Report</h3>
+        <p>National expansion of the Ondo State study — ICT infrastructure, power, connectivity, teacher skills and result digitisation across 6 geopolitical zones. Co-published with partner institutions.</p>
+        <div class="report-actions"><a class="btn btn-ghost" href="/contact.html">Propose partnership</a></div>
+      </div>
+      <div class="report-stats">
+        <div class="stat-box"><div class="stat-num">6</div><div class="stat-lbl">Zones target</div></div>
+        <div class="stat-box"><div class="stat-num">200+</div><div class="stat-lbl">Schools target</div></div>
+        <div class="stat-box"><div class="stat-num">Open</div><div class="stat-lbl">For partners</div></div>
+      </div>
+    </div>
+
+    <div class="report">
+      <div class="report-main">
+        <div class="report-sub">Skills • TVET • Planned</div>
+        <h3>TVET Skills Demand Report — Electrical, Solar & IT</h3>
+        <p>What do employers actually ask for vs what trainees can do? Built from Rehoteq training cohorts, field installation checklists and technician assessments. Electrical safety, solar PV and computer hardware competencies.</p>
+        <div class="report-actions"><a class="btn btn-ghost" href="/contact.html">Collaborate</a></div>
+      </div>
+      <div class="report-stats">
+        <div class="stat-box"><div class="stat-num">Electrical</div><div class="stat-lbl">Trade</div></div>
+        <div class="stat-box"><div class="stat-num">Solar PV</div><div class="stat-lbl">Trade</div></div>
+        <div class="stat-box"><div class="stat-num">IT</div><div class="stat-lbl">Trade</div></div>
+      </div>
+    </div>
+
+    <div class="method">
+      <h3>How Rehoteq Insight works — Methodology</h3>
+      <ul>
+        <li><strong>Field-first:</strong> Every report starts from real deployments, site surveys or platform usage — not desk research alone. Solar Cost from real quotes, School Readiness from school visits, TVET from training assessments.</li>
+        <li><strong>Transparent assumptions:</strong> We publish sample sizes, collection dates, geographic coverage and limitations. Where data is thin, we say so.</li>
+        <li><strong>Open index:</strong> Nigeria Technology Index methodology and weights are public, so researchers can reproduce or critique.</li>
+        <li><strong>No paywall on data:</strong> Key findings and index scores are free. Full datasets available to research partners under open terms.</li>
+        <li><strong>Built in Okitipupa, for Nigeria:</strong> We deliberately start outside Lagos/Abuja to capture underserved realities — then expand nationally with partners.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Why <span>Insight</span> matters for Rehoteq</h2>
+    <p class="lead">Rehoteq already built Academy + Tools + Labs + AI Studio + News + Products. Insight is the missing pillar that turns activity into authority. Original data gives us something competitors cannot copy — and gives journalists, universities, businesses and policymakers a reason to cite Rehoteq.</p>
+    <div class="index-grid">
+      <div class="index-card"><div class="index-name" style="font-size:0.95rem;">For Journalists</div><div class="index-desc">Cite original Nigerian technology data — not press releases. State-level breakdowns, cost ranges and adoption trends with methodology.</div></div>
+      <div class="index-card"><div class="index-name" style="font-size:0.95rem;">For Researchers</div><div class="index-desc">Reproducible indices, field datasets and collaboration on national expansion. Open methodology, partner access to full data.</div></div>
+      <div class="index-card"><div class="index-name" style="font-size:0.95rem;">For Schools & Institutions</div><div class="index-desc">Benchmark your school/LGA against readiness baselines. Use reports to justify funding and plan interventions.</div></div>
+      <div class="index-card"><div class="index-name" style="font-size:0.95rem;">For Businesses & Investors</div><div class="index-desc">Understand real adoption, cost and skills gaps before investing. See what Rehoteq actually builds and where the opportunity is.</div></div>
+    </div>
+    <div class="cta-box">
+      <h3>Partner on the next report</h3>
+      <p>We're looking for universities, TVET centres, NGOs, journalists and businesses who want Nigerian technology data that actually reflects Nigerian realities. If you collect data, run schools, or fund research — let's talk.</p>
+      <a class="btn btn-gold" href="/contact.html" style="font-size:0.85rem;padding:12px 24px;">Propose a collaboration →</a>
+      <a class="btn btn-ghost" href="/labs.html" style="font-size:0.85rem;padding:12px 24px;margin-left:8px;">See Labs — What we're building</a>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <p style="margin-bottom:6px;"><a href="/">rehoteq.com</a> · Built in Okitipupa, Nigeria. Designed for Africa. Ready for the world. · <a href="tel:+2347036302585">07036302585</a></p>
+  <p>© 2026 Rehoteq Technologies · <a href="/academy.html">Academy</a> · <a href="/tools.html">Tools</a> · <a href="/labs.html">Labs</a> · <a href="/insight.html">Insight</a> · <a href="/news.html">Guides</a> · <a href="/about.html">About</a> · <a href="/contact.html">Contact</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></p>
+</footer>
+</body>
+</html>
