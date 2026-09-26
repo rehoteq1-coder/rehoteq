@@ -4,25 +4,47 @@
 
 ---
 
-## Phase 1 implementation update — 2026-09-23
+## Phase 1 merge & deploy status — 2026-09-26
 
-Phase 0 PR #10 is merged and its Pages build was verified `built`. Phase 1 implementation now includes four cornerstone lessons, four calculators, a 25-entry Knowledge Base, reciprocal hub/spoke links and nine sitemap additions. Local validation: **51 HTML files / 44 sitemap URLs / 0 errors / 0 warnings**, plus 17 calculator tests, 6 content tests and browser checks at 360px/1280px.
+**Phase 1 is merged and deployed.** PR #11 ("Phase 1: Academy lessons, four calculators and 25-term knowledge base") merged to `main` on 2026-09-23 as merge commit `0de1027`. The "Site quality" workflow passed on that push, and the Pages API reported `built` for `0de1027` at 2026-09-23T23:33:46Z.
 
-**Publication is pending practitioner/editorial review, not claimed complete.** Examples are explicitly illustrative because approved real job notes and a signed technical review were not supplied; none were invented. Search Console indexing and traffic results also require owner access. See [the Phase 1 handoff](docs/PHASE1-HANDOFF.md) for URLs, methodology, tests and the remaining publication/measurement checklist. The original brief below is retained for context.
+Re-validated on `main` at 2026-09-26: **51 HTML files / 44 sitemap URLs / 0 errors / 0 warnings**, 6 content tests pass, 17 calculator tests pass. Shipped content is four cornerstone lessons, four calculators, a 25-entry Knowledge Base, reciprocal hub/spoke links and nine sitemap additions.
+
+### Still open after the merge — these need the owner, not another commit
+
+1. **Practitioner/editorial review was never recorded as completed.** The content merged with its examples labelled illustrative, because approved real job notes and a signed technical review were not supplied; none were invented. Publishing happened; the review gate did not close. A named competent reviewer should still verify the technical material, and approved anonymised real examples should replace the illustrative ones before the full editorial brief in section 3 can be called satisfied.
+2. **Search Console indexing has not been requested** and no traffic data has been observed — both need owner access. Treat impressions/clicks as unknown, not zero.
+
+See [the Phase 1 handoff](docs/PHASE1-HANDOFF.md) for URLs, methodology, tests and the measurement log. The original brief below is retained for context.
+
+---
+
+## Recovered work — ecosystem restructure & Insight (2026-09-26)
+
+A later session committed and pushed `arena/01a0d1ef-rehoteq` (`15f6335`, 2026-09-24) but **never opened a pull request**, so the work sat unmerged and invisible for two days. It has been recovered by cherry-picking onto the current session branch and merged through the normal PR route.
+
+Contents: the 7-pillar ecosystem restructure (LEARN, BUILD, USE, SCHOOLS, ENGINEERING, CONNECT, INSIGHT), the new `insight.html` data-centre page, the Labs transparency rebuild (Problem / Technology / Users / Stage / Roadmap / Looking-for per product), hero-stat and counter fixes, unified navigation, ad de-duplication, and a sitemap entry for `insight.html`.
+
+**Owner review requested — unverifiable claims.** This commit asserts figures the repository cannot substantiate: "12+ Years Engineering Practice", "8+ Live", "70+ Engines", "50+ Projects" and the founder certification pills. They were authored in the earlier session, not by the merging session, and no supporting evidence exists in the repo. Confirm each figure is true and defensible, or amend it — the same evidence standard the Phase 1 lessons were held to applies here.
+
+**Process lesson:** pushing a branch is not shipping. A branch with no PR does not reach `main`. Open the PR in the same session that pushes the branch.
 
 ---
 
 ## 1. Current state (read before doing anything)
 
 ### Shipped to production (merged PRs — live on rehoteq.com)
+- **PR #11** — Phase 1: four cornerstone lessons under `/guides/`, four client-side calculators, `knowledge-base.html` with 25 entries, Academy path steps, Tools cards and nine sitemap additions. Merged 2026-09-23 (`0de1027`); Pages `built`.
+- **PR #10** — Phase 0: the `academy.html` / `tools.html` / `labs.html` hubs, homepage nav and footer wiring, and 18 spoke→hub backlinks. Merged 2026-09-23; Pages `built`.
 - **PR #8** — removed broken Sitelinks `SearchAction` JSON-LD (fixed junk `/?s=` URL in Search Console).
 - **PR #9** — carried PR #6 "AdSense readiness" content: `news.html` replaced with permanent Guides hub (**exposed newsdata.io API key removed from live site**), 6 original Nigerian guides + `editorial-policy.html`, `news-admin.html` & `rehoteq-blog-articles.html` deleted (still in git history), noindex on utility pages, duplicate-canonical fixes, broken `rsms-app.html` link fix.
 - **Tier 1 infrastructure** — `scripts/site_check.py` + `.github/workflows/site-quality.yml` (JSON-LD parse, internal links, sitemap↔repo consistency, noindex↔sitemap invariants, title/canonical rules, single-canonical rule). Runs on every PR and push to `main`. Must stay **0 errors**.
 - `_config.yml` — whitelisted `jekyll-redirect-from` + `jekyll-seo-tag` enabled. `jekyll-sitemap` deliberately OFF (hand-maintained sitemap.xml is CI-policed instead).
 
-### Phase 0 transfer note (added at transfer time)
-- The original Phase 0 commits were lost to sandbox re-provisioning; the content is being **transferred as raw files via chat** (this file + `academy.html`, `tools.html`, `labs.html` + an edits script for 18 backlinks/homepage/sitemap).
-- After all chunks arrive: run `python scripts/site_check.py` (expect 42 files / 35 sitemap URLs / 0 errors), commit everything on **this session's branch**, push, open PR → `main`, merge after CI, verify Pages `built`.
+### Phase 0 transfer note — RESOLVED, kept for history
+- The original Phase 0 commits were lost to sandbox re-provisioning; the content was **transferred as raw files via chat** (this file + `academy.html`, `tools.html`, `labs.html` + an edits script for 18 backlinks/homepage/sitemap).
+- That recovery completed: the transferred work shipped as PR #10 and the hubs are live. Nothing further is outstanding from the transfer.
+- **Standing lesson:** a sandbox is not storage. Push to the session branch early — anything never pushed to GitHub is gone when the sandbox is re-provisioned.
 
 ### Manual items only the owner can do
 1. **Rotate the newsdata.io API key** — old key `pub_8a14…` is off the live site but remains in git history; treat as public.
@@ -81,12 +103,15 @@ DoD per tool: card on `tools.html` + Academy path step where relevant + one guid
 
 ### D. Phase 1 definition of done
 - [x] Push Phase 0, PR merged, Pages `built` (FIRST) — PR #10 verified 2026-09-23
-- [ ] 4 cornerstone lessons live, each ↔ path ↔ tool cross-linked
-- [ ] 3–5 calculators live on tools.html, linked from Academy paths
-- [x] KB index (if time) with ≥20 entries — 25 entries implemented; publication pending review
-- [x] `site_check.py` 0 errors; sitemap matches reality — 51 HTML files / 44 sitemap URLs locally
+- [x] 4 cornerstone lessons live, each ↔ path ↔ tool cross-linked — merged in PR #11
+- [x] 3–5 calculators live on tools.html, linked from Academy paths — 4 calculators merged in PR #11
+- [x] KB index (if time) with ≥20 entries — 25 entries, merged in PR #11
+- [x] `site_check.py` 0 errors; sitemap matches reality — re-verified on `main` 2026-09-26
+- [ ] **Practitioner/editorial review of the merged lessons** — owner action, still open (see status block at top)
 - [ ] GSC: request indexing for `/academy.html`, `/tools.html`, `/labs.html`, new tools + lessons; watch "Alternate page" report stay quiet
 - [ ] Note results (impressions/clicks) for the Phase 2 report
+
+Everything above that is checked is merged and deployed. The two unchecked items need Search Console access and a named reviewer, so no further commit can close them.
 
 ---
 
