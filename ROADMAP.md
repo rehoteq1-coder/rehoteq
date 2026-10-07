@@ -50,6 +50,13 @@ Contents: the 7-pillar ecosystem restructure (LEARN, BUILD, USE, SCHOOLS, ENGINE
 1. **Rotate the newsdata.io API key** — old key `pub_8a14…` is off the live site but remains in git history; treat as public.
 2. **Repo metadata** — agent token got 403; set description + homepage manually on github.com: description `Rehoteq Technologies — school RMS, solar & electrical engineering, AI learning tools and cybersecurity for Nigeria.` homepage `https://rehoteq.com`.
 
+### TLS / SSL certificates — fully managed, nothing to renew (resolved 2026-10-07)
+- **Edge (what visitors see):** Cloudflare Universal SSL — Let's Encrypt wildcard (`*.rehoteq.com` + apex), ~90-day lifecycle, **auto-renewed by Cloudflare**. SSL Labs check on 2026-10-07: issuer `YE2` (lencr.org), valid 15 Sep 2026 → 14 Dec 2026, chain to ISRG Root X2/X1, trusted everywhere.
+- **Origin:** GitHub Pages' own certificate for `rehoteq.com` + `www` (Pages API: state `approved`, expires 2026-11-16, `https_enforced: true`). Also auto-renewed.
+- **Namecheap PositiveSSL order 33848179 (expiring 2026-10-08): ORPHANED.** It is served nowhere — DNS terminates at Cloudflare, origin is GitHub Pages, and no mail/webmail/cpanel/ftp hosts exist on the domain. **Let it lapse; do NOT renew or reissue** (a reissue would not extend past the expiry date anyway). Owner to switch its Namecheap auto-renew OFF and ignore further Sectigo/Namecheap reminder emails.
+- **Optional hardening:** Cloudflare → SSL/TLS → Edge Certificates → Minimum TLS version = 1.2. SSL Labs caps the grade at B while TLS 1.0/1.1 remain enabled at the edge; only ~decade-old clients (Android ≤ 4.3, IE ≤ 10) depend on them.
+- **Standing rule:** this site uses auto-renewing certificates only (Cloudflare edge + GitHub Pages origin). Never purchase or upload a fixed-term certificate for rehoteq.com again.
+
 ---
 
 ## 2. What Phase 0 put in place (architecture to build on)
