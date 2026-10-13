@@ -22,7 +22,7 @@ ROOT = Path(__file__).resolve().parent.parent
 SITE_ORIGIN = "https://rehoteq.com"
 
 # Pages exempt from sitemap/SEO rules (verification files, error page).
-EXEMPT_FROM_SITEMAP_RULES = {"404.html"}
+EXEMPT_FROM_SITEMAP_RULES = {"404.html", "rehoteq-blog-articles.html", "student-hub.html", "400-redirect.html"}  # redirect stubs: canonical points to the target, never in sitemap
 
 # href/src prefixes/schemes that never point at repo files.
 SKIP_PREFIXES = ("/cdn-cgi/",)
